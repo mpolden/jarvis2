@@ -1,0 +1,9 @@
+{
+  "name": "jarvis2",
+  "version": "0.1.0",
+  "dependencies": {
+    "jquery": "~2.0.2",
+    "gridster": "latest",
+    "normalize-css": "~2.1.2"
+  }
+}
