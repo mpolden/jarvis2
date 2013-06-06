@@ -9,6 +9,7 @@ class Yr(object):
 
     def __init__(self, conf):
         self.url = conf['yr']['url']
+        self.every = conf['yr']['every']
 
     def get(self):
         # Retrieve XML data from YR_URL

@@ -1,7 +1,11 @@
 # Yr widget
 # URL to Yr XML data
 yr:
+  # Enable job
   enabled: true
+  # Run job every N seconds
+  every: 10
+  # URL for data
   url: http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/Trondheim/varsel.xml
 
 
