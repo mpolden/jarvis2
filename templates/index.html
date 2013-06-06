@@ -1,26 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="jarvis">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>JARVIS</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:700">
-    <link rel="stylesheet" href="/static/normalize-css/normalize.css">
-    <link rel="stylesheet" href="/static/gridster/dist/jquery.gridster.min.css">
+    <link rel="stylesheet" href="/static/components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="/static/components/gridster/dist/jquery.gridster.min.css">
     <link rel="stylesheet" href="/styles.css">
   </head>
-  <body>
+  <body ng-controller="EventCtrl">
     <h1>JARVIS</h1>
     {% include 'layout.html' %}
-    <script src="/static/jquery/jquery.min.js"></script>
-    <script src="/static/gridster/dist/jquery.gridster.min.js"></script>
-    <script>
-      $(function(){
-        $(".gridster ul").gridster({
-          widget_margins: [10, 10],
-          widget_base_dimensions: [140, 140]
-        });
-      });
-    </script>
+    <script src="/static/components/jquery/jquery.min.js"></script>
+    <script src="/static/components/gridster/dist/jquery.gridster.min.js"></script>
+    <script src="/static/components/angular/angular.min.js"></script>
+    <script src="/static/js/app.js"></script>
   </body>
 </html>
