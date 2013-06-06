@@ -4,6 +4,7 @@
   "dependencies": {
     "jquery": "~2.0.2",
     "gridster": "latest",
-    "normalize-css": "~2.1.2"
+    "normalize-css": "~2.1.2",
+    "angular": "~1.0.7"
   }
 }
