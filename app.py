@@ -4,13 +4,15 @@ import sys
 import os
 import yaml
 import inspect
-from flask import Flask, render_template, make_response, Response, \
-    stream_with_context
-
+import schedule
+import Queue
 import workers
+from flask import Flask, render_template, make_response, Response, \
+    stream_with_context, request
+
 
 app = Flask(__name__)
-active_workers = []
+queued_events = {}
 
 
 @app.route('/')
@@ -29,10 +31,18 @@ def css():
 
 @app.route('/events')
 def events():
-    def generate():
-        for worker in active_workers:
-            yield 'data: %s\n\n' % (worker.get(),)
-    return Response(stream_with_context(generate()),
+    remote_port = request.environ['REMOTE_PORT']
+    current_queue = Queue.Queue()
+    queued_events[remote_port] = current_queue
+
+    def schedule_and_consume():
+        while True:
+            schedule.run_pending()
+            if not current_queue.empty():
+                data = current_queue.get(block=False)
+                yield 'data: %s\n\n' % (data,)
+
+    return Response(stream_with_context(schedule_and_consume()),
                     mimetype='text/event-stream')
 
 
@@ -47,9 +57,16 @@ def _configure_jobs(conf):
         if name not in conf.keys() or not conf[name]['enabled']:
             print 'Skipping missing or disabled worker: %s' % (name,)
             continue
-        print 'Configuring worker: %s' % (name,)
-        worker = cls(conf)
-        active_workers.append(worker)
+        job = cls(conf)
+        print 'Configuring worker %s to run every %d seconds' % (name,
+                                                                 job.every)
+        schedule.every(job.every).seconds.do(_queue_data, name, job)
+
+
+def _queue_data(widget, job):
+    data = job.get()
+    for queue in queued_events.values():
+        queue.put(data)
 
 
 if __name__ == '__main__':
@@ -57,4 +74,7 @@ if __name__ == '__main__':
         app.debug = True
     _configure_jobs(_read_conf())
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, threaded=True)
+    try:
+        app.run(host='0.0.0.0', port=port, threaded=True)
+    finally:
+        schedule.clear()
