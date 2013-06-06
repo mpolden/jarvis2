@@ -1,5 +1,7 @@
 Flask==0.9
 Jinja2==2.7
+lxml==3.2.1
 MarkupSafe==0.18
+PyYAML==3.10
+requests==1.2.3
 Werkzeug==0.8.3
-wsgiref==0.1.2
