@@ -42,7 +42,8 @@ if __name__ == '__main__':
     yr = Yr({
             'yr': {
                 'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/'
-                        'Trondheim/Trondheim/varsel.xml')
+                        'Trondheim/Trondheim/varsel.xml'),
+                'every': 10
             }
             })
     print yr.get()
