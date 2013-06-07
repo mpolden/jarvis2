@@ -8,8 +8,8 @@ from lxml import etree
 class Yr(object):
 
     def __init__(self, conf):
-        self.url = conf['yr']['url']
-        self.every = conf['yr']['every']
+        self.url = conf['url']
+        self.every = conf['interval']
 
     def get(self):
         # Retrieve XML data from YR_URL
@@ -40,10 +40,8 @@ class Yr(object):
 
 if __name__ == '__main__':
     yr = Yr({
-            'yr': {
-                'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/'
-                        'Trondheim/Trondheim/varsel.xml'),
-                'every': 10
-            }
+            'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/'
+                    'Trondheim/Trondheim/varsel.xml'),
+            'interval': 10
             })
     print yr.get()

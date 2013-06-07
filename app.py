@@ -59,7 +59,7 @@ def _configure_jobs():
         if name not in conf.keys() or not conf[name]['enabled']:
             print 'Skipping missing or disabled job: %s' % (name,)
             continue
-        job = cls(conf)
+        job = cls(conf[name])
         print 'Configuring jobs %s to run every %d seconds' % (name,
                                                                job.every)
         _queue_data(name, job)
