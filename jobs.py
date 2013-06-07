@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import requests
-import json
 from lxml import etree
 
 
@@ -35,7 +34,7 @@ class Yr(object):
                     'name')
             }
         }
-        return json.dumps(data)
+        return data
 
 
 if __name__ == '__main__':

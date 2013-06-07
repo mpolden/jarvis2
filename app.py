@@ -7,6 +7,8 @@ import inspect
 import Queue
 import jobs
 import SocketServer
+import json
+from time import time
 from apscheduler.scheduler import Scheduler
 from flask import Flask, render_template, make_response, Response, \
     stream_with_context, request
@@ -73,10 +75,14 @@ def _configure_jobs():
 
 
 def _queue_data(widget, job):
-    data = job.get()
-    last_events[widget] = data
+    json_data = json.dumps({
+        'widget': widget,
+        'timestamp': int(time()),
+        'data': job.get()
+    })
+    last_events[widget] = json_data
     for queue in queued_events.values():
-        queue.put(data)
+        queue.put(json_data)
 
 
 def _close_stream(*args, **kwargs):

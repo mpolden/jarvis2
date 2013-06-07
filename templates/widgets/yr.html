@@ -1,6 +1,6 @@
 <div id="yr">
-  <h2>{{ '{{ data.location }}' }}</h2>
-  <h1>{{ '{{ data.temperature }}' }}&deg;</h1>
-  <p>{{ '{{ data.description }}' }}</p>
-  <p>{{ '{{ data.wind.description }} ({{ data.wind.speed }} m/s) fra {{ data.wind.direction | lowercase }}' }}</p>
+  <h2>{{ '{{ event.data.location }}' }}</h2>
+  <h1>{{ '{{ event.data.temperature }}' }}&deg;</h1>
+  <p>{{ '{{ event.data.description }}' }}</p>
+  <p>{{ '{{ event.data.wind.description }} ({{ data.wind.speed }} m/s) fra {{ data.wind.direction | lowercase }}' }}</p>
 </div>
