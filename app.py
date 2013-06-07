@@ -13,8 +13,9 @@ from flask import Flask, render_template, make_response, Response, \
 
 
 app = Flask(__name__)
-queued_events = {}
 sched = Scheduler()
+queued_events = {}
+last_events = {}
 
 
 @app.route('/')
@@ -36,6 +37,9 @@ def events():
     remote_port = request.environ['REMOTE_PORT']
     current_queue = Queue.Queue()
     queued_events[remote_port] = current_queue
+
+    for event in last_events.values():
+        current_queue.put(event)
 
     def consume():
         while True:
@@ -70,6 +74,7 @@ def _configure_jobs():
 
 def _queue_data(widget, job):
     data = job.get()
+    last_events[widget] = data
     for queue in queued_events.values():
         queue.put(data)
 
