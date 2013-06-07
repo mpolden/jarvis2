@@ -4,15 +4,17 @@ import sys
 import os
 import yaml
 import inspect
-import schedule
 import Queue
-import workers
+import jobs
+import SocketServer
+from apscheduler.scheduler import Scheduler
 from flask import Flask, render_template, make_response, Response, \
     stream_with_context, request
 
 
 app = Flask(__name__)
 queued_events = {}
+sched = Scheduler()
 
 
 @app.route('/')
@@ -35,14 +37,12 @@ def events():
     current_queue = Queue.Queue()
     queued_events[remote_port] = current_queue
 
-    def schedule_and_consume():
+    def consume():
         while True:
-            schedule.run_pending()
-            if not current_queue.empty():
-                data = current_queue.get(block=False)
-                yield 'data: %s\n\n' % (data,)
+            data = current_queue.get()
+            yield 'data: %s\n\n' % (data,)
 
-    return Response(stream_with_context(schedule_and_consume()),
+    return Response(stream_with_context(consume()),
                     mimetype='text/event-stream')
 
 
@@ -51,16 +51,21 @@ def _read_conf():
         return yaml.load(conf)
 
 
-def _configure_jobs(conf):
-    for cls_name, cls in inspect.getmembers(workers, inspect.isclass):
+@app.before_first_request
+def _configure_jobs():
+    conf = _read_conf()
+    for cls_name, cls in inspect.getmembers(jobs, inspect.isclass):
         name = cls_name.lower()
         if name not in conf.keys() or not conf[name]['enabled']:
-            print 'Skipping missing or disabled worker: %s' % (name,)
+            print 'Skipping missing or disabled job: %s' % (name,)
             continue
         job = cls(conf)
-        print 'Configuring worker %s to run every %d seconds' % (name,
-                                                                 job.every)
-        schedule.every(job.every).seconds.do(_queue_data, name, job)
+        print 'Configuring jobs %s to run every %d seconds' % (name,
+                                                               job.every)
+        _queue_data(name, job)
+        sched.add_interval_job(_queue_data, seconds=job.every, kwargs={
+            'widget': name, 'job': job})
+    sched.start()
 
 
 def _queue_data(widget, job):
@@ -69,12 +74,15 @@ def _queue_data(widget, job):
         queue.put(data)
 
 
+def _close_stream(*args, **kwargs):
+    remote_port = args[2][1]
+    if remote_port in queued_events:
+        del queued_events[remote_port]
+
+
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'debug':
         app.debug = True
-    _configure_jobs(_read_conf())
     port = int(os.environ.get('PORT', 5000))
-    try:
-        app.run(host='0.0.0.0', port=port, threaded=True)
-    finally:
-        schedule.clear()
+    SocketServer.BaseServer.handle_error = _close_stream
+    app.run(host='0.0.0.0', port=port)
