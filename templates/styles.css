@@ -1,5 +1,5 @@
 body {
-    background-color: #111;
+    background-color: #191818;
     color: #fff;
     font-family: "Montserrat", sans-serif;
 }
@@ -12,9 +12,6 @@ h1 {
 }
 .gridster ul {
     list-style: none;
-}
-.gridster li {
-    background: gray;
 }
 
 {% include 'widgets/styles.css' ignore missing %}
