@@ -64,10 +64,10 @@ def _configure_jobs():
             print 'Skipping missing or disabled job: %s' % (name,)
             continue
         job = cls(conf[name])
-        print 'Configuring jobs %s to run every %d seconds' % (name,
-                                                               job.every)
+        print 'Configuring job %s to run every %d seconds' % (name,
+                                                              job.interval)
         _queue_data(name, job)
-        sched.add_interval_job(_queue_data, seconds=job.every, kwargs={
+        sched.add_interval_job(_queue_data, seconds=job.interval, kwargs={
             'widget': name, 'job': job})
     sched.start()
 
