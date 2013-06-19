@@ -80,7 +80,7 @@ def _queue_data(widget, job):
     json_data = json.dumps({
         'widget': widget,
         'timestamp': int(time()),
-        'data': job.get()
+        'body': job.get()
     })
     last_events[widget] = json_data
     for queue in queued_events.values():

@@ -9,7 +9,8 @@ jarvis.controller('EventCtrl', ['$scope', function ($scope) {
 
   source.addEventListener('message', function (message) {
     $scope.$apply(function () {
-      $scope.event = JSON.parse(message.data);
+      var data = JSON.parse(message.data);
+      $scope[data.widget] = data.body;
     });
   }, false);
 
