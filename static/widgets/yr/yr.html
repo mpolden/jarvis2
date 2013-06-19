@@ -1,0 +1,6 @@
+<div id="yr">
+  <h2>{{ event.data.location }}</h2>
+  <h1>{{ event.data.temperature }}&deg;</h1>
+  <p>{{ event.data.description }}</p>
+  <p>{{ event.data.wind.description }} ({{ event.data.wind.speed }} m/s) fra {{ event.data.wind.direction | lowercase }}</p>
+</div>

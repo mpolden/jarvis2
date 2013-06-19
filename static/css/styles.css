@@ -13,5 +13,3 @@ h1 {
 .gridster ul {
     list-style: none;
 }
-
-{% include 'widgets/styles.css' ignore missing %}
