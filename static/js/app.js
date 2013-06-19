@@ -1,3 +1,5 @@
+'use strict';
+
 /* Setup Angular app */
 var jarvis = angular.module('jarvis', []);
 
@@ -15,7 +17,7 @@ jarvis.controller('EventCtrl', ['$scope', function ($scope) {
 
 /* Initialize gridster */
 $(function () {
-  $(".gridster ul").gridster({
+  $('.gridster ul').gridster({
     widget_margins: [10, 10],
     widget_base_dimensions: [140, 140]
   });
