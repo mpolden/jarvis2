@@ -12,9 +12,11 @@ from time import time
 from apscheduler.scheduler import Scheduler
 from flask import Flask, render_template, make_response, Response, \
     stream_with_context, request
+from flask.ext.assets import Environment, Bundle
 
 
 app = Flask(__name__)
+assets = Environment(app)
 sched = Scheduler()
 queued_events = {}
 last_events = {}
@@ -96,4 +98,7 @@ if __name__ == '__main__':
         app.debug = True
     port = int(os.environ.get('PORT', 5000))
     SocketServer.BaseServer.handle_error = _close_stream
-    app.run(host='0.0.0.0', port=port)
+    try:
+        app.run(host='0.0.0.0', port=port, threaded=True, use_reloader=False)
+    finally:
+        sched.shutdown(wait=False)

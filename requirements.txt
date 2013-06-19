@@ -1,8 +1,11 @@
 APScheduler==2.1.0
+Flask-Assets==0.8
 Flask==0.9
 Jinja2==2.7
+jsmin==2.0.3
 lxml==3.2.1
 MarkupSafe==0.18
 PyYAML==3.10
 requests==1.2.3
+webassets==0.8
 Werkzeug==0.8.3
