@@ -1,7 +1,12 @@
 <div class="gridster">
   <ul>
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
-      <div ng-include src="'/static/widgets/yr/yr.html'"></div>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/yr/yr.html'"
+      ng-controller="EventCtrl">
     </li>
+    <li data-row="1" data-col="2" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/time/time.html'"
+      ng-controller="TimeCtrl">
+    </div>
   </ul>
 </div>
