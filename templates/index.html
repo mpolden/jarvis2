@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:700">
     <link rel="stylesheet" href="/static/components/normalize-css/normalize.css">
     <link rel="stylesheet" href="/static/components/gridster/dist/jquery.gridster.min.css">
-    <link rel="stylesheet" href="/static/css/styles.css">
-    {% assets output="assets/styles.less", "widgets/yr/yr.less", "widgets/time/time.less" %}
+    {% assets "less" %}
     <link rel="stylesheet/less" href="{{ ASSET_URL }}">
     {% endassets %}
   </head>
@@ -18,9 +17,8 @@
     <script src="/static/components/less.js/dist/less-1.3.3.min.js"></script>
     <script src="/static/components/gridster/dist/jquery.gridster.min.js"></script>
     <script src="/static/components/angular/angular.min.js"></script>
-    {% assets filters="jsmin", output="assets/app.min.js", "js/app.js" %}
+    {% assets "js" %}
     <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
-    <script src="/static/widgets/time/time.js"></script>
   </body>
 </html>

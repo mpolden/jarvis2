@@ -10,8 +10,8 @@ import SocketServer
 import json
 from time import time
 from apscheduler.scheduler import Scheduler
-from flask import Flask, render_template, make_response, Response, \
-    stream_with_context, request
+from flask import Flask, render_template, Response, stream_with_context, \
+    request
 from flask.ext.assets import Environment, Bundle
 
 
@@ -22,18 +22,30 @@ queued_events = {}
 last_events = {}
 
 
+@app.before_first_request
+def _configure_assets():
+    """Configure widget assets"""
+    js_files = ['js/app.js']
+    less_files = ['css/styles.less']
+    widgets_path = os.path.join('static', 'widgets')
+    for widget in os.listdir(widgets_path):
+        widget_path = os.path.join('widgets', widget)
+        for asset_file in os.listdir(os.path.join('static', widget_path)):
+            asset_path = os.path.join(widget_path, asset_file)
+            if asset_file.endswith('.js'):
+                js_files.append(asset_path)
+            elif asset_file.endswith('.less'):
+                less_files.append(asset_path)
+    js = Bundle(*js_files, filters='jsmin', output='assets/app.min.js')
+    less = Bundle(*less_files, output='assets/styles.less')
+    assets.register('js', js)
+    assets.register('less', less)
+
+
 @app.route('/')
 def index():
     """Render index template"""
     return render_template('index.html')
-
-
-@app.route('/styles.css')
-def css():
-    """Render widget styles"""
-    response = make_response(render_template('styles.css'))
-    response.headers['Content-Type'] = 'text/css'
-    return response
 
 
 @app.route('/events')
