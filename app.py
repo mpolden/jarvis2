@@ -49,12 +49,15 @@ def _configure_assets():
                 less_files.append(asset_path)
             elif asset_file.endswith('.css'):
                 css_files.append(asset_path)
-    js = Bundle(*js_files, filters='jsmin', output='assets/app.min.js')
+    js_min = Bundle(*js_files, filters='jsmin', output='assets/app.min.js')
+    js = Bundle(*js_files[3:], output='assets/app.js')
     less = Bundle(*less_files, output='assets/styles.less')
-    css = Bundle(*css_files, filters='cssmin', output='assets/styles.min.css')
+    css_min = Bundle(*css_files, filters='cssmin',
+            output='assets/styles.min.css')
+    assets.register('js_min_all', js_min)
     assets.register('js_all', js)
     assets.register('less_all', less)
-    assets.register('css_all', css)
+    assets.register('css_min_all', css_min)
 
 
 @app.route('/')
@@ -93,7 +96,8 @@ def _configure_jobs():
         if not issubclass(cls, jobs.Base) or cls is jobs.Base:
             continue
         name = cls_name.lower()
-        if name not in conf.keys() or not conf[name]['enabled']:
+        if name not in conf.keys() or 'enabled' not in conf[name] or \
+                not conf[name]['enabled']:
             print 'Skipping missing or disabled job: %s' % (name,)
             continue
         job = cls(conf[name])
