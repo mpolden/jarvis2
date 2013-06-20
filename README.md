@@ -18,3 +18,7 @@ TODO
 Usage
 =====
 TODO
+
+Screenshot
+==========
+![Screenshot](https://github.com/martinp/jarvis2/raw/master/public/jarvis2.png)
