@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import requests
+import json
+from time import time
+from datetime import datetime
 from lxml import etree
 
 
@@ -35,6 +38,34 @@ class Yr(object):
             }
         }
         return data
+
+
+class Atb(object):
+
+    def __init__(self, conf):
+        self.url = conf['url']
+        self.interval = conf['interval']
+
+    def get(self):
+        r = requests.get(self.url)
+
+        if r.status_code == 200 and len(r.content) > 0:
+            data = json.loads(r.content)
+            for departure in data['departures']:
+                departureTime = datetime.strptime(
+                        departure['registeredDepartureTime'],
+                        '%Y-%m-%dT%H:%M:%S.000')
+                remaining = (departureTime - datetime.now()
+                        ).total_seconds() / 60
+                departure['hour'] = departureTime.strftime('%H')
+                departure['minute'] = departureTime.strftime('%M')
+                if remaining > 0:
+                    departure['remaining'] = int(remaining)
+                else:
+                    departure['remaining'] = 0
+
+            return data
+        return {}
 
 
 if __name__ == '__main__':
