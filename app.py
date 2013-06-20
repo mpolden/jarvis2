@@ -25,7 +25,18 @@ last_events = {}
 @app.before_first_request
 def _configure_assets():
     """Configure widget assets"""
-    js_files = ['js/app.js']
+    js_files = [
+            'js/jquery/jquery.min.js',
+            'js/gridster/jquery.gridster.min.js',
+            'js/angular/angular.min.js',
+            'js/gridster.js',
+            'js/app.js'
+            ]
+    css_files = [
+            'css/normalize-css/normalize.css',
+            'css/gridster/jquery.gridster.min.css',
+            'css/styles.css'
+            ]
     less_files = ['css/styles.less']
     widgets_path = os.path.join(sys.path[0], 'static', 'widgets')
     for widget in os.listdir(widgets_path):
@@ -36,10 +47,14 @@ def _configure_assets():
                 js_files.append(asset_path)
             elif asset_file.endswith('.less'):
                 less_files.append(asset_path)
+            elif asset_file.endswith('.css'):
+                css_files.append(asset_path)
     js = Bundle(*js_files, filters='jsmin', output='assets/app.min.js')
     less = Bundle(*less_files, output='assets/styles.less')
-    assets.register('js', js)
-    assets.register('less', less)
+    css = Bundle(*css_files, filters='cssmin', output='assets/styles.min.css')
+    assets.register('js_all', js)
+    assets.register('less_all', less)
+    assets.register('css_all', css)
 
 
 @app.route('/')
