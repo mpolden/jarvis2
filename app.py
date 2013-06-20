@@ -22,6 +22,26 @@ queued_events = {}
 last_events = {}
 
 
+@app.before_first_request
+def _configure_assets():
+    """Configure widget assets"""
+    js_files = ['js/app.js']
+    less_files = ['css/styles.less']
+    widgets_path = os.path.join(sys.path[0], 'static', 'widgets')
+    for widget in os.listdir(widgets_path):
+        widget_path = os.path.join('widgets', widget)
+        for asset_file in os.listdir(os.path.join(widgets_path, widget)):
+            asset_path = os.path.join(widget_path, asset_file)
+            if asset_file.endswith('.js'):
+                js_files.append(asset_path)
+            elif asset_file.endswith('.less'):
+                less_files.append(asset_path)
+    js = Bundle(*js_files, filters='jsmin', output='assets/app.min.js')
+    less = Bundle(*less_files, output='assets/styles.less')
+    assets.register('js', js)
+    assets.register('less', less)
+
+
 @app.route('/')
 def index():
     """Render index template"""
@@ -46,30 +66,12 @@ def events():
                     mimetype='text/event-stream')
 
 
-def _configure_assets():
-    """Configure widget assets"""
-    js_files = ['js/app.js']
-    less_files = ['css/styles.less']
-    widgets_path = os.path.join(sys.path[0], 'static', 'widgets')
-    for widget in os.listdir(widgets_path):
-        widget_path = os.path.join('widgets', widget)
-        for asset_file in os.listdir(os.path.join(widgets_path, widget)):
-            asset_path = os.path.join(widget_path, asset_file)
-            if asset_file.endswith('.js'):
-                js_files.append(asset_path)
-            elif asset_file.endswith('.less'):
-                less_files.append(asset_path)
-    js = Bundle(*js_files, filters='jsmin', output='assets/app.min.js')
-    less = Bundle(*less_files, output='assets/styles.less')
-    assets.register('js', js)
-    assets.register('less', less)
-
-
 def _read_conf():
     with open(os.path.join(sys.path[0], 'config.yml'), 'r') as conf:
         return yaml.load(conf)
 
 
+@app.before_first_request
 def _configure_jobs():
     conf = _read_conf()
     for cls_name, cls in inspect.getmembers(jobs, inspect.isclass):
@@ -107,10 +109,6 @@ def _close_stream(*args, **kwargs):
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'debug':
         app.debug = True
-
-    _configure_jobs()
-    _configure_assets()
-
     port = int(os.environ.get('PORT', 5000))
     SocketServer.BaseServer.handle_error = _close_stream
     try:
