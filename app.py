@@ -50,10 +50,10 @@ def _configure_assets():
     """Configure widget assets"""
     js_files = ['js/app.js']
     less_files = ['css/styles.less']
-    widgets_path = os.path.join('static', 'widgets')
+    widgets_path = os.path.join(sys.path[0], 'static', 'widgets')
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)
-        for asset_file in os.listdir(os.path.join('static', widget_path)):
+        for asset_file in os.listdir(os.path.join(widgets_path, widget)):
             asset_path = os.path.join(widget_path, asset_file)
             if asset_file.endswith('.js'):
                 js_files.append(asset_path)
