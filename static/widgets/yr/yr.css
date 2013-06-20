@@ -1,0 +1,16 @@
+#yr {
+  height: 100%;
+  padding: 5px;
+  background: #81c6dd;
+  text-align: center;
+}
+#yr h1 {
+  font-size: 55px;
+  margin: 0;
+}
+#yr h2 {
+  font-size: 28px;
+}
+#yr p {
+  font-size: 18px;
+}

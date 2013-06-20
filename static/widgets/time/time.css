@@ -1,0 +1,15 @@
+#time {
+  height: 100%;
+  padding: 5px;
+  background: #9e3b33;
+  text-align: center;
+}
+#time h1 {
+  font-size: 60px;
+}
+#time h2 {
+  font-size: 30px;
+}
+#time p {
+  font-size: 18px;
+}

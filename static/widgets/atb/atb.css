@@ -1,0 +1,30 @@
+#atb {
+  height: 100%;
+  padding: 5px;
+  background: #90ca77;
+  text-align: center;
+}
+#atb h1 {
+  font-size: 55px;
+  margin: 0;
+}
+#atb h2 {
+  font-size: 25px;
+}
+#atb p {
+  font-size: 16px;
+}
+#atb table {
+  padding: 5px;
+  margin: 0 auto;
+}
+#atb .time {
+  text-align: right;
+  width: 50px;
+}
+#atb .destination {
+  text-align: left;
+}
+#atb .fade {
+  color: rgba(255, 255, 255, 0.7);
+}
