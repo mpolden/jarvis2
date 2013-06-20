@@ -7,7 +7,13 @@ from datetime import datetime
 from lxml import etree
 
 
-class Yr(object):
+class Base(object):
+
+    def get(self):
+        raise NotImplementedError('Needs to be implemented')
+
+
+class Yr(Base):
 
     def __init__(self, conf):
         self.url = conf['url']
@@ -40,7 +46,7 @@ class Yr(object):
         return data
 
 
-class Atb(object):
+class Atb(Base):
 
     def __init__(self, conf):
         self.url = conf['url']

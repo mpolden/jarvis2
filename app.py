@@ -90,6 +90,8 @@ def _read_conf():
 def _configure_jobs():
     conf = _read_conf()
     for cls_name, cls in inspect.getmembers(jobs, inspect.isclass):
+        if not issubclass(cls, jobs.Base) or cls is jobs.Base:
+            continue
         name = cls_name.lower()
         if name not in conf.keys() or not conf[name]['enabled']:
             print 'Skipping missing or disabled job: %s' % (name,)
