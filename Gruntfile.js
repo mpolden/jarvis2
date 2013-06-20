@@ -2,10 +2,19 @@ module.exports = function (grunt) {
 
   'use strict';
 
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.initConfig({
+    bower: {
+      install: {
+        options: {
+          targetDir: './static',
+          cleanBowerDir: true
+        }
+      }
+    },
     jshint: {
       all: ['Gruntfile.js', 'static/js/*.js', 'static/widgets/*/*.js'],
       options: {
