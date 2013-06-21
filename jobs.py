@@ -73,6 +73,20 @@ class Atb(Base):
         return {}
 
 
+class HackerNews(Base):
+
+    def __init__(self, conf):
+        self.url = conf['url']
+        self.interval = conf['interval']
+
+    def get(self):
+        r = requests.get(self.url)
+
+        if r.status_code == 200 and len(r.content) > 0:
+            return json.loads(r.content)
+        return {}
+
+
 if __name__ == '__main__':
     yr = Yr({
             'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/'
