@@ -2,7 +2,6 @@
 
 import sys
 import os
-import yaml
 import inspect
 import Queue
 import jobs
@@ -16,6 +15,7 @@ from flask.ext.assets import Environment, Bundle
 
 
 app = Flask(__name__)
+app.config.from_envvar('JARVIS_SETTINGS')
 assets = Environment(app)
 sched = Scheduler()
 queued_events = {}
@@ -88,14 +88,9 @@ def events():
                     mimetype='text/event-stream')
 
 
-def _read_conf():
-    with open(os.path.join(sys.path[0], 'config.yml'), 'r') as conf:
-        return yaml.load(conf)
-
-
 @app.before_first_request
 def _configure_jobs():
-    conf = _read_conf()
+    conf = app.config['JOBS']
     for cls_name, cls in inspect.getmembers(jobs, inspect.isclass):
         if not issubclass(cls, jobs.Base) or cls is jobs.Base:
             continue

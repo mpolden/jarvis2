@@ -1,0 +1,28 @@
+JOBS = {}
+
+JOBS['yr'] = {
+    # Enable job
+    'enabled': True,
+    # Run job every N seconds
+    'interval': 60,
+    # URL for data
+    'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
+            'Trondheim/varsel.xml')
+}
+
+JOBS['time'] = {
+    'enabled': True
+}
+
+JOBS['atb'] = {
+    'enabled': False,
+    'interval': 60,
+    'url': ('http://api.busbuddy.no/api/1.4.4/departures/yourLocationId'
+            '?apiKey=yourApiKey')
+}
+
+JOBS['hackernews'] = {
+    'enabled': True,
+    'interval': 600,
+    'url': 'http://api.ihackernews.com/page'
+}
