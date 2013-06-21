@@ -1,4 +1,4 @@
-/* jshint node: true, camelcase: false */
+/* jshint node: true, camelcase: false, maxlen: false */
 
 module.exports = function (grunt) {
 
@@ -7,6 +7,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-jsbeautifier');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.initConfig({
@@ -58,18 +59,32 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['static/js/app/*.js', 'static/widgets/*/*.js'],
-        tasks: ['default'],
+        files: [
+          'static/js/app/*.js',
+          'static/widgets/*/*.js',
+          'static/widgets/*/*.less',
+        ],
+        tasks: ['jshint', 'less'],
       }
     },
     jsbeautifier: {
-      files: ['static/js/app/*.js', 'static/widgets/*/*.js'],
+      files: ['Gruntfile.js', 'static/js/app/*.js', 'static/widgets/*/*.js'],
       options: {
         indent_size: 2,
         jslint_happy: true
       }
+    },
+    less: {
+      development: {
+        files: {
+          'static/widgets/atb/atb.css': 'static/widgets/atb/atb.less',
+          'static/widgets/hackernews/hackernews.css': 'static/widgets/hackernews/hackernews.less',
+          'static/widgets/time/time.css': 'static/widgets/time/time.less',
+          'static/widgets/yr/yr.css': 'static/widgets/yr/yr.less'
+        }
+      }
     }
   });
 
-  grunt.registerTask('default', 'jshint');
+  grunt.registerTask('default', ['jsbeautifier', 'jshint', 'less']);
 };
