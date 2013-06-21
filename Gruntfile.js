@@ -5,6 +5,7 @@ module.exports = function (grunt) {
   'use strict';
 
   grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-jsbeautifier');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
@@ -59,6 +60,13 @@ module.exports = function (grunt) {
       scripts: {
         files: ['static/js/app/*.js', 'static/widgets/*/*.js'],
         tasks: ['default'],
+      }
+    },
+    jsbeautifier: {
+      files: ['static/js/app/*.js', 'static/widgets/*/*.js'],
+      options: {
+        indent_size: 2,
+        jslint_happy: true
       }
     }
   });
