@@ -15,13 +15,16 @@ module.exports = function (grunt) {
     bower: {
       install: {
         options: {
-          targetDir: './static',
+          targetDir: './app/static',
           cleanBowerDir: true
         }
       }
     },
     jshint: {
-      all: ['Gruntfile.js', 'static/js/app/*.js', 'static/widgets/*/*.js'],
+      all: ['Gruntfile.js',
+        'app/static/js/app/*.js',
+        'app/static/widgets/*/*.js'
+      ],
       options: {
         /* enforcing options */
         bitwise: false,
@@ -60,15 +63,18 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: [
-          'static/js/app/*.js',
-          'static/widgets/*/*.js',
-          'static/widgets/*/*.less',
+          'app/static/js/app/*.js',
+          'app/static/widgets/*/*.js',
+          'app/static/widgets/*/*.less',
         ],
         tasks: ['jshint', 'less'],
       }
     },
     jsbeautifier: {
-      files: ['Gruntfile.js', 'static/js/app/*.js', 'static/widgets/*/*.js'],
+      files: ['Gruntfile.js',
+        'app/static/js/app/*.js',
+        'app/static/widgets/*/*.js'
+      ],
       options: {
         indent_size: 2,
         jslint_happy: true
@@ -77,10 +83,10 @@ module.exports = function (grunt) {
     less: {
       development: {
         files: {
-          'static/widgets/atb/atb.css': 'static/widgets/atb/atb.less',
-          'static/widgets/hackernews/hackernews.css': 'static/widgets/hackernews/hackernews.less',
-          'static/widgets/time/time.css': 'static/widgets/time/time.less',
-          'static/widgets/yr/yr.css': 'static/widgets/yr/yr.less'
+          'app/static/widgets/atb/atb.css': 'app/static/widgets/atb/atb.less',
+          'app/static/widgets/hackernews/hackernews.css': 'app/static/widgets/hackernews/hackernews.less',
+          'app/static/widgets/time/time.css': 'app/static/widgets/time/time.less',
+          'app/static/widgets/yr/yr.css': 'app/static/widgets/yr/yr.less'
         }
       }
     }

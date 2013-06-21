@@ -1,6 +1,6 @@
 *.pyc
-static/assets/
-static/.webassets-cache/
+app/static/assets/
+app/static/.webassets-cache/
 node_modules/
 components/
 config.py
