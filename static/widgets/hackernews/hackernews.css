@@ -12,6 +12,7 @@
 }
 #hackernews .title {
   text-align: left;
+  width: 100%;
 }
 #hackernews .points {
   text-align: right;

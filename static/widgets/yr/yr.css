@@ -9,8 +9,11 @@
   margin: 0;
 }
 #yr h2 {
-  font-size: 28px;
+  font-size: 30px;
 }
 #yr p {
-  font-size: 18px;
+  font-size: 20px;
+}
+#yr .fade {
+  color: rgba(255, 255, 255, 0.7);
 }
