@@ -4,11 +4,13 @@ FROM base
 # Install required system packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
-RUN apt-get install -y wget python-virtualenv python-dev libxml2-dev libxslt1-dev libyaml-dev
+RUN apt-get install -y wget python-pip python-dev libxml2-dev libxslt1-dev
 
 # Add files
-RUN mkdir -p /app
-ADD . /app
+RUN mkdir /app
+ADD ./app /app/app
+ADD ./run.py /app/run.py
+ADD ./requirements.txt /app/requirements.txt
 
 # Install pip dependencies
 RUN pip install --use-mirrors -r /app/requirements.txt
@@ -17,4 +19,4 @@ RUN pip install --use-mirrors -r /app/requirements.txt
 EXPOSE 5000
 
 # Command for running app
-CMD /app/app.py
+CMD JARVIS_SETTINGS="config.py" /app/run.py
