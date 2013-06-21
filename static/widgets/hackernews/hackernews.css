@@ -1,0 +1,22 @@
+#hackernews {
+  height: 100%;
+  padding: 5px;
+  background: #e9b64d;
+  text-align: center;
+}
+#hackernews p {
+  font-size: 16px;
+}
+#hackernews table {
+  margin: 0 6px 0 6px;
+}
+#hackernews .title {
+  text-align: left;
+}
+#hackernews .points {
+  text-align: right;
+  width: 33px;
+}
+#hackernews .fade {
+  color: rgba(255, 255, 255, 0.7);
+}

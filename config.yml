@@ -31,6 +31,13 @@ atb:
   url: http://api.busbuddy.no/api/1.4.4/departures/yourLocationId?apiKey=yourApiKey
 
 
+# Hacker News widget
+hackernews:
+  enabled: true
+  interval: 300
+  url: http://api.ihackernews.com/page
+
+
 # Plex widget
 # Replace ip:port with the IP and port (default is 32400) of your Plex Media
 # Server. The section number identifies the appropriate section.
