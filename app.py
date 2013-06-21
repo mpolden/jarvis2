@@ -30,8 +30,8 @@ def _configure_assets():
         'js/gridster/jquery.gridster.min.js',
         'js/angular/angular.min.js',
         'js/angular-truncate/truncate.js',
-        'js/gridster.js',
-        'js/app.js'
+        'js/app/gridster.js',
+        'js/app/main.js'
     ]
     css_files = [
         'css/normalize-css/normalize.css',

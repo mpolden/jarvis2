@@ -1,8 +1,7 @@
-'use strict';
-
-var jarvis = jarvis || angular.module('jarvis', []);
+var jarvis = jarvis || angular.module('jarvis', ['truncate']);
 
 jarvis.controller('EventCtrl', ['$scope', function ($scope) {
+  'use strict';
 
   var source = new EventSource('/events');
 
