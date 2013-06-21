@@ -1,8 +1,7 @@
-'use strict';
-
 var jarvis = jarvis || angular.module('jarvis', []);
 
 jarvis.controller('AtbCtrl', ['$scope', function ($scope) {
+  'use strict';
 
   var fmtMessage = function (departure) {
     var n = departure !== null ? departure.remaining : 0,

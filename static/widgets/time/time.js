@@ -1,8 +1,7 @@
-'use strict';
-
 var jarvis = jarvis || angular.module('jarvis', []);
 
 jarvis.controller('TimeCtrl', ['$scope', function ($scope) {
+  'use strict';
 
   var fmtTime = function (n) {
     return n < 10 ? '0' + n : n;

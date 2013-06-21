@@ -35,7 +35,6 @@ module.exports = function (grunt) {
         strict: true,
         trailing: true,
         maxdepth: 5,
-        globalstrict: true,
         node: true,
         globals: {
           angular: true,
