@@ -78,8 +78,11 @@ def events():
 
     def consume():
         while True:
-            data = current_queue.get()
-            yield 'data: %s\n\n' % (data,)
+            try:
+                data = current_queue.get()
+                yield 'data: %s\n\n' % (data,)
+            except KeyboardInterrupt:
+                break
 
     return Response(stream_with_context(consume()),
                     mimetype='text/event-stream')
