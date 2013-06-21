@@ -29,6 +29,7 @@ def _configure_assets():
         'js/jquery/jquery.min.js',
         'js/gridster/jquery.gridster.min.js',
         'js/angular/angular.min.js',
+        'js/angular-truncate/truncate.js',
         'js/gridster.js',
         'js/app.js'
     ]
