@@ -2,7 +2,6 @@
 
 import requests
 import json
-from time import time
 from datetime import datetime
 from lxml import etree
 
@@ -59,10 +58,10 @@ class Atb(Base):
             data = json.loads(r.content)
             for departure in data['departures']:
                 departureTime = datetime.strptime(
-                        departure['registeredDepartureTime'],
-                        '%Y-%m-%dT%H:%M:%S.000')
+                    departure['registeredDepartureTime'],
+                    '%Y-%m-%dT%H:%M:%S.000')
                 remaining = (departureTime - datetime.now()
-                        ).total_seconds() / 60
+                             ).total_seconds() / 60
                 departure['hour'] = departureTime.strftime('%H')
                 departure['minute'] = departureTime.strftime('%M')
                 if remaining > 0:

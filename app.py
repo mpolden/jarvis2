@@ -26,17 +26,17 @@ last_events = {}
 def _configure_assets():
     """Configure widget assets"""
     js_files = [
-            'js/jquery/jquery.min.js',
-            'js/gridster/jquery.gridster.min.js',
-            'js/angular/angular.min.js',
-            'js/gridster.js',
-            'js/app.js'
-            ]
+        'js/jquery/jquery.min.js',
+        'js/gridster/jquery.gridster.min.js',
+        'js/angular/angular.min.js',
+        'js/gridster.js',
+        'js/app.js'
+    ]
     css_files = [
-            'css/normalize-css/normalize.css',
-            'css/gridster/jquery.gridster.min.css',
-            'css/styles.css'
-            ]
+        'css/normalize-css/normalize.css',
+        'css/gridster/jquery.gridster.min.css',
+        'css/styles.css'
+    ]
     less_files = ['css/styles.less']
     widgets_path = os.path.join(sys.path[0], 'static', 'widgets')
     for widget in os.listdir(widgets_path):
@@ -53,7 +53,7 @@ def _configure_assets():
     js = Bundle(*js_files[3:], output='assets/app.js')
     less = Bundle(*less_files, output='assets/styles.less')
     css_min = Bundle(*css_files, filters='cssmin',
-            output='assets/styles.min.css')
+                     output='assets/styles.min.css')
     assets.register('js_min_all', js_min)
     assets.register('js_all', js)
     assets.register('less_all', less)
