@@ -1,3 +1,5 @@
+/* jshint node: true, camelcase: false */
+
 module.exports = function (grunt) {
 
   'use strict';
@@ -19,8 +21,12 @@ module.exports = function (grunt) {
     jshint: {
       all: ['Gruntfile.js', 'static/js/app/*.js', 'static/widgets/*/*.js'],
       options: {
+        /* enforcing options */
+        bitwise: false,
+        camelcase: true,
         curly: true,
         eqeqeq: true,
+        es3: false,
         forin: true,
         immed: true,
         indent: 2,
@@ -29,13 +35,19 @@ module.exports = function (grunt) {
         noarg: true,
         noempty: true,
         nonew: true,
+        plusplus: true,
         quotmark: 'single',
         undef: true,
         unused: true,
         strict: true,
         trailing: true,
+        maxparams: 5,
         maxdepth: 5,
-        node: true,
+        maxstatements: 20,
+        maxcomplexity: 5,
+        maxlen: 80,
+        /* relaxing options */
+        browser: true,
         globals: {
           angular: true,
           $: true,
@@ -45,7 +57,7 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['static/js/*.js', 'widgets/*/*.js'],
+        files: ['static/js/app/*.js', 'static/widgets/*/*.js'],
         tasks: ['default'],
       }
     }

@@ -1,3 +1,4 @@
+/* jshint camelcase: false */
 $(function () {
   'use strict';
   $('.gridster ul').gridster({
