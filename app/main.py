@@ -39,7 +39,7 @@ def _configure_assets():
         'css/styles.css'
     ]
     less_files = ['css/styles.less']
-    widgets_path = os.path.join(sys.path[0], 'static', 'widgets')
+    widgets_path = os.path.join(os.path.dirname(__file__), 'static', 'widgets')
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)
         for asset_file in os.listdir(os.path.join(widgets_path, widget)):
@@ -126,12 +126,4 @@ def _close_stream(*args, **kwargs):
         del queued_events[remote_port]
 
 
-if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == 'debug':
-        app.debug = True
-    port = int(os.environ.get('PORT', 5000))
-    SocketServer.BaseServer.handle_error = _close_stream
-    try:
-        app.run(host='0.0.0.0', port=port, threaded=True)
-    finally:
-        sched.shutdown(wait=False)
+SocketServer.BaseServer.handle_error = _close_stream
