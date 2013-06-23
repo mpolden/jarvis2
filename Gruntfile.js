@@ -1,4 +1,4 @@
-/* jshint node: true, camelcase: false, maxlen: false */
+/* jshint node: true, camelcase: false */
 
 module.exports = function (grunt) {
 
@@ -9,6 +9,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
+
+  var less_files = {};
+  grunt.file.recurse('app/static/widgets',
+    function (abspath, rootdir, subdir, filename) {
+      if (grunt.file.isMatch('*.less', filename)) {
+        less_files[abspath.replace(/\.less$/, '.css')] = abspath;
+      }
+    });
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -82,12 +90,7 @@ module.exports = function (grunt) {
     },
     less: {
       development: {
-        files: {
-          'app/static/widgets/atb/atb.css': 'app/static/widgets/atb/atb.less',
-          'app/static/widgets/hackernews/hackernews.css': 'app/static/widgets/hackernews/hackernews.less',
-          'app/static/widgets/time/time.css': 'app/static/widgets/time/time.less',
-          'app/static/widgets/yr/yr.css': 'app/static/widgets/yr/yr.less'
-        }
+        files: less_files
       }
     }
   });
