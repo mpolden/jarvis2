@@ -1,0 +1,19 @@
+#sonos {
+  height: 100%;
+  padding: 5px;
+  background: #e48743;
+  text-align: center;
+}
+#sonos h1 {
+  font-size: 30px;
+  margin: 0;
+}
+#sonos h2 {
+  font-size: 25px;
+}
+#sonos p {
+  font-size: 18px;
+}
+#sonos .fade {
+  color: rgba(255, 255, 255, 0.7);
+}
