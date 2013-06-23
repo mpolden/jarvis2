@@ -4,6 +4,7 @@ import requests
 import json
 from datetime import datetime
 from lxml import etree
+from soco import SoCo
 
 
 class Base(object):
@@ -85,6 +86,24 @@ class HackerNews(Base):
         if r.status_code == 200 and len(r.content) > 0:
             return json.loads(r.content)
         return {}
+
+
+class Sonos(Base):
+
+    def __init__(self, conf):
+        self.ip = conf['ip']
+        self.interval = conf['interval']
+
+    def get(self):
+        sonos = SoCo(self.ip)
+
+        np = sonos.get_current_track_info()
+        next = sonos.get_queue(int(np['playlist_position']), 1).pop()
+        return {
+            'name': sonos.get_speaker_info()['zone_name'],
+            'np': np,
+            'next': next
+        }
 
 
 if __name__ == '__main__':

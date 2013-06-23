@@ -26,3 +26,9 @@ JOBS['hackernews'] = {
     'interval': 600,
     'url': 'http://api.ihackernews.com/page'
 }
+
+JOBS['sonos'] = {
+    'enabled': False,
+    'interval': 10,
+    'ip': 'ip.addr'
+}

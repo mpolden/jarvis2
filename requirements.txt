@@ -8,5 +8,6 @@ jsmin==2.0.3
 lxml==3.2.1
 MarkupSafe==0.18
 requests==1.2.3
+soco==0.2
 webassets==0.8
 Werkzeug==0.9.1
