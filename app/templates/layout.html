@@ -24,5 +24,11 @@
       ng-controller="HackerNewsCtrl">
     </li>
     {% endif %}
+    {% if config['JOBS']['sonos']['enabled'] %}
+    <li data-row="2" data-col="1" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/sonos/sonos.html'"
+      ng-controller="SonosCtrl">
+    </li>
+    {% endif %}
   </ul>
 </div>
