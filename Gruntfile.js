@@ -29,7 +29,8 @@ module.exports = function (grunt) {
       }
     },
     jshint: {
-      all: ['Gruntfile.js',
+      all: [
+        'Gruntfile.js',
         'app/static/js/app/*.js',
         'app/static/widgets/*/*.js'
       ],
@@ -79,7 +80,8 @@ module.exports = function (grunt) {
       }
     },
     jsbeautifier: {
-      files: ['Gruntfile.js',
+      files: [
+        'Gruntfile.js',
         'app/static/js/app/*.js',
         'app/static/widgets/*/*.js'
       ],
@@ -95,5 +97,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('hint', 'jshint');
+  grunt.registerTask('build', ['bower', 'jsbeautifier', 'jshint', 'less']);
   grunt.registerTask('default', ['jsbeautifier', 'jshint', 'less']);
 };
