@@ -8,7 +8,9 @@ jarvis.controller('EventCtrl', ['$scope',
 
     source.addEventListener('message', function (message) {
       var o = JSON.parse(message.data);
-      $scope.$broadcast(o.widget, o.body);
+      if (Object.keys(o.body).length > 0) {
+        $scope.$broadcast(o.widget, o.body);
+      }
     }, false);
 
   }
