@@ -1,4 +1,5 @@
 *.pyc
+app/.calendar.json
 app/static/assets/
 app/static/.webassets-cache/
 node_modules/

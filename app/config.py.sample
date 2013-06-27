@@ -32,3 +32,11 @@ JOBS['sonos'] = {
     'interval': 10,
     'ip': 'ip.addr'
 }
+
+JOBS['calendar'] = {
+    'enabled': False,
+    'interval': 600,
+    'client_id': '',
+    'client_secret': '',
+    'api_key': ''
+}
