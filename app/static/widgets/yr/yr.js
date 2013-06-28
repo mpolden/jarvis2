@@ -5,9 +5,7 @@ jarvis.controller('YrCtrl', ['$scope',
     'use strict';
 
     $scope.$on('yr', function (ev, body) {
-      $scope.$apply(function () {
-        $scope[ev.name] = body;
-      });
+      $scope[ev.name] = body;
     });
 
   }

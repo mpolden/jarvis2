@@ -17,7 +17,7 @@ jarvis.controller('AtbCtrl', ['$scope',
         body.first = body.departures[0];
         body.first.remainingMessage = fmtMessage(body.first);
         body.rest = body.departures.slice(1, 5);
-      } else  {
+      } else {
         body.first = null;
         body.rest = [];
       }

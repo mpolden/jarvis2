@@ -15,15 +15,15 @@
   font-size: 16px;
 }
 #atb table {
-  padding: 5px;
-  margin: 0 auto;
+  margin: 0 10px 0 10px;
 }
 #atb .time {
   text-align: right;
-  width: 50px;
+  white-space: nowrap;
 }
 #atb .destination {
   text-align: left;
+  width: 100%;
 }
 #atb .fade {
   color: rgba(255, 255, 255, 0.7);

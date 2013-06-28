@@ -16,7 +16,7 @@
 }
 #hackernews .points {
   text-align: right;
-  width: 33px;
+  white-space: nowrap;
 }
 #hackernews .fade {
   color: rgba(255, 255, 255, 0.7);
