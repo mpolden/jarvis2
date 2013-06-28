@@ -30,5 +30,11 @@
       ng-controller="SonosCtrl">
     </li>
     {% endif %}
+    {% if config['JOBS']['calendar']['enabled'] %}
+    <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/calendar/calendar.html'"
+      ng-controller="CalendarCtrl">
+    </li>
+    {% endif %}
   </ul>
 </div>

@@ -1,0 +1,30 @@
+#calendar {
+  height: 100%;
+  padding: 5px;
+  background: #447294;
+  text-align: center;
+}
+#calendar h1 {
+  font-size: 55px;
+  margin: 0 0 10px 0;
+}
+#calendar h2 {
+  font-size: 25px;
+}
+#calendar p {
+  font-size: 16px;
+}
+#calendar table {
+  margin: 0 10px 0 10px;
+}
+#calendar .summary {
+  text-align: left;
+  width: 100%;
+}
+#calendar .start {
+  text-align: right;
+  white-space: nowrap;
+}
+#calendar .fade {
+  color: rgba(255, 255, 255, 0.7);
+}
