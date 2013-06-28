@@ -2,9 +2,15 @@
 
 import requests
 import json
+import os.path
+import dateutil.parser
 from datetime import datetime
 from lxml import etree
 from soco import SoCo
+
+import httplib2
+from apiclient.discovery import build
+from oauth2client.file import Storage
 
 
 class Base(object):
@@ -106,10 +112,68 @@ class Sonos(Base):
         }
 
 
-if __name__ == '__main__':
-    yr = Yr({
-            'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/'
-                    'Trondheim/Trondheim/varsel.xml'),
-            'interval': 10
+class Calendar(Base):
+
+    def __init__(self, conf):
+        self.interval = conf['interval']
+
+        credentials_file = os.path.join(os.path.dirname(__file__),
+                                        '.calendar.json')
+        storage = Storage(credentials_file)
+        credentials = storage.get()
+        http = httplib2.Http()
+        http = credentials.authorize(http)
+        self.service = build(serviceName='calendar', version='v3', http=http,
+                             developerKey=conf['api_key'])
+
+    def _parse_date(self, date):
+        if 'dateTime' in date:
+            d = date['dateTime']
+        elif 'date' in date:
+            d = date['date']
+        else:
+            return None
+        return dateutil.parser.parse(d)
+
+    def get_current_event(self, items):
+        if len(items) == 0:
+            return None
+
+        event = items[0]
+        date = self._parse_date(event['start'])
+
+        if date is None or date.date() != date.now().date():
+            return None
+
+        return {
+            'summary': event['summary'],
+            'start': date.strftime('%H:%M')
+        }
+
+    def get_events(self, items, today):
+        if len(items) == 0:
+            return None
+
+        events = []
+        start = 0 if today is None else 1
+        for event in items[start:]:
+            date = self._parse_date(event['start'])
+            events.append({
+                'summary': event['summary'],
+                'start': date.strftime('%d.%m %H:%M')
             })
-    print yr.get()
+        return events
+
+    def get(self):
+        now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        result = self.service.events().list(calendarId='primary',
+                                            orderBy='startTime',
+                                            singleEvents=True,
+                                            timeMin=now).execute()
+        items = result['items']
+        today = self.get_current_event(items)
+        events = self.get_events(items, today)
+        return {
+            'today': today,
+            'events': events
+        }
