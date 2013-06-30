@@ -26,19 +26,13 @@ class Yr(Base):
         self.url = conf['url']
         self.interval = conf['interval']
 
-    def get(self):
-        # Retrieve XML data from YR_URL
-        r = requests.get(self.url)
-
-        # Parse XML string into an ElementTree
-        tree = etree.fromstring(r.content)
-
-        # Use XPath to get the values we're interested in
+    def _parse(self, xml):
+        tree = etree.fromstring(xml)
         tabular = tree.xpath('/weatherdata/forecast/tabular/time[1]').pop()
         weatherStation = tree.xpath(
             '/weatherdata/observations/weatherstation[1]').pop()
         windSpeed = weatherStation.xpath('windSpeed').pop()
-        data = {
+        return {
             'location': tree.xpath('/weatherdata/location/name').pop().text,
             'temperature': weatherStation.xpath('temperature').pop().get(
                 'value'),
@@ -50,7 +44,13 @@ class Yr(Base):
                     'name')
             }
         }
-        return data
+
+    def get(self):
+        r = requests.get(self.url)
+
+        if r.status_code == 200 and len(r.content) > 0:
+            return self._parse(xml)
+        return {}
 
 
 class Atb(Base):
