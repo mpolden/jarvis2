@@ -42,5 +42,11 @@
       ng-controller="UptimeCtrl">
     </li>
     {% endif %}
+    {% if config['JOBS']['plex']['enabled'] %}
+    <li data-row="2" data-col="4" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/plex/plex.html'"
+      ng-controller="PlexCtrl">
+    </li>
+    {% endif %}
   </ul>
 </div>

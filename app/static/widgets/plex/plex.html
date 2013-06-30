@@ -1,0 +1,16 @@
+<div id="plex">
+  <p class="fade">Plex</p>
+  <table>
+    <tr ng-repeat="show in plex.shows">
+      <td class="title">{{ show.name }}</td>
+      <td class="year">{{ show.season }}x{{ show.episode }}</td>
+    </tr>
+  </table>
+  <hr>
+  <table>
+    <tr ng-repeat="movie in plex.movies">
+      <td class="title">{{ movie.title }}</td>
+      <td class="year">({{ movie.year }})</td>
+    </tr>
+  </table>
+</div>
