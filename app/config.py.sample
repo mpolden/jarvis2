@@ -40,3 +40,18 @@ JOBS['calendar'] = {
     'client_secret': '',
     'api_key': ''
 }
+
+JOBS['uptime'] = {
+    'enabled': False,
+    'interval': 60,
+    'hosts': [
+        {
+            'label': 'Router',
+            'ip': 'ip.addr'
+        },
+        {
+            'label': 'Laptop',
+            'ip': 'ip.addr'
+        }
+    ]
+}

@@ -2,8 +2,9 @@
 
 import requests
 import json
-import os.path
+import os
 import dateutil.parser
+from subprocess import call
 from datetime import datetime
 from lxml import etree
 from soco import SoCo
@@ -177,3 +178,18 @@ class Calendar(Base):
             'today': today,
             'events': events
         }
+
+
+class Uptime(Base):
+
+    def __init__(self, conf):
+        self.hosts = conf['hosts']
+        self.interval = conf['interval']
+
+    def get(self):
+        with open(os.devnull, 'w') as devnull:
+            for host in self.hosts:
+                ping = 'ping -c 1 -t 1 -q %s' % (host['ip'],)
+                up = call(ping.split(' '), stdout=devnull, stderr=devnull)
+                host['active'] = (up == 0)
+        return self.hosts
