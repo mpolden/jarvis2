@@ -36,5 +36,11 @@
       ng-controller="CalendarCtrl">
     </li>
     {% endif %}
+    {% if config['JOBS']['uptime']['enabled'] %}
+    <li data-row="2" data-col="3" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/uptime/uptime.html'"
+      ng-controller="UptimeCtrl">
+    </li>
+    {% endif %}
   </ul>
 </div>
