@@ -4,6 +4,7 @@ import requests
 import json
 import os
 import dateutil.parser
+from abc import ABCMeta, abstractmethod
 from subprocess import call
 from datetime import datetime
 from lxml import etree
@@ -14,13 +15,15 @@ from apiclient.discovery import build
 from oauth2client.file import Storage
 
 
-class Base(object):
+class AbstractJob(object):
+    __metaclass__ = ABCMeta
 
+    @abstractmethod
     def get(self):
-        raise NotImplementedError('Needs to be implemented')
+        return
 
 
-class Yr(Base):
+class Yr(AbstractJob):
 
     def __init__(self, conf):
         self.url = conf['url']
@@ -53,7 +56,7 @@ class Yr(Base):
         return {}
 
 
-class Atb(Base):
+class Atb(AbstractJob):
 
     def __init__(self, conf):
         self.url = conf['url']
@@ -82,7 +85,7 @@ class Atb(Base):
         return {}
 
 
-class HackerNews(Base):
+class HackerNews(AbstractJob):
 
     def __init__(self, conf):
         self.url = conf['url']
@@ -96,7 +99,7 @@ class HackerNews(Base):
         return {}
 
 
-class Sonos(Base):
+class Sonos(AbstractJob):
 
     def __init__(self, conf):
         self.ip = conf['ip']
@@ -114,7 +117,7 @@ class Sonos(Base):
         }
 
 
-class Calendar(Base):
+class Calendar(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']
@@ -181,7 +184,7 @@ class Calendar(Base):
         }
 
 
-class Uptime(Base):
+class Uptime(AbstractJob):
 
     def __init__(self, conf):
         self.hosts = conf['hosts']
@@ -196,7 +199,7 @@ class Uptime(Base):
         return self.hosts
 
 
-class Plex(Base):
+class Plex(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']

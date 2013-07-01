@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-import inspect
 import Queue
 import jobs
 import SocketServer
@@ -95,10 +94,8 @@ def events():
 @app.before_first_request
 def _configure_jobs():
     conf = app.config['JOBS']
-    for cls_name, cls in inspect.getmembers(jobs, inspect.isclass):
-        if not issubclass(cls, jobs.Base) or cls is jobs.Base:
-            continue
-        name = cls_name.lower()
+    for cls in jobs.AbstractJob.__subclasses__():
+        name = cls.__name__.lower()
         if name not in conf.keys() or 'enabled' not in conf[name] or \
                 not conf[name]['enabled']:
             print 'Skipping missing or disabled job: %s' % (name,)
