@@ -1,0 +1,40 @@
+{
+  "isGoingTowardsCentrum": true,
+  "departures": [
+    {
+      "line": "7",
+      "destination": "Markapl. skole",
+      "registeredDepartureTime": "2013-07-01T21:35:00.000",
+      "scheduledDepartureTime": "2013-06-29T21:31:00.000",
+      "isRealtimeData": true
+    },
+    {
+      "line": "60",
+      "destination": "Trondheim S.",
+      "registeredDepartureTime": "2013-07-01T21:35:00.000",
+      "scheduledDepartureTime": "2013-06-29T21:35:00.000",
+      "isRealtimeData": true
+    },
+    {
+      "line": "8",
+      "destination": "Dronningens gt.",
+      "registeredDepartureTime": "2013-07-01T21:35:00.000",
+      "scheduledDepartureTime": "2013-06-29T21:35:00.000",
+      "isRealtimeData": true
+    },
+    {
+      "line": "301",
+      "destination": "Munkegata - M4",
+      "registeredDepartureTime": "2013-07-01T21:38:00.000",
+      "scheduledDepartureTime": "2013-06-29T21:32:00.000",
+      "isRealtimeData": true
+    },
+    {
+      "line": "4",
+      "destination": "Munkegata - M5",
+      "registeredDepartureTime": "2013-07-01T21:40:00.000",
+      "scheduledDepartureTime": "2013-06-29T21:37:00.000",
+      "isRealtimeData": true
+    }
+  ]
+}

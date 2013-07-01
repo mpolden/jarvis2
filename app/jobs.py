@@ -59,25 +59,26 @@ class Atb(Base):
         self.url = conf['url']
         self.interval = conf['interval']
 
+    def _parse(self, jsonData, now=datetime.now()):
+        data = json.loads(jsonData)
+        for departure in data['departures']:
+            departureTime = datetime.strptime(
+                departure['registeredDepartureTime'],
+                '%Y-%m-%dT%H:%M:%S.000')
+            remaining = (departureTime - now).total_seconds() / 60
+            departure['hour'] = departureTime.strftime('%H')
+            departure['minute'] = departureTime.strftime('%M')
+            if remaining > 0:
+                departure['remaining'] = int(remaining)
+            else:
+                departure['remaining'] = 0
+        return data
+
     def get(self):
         r = requests.get(self.url)
 
         if r.status_code == 200 and len(r.content) > 0:
-            data = json.loads(r.content)
-            for departure in data['departures']:
-                departureTime = datetime.strptime(
-                    departure['registeredDepartureTime'],
-                    '%Y-%m-%dT%H:%M:%S.000')
-                remaining = (departureTime - datetime.now()
-                             ).total_seconds() / 60
-                departure['hour'] = departureTime.strftime('%H')
-                departure['minute'] = departureTime.strftime('%M')
-                if remaining > 0:
-                    departure['remaining'] = int(remaining)
-                else:
-                    departure['remaining'] = 0
-
-            return data
+            return self._parse(r.content)
         return {}
 
 

@@ -3,6 +3,7 @@
 import unittest
 import os.path
 import jobs
+from datetime import datetime
 
 
 class Yr(unittest.TestCase):
@@ -23,6 +24,39 @@ class Yr(unittest.TestCase):
         self.assertEqual('Nord', data['wind']['direction'])
         self.assertEqual('0.7', data['wind']['speed'])
         self.assertEqual('Flau vind', data['wind']['description'])
+
+
+class Atb(unittest.TestCase):
+
+    def setUp(self):
+        json_path = os.path.join(os.path.dirname(__file__), 'test_data',
+                                 'atb.json')
+        with open(json_path, 'r') as f:
+            self.json = f.read()
+
+    def test_parse(self):
+        atb = jobs.Atb({'interval': None, 'url': None})
+        data = atb._parse(self.json, now=datetime(2013, 7, 1, 21, 30, 0, 0))
+
+        departures = data['departures']
+        self.assertEqual(5, len(departures))
+        self.assertEqual(5, departures[0]['remaining'])
+        self.assertEqual(5, departures[1]['remaining'])
+        self.assertEqual(5, departures[2]['remaining'])
+        self.assertEqual(8, departures[3]['remaining'])
+        self.assertEqual(10, departures[4]['remaining'])
+
+    def test_parse_gt_or_eq_zero(self):
+        atb = jobs.Atb({'interval': None, 'url': None})
+        data = atb._parse(self.json, now=datetime(2013, 7, 1, 21, 35, 0, 0))
+
+        departures = data['departures']
+        self.assertEqual(5, len(departures))
+        self.assertEqual(0, departures[0]['remaining'])
+        self.assertEqual(0, departures[1]['remaining'])
+        self.assertEqual(0, departures[2]['remaining'])
+        self.assertEqual(3, departures[3]['remaining'])
+        self.assertEqual(5, departures[4]['remaining'])
 
 
 if __name__ == '__main__':
