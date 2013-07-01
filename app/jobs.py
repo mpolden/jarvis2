@@ -49,7 +49,7 @@ class Yr(Base):
         r = requests.get(self.url)
 
         if r.status_code == 200 and len(r.content) > 0:
-            return self._parse(xml)
+            return self._parse(r.content)
         return {}
 
 
