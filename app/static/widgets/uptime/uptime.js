@@ -5,10 +5,10 @@ jarvis.controller('UptimeCtrl', ['$scope',
     'use strict';
 
     $scope.$on('uptime', function (ev, body) {
-      body.forEach(function (host) {
+      body.hosts.forEach(function (host) {
         host.active = host.active ? 'aktiv' : 'inaktiv';
       });
-      $scope[ev.name] = body;
+      angular.extend($scope, body);
     });
 
   }

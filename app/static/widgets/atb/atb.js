@@ -22,7 +22,7 @@ jarvis.controller('AtbCtrl', ['$scope',
         body.rest = [];
       }
 
-      $scope[widget] = body;
+      angular.extend($scope, body);
     };
 
     $scope.$on('atb', processMessage);

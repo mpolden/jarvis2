@@ -196,7 +196,7 @@ class Uptime(AbstractJob):
                 ping = 'ping -c 1 -t 1 -q %s' % (host['ip'],)
                 up = call(ping.split(' '), stdout=devnull, stderr=devnull)
                 host['active'] = (up == 0)
-        return self.hosts
+        return {'hosts': self.hosts}
 
 
 class Plex(AbstractJob):

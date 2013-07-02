@@ -1,7 +1,7 @@
 <div id="hackernews">
   <p class="fade">Hacker News</p>
   <table>
-    <tr ng-repeat="item in hackernews.top">
+    <tr ng-repeat="item in top">
       <td class="title">{{ item.title | characters:24 }}</td>
       <td class="points fade">{{ item.points }}</td>
     </tr>

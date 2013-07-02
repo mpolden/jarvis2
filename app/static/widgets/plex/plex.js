@@ -11,7 +11,7 @@ jarvis.controller('PlexCtrl', ['$scope',
       if (body.shows.length > 5) {
         body.shows = body.shows.slice(0, 5);
       }
-      $scope[ev.name] = body;
+      angular.extend($scope, body);
     });
 
   }

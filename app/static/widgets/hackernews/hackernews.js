@@ -8,7 +8,7 @@ jarvis.controller('HackerNewsCtrl', ['$scope',
       if (body.items && body.items.length > 0) {
         body.top = body.items.slice(1, 11);
       }
-      $scope[ev.name] = body;
+      angular.extend($scope, body);
     });
 
   }

@@ -5,9 +5,7 @@ jarvis.controller('SonosCtrl', ['$scope',
     'use strict';
 
     $scope.$on('sonos', function (ev, body) {
-      $scope.$apply(function () {
-        $scope[ev.name] = body;
-      });
+      angular.extend($scope, body);
     });
 
   }
