@@ -124,8 +124,8 @@ class Calendar(AbstractJob):
     def __init__(self, conf):
         self.interval = conf['interval']
 
-        credentials_file = os.path.join(os.path.dirname(__file__),
-                                        '.calendar.json')
+        credentials_file = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '.calendar.json'))
         storage = Storage(credentials_file)
         credentials = storage.get()
         http = httplib2.Http()

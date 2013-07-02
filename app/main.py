@@ -40,7 +40,8 @@ def _configure_bundles():
         'css/app/styles.css'
     ]
 
-    widgets_path = os.path.join(os.path.dirname(__file__), 'static', 'widgets')
+    widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                   'static', 'widgets'))
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)
         for asset_file in os.listdir(os.path.join(widgets_path, widget)):
