@@ -40,11 +40,11 @@ class Atb(unittest.TestCase):
 
         departures = data['departures']
         self.assertEqual(5, len(departures))
-        self.assertEqual(5, departures[0]['remaining'])
-        self.assertEqual(5, departures[1]['remaining'])
-        self.assertEqual(5, departures[2]['remaining'])
-        self.assertEqual(8, departures[3]['remaining'])
-        self.assertEqual(10, departures[4]['remaining'])
+        self.assertEqual(5, departures[0]['eta'])
+        self.assertEqual(5, departures[1]['eta'])
+        self.assertEqual(5, departures[2]['eta'])
+        self.assertEqual(8, departures[3]['eta'])
+        self.assertEqual(10, departures[4]['eta'])
 
     def test_parse_gt_or_eq_zero(self):
         atb = jobs.Atb({'interval': None, 'url': None})
@@ -52,11 +52,11 @@ class Atb(unittest.TestCase):
 
         departures = data['departures']
         self.assertEqual(5, len(departures))
-        self.assertEqual(0, departures[0]['remaining'])
-        self.assertEqual(0, departures[1]['remaining'])
-        self.assertEqual(0, departures[2]['remaining'])
-        self.assertEqual(3, departures[3]['remaining'])
-        self.assertEqual(5, departures[4]['remaining'])
+        self.assertEqual(0, departures[0]['eta'])
+        self.assertEqual(0, departures[1]['eta'])
+        self.assertEqual(0, departures[2]['eta'])
+        self.assertEqual(3, departures[3]['eta'])
+        self.assertEqual(5, departures[4]['eta'])
 
 
 if __name__ == '__main__':
