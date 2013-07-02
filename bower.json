@@ -6,7 +6,6 @@
     "gridster": "latest",
     "normalize-css": "~2.1.2",
     "angular": "~1.0.7",
-    "less.js": "~1.3.3",
     "angular-truncate": "latest"
   },
   "exportsOverride": {
@@ -15,16 +14,13 @@
     },
     "gridster": {
       "js": "dist/jquery.gridster.min.js",
-      "css": "dist/jquery.gridster.min.css"
+      "css": "dist/jquery.gridster.css"
     },
     "normalize-css": {
       "css": "normalize.css"
     },
     "angular": {
       "js": "angular.min.js"
-    },
-    "less.js": {
-      "js": "dist/less-1.3.3.min.js"
     },
     "angular-truncate": {
       "js": "dist/angular-truncate.min.js"

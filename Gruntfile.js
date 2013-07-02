@@ -11,7 +11,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   var less_files = {};
-  grunt.file.recurse('app/static/widgets',
+  grunt.file.recurse('app/static',
     function (abspath, rootdir, subdir, filename) {
       if (grunt.file.isMatch('*.less', filename)) {
         less_files[abspath.replace(/\.less$/, '.css')] = abspath;

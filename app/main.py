@@ -22,46 +22,43 @@ last_events = {}
 
 @app.before_first_request
 def _configure_bundles():
-    # Static assets
-    js_deps = [
+    js_vendor = [
         'js/jquery/jquery.min.js',
         'js/gridster/jquery.gridster.min.js',
         'js/angular/angular.min.js',
         'js/angular-truncate/angular-truncate.min.js'
     ]
-    js_files = [
+    js = [
         'js/app/gridster.js',
         'js/app/main.js'
     ]
-    css_files = [
+    css_vendor = [
         'css/normalize-css/normalize.css',
-        'css/gridster/jquery.gridster.min.css',
-        'css/styles.css'
+        'css/gridster/jquery.gridster.css',
     ]
-    less_files = [
-        'css/styles.less'
+    css = [
+        'css/app/styles.css'
     ]
 
-    # Dynamic assets
     widgets_path = os.path.join(os.path.dirname(__file__), 'static', 'widgets')
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)
         for asset_file in os.listdir(os.path.join(widgets_path, widget)):
             asset_path = os.path.join(widget_path, asset_file)
             if asset_file.endswith('.js'):
-                js_files.append(asset_path)
-            elif asset_file.endswith('.less'):
-                less_files.append(asset_path)
+                js.append(asset_path)
             elif asset_file.endswith('.css'):
-                css_files.append(asset_path)
+                css.append(asset_path)
 
-    assets.register('js_all', Bundle(*js_files, output='assets/app.js'))
-    assets.register('less_all', Bundle(*less_files,
-                                       output='assets/styles.less'))
-    assets.register('js_min_all', Bundle(Bundle(*js_deps),
-                                         Bundle(*js_files, filters='jsmin'),
+    assets.register('js_all', Bundle(*(js_vendor + js),
+                                     output='assets/app.js'))
+    assets.register('css_all', Bundle(*(css_vendor + css),
+                                      output='assets/styles.css'))
+    assets.register('js_min_all', Bundle(Bundle(*js_vendor),
+                                         Bundle(*js, filters='jsmin'),
                                          output='assets/app.min.js'))
-    assets.register('css_min_all', Bundle(*css_files, filters='cssmin',
+    assets.register('css_min_all', Bundle(*(css_vendor + css),
+                                          filters='cssmin',
                                           output='assets/styles.min.css'))
 
 
