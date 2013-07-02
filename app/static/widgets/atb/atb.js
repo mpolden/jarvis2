@@ -7,7 +7,7 @@ jarvis.controller('AtbCtrl', ['$scope',
     var eta = function (departure) {
       var n = departure !== null ? departure.eta : 0,
         unit = n > 1 ? 'minutter' : 'minutt';
-      return n === 0 ? 'LØP!' : 'om ' + n + ' ' + unit;
+      return n === 0 ? 'L\u00d8P!' : 'om ' + n + ' ' + unit;
     };
 
     $scope.$on('atb', function (ev, body) {

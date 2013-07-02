@@ -9,8 +9,8 @@ jarvis.controller('TimeCtrl', ['$scope',
     };
 
     var getDayName = function (date) {
-      return ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag',
-        'lørdag'][date.getDay()];
+      return ['s\u00d8ndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag',
+        'l\u00d8rdag'][date.getDay()];
     };
 
     var getMonthName = function (date) {
