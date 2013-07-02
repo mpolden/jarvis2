@@ -62,7 +62,9 @@ class Atb(AbstractJob):
         self.url = conf['url']
         self.interval = conf['interval']
 
-    def _parse(self, jsonData, now=datetime.now()):
+    def _parse(self, jsonData, now=None):
+        if now is None:
+            now = datetime.now()
         data = json.loads(jsonData)
         for departure in data['departures']:
             departureTime = datetime.strptime(
