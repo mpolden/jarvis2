@@ -20,9 +20,6 @@
   white-space: nowrap;
   font-size: 16px;
 }
-#plex .fade {
-  color: rgba(255, 255, 255, 0.7);
-}
 #plex hr {
   border: 0;
   height: 1px;

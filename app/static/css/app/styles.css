@@ -3,13 +3,21 @@ body {
   color: #fff;
   font-family: "Montserrat", sans-serif;
 }
-h1 {
-  text-align: center;
-  font-size: 20px;
-}
 .gridster {
   margin: 0 auto;
 }
 .gridster ul {
   list-style: none;
+}
+.fade {
+  color: rgba(255, 255, 255, 0.7);
+}
+.updated-at {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 12px !important;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

@@ -11,8 +11,8 @@ jarvis.controller('CalendarCtrl', ['$scope',
           start: '--:--'
         };
       }
-      if (body.events.length > 5) {
-        body.events = body.events.slice(0, 5);
+      if (body.events.length > 4) {
+        body.events = body.events.slice(0, 4);
       }
       angular.extend($scope, body);
     });
