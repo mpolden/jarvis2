@@ -72,9 +72,9 @@ class Atb(AbstractJob):
             departure['hour'] = departureTime.strftime('%H')
             departure['minute'] = departureTime.strftime('%M')
             if remaining > 0:
-                departure['remaining'] = int(remaining)
+                departure['eta'] = int(remaining)
             else:
-                departure['remaining'] = 0
+                departure['eta'] = 0
         return data
 
     def get(self):
@@ -102,18 +102,18 @@ class HackerNews(AbstractJob):
 class Sonos(AbstractJob):
 
     def __init__(self, conf):
-        self.ip = conf['ip']
         self.interval = conf['interval']
+        self.sonos = SoCo(conf['ip'])
 
     def get(self):
-        sonos = SoCo(self.ip)
+        current_track = self.sonos.get_current_track_info()
+        next_track = self.sonos.get_queue(
+            int(current_track['playlist_position']), 1).pop()
 
-        np = sonos.get_current_track_info()
-        next = sonos.get_queue(int(np['playlist_position']), 1).pop()
         return {
-            'name': sonos.get_speaker_info()['zone_name'],
-            'np': np,
-            'next': next
+            'room': self.sonos.get_speaker_info()['zone_name'],
+            'current': current_track,
+            'next': next_track
         }
 
 

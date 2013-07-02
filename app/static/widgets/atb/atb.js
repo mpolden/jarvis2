@@ -4,28 +4,23 @@ jarvis.controller('AtbCtrl', ['$scope',
   function ($scope) {
     'use strict';
 
-    var fmtMessage = function (departure) {
-      var n = departure !== null ? departure.remaining : 0,
+    var eta = function (departure) {
+      var n = departure !== null ? departure.eta : 0,
         unit = n > 1 ? 'minutter' : 'minutt';
       return n === 0 ? 'LØP!' : 'om ' + n + ' ' + unit;
     };
 
-    var processMessage = function (ev, body) {
-      var widget = ev.name;
-
+    $scope.$on('atb', function (ev, body) {
       if (body.departures.length > 0) {
-        body.first = body.departures[0];
-        body.first.remainingMessage = fmtMessage(body.first);
-        body.rest = body.departures.slice(1, 5);
+        body.next = body.departures[0];
+        body.next.eta = eta(body.next);
+        body.upcoming = body.departures.slice(1, 5);
       } else {
-        body.first = null;
-        body.rest = [];
+        body.next = null;
+        body.upcoming = [];
       }
-
       angular.extend($scope, body);
-    };
-
-    $scope.$on('atb', processMessage);
+    });
 
   }
 ]);
