@@ -23,8 +23,7 @@ JOBS['atb'] = {
 
 JOBS['hackernews'] = {
     'enabled': True,
-    'interval': 600,
-    'url': 'http://api.ihackernews.com/page'
+    'interval': 900
 }
 
 JOBS['sonos'] = {

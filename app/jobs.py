@@ -8,6 +8,7 @@ from subprocess import call
 from datetime import datetime
 from lxml import etree
 from soco import SoCo
+from BeautifulSoup import BeautifulSoup
 
 import httplib2
 from apiclient.discovery import build
@@ -88,14 +89,32 @@ class Atb(AbstractJob):
 class HackerNews(AbstractJob):
 
     def __init__(self, conf):
-        self.url = conf['url']
+        self.url = 'https://news.ycombinator.com'
         self.interval = conf['interval']
+
+    def _parse(self, html):
+        soup = BeautifulSoup(html)
+
+        titles = [td.a.text for td in
+                  soup.findAll('td', attrs={'class': 'title', 'align': None},
+                               limit=30)]
+        points = [int(td.span.text.rstrip(' points')) for td in
+                  soup.findAll('td', attrs={'class': 'subtext'}, limit=30)]
+
+        items = []
+        for title, num_points in zip(titles, points):
+            items.append({
+                'title': title,
+                'points': num_points
+            })
+
+        return {'items': items}
 
     def get(self):
         r = requests.get(self.url)
 
         if r.status_code == 200 and len(r.content) > 0:
-            return r.json()
+            return self._parse(r.content)
         return {}
 
 

@@ -6,7 +6,7 @@ jarvis.controller('HackerNewsCtrl', ['$scope',
 
     $scope.$on('hackernews', function (ev, body) {
       if (body.items && body.items.length > 0) {
-        body.items = body.items.slice(1, 11);
+        body.items = body.items.slice(0, 10);
       }
       angular.extend($scope, body);
     });
