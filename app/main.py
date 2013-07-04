@@ -101,16 +101,18 @@ def _configure_jobs():
         job = cls(conf[name])
         print 'Configuring job %s to run every %d seconds' % (name,
                                                               job.interval)
-        _queue_data(name, job)
-        sched.add_interval_job(_queue_data, seconds=job.interval, kwargs={
+        _run_job(name, job)
+        sched.add_interval_job(_run_job, seconds=job.interval, kwargs={
             'widget': name, 'job': job})
     if not sched.running:
         sched.start()
 
 
-def _queue_data(widget, job):
+def _run_job(widget, job):
     body = job.get()
-    body['updated_at'] = datetime.now().strftime('%H:%M')
+    if not body:
+        return
+    body.update({'updated_at': datetime.now().strftime('%H:%M')})
     json_data = json.dumps({
         'widget': widget,
         'body': body
