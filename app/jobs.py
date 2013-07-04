@@ -3,14 +3,13 @@
 import requests
 import os
 import dateutil.parser
+import httplib2
 from abc import ABCMeta, abstractmethod
 from subprocess import call
 from datetime import datetime
 from lxml import etree
 from soco import SoCo
-from BeautifulSoup import BeautifulSoup
-
-import httplib2
+from pyquery import PyQuery as pq
 from apiclient.discovery import build
 from oauth2client.file import Storage
 
@@ -93,13 +92,12 @@ class HackerNews(AbstractJob):
         self.interval = conf['interval']
 
     def _parse(self, html):
-        soup = BeautifulSoup(html)
+        d = pq(html)
 
-        titles = [td.a.text for td in
-                  soup.findAll('td', attrs={'class': 'title', 'align': None},
-                               limit=30)]
-        points = [int(td.span.text.rstrip(' points')) for td in
-                  soup.findAll('td', attrs={'class': 'subtext'}, limit=30)]
+        titles = [el.text for el in
+                  d.find('td.title a').not_('a[href="news2"]')]
+        points = [int(el.text.rstrip(' points')) for el in
+                  d.find('td.subtext span')]
 
         items = []
         for title, num_points in zip(titles, points):

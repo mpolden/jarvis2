@@ -1,6 +1,6 @@
 APScheduler==2.1.1
-BeautifulSoup==3.2.1
 cssmin==0.1.4
+cssselect==0.8
 Flask-Assets==0.8
 Flask==0.10.1
 google-api-python-client==1.1
@@ -10,6 +10,7 @@ Jinja2==2.7
 jsmin==2.0.3
 lxml==3.2.1
 MarkupSafe==0.18
+pyquery==1.2.4
 python-dateutil==2.1
 python-gflags==2.0
 requests==1.2.3
