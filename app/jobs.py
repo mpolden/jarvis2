@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import requests
-import json
 import os
 import dateutil.parser
 from abc import ABCMeta, abstractmethod
@@ -62,10 +61,9 @@ class Atb(AbstractJob):
         self.url = conf['url']
         self.interval = conf['interval']
 
-    def _parse(self, jsonData, now=None):
+    def _parse(self, data, now=None):
         if now is None:
             now = datetime.now()
-        data = json.loads(jsonData)
         for departure in data['departures']:
             departureTime = datetime.strptime(
                 departure['registeredDepartureTime'],
@@ -83,7 +81,7 @@ class Atb(AbstractJob):
         r = requests.get(self.url)
 
         if r.status_code == 200 and len(r.content) > 0:
-            return self._parse(r.content)
+            return self._parse(r.json())
         return {}
 
 
@@ -97,7 +95,7 @@ class HackerNews(AbstractJob):
         r = requests.get(self.url)
 
         if r.status_code == 200 and len(r.content) > 0:
-            return json.loads(r.content)
+            return r.json()
         return {}
 
 

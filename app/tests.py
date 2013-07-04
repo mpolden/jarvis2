@@ -3,14 +3,16 @@
 import unittest
 import os.path
 import jobs
+import json
 from datetime import datetime
 
 
 class Yr(unittest.TestCase):
 
     def setUp(self):
-        xml_path = os.path.join(os.path.dirname(__file__), 'test_data',
-                                'varsel.xml')
+        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                   'test_data',
+                                   'varsel.xml'))
         with open(xml_path, 'r') as f:
             self.xml = f.read()
 
@@ -29,10 +31,11 @@ class Yr(unittest.TestCase):
 class Atb(unittest.TestCase):
 
     def setUp(self):
-        json_path = os.path.join(os.path.dirname(__file__), 'test_data',
-                                 'atb.json')
+        json_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                    'test_data',
+                                    'atb.json'))
         with open(json_path, 'r') as f:
-            self.json = f.read()
+            self.json = json.loads(f.read())
 
     def test_parse(self):
         atb = jobs.Atb({'interval': None, 'url': None})
