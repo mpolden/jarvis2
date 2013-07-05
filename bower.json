@@ -2,11 +2,11 @@
   "name": "jarvis2",
   "version": "0.1.0",
   "dependencies": {
-    "jquery": "~2.0.2",
-    "gridster": "latest",
-    "normalize-css": "~2.1.2",
-    "angular": "~1.0.7",
-    "angular-truncate": "latest"
+    "jquery": "git://github.com/components/jquery.git#~2.0.3",
+    "gridster": "git://github.com/ducksboard/gridster.js.git",
+    "normalize-css": "git://github.com/necolas/normalize.css.git#2.1.2",
+    "angular": "git://github.com/angular/bower-angular.git#1.0.7",
+    "angular-truncate": "git://github.com/martinp/angular-truncate.git"
   },
   "exportsOverride": {
     "jquery": {
