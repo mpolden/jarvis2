@@ -7,8 +7,7 @@ import SocketServer
 import json
 from datetime import datetime
 from apscheduler.scheduler import Scheduler
-from flask import Flask, render_template, Response, stream_with_context, \
-    request
+from flask import Flask, render_template, Response, request
 from flask.ext.assets import Environment, Bundle
 
 
@@ -16,7 +15,7 @@ app = Flask(__name__)
 app.config.from_envvar('JARVIS_SETTINGS')
 assets = Environment(app)
 sched = Scheduler()
-queued_events = {}
+queues = {}
 last_events = {}
 
 
@@ -72,21 +71,19 @@ def index():
 def events():
     remote_port = request.environ['REMOTE_PORT']
     current_queue = Queue.Queue()
-    queued_events[remote_port] = current_queue
+    queues[remote_port] = current_queue
 
     for event in last_events.values():
         current_queue.put(event)
 
     def consume():
         while True:
-            try:
-                data = current_queue.get()
-                yield 'data: %s\n\n' % (data,)
-            except KeyboardInterrupt:
+            data = current_queue.get()
+            if data is None:
                 break
+            yield 'data: %s\n\n' % (data,)
 
-    return Response(stream_with_context(consume()),
-                    mimetype='text/event-stream')
+    return Response(consume(), mimetype='text/event-stream')
 
 
 @app.before_first_request
@@ -118,14 +115,14 @@ def _run_job(widget, job):
         'body': body
     })
     last_events[widget] = json_data
-    for queue in queued_events.values():
+    for queue in queues.values():
         queue.put(json_data)
 
 
 def _close_stream(*args, **kwargs):
     remote_port = args[2][1]
-    if remote_port in queued_events:
-        del queued_events[remote_port]
+    if remote_port in queues:
+        del queues[remote_port]
 
 
 SocketServer.BaseServer.handle_error = _close_stream
