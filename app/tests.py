@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import unittest
-import os.path
 import jobs
 import json
+import os.path
+import unittest
 from datetime import datetime
 
 

@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 
-import requests
-import os
 import dateutil.parser
 import httplib2
+import os
+import requests
 from abc import ABCMeta, abstractmethod
-from subprocess import call
+from apiclient.discovery import build
 from datetime import datetime
 from lxml import etree
-from soco import SoCo
-from pyquery import PyQuery as pq
-from apiclient.discovery import build
 from oauth2client.file import Storage
+from pyquery import PyQuery as pq
+from soco import SoCo
+from subprocess import call
 
 
 class AbstractJob(object):

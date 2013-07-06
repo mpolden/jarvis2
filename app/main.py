@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
+import jobs
+import json
 import os
 import Queue
-import jobs
 import SocketServer
-import json
-from datetime import datetime
 from apscheduler.scheduler import Scheduler
+from datetime import datetime
 from flask import Flask, render_template, Response, request
 from flask.ext.assets import Environment, Bundle
 
