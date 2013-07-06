@@ -123,15 +123,17 @@ class Sonos(AbstractJob):
         self.sonos = SoCo(conf['ip'])
 
     def get(self):
-        current_track = self.sonos.get_current_track_info()
-        next_track = self.sonos.get_queue(
-            int(current_track['playlist_position']), 1).pop()
-
-        return {
-            'room': self.sonos.get_speaker_info()['zone_name'],
-            'current': current_track,
-            'next': next_track
-        }
+        try:
+            current_track = self.sonos.get_current_track_info()
+            next_track = self.sonos.get_queue(
+                int(current_track['playlist_position']), 1).pop()
+            return {
+                'room': self.sonos.get_speaker_info()['zone_name'],
+                'current': current_track,
+                'next': next_track
+            }
+        except:
+            return {}
 
 
 class Calendar(AbstractJob):
