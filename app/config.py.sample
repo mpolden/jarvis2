@@ -61,3 +61,11 @@ JOBS['plex'] = {
     'movies': 'http://ip:port/library/sections/2/recentlyAdded/',
     'shows': 'http://ip:port/library/sections/1/recentlyAdded/'
 }
+
+JOBS['nsb'] = {
+    'enabled': False,
+    'interval': 900,
+    # See http://www.nsb.no for valid locations
+    'from': 'from_location',
+    'to': 'to_location'
+}

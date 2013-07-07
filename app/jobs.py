@@ -249,3 +249,54 @@ class Plex(AbstractJob):
                 'season': show.get('parentIndex').zfill(2)
             })
         return data
+
+
+class Nsb(AbstractJob):
+
+    def __init__(self, conf):
+        self.from_location = conf['from']
+        self.to_location = conf['to']
+        self.url = ('https://www.nsb.no/category2734.html'
+                    '?booking-from=%s'
+                    '&booking-to=%s'
+                    '&booking-type=single'
+                    '&booking-date=%s'
+                    '&booking-date_outward_hour=%s')
+        self.interval = conf['interval']
+
+    def _parse(self, html):
+        d = pq(html)
+
+        date = d.find('th.date').pop().text_content().lstrip('Spor')
+        departure_times = [el.text_content().strip() for el in
+                           d.find('td.depart strong')]
+        arrival_times = [el.text_content().strip() for el in
+                         d.find('td.arrive strong')]
+        durations = [el.text_content().rstrip(' min') for el in
+                     d.find('td.duration em')]
+
+        departures = []
+        for departure, arrival, duration in zip(departure_times, arrival_times,
+                                                durations):
+            departures.append({
+                'departure': departure,
+                'arrival': arrival,
+                'duration': duration
+            })
+
+        return {
+            'date': date.partition(', ')[2],
+            'from': self.from_location,
+            'to': self.to_location,
+            'departures': departures
+        }
+
+    def get(self):
+        now = datetime.now()
+        params = (self.from_location, self.to_location,
+                  now.strftime('%d-%m-%Y'), now.strftime('%H'))
+        r = requests.get(self.url % params)
+
+        if r.status_code == 200 and len(r.content) > 0:
+            return self._parse(r.content)
+        return {}
