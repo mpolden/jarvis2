@@ -67,16 +67,16 @@ module.exports = function (grunt) {
           $: true,
           EventSource: true
         }
-      },
+      }
     },
     watch: {
       scripts: {
         files: [
           'app/static/js/app/*.js',
           'app/static/widgets/*/*.js',
-          'app/static/widgets/*/*.less',
+          'app/static/widgets/*/*.less'
         ],
-        tasks: ['jshint', 'less'],
+        tasks: ['jshint', 'less']
       }
     },
     jsbeautifier: {
