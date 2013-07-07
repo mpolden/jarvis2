@@ -48,5 +48,11 @@
       ng-controller="PlexCtrl">
     </li>
     {% endif %}
+    {% if config['JOBS']['nsb']['enabled'] %}
+    <li data-row="3" data-col="1" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/nsb/nsb.html'"
+      ng-controller="NsbCtrl">
+    </li>
+    {% endif %}
   </ul>
 </div>

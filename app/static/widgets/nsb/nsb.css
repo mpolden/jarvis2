@@ -1,0 +1,23 @@
+#nsb {
+  height: 100%;
+  padding: 5px;
+  background: #990033;
+  text-align: center;
+}
+#nsb h1 {
+  font-size: 45px;
+}
+#nsb table {
+  margin: 0 10px 0 10px;
+}
+#nsb th {
+  font-size: 16px;
+}
+#nsb .departure {
+  text-align: left;
+  width: 100%;
+}
+#nsb .arrival {
+  text-align: right;
+  white-space: nowrap;
+}

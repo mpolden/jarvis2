@@ -1,0 +1,15 @@
+<div id="nsb">
+  <p class="fade">Toget fra {{ from }} til {{ to }} går<br>{{ date }}</p>
+  <h1>{{ next.departure }}</h1>
+  <table>
+    <tr>
+      <th class="departure fade">Avgang:</th>
+      <th class="arrival fade">Ankomst:</th>
+    </tr>
+    <tr ng-repeat="departure in upcoming">
+      <td class="departure">{{ departure.departure }}</td>
+      <td class="arrival">{{ departure.arrival }}</td>
+    </tr>
+  </table>
+  <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
+</div>
