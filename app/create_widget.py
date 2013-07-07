@@ -5,31 +5,41 @@ import sys
 from jinja2 import Environment, FileSystemLoader
 
 
-def render_templates(name):
-    env = Environment(loader=FileSystemLoader(os.path.abspath(os.path.join(
-                                              os.path.dirname(__file__),
-                                              'templates', 'widget'))))
-    return {
-        '%s.js' % (name,): env.get_template('widget.js').render(name=name),
-        '%s.less' % (name,): env.get_template('widget.less').render(name=name),
-        '%s.html' % (name,): env.get_template('widget.html').render(name=name),
-    }
+class WidgetFactory(object):
 
+    def __init__(self, name):
+        self.env = Environment(loader=FileSystemLoader(
+                               os.path.abspath(os.path.join(
+                               os.path.dirname(__file__), 'templates',
+                                                          'widget'))))
+        self.name = name
 
-def create_widget(contents, name):
-    widgets_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                               'static', 'widgets', name))
-    if os.path.isdir(widgets_dir):
-        print '%s already exists' % (widgets_dir,)
-        sys.exit(1)
+    def _render_templates(self):
+        js = self.env.get_template('widget.js').render(name=self.name)
+        less = self.env.get_template('widget.less').render(name=self.name)
+        html = self.env.get_template('widget.html').render(name=self.name)
 
-    os.mkdir(widgets_dir)
+        return {
+            '%s.js' % (self.name,): js,
+            '%s.less' % (self.name,): less,
+            '%s.html' % (self.name,): html
+        }
 
-    for filename in contents:
-        widget_dir = os.path.join(widgets_dir, filename)
-        with open(widget_dir, 'w') as f:
-            f.write(contents[filename])
-            print 'Created %s' % (widget_dir,)
+    def create_widget(self):
+        contents = self._render_templates()
+        widget_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                  'static', 'widgets',
+                                                  self.name))
+        if os.path.isdir(widget_dir):
+            print '%s already exists' % (widget_dir,)
+            sys.exit(1)
+        os.mkdir(widget_dir)
+
+        for filename in contents:
+            widget_file = os.path.join(widget_dir, filename)
+            with open(widget_file, 'w') as f:
+                f.write(contents[filename])
+                print 'Created %s' % (widget_file,)
 
 
 if __name__ == '__main__':
@@ -37,5 +47,4 @@ if __name__ == '__main__':
         print 'usage: %s name' % (sys.argv[0],)
         sys.exit(1)
     name = sys.argv[1]
-    contents = render_templates(name)
-    create_widget(contents, name)
+    WidgetFactory(name).create_widget()
