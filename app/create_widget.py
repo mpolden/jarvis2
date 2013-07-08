@@ -8,10 +8,9 @@ from jinja2 import Environment, FileSystemLoader
 class WidgetFactory(object):
 
     def __init__(self, name):
-        self.env = Environment(loader=FileSystemLoader(
-                               os.path.abspath(os.path.join(
-                               os.path.dirname(__file__), 'templates',
-                                                          'widget'))))
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                            'templates', 'widget'))
+        self.env = Environment(loader=FileSystemLoader(path))
         self.name = name
 
     def _render_templates(self):
