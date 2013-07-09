@@ -1,6 +1,7 @@
 lint:
 	pep8 *.py app/*.py
 	pyflakes *.py app/*.py
+	grunt jshint
 
 widget:
 	@test -n "$(NAME)" || \
