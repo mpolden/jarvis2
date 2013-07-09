@@ -29,13 +29,7 @@ module.exports = function (grunt) {
       }
     },
     jshint: {
-      all: [
-        'Gruntfile.js',
-        'app/static/js/app/*.js',
-        'app/static/widgets/*/*.js'
-      ],
       options: {
-        /* enforcing options */
         bitwise: false,
         camelcase: true,
         curly: true,
@@ -59,13 +53,23 @@ module.exports = function (grunt) {
         maxdepth: 5,
         maxstatements: 20,
         maxcomplexity: 5,
-        maxlen: 80,
-        /* relaxing options */
-        browser: true,
-        globals: {
-          angular: true,
-          $: true,
-          EventSource: true
+        maxlen: 80
+      },
+      uses_defaults: 'Gruntfile.js',
+      with_overrides: {
+        options: {
+          browser: true,
+          globals: {
+            angular: true,
+            $: true,
+            EventSource: true
+          }
+        },
+        files: {
+          src: [
+            'app/static/js/app/*.js',
+            'app/static/widgets/*/*.js'
+          ]
         }
       }
     },
