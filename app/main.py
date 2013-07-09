@@ -6,7 +6,7 @@ import os
 import Queue
 import SocketServer
 from apscheduler.scheduler import Scheduler
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import Flask, render_template, Response, request
 from flask.ext.assets import Environment, Bundle
 
@@ -98,9 +98,11 @@ def _configure_jobs():
         job = cls(conf[name])
         print 'Configuring job %s to run every %d seconds' % (name,
                                                               job.interval)
-        _run_job(name, job)
-        sched.add_interval_job(_run_job, seconds=job.interval, kwargs={
-            'widget': name, 'job': job})
+        start_date = datetime.now() + timedelta(seconds=1)
+        sched.add_interval_job(_run_job,
+                               seconds=job.interval,
+                               start_date=start_date,
+                               kwargs={'widget': name, 'job': job})
     if not sched.running:
         sched.start()
 

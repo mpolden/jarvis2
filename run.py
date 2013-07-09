@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import sys
 import os
 import signal
+import sys
 from app.main import app, queues, sched
 
 
