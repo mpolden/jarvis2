@@ -18,6 +18,6 @@ def _teardown(signal, frame):
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'debug':
         app.debug = True
-        signal.signal(signal.SIGINT, _teardown)
+    signal.signal(signal.SIGINT, _teardown)
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, use_reloader=False, threaded=True)
