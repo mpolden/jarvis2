@@ -54,5 +54,11 @@
       ng-controller="NsbCtrl">
     </li>
     {% endif %}
+    {% if config['JOBS']['ping']['enabled'] %}
+    <li data-row="4" data-col="2" data-sizex="4" data-sizey="2"
+      ng-include src="'/static/widgets/ping/ping.html'"
+      ng-controller="PingCtrl">
+    </li>
+    {% endif %}
   </ul>
 </div>
