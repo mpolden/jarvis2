@@ -5,9 +5,10 @@ JARVIS is a dashboard framework designed to run on the Raspberry Pi.
 The framework is written in Python and is a new and improved version of the old
 [JARVIS](https://github.com/martinp/jarvis) project.
 
-Screenshot
+Screenshots
 ==========
-![Screenshot](https://github.com/martinp/jarvis2/raw/master/public/jarvis2.png)
+![Screenshot 1](https://github.com/martinp/jarvis2/raw/master/public/jarvis2.png)
+![Screenshot 2](https://github.com/martinp/jarvis2/raw/master/public/jarvis2_1.png)
 
 Dependencies
 ============
