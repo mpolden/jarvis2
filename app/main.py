@@ -25,7 +25,9 @@ def _configure_bundles():
         'js/jquery/jquery.min.js',
         'js/gridster/jquery.gridster.min.js',
         'js/angular/angular.min.js',
-        'js/angular-truncate/angular-truncate.min.js'
+        'js/angular-truncate/angular-truncate.min.js',
+        'js/d3/d3.min.js',
+        'js/rickshaw/rickshaw.min.js'
     ]
     js = [
         'js/app/gridster.js',
@@ -34,6 +36,7 @@ def _configure_bundles():
     css_vendor = [
         'css/normalize-css/normalize.css',
         'css/gridster/jquery.gridster.css',
+        'css/rickshaw/rickshaw.css'
     ]
     css = [
         'css/app/styles.css'
