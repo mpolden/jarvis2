@@ -17,6 +17,10 @@
   text-align: left;
   width: 100%;
 }
+#nsb em {
+  font-style: normal;
+  color: white;
+}
 #nsb .arrival {
   text-align: right;
   white-space: nowrap;
