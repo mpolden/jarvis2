@@ -69,3 +69,12 @@ JOBS['nsb'] = {
     'from': 'from_location',
     'to': 'to_location'
 }
+
+JOBS['ping'] = {
+    'enabled': False,
+    'interval': 3,
+    'hosts': [
+        ('google.com', 'google.com'),
+        ('gw', '10.0.0.1')
+    ]
+}

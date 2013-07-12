@@ -11,7 +11,7 @@ from lxml import etree
 from oauth2client.file import Storage
 from pyquery import PyQuery as pq
 from soco import SoCo
-from subprocess import call
+from subprocess import call, Popen, PIPE
 
 
 class AbstractJob(object):
@@ -300,3 +300,25 @@ class Nsb(AbstractJob):
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)
         return {}
+
+
+class Ping(AbstractJob):
+
+    def __init__(self, conf):
+        self.interval = conf['interval']
+        self.hosts = conf['hosts']
+
+    def _parse_latency(self, lines):
+        return dict(x.split('=') for x in
+                    lines.splitlines()[1].split(' ')[4:7])
+
+    def get(self):
+        data = {'values': {}}
+        for host in self.hosts:
+            ping = 'ping -c 1 -t 1 %s' % (host[1],)
+            p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE, stdin=PIPE)
+            latency = self._parse_latency(p.stdout.read())
+            if not 'time' in latency:
+                continue
+            data['values'][host[0]] = float(latency['time'])
+        return data
