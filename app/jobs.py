@@ -270,7 +270,7 @@ class Nsb(AbstractJob):
                            d.find('td.depart strong')]
         arrival_times = [el.text_content().strip() for el in
                          d.find('td.arrive strong')]
-        durations = [el.text_content().rstrip(' min') for el in
+        durations = [int(el.text_content().rstrip(' min')) for el in
                      d.find('td.duration em')]
 
         departures = []

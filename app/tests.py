@@ -87,5 +87,28 @@ class HackerNews(unittest.TestCase):
                          data['items'][0]['title'])
 
 
+class Nsb(unittest.TestCase):
+
+    def setUp(self):
+        html_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                    'test_data',
+                                    'nsb.html'))
+        with open(html_path, 'r') as f:
+            self.html = f.read()
+        self.nsb = jobs.Nsb({'interval': None, 'from': 'Lerkendal',
+                             'to': 'Rotvoll'})
+
+    def test_parse(self):
+        data = self.nsb._parse(self.html)
+
+        self.assertEqual('15. juli 2013', data['date'])
+        self.assertEqual('Rotvoll', data['to'])
+        self.assertEqual('Lerkendal', data['from'])
+        self.assertEqual(5, len(data['departures']))
+        self.assertEqual('06:17', data['departures'][0]['arrival'])
+        self.assertEqual('05:56', data['departures'][0]['departure'])
+        self.assertEqual(21, data['departures'][0]['duration'])
+
+
 if __name__ == '__main__':
     unittest.main()

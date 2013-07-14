@@ -3,6 +3,9 @@ lint:
 	pyflakes *.py app/*.py
 	grunt jshint
 
+test:
+	python app/tests.py -v
+
 widget:
 	@test -n "$(NAME)" || \
 		(echo "NAME is not set. Use NAME=widget_name make widget" && exit 1)
