@@ -15,10 +15,21 @@ $script = <<SCRIPT
   dpkg-reconfigure tzdata
 
   # Install packages
-  apt-get -y install python-pip python-dev libxml2-dev libxslt1-dev
+  apt-get -y install make python-pip python-dev libxml2-dev libxslt1-dev \
+          python-software-properties
+
+  # Install nodejs
+  add-apt-repository -y ppa:chris-lea/node.js
+  apt-get -y update
+  apt-get -y install nodejs
+
+  # Install npm packages
+  npm install -g grunt-cli
+  cd /vagrant && npm install
 
   # Install pip packages
   pip install --use-mirrors -r /vagrant/requirements.txt
+  pip install --use-mirrors -r /vagrant/dev-requirements.txt
 SCRIPT
 
 Vagrant.configure("2") do |config|
