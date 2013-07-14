@@ -39,7 +39,9 @@ class Atb(unittest.TestCase):
 
     def test_parse(self):
         atb = jobs.Atb({'interval': None, 'url': None})
-        data = atb._parse(self.json, now=datetime(2013, 7, 1, 21, 30, 0, 0))
+        now = datetime.now()
+        data = atb._parse(self.json, now=datetime(now.year, now.month, now.day,
+                                                  21, 30, 0, 0))
 
         departures = data['departures']
         self.assertEqual(5, len(departures))
@@ -51,7 +53,9 @@ class Atb(unittest.TestCase):
 
     def test_parse_gt_or_eq_zero(self):
         atb = jobs.Atb({'interval': None, 'url': None})
-        data = atb._parse(self.json, now=datetime(2013, 7, 1, 21, 35, 0, 0))
+        now = datetime.now()
+        data = atb._parse(self.json, now=datetime(now.year, now.month, now.day,
+                                                  21, 35, 0, 0))
 
         departures = data['departures']
         self.assertEqual(5, len(departures))

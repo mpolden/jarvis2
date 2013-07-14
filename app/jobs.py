@@ -67,13 +67,10 @@ class Atb(AbstractJob):
         for departure in data['departures']:
             departureTime = dateutil.parser.parse(
                 departure['registeredDepartureTime'].split('T').pop())
-            remaining = (departureTime - now).total_seconds() / 60
+            remaining = int((departureTime - now).total_seconds() / 60)
             departure['hour'] = departureTime.strftime('%H')
             departure['minute'] = departureTime.strftime('%M')
-            if remaining > 0:
-                departure['eta'] = int(remaining)
-            else:
-                departure['eta'] = 0
+            departure['eta'] = remaining if remaining > 0 else 0
         return data
 
     def get(self):
