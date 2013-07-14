@@ -1,5 +1,4 @@
 /* jshint nonew: false */
-/* global Rickshaw */
 
 var jarvis = jarvis || angular.module('jarvis', []);
 
