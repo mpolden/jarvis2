@@ -65,9 +65,8 @@ class Atb(AbstractJob):
         if now is None:
             now = datetime.now()
         for departure in data['departures']:
-            departureTime = datetime.strptime(
-                departure['registeredDepartureTime'],
-                '%Y-%m-%dT%H:%M:%S.000')
+            departureTime = dateutil.parser.parse(
+                departure['registeredDepartureTime'].split('T').pop())
             remaining = (departureTime - now).total_seconds() / 60
             departure['hour'] = departureTime.strftime('%H')
             departure['minute'] = departureTime.strftime('%M')
