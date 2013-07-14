@@ -308,17 +308,16 @@ class Ping(AbstractJob):
         self.interval = conf['interval']
         self.hosts = conf['hosts']
 
-    def _parse_latency(self, lines):
-        return dict(x.split('=') for x in
-                    lines.splitlines()[1].split(' ')[4:7])
+    def _get_latency(self, host):
+        ping_cmd = 'ping6' if ':' in host[1] else 'ping'
+        ping = '%s -c 1 %s' % (ping_cmd, host[1])
+        p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE, stdin=PIPE)
+        values = dict(line.split('=') for line in
+                      p.stdout.read().splitlines()[1].split(' ')[4:7])
+        return float(values['time']) if 'time' in values else 0
 
     def get(self):
         data = {'values': {}}
         for host in self.hosts:
-            ping = 'ping -c 1 -t 1 %s' % (host[1],)
-            p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE, stdin=PIPE)
-            latency = self._parse_latency(p.stdout.read())
-            if not 'time' in latency:
-                continue
-            data['values'][host[0]] = float(latency['time'])
+            data['values'][host[0]] = self._get_latency(host)
         return data
