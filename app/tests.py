@@ -66,5 +66,26 @@ class Atb(unittest.TestCase):
         self.assertEqual(5, departures[4]['eta'])
 
 
+class HackerNews(unittest.TestCase):
+
+    def setUp(self):
+        html_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                    'test_data',
+                                    'hn.html'))
+        with open(html_path, 'r') as f:
+            self.html = f.read()
+        self.hn = jobs.HackerNews({'interval': None})
+
+    def test_parse(self):
+        data = self.hn._parse(self.html)
+
+        self.assertEqual(29, len(data['items']))
+        self.assertTrue('points' in data['items'][0])
+        self.assertTrue('title' in data['items'][0])
+        self.assertEqual(220, data['items'][0]['points'])
+        self.assertEqual('Do Things that Don\'t Scale',
+                         data['items'][0]['title'])
+
+
 if __name__ == '__main__':
     unittest.main()

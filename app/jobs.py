@@ -91,7 +91,9 @@ class HackerNews(AbstractJob):
         d = pq(html)
 
         titles = [el.text for el in
-                  d.find('td.title a').not_('a[href="news2"]')]
+                  d.find('td.title a')
+                  .not_('a[href="news2"]')
+                  .not_('a[href^="item"]')]
         points = [int(el.text.rstrip(' points')) for el in
                   d.find('td.subtext span')]
 
