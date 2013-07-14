@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import logging
 import os
 import signal
 import sys
@@ -17,6 +18,7 @@ def _teardown(signal, frame):
 
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'debug':
+        logging.basicConfig()
         app.debug = True
     signal.signal(signal.SIGINT, _teardown)
     port = int(os.environ.get('PORT', 5000))
