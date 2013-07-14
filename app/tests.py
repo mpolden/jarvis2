@@ -110,5 +110,21 @@ class Nsb(unittest.TestCase):
         self.assertEqual(21, data['departures'][0]['duration'])
 
 
+class Ping(unittest.TestCase):
+
+    def setUp(self):
+        self.ping = jobs.Ping({'interval': None, 'hosts': None})
+
+    def test_parse_time(self):
+        s = ('PING google.com (173.194.69.139): 56 data bytes\n'
+             '64 bytes from 173.194.69.139: icmp_seq=0 ttl=46 time=57.478 ms\n'
+             '\n--- google.com ping statistics ---\n'
+             '1 packets transmitted, 1 packets received, 0.0% packet loss\n'
+             'round-trip min/avg/max/stddev = 57.478/57.478/57.478/0.000 ms\n')
+
+        self.assertEqual(57.478, self.ping._parse_time(s))
+        self.assertEqual(0, self.ping._parse_time('foo bar'))
+
+
 if __name__ == '__main__':
     unittest.main()

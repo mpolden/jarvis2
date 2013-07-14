@@ -3,6 +3,7 @@
 import dateutil.parser
 import httplib2
 import os
+import re
 import requests
 from abc import ABCMeta, abstractmethod
 from apiclient.discovery import build
@@ -306,13 +307,15 @@ class Ping(AbstractJob):
         self.interval = conf['interval']
         self.hosts = conf['hosts']
 
+    def _parse_time(self, ping_output):
+        time = re.search('time=(\d+(?:\.\d+)?)', ping_output)
+        return float(time.group(1)) if time is not None else 0
+
     def _get_latency(self, host):
         ping_cmd = 'ping6' if ':' in host[1] else 'ping'
         ping = '%s -c 1 %s' % (ping_cmd, host[1])
-        p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE, stdin=PIPE)
-        values = dict(line.split('=') for line in
-                      p.stdout.read().splitlines()[1].split(' ')[4:7])
-        return float(values['time']) if 'time' in values else 0
+        p = Popen(ping.split(' '), stdout=PIPE)
+        return self._parse_time(p.stdout.read())
 
     def get(self):
         data = {'values': {}}
