@@ -26,7 +26,7 @@ jarvis.controller('PingCtrl', ['$scope',
       );
       graph = new Rickshaw.Graph({
         element: element,
-        width: 570,
+        width: 565,
         height: 240,
         renderer: 'area',
         stroke: true,
