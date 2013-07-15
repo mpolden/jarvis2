@@ -15,7 +15,7 @@ $script = <<SCRIPT
   dpkg-reconfigure tzdata
 
   # Install packages
-  apt-get -y install make python-pip python-dev libxml2-dev libxslt1-dev \
+  apt-get -y install git make python-pip python-dev libxml2-dev libxslt1-dev \
           python-software-properties
 
   # Install nodejs
@@ -24,7 +24,7 @@ $script = <<SCRIPT
   apt-get -y install nodejs
 
   # Install npm packages
-  npm install -g grunt-cli
+  npm install -g bower grunt-cli
   cd /vagrant && npm install
 
   # Install pip packages
