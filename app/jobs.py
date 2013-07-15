@@ -12,7 +12,7 @@ from lxml import etree
 from oauth2client.file import Storage
 from pyquery import PyQuery as pq
 from soco import SoCo
-from subprocess import call, Popen, PIPE
+from subprocess import Popen, PIPE
 
 
 class AbstractJob(object):
@@ -209,11 +209,11 @@ class Uptime(AbstractJob):
         self.interval = conf['interval']
 
     def get(self):
-        with open(os.devnull, 'w') as devnull:
-            for host in self.hosts:
-                ping = 'ping -c 1 -t 1 -q %s' % (host['ip'],)
-                up = call(ping.split(' '), stdout=devnull, stderr=devnull)
-                host['active'] = (up == 0)
+        for host in self.hosts:
+            ping_cmd = 'ping6' if ':' in host['ip'] else 'ping'
+            ping = '%s -c 1 %s' % (ping_cmd, host['ip'])
+            p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
+            host['active'] = p.wait() == 0
         return {'hosts': self.hosts}
 
 
@@ -314,8 +314,8 @@ class Ping(AbstractJob):
     def _get_latency(self, host):
         ping_cmd = 'ping6' if ':' in host[1] else 'ping'
         ping = '%s -c 1 %s' % (ping_cmd, host[1])
-        p = Popen(ping.split(' '), stdout=PIPE)
-        return self._parse_time(p.stdout.read())
+        p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
+        return self._parse_time(p.communicate()[0])
 
     def get(self):
         data = {'values': {}}
