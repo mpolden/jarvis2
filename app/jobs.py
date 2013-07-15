@@ -8,6 +8,7 @@ import requests
 from abc import ABCMeta, abstractmethod
 from apiclient.discovery import build
 from datetime import datetime
+from httplib import BadStatusLine
 from lxml import etree
 from oauth2client.file import Storage
 from pyquery import PyQuery as pq
@@ -189,10 +190,14 @@ class Calendar(AbstractJob):
 
     def get(self):
         now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-        result = self.service.events().list(calendarId='primary',
-                                            orderBy='startTime',
-                                            singleEvents=True,
-                                            timeMin=now).execute()
+        try:
+            result = self.service.events().list(calendarId='primary',
+                                                orderBy='startTime',
+                                                singleEvents=True,
+                                                timeMin=now).execute()
+        except BadStatusLine:
+            return {}
+
         items = result['items']
         today = self.get_current_event(items)
         events = self.get_events(items, today)
