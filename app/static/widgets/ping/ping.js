@@ -8,7 +8,7 @@ jarvis.controller('PingCtrl', ['$scope',
 
     var graph = null;
 
-    var initGraph = function (element, values) {
+    var createGraph = function (element, values) {
       var labels = Object.keys(values).map(function (name) {
         return {
           name: name
@@ -24,7 +24,7 @@ jarvis.controller('PingCtrl', ['$scope',
           timeBase: new Date().getTime() / 1000
         }
       );
-      graph = new Rickshaw.Graph({
+      var _graph = new Rickshaw.Graph({
         element: element,
         width: 565,
         height: 240,
@@ -35,30 +35,30 @@ jarvis.controller('PingCtrl', ['$scope',
       });
       new Rickshaw.Graph.Legend({
         element: document.querySelector('#legend'),
-        graph: graph
+        graph: _graph
       });
       new Rickshaw.Graph.Axis.Y({
         element: document.querySelector('#y-axis'),
-        graph: graph,
+        graph: _graph,
         orientation: 'left',
         ticks: 5,
         tickFormat: function (n) {
           return n + ' ms';
         }
       });
-      graph.render();
+      return _graph;
     };
 
     $scope.$on('ping', function (ev, body) {
       if (graph === null) {
         var element = document.querySelector('#chart');
         if (element !== null) {
-          initGraph(element, body.values);
+          graph = createGraph(element, body.values);
         }
       } else {
         graph.series.addData(body.values);
-        graph.render();
       }
+      graph.render();
     });
   }
 ]);

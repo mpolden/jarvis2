@@ -14,11 +14,9 @@
   left: 0;
   width: 55px;
   height: 270px;
-  color: #ffffff;
 }
 #ping .y_ticks {
   fill: #ffffff;
-  fill-opacity: 1;
 }
 #ping .y_axis {
   height: 100%;
