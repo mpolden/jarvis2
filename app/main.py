@@ -103,13 +103,11 @@ def _configure_jobs():
     conf = app.config['JOBS']
     for cls in jobs.AbstractJob.__subclasses__():
         name = cls.__name__.lower()
-        if name not in conf.keys() or 'enabled' not in conf[name] or \
-                not conf[name]['enabled']:
-            print 'Skipping missing or disabled job: %s' % (name,)
+        if name not in conf or not conf[name].get('enabled'):
+            print 'Skipping disabled job: %s' % (name,)
             continue
         job = cls(conf[name])
-        print 'Configuring job %s to run every %d seconds' % (name,
-                                                              job.interval)
+        print 'Configuring job: %s (interval: %d secs)' % (name, job.interval)
         start_date = datetime.now() + timedelta(seconds=1)
         sched.add_interval_job(_run_job,
                                seconds=job.interval,
@@ -123,7 +121,7 @@ def _run_job(widget, job):
     body = job.get()
     if not body:
         return
-    body.update({'updated_at': datetime.now().strftime('%H:%M')})
+    body['updated_at'] = datetime.now().strftime('%H:%M')
     json_data = json.dumps({
         'widget': widget,
         'body': body
