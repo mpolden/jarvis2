@@ -7,9 +7,10 @@ test:
 	python app/tests.py -v
 
 widget:
-	@test -n "$(NAME)" || \
-		(echo "NAME is not set. Use NAME=widget_name make widget" && exit 1)
 	python app/create_widget.py $(NAME)
+
+run-job:
+	python app/jobs.py $(NAME)
 
 google-api-auth:
 	python app/google-api.py

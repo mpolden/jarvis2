@@ -42,8 +42,8 @@ class WidgetFactory(object):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print 'usage: %s name' % (sys.argv[0],)
-        sys.exit(1)
-    name = sys.argv[1]
+    if len(sys.argv) > 1:
+        name = sys.argv[1]
+    else:
+        name = raw_input('Name of the widget to create: ')
     WidgetFactory(name).create_widget()

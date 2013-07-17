@@ -334,11 +334,15 @@ if __name__ == '__main__':
     from flask import Flask
     from pprint import pprint
 
+    app = Flask(__name__)
+    app.config.from_envvar('JARVIS_SETTINGS')
+    conf = app.config['JOBS']
+
     if len(sys.argv) > 1:
         name = sys.argv[1].lower()
     else:
-        print 'usage: %s job-name' % (sys.argv[0],)
-        sys.exit(1)
+        jobs = ' '.join(app.config['JOBS'].keys())
+        name = raw_input('Name of the job to run [%s]: ' % (jobs,)).lower()
 
     classes = [cls for cls in AbstractJob.__subclasses__()
                if cls.__name__.lower() == name]
@@ -346,10 +350,6 @@ if __name__ == '__main__':
     if len(classes) == 0:
         print 'No such job: %s' % (name,)
         sys.exit(1)
-
-    app = Flask(__name__)
-    app.config.from_envvar('JARVIS_SETTINGS')
-    conf = app.config['JOBS']
 
     cls = classes.pop()
     job = cls(conf[name])
