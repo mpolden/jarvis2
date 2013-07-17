@@ -4,7 +4,7 @@ import jobs
 import json
 import os.path
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Yr(unittest.TestCase):
@@ -138,6 +138,85 @@ class Ping(unittest.TestCase):
 
         self.assertEqual(57.478, self.ping._parse_time(s))
         self.assertEqual(0, self.ping._parse_time('foo bar'))
+
+
+class Calendar(unittest.TestCase):
+
+    def setUp(self):
+        self.calendar = jobs.Calendar({'interval': None, 'api_key': None})
+
+    def test_parse_date(self):
+        date = datetime(2013, 07, 17)
+        dateTime = datetime(2013, 07, 17, 20)
+
+        self.assertEqual(dateTime, self.calendar._parse_date(
+            {'dateTime': dateTime.strftime('%Y-%m-%dT%H:%M:%S')}))
+
+        self.assertEqual(date, self.calendar._parse_date(
+            {'date': date.strftime('%Y-%m-%d')}))
+
+        self.assertEqual(None, self.calendar._parse_date({}))
+
+    def test_get_current_event_today(self):
+        now = datetime.now()
+        date1 = now + timedelta(days=1)
+        date2 = now + timedelta(days=5)
+        date3 = now + timedelta(days=7)
+        items = [
+            {'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
+             'summary': 'Event 1'},
+            {'start': {'date': date1.strftime('%Y-%m-%d')},
+             'summary': 'Event 2'},
+            {'start': {'date': date2.strftime('%Y-%m-%d')},
+             'summary': 'Event 3'},
+            {'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
+             'summary': 'Event 4'}
+        ]
+        event = self.calendar.get_current_event(items)
+
+        self.assertEqual(None, self.calendar.get_current_event([]))
+        self.assertEqual(now.strftime('%H:%M'), event['start'])
+        self.assertEqual('Event 1', event['summary'])
+
+    def test_get_current_event_closest_today(self):
+        now = datetime.now()
+        date1 = now - timedelta(days=10)
+        date2 = now - timedelta(days=7)
+        date3 = now - timedelta(days=5)
+        date4 = now - timedelta(days=1)
+        items = [
+            {'start': {'date': date1.strftime('%Y-%m-%d')},
+             'summary': 'Event 1'},
+            {'start': {'dateTime': date2.strftime('%Y-%m-%dT%H:%M:%S')},
+             'summary': 'Event 2'},
+            {'start': {'date': date3.strftime('%Y-%m-%d')},
+             'summary': 'Event 3'},
+            {'start': {'date': date4.strftime('%Y-%m-%dT%H:%M:%S')},
+             'summary': 'Event 4'}
+        ]
+        event = self.calendar.get_current_event(items)
+
+        self.assertEqual(date1.strftime('%H:%M'), event['start'])
+        self.assertEqual('Event 4', event['summary'])
+
+    def test_get_events(self):
+        now = datetime.now()
+        date1 = now + timedelta(days=1)
+        date2 = now + timedelta(days=5)
+        date3 = now + timedelta(days=7)
+        items = [
+            {'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
+             'summary': 'Event 1'},
+            {'start': {'date': date1.strftime('%Y-%m-%d')},
+             'summary': 'Event 2'},
+            {'start': {'date': date2.strftime('%Y-%m-%d')},
+             'summary': 'Event 3'},
+            {'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
+             'summary': 'Event 4'}
+        ]
+        self.assertEqual(None, self.calendar.get_events([], None))
+        self.assertEqual(3, len(self.calendar.get_events(items, items[0])))
+        self.assertEqual(4, len(self.calendar.get_events(items, None)))
 
 
 if __name__ == '__main__':
