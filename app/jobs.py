@@ -327,3 +327,30 @@ class Ping(AbstractJob):
         for host in self.hosts:
             data['values'][host[0]] = self._get_latency(host)
         return data
+
+
+if __name__ == '__main__':
+    import sys
+    from flask import Flask
+    from pprint import pprint
+
+    if len(sys.argv) > 1:
+        name = sys.argv[1].lower()
+    else:
+        print 'usage: %s job-name' % (sys.argv[0],)
+        sys.exit(1)
+
+    classes = [cls for cls in AbstractJob.__subclasses__()
+               if cls.__name__.lower() == name]
+
+    if len(classes) == 0:
+        print 'No such job: %s' % (name,)
+        sys.exit(1)
+
+    app = Flask(__name__)
+    app.config.from_envvar('JARVIS_SETTINGS')
+    conf = app.config['JOBS']
+
+    cls = classes.pop()
+    job = cls(conf[name])
+    pprint(job.get())
