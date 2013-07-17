@@ -1,0 +1,10 @@
+<div class="gridster" ng-controller="EventCtrl">
+  <ul>
+    {% if config['JOBS'][widget]['enabled'] %}
+    <li data-row="1" data-col="1" data-sizex="{{ x }}" data-sizey="{{ y }}"
+      ng-include src="'/static/widgets/{{ widget }}/{{ widget }}.html'"
+      ng-controller="{{ widget_cls }}Ctrl">
+    </li>
+    {% endif %}
+  </ul>
+</div>

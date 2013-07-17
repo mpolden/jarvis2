@@ -346,6 +346,12 @@ class Ping(AbstractJob):
         return data
 
 
+def find_cls(name):
+    classes = [cls for cls in AbstractJob.__subclasses__()
+               if cls.__name__.lower() == name]
+    return classes.pop() if len(classes) > 0 else None
+
+
 if __name__ == '__main__':
     import sys
     from flask import Flask
@@ -361,13 +367,10 @@ if __name__ == '__main__':
         jobs = ' '.join(app.config['JOBS'].keys())
         name = raw_input('Name of the job to run [%s]: ' % (jobs,)).lower()
 
-    classes = [cls for cls in AbstractJob.__subclasses__()
-               if cls.__name__.lower() == name]
-
-    if len(classes) == 0:
+    cls = find_cls(name)
+    if cls is None:
         print 'No such job: %s' % (name,)
         sys.exit(1)
 
-    cls = classes.pop()
     job = cls(conf[name])
     pprint(job.get())

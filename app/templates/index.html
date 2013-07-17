@@ -16,7 +16,11 @@
     {% endif %}
   </head>
   <body>
+    {% if layout %}
+    {% include layout %}
+    {% else %}
     {% include 'layout.html' %}
+    {% endif %}
     {% if config['DEBUG'] %}
     {% assets "js_all" %}
     <script src="{{ ASSET_URL }}"></script>

@@ -7,7 +7,7 @@ import Queue
 import SocketServer
 from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, abort
 from flask.ext.assets import Environment, Bundle
 
 
@@ -66,7 +66,18 @@ def _configure_bundles():
 
 
 @app.route('/')
-def index():
+@app.route('/<widget>')
+def index(widget=None):
+    if widget is not None:
+        x = request.args.get('x', 2)
+        y = request.args.get('y', 2)
+        widget_cls = jobs.find_cls(widget)
+        if widget_cls is None:
+            abort(404)
+        return render_template('index.html', layout='layout_single.html',
+                               widget=widget.lower(),
+                               widget_cls=widget_cls.__name__,
+                               x=x, y=y)
     return render_template('index.html')
 
 
