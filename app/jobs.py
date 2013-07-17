@@ -140,7 +140,9 @@ class Calendar(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']
+        self.api_key = conf['api_key']
 
+    def _auth(self):
         credentials_file = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '.calendar.json'))
         storage = Storage(credentials_file)
@@ -148,7 +150,7 @@ class Calendar(AbstractJob):
         http = httplib2.Http()
         http = credentials.authorize(http)
         self.service = build(serviceName='calendar', version='v3', http=http,
-                             developerKey=conf['api_key'])
+                             developerKey=self.api_key)
 
     def _parse_date(self, date):
         if 'dateTime' in date:
@@ -163,15 +165,24 @@ class Calendar(AbstractJob):
         if len(items) == 0:
             return None
 
-        event = items[0]
-        date = self._parse_date(event['start'])
+        event = None
+        for item in items:
+            date = self._parse_date(item['start'])
+            if date is None:
+                continue
+            today = date.now().date()
+            if date.date() == today:
+                event = (item, date)
+                break
+            elif date.date() < today:
+                event = (item, date)
 
-        if date is None or date.date() != date.now().date():
+        if event is None:
             return None
 
         return {
-            'summary': event['summary'],
-            'start': date.strftime('%H:%M')
+            'summary': event[0]['summary'],
+            'start': event[1].strftime('%H:%M')
         }
 
     def get_events(self, items, today):
@@ -189,6 +200,9 @@ class Calendar(AbstractJob):
         return events
 
     def get(self):
+        if not hasattr(self, 'service'):
+            self._auth()
+
         now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
         try:
             result = self.service.events().list(calendarId='primary',
