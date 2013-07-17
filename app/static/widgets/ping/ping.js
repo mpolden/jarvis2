@@ -54,11 +54,12 @@ jarvis.controller('PingCtrl', ['$scope',
         var element = document.querySelector('#chart');
         if (element !== null) {
           graph = createGraph(element, body.values);
+          graph.render();
         }
       } else {
         graph.series.addData(body.values);
+        graph.render();
       }
-      graph.render();
     });
   }
 ]);
