@@ -50,6 +50,18 @@ To start the app in debug mode, use:
 
     JARVIS_SETTINGS=config.py ./run.py debug
 
+Run a job standalone and pretty-print output (useful for debugging):
+
+    JARVIS_SETTINGS=config.py make run-job
+
+Create Google API credentials (required for Calendar widget):
+
+    JARVIS_SETTINGS=config.py make google-api-auth
+
+Create a new widget:
+
+    make widget
+
 Development environment
 =======================
 A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
