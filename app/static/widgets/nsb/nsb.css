@@ -1,27 +1,25 @@
 #nsb {
   height: 100%;
   padding: 5px;
-  background: #990033;
+  background: #5c755e;
   text-align: center;
 }
 #nsb h1 {
   font-size: 45px;
+  margin: 8px;
+}
+#nsb h2 {
+  font-size: 16px;
+  margin: 12px 0 12px 0;
 }
 #nsb table {
+  width: 100%;
   margin: 0 10px 0 10px;
 }
 #nsb th {
-  font-size: 16px;
-}
-#nsb .departure {
-  text-align: left;
-  width: 100%;
+  font-size: 14px;
 }
 #nsb em {
   font-style: normal;
   color: white;
-}
-#nsb .arrival {
-  text-align: right;
-  white-space: nowrap;
 }

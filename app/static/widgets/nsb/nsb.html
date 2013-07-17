@@ -1,16 +1,21 @@
 <div id="nsb">
-  <p class="fade">Første tog fra <em>{{ from }}</em> til <em>{{ to }}</em> går
+  <p class="fade">Neste tog fra <em>{{ from }}</em> til <em>{{ to }}</em> går
     <em>{{ date }}</em>
   </p>
   <h1>{{ next.departure }}</h1>
+  <h2 class="fade">Ankomst: <em>{{ next.arrival }}</em>
+    (<em>{{ next.duration }} min</em>)
+  </h2>
   <table>
-    <tr>
-      <th class="departure fade">Avgang:</th>
-      <th class="arrival fade">Ankomst:</th>
+    <tr class="fade">
+      <th>Avgang</th>
+      <th>Ankomst</th>
+      <th>Reisetid</th>
     </tr>
     <tr ng-repeat="departure in upcoming">
-      <td class="departure">{{ departure.departure }}</td>
-      <td class="arrival">{{ departure.arrival }}</td>
+      <td>{{ departure.departure }}</td>
+      <td>{{ departure.arrival }}</td>
+      <td>{{ departure.duration }} min</td>
     </tr>
   </table>
   <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
