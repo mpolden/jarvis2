@@ -75,9 +75,7 @@ def index(widget=None):
         if widget_cls is None:
             abort(404)
         return render_template('index.html', layout='layout_single.html',
-                               widget=widget.lower(),
-                               widget_cls=widget_cls.__name__,
-                               x=x, y=y)
+                               widget=widget_cls.__name__, x=x, y=y)
     return render_template('index.html')
 
 

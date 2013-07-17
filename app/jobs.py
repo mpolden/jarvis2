@@ -348,7 +348,7 @@ class Ping(AbstractJob):
 
 def find_cls(name):
     classes = [cls for cls in AbstractJob.__subclasses__()
-               if cls.__name__.lower() == name]
+               if cls.__name__.lower() == name.lower()]
     return classes.pop() if len(classes) > 0 else None
 
 

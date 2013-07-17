@@ -1,9 +1,9 @@
 <div class="gridster" ng-controller="EventCtrl">
   <ul>
-    {% if config['JOBS'][widget]['enabled'] %}
+    {% if config['JOBS'][widget.lower()]['enabled'] %}
     <li data-row="1" data-col="1" data-sizex="{{ x }}" data-sizey="{{ y }}"
-      ng-include src="'/static/widgets/{{ widget }}/{{ widget }}.html'"
-      ng-controller="{{ widget_cls }}Ctrl">
+      ng-include src="'/static/widgets/{{ widget|lower }}/{{ widget|lower }}.html'"
+      ng-controller="{{ widget }}Ctrl">
     </li>
     {% endif %}
   </ul>
