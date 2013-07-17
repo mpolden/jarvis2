@@ -203,7 +203,7 @@ class Calendar(AbstractJob):
         if not hasattr(self, 'service'):
             self._auth()
 
-        now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        now = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
         try:
             result = self.service.events().list(calendarId='primary',
                                                 orderBy='startTime',
