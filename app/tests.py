@@ -163,13 +163,13 @@ class Calendar(unittest.TestCase):
         date2 = now + timedelta(days=5)
         date3 = now + timedelta(days=7)
         items = [
-            {'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
+            {'id': 1, 'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
              'summary': 'Event 1'},
-            {'start': {'date': date1.strftime('%Y-%m-%d')},
+            {'id': 2, 'start': {'date': date1.strftime('%Y-%m-%d')},
              'summary': 'Event 2'},
-            {'start': {'date': date2.strftime('%Y-%m-%d')},
+            {'id': 3, 'start': {'date': date2.strftime('%Y-%m-%d')},
              'summary': 'Event 3'},
-            {'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
+            {'id': 4, 'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
              'summary': 'Event 4'}
         ]
         event = self.calendar.get_current_event(items)
@@ -185,13 +185,14 @@ class Calendar(unittest.TestCase):
         date3 = now - timedelta(days=5)
         date4 = now - timedelta(days=1)
         items = [
-            {'start': {'date': date1.strftime('%Y-%m-%d')},
+            {'id': 1, 'start': {'date': date1.strftime('%Y-%m-%d')},
              'summary': 'Event 1'},
-            {'start': {'dateTime': date2.strftime('%Y-%m-%dT%H:%M:%S')},
+            {'id': 2,
+             'start': {'dateTime': date2.strftime('%Y-%m-%dT%H:%M:%S')},
              'summary': 'Event 2'},
-            {'start': {'date': date3.strftime('%Y-%m-%d')},
+            {'id': 3, 'start': {'date': date3.strftime('%Y-%m-%d')},
              'summary': 'Event 3'},
-            {'start': {'date': date4.strftime('%Y-%m-%dT%H:%M:%S')},
+            {'id': 4, 'start': {'date': date4.strftime('%Y-%m-%dT%H:%M:%S')},
              'summary': 'Event 4'}
         ]
         event = self.calendar.get_current_event(items)
@@ -205,13 +206,13 @@ class Calendar(unittest.TestCase):
         date2 = now + timedelta(days=5)
         date3 = now + timedelta(days=7)
         items = [
-            {'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
+            {'id': 1, 'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
              'summary': 'Event 1'},
-            {'start': {'date': date1.strftime('%Y-%m-%d')},
+            {'id': 2, 'start': {'date': date1.strftime('%Y-%m-%d')},
              'summary': 'Event 2'},
-            {'start': {'date': date2.strftime('%Y-%m-%d')},
+            {'id': 3, 'start': {'date': date2.strftime('%Y-%m-%d')},
              'summary': 'Event 3'},
-            {'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
+            {'id': 4, 'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
              'summary': 'Event 4'}
         ]
         self.assertEqual(None, self.calendar.get_events([], None))

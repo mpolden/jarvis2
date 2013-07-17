@@ -181,6 +181,7 @@ class Calendar(AbstractJob):
             return None
 
         return {
+            'id': event[0]['id'],
             'summary': event[0]['summary'],
             'start': event[1].strftime('%H:%M')
         }
@@ -190,11 +191,13 @@ class Calendar(AbstractJob):
             return None
 
         events = []
-        start = 0 if today is None else 1
-        for event in items[start:]:
-            date = self._parse_date(event['start'])
+        for item in items:
+            if today is not None and today['id'] == item['id']:
+                continue
+            date = self._parse_date(item['start'])
             events.append({
-                'summary': event['summary'],
+                'id': item['id'],
+                'summary': item['summary'],
                 'start': date.strftime('%d.%m %H:%M')
             })
         return events
