@@ -27,12 +27,14 @@ def main():
         client_secret=config['client_secret'],
         scope='https://www.googleapis.com/auth/calendar.readonly')
 
-    credentials_file = os.path.join(os.path.dirname(__file__),
-                                    '.calendar.json')
+    credentials_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                       '.calendar.json'))
     storage = Storage(credentials_file)
     credentials = storage.get()
     if credentials is None or credentials.invalid:
         credentials = run(FLOW, storage)
+    else:
+        print 'Google API credentials already exist: %s' % (credentials_file,)
 
 
 if __name__ == '__main__':
