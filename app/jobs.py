@@ -271,7 +271,7 @@ class Nsb(AbstractJob):
     def _parse(self, html):
         d = pq(html)
 
-        date = list(d.find('th.date').pop().itertext())[-1]
+        date = list(d.find('th.date')[0].itertext())[-1]
         departure_times = [el.text_content().strip() for el in
                            d.find('td.depart strong')]
         arrival_times = [el.text_content().strip() for el in

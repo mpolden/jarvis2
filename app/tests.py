@@ -90,11 +90,14 @@ class HackerNews(unittest.TestCase):
 class Nsb(unittest.TestCase):
 
     def setUp(self):
-        html_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                    'test_data',
-                                    'nsb.html'))
-        with open(html_path, 'r') as f:
+        test_data = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                    'test_data'))
+        with open(os.path.join(test_data, 'nsb.html')) as f:
             self.html = f.read()
+
+        with open(os.path.join(test_data, 'nsb2.html')) as f:
+            self.html2 = f.read()
+
         self.nsb = jobs.Nsb({'interval': None, 'from': 'Lerkendal',
                              'to': 'Rotvoll'})
 
@@ -107,6 +110,17 @@ class Nsb(unittest.TestCase):
         self.assertEqual(5, len(data['departures']))
         self.assertEqual('06:17', data['departures'][0]['arrival'])
         self.assertEqual('05:56', data['departures'][0]['departure'])
+        self.assertEqual(21, data['departures'][0]['duration'])
+
+    def test_parse_multiple_dates(self):
+        data = self.nsb._parse(self.html2)
+
+        self.assertEqual('17. juli 2013', data['date'])
+        self.assertEqual('Rotvoll', data['to'])
+        self.assertEqual('Lerkendal', data['from'])
+        self.assertEqual(5, len(data['departures']))
+        self.assertEqual('19:17', data['departures'][0]['arrival'])
+        self.assertEqual('18:56', data['departures'][0]['departure'])
         self.assertEqual(21, data['departures'][0]['duration'])
 
 
