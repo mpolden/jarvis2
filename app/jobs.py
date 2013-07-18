@@ -364,7 +364,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         name = sys.argv[1].lower()
     else:
-        jobs = ' '.join(app.config['JOBS'].keys())
+        jobs = ' '.join([cls.__name__.lower() for cls in
+                         AbstractJob.__subclasses__()])
         name = raw_input('Name of the job to run [%s]: ' % (jobs,)).lower()
 
     cls = find_cls(name)
