@@ -220,5 +220,17 @@ class Calendar(unittest.TestCase):
         self.assertEqual(4, len(self.calendar.get_events(items, None)))
 
 
+class Gmail(unittest.TestCase):
+
+    def setUp(self):
+        self.gmail = jobs.Gmail({'interval': None, 'email': None,
+                                 'password': None, 'folder': None})
+
+    def test_parse_count(self):
+        self.assertEqual(0, self.gmail._parse_count('foo bar'))
+        self.assertEqual(10, self.gmail._parse_count('"INBOX" (UNSEEN 10)'))
+        self.assertEqual(20, self.gmail._parse_count('"INBOX" (MESSAGES 20)'))
+
+
 if __name__ == '__main__':
     unittest.main()

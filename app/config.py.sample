@@ -78,3 +78,13 @@ JOBS['ping'] = {
         ('gw', '10.0.0.1')
     ]
 }
+
+JOBS['gmail'] = {
+    'enabled': True,
+    'interval': 600,
+    'email': 'your.username@gmail.com',
+    # Generate a application-specific password at
+    # https://accounts.google.com/b/0/IssuedAuthSubTokens#accesscodes
+    'password': 'application-specific-password',
+    'folder': 'Inbox'
+}
