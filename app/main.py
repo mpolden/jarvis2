@@ -58,7 +58,7 @@ def _configure_bundles():
     assets.register('css_all', Bundle(*(css_vendor + css),
                                       output='assets/styles.css'))
     assets.register('js_min_all', Bundle(Bundle(*js_vendor),
-                                         Bundle(*js, filters='jsmin'),
+                                         Bundle(*js, filters='rjsmin'),
                                          output='assets/app.min.js'))
     assets.register('css_min_all', Bundle(*(css_vendor + css),
                                           filters='cssmin',
