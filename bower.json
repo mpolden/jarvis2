@@ -33,6 +33,9 @@
     "rickshaw": {
       "js": "rickshaw.min.js",
       "css": "rickshaw.css"
+    },
+    "jquery-knob": {
+      "js": "js/jquery.knob.js"
     }
   }
 }
