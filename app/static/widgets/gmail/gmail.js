@@ -7,7 +7,7 @@ jarvis.controller('GmailCtrl', ['$scope',
     $scope.$on('gmail', function (ev, body) {
       var meter = $('#meter');
       if (meter.length !== 0) {
-        if (meter.children().length === 0) {
+        if (!meter.prev().is('canvas')) {
           meter.knob({
             min: 0,
             max: body.count
