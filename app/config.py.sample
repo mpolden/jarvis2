@@ -80,7 +80,7 @@ JOBS['ping'] = {
 }
 
 JOBS['gmail'] = {
-    'enabled': True,
+    'enabled': False,
     'interval': 600,
     'email': 'your.username@gmail.com',
     # Generate a application-specific password at
