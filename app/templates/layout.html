@@ -60,5 +60,11 @@
       ng-controller="PingCtrl">
     </li>
     {% endif %}
+    {% if config['JOBS']['gmail']['enabled'] %}
+    <li data-row="3" data-col="4" data-sizex="2" data-sizey="2"
+      ng-include src="'/static/widgets/gmail/gmail.html'"
+      ng-controller="GmailCtrl">
+    </li>
+    {% endif %}
   </ul>
 </div>
