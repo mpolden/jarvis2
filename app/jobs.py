@@ -354,7 +354,6 @@ class Gmail(AbstractJob):
         self.email = conf['email']
         self.password = conf['password']
         self.folder = conf['folder']
-        self.mail = imaplib.IMAP4_SSL('imap.gmail.com', 993)
 
     def _parse_count(self, message):
         count = re.search('\w+ (\d+)', message)
@@ -369,13 +368,16 @@ class Gmail(AbstractJob):
         return self._parse_count(message[0])
 
     def get(self):
-        if self.mail.state == 'NONAUTH':
-            self.mail.login(self.email, self.password)
+        self.mail = imaplib.IMAP4_SSL('imap.gmail.com')
+        self.mail.login(self.email, self.password)
+        count = self._get_count()
+        unread_count = self._get_unread_count()
+        self.mail.logout()
         return {
             'email': self.email,
             'folder': self.folder,
-            'count': self._get_count(),
-            'unread_count': self._get_unread_count()
+            'count': count,
+            'unread_count': unread_count
         }
 
 
