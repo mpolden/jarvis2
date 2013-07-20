@@ -99,12 +99,18 @@ def events():
     return Response(consume(), mimetype='text/event-stream')
 
 
+def _is_enabled(name):
+    conf = app.config['JOBS']
+    return name in conf and conf[name].get('enabled')
+app.jinja_env.globals.update(is_widget_enabled=_is_enabled)
+
+
 @app.before_first_request
 def _configure_jobs():
     conf = app.config['JOBS']
     for cls in jobs.AbstractJob.__subclasses__():
         name = cls.__name__.lower()
-        if name not in conf or not conf[name].get('enabled'):
+        if not _is_enabled(name):
             print 'Skipping disabled job: %s' % (name,)
             continue
         job = cls(conf[name])
