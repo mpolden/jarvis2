@@ -7,7 +7,7 @@ import Queue
 import SocketServer
 from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
-from flask import Flask, render_template, Response, request, abort
+from flask import Flask, render_template, Response, request, abort, url_for
 from flask.ext.assets import Environment, Bundle
 
 
@@ -102,7 +102,18 @@ def events():
 def _is_enabled(name):
     conf = app.config['JOBS']
     return name in conf and conf[name].get('enabled')
-app.jinja_env.globals.update(is_widget_enabled=_is_enabled)
+
+
+@app.context_processor
+def _inject_template_methods():
+    def url_for_mtime(endpoint, **values):
+        if endpoint == 'static':
+            filename = values.get('filename', None)
+            if filename is not None:
+                file_path = os.path.join(app.root_path, endpoint, filename)
+                values['t'] = int(os.stat(file_path).st_mtime)
+        return url_for(endpoint, **values)
+    return dict(url_for_mtime=url_for_mtime, is_widget_enabled=_is_enabled)
 
 
 @app.before_first_request

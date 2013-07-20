@@ -2,67 +2,67 @@
   <ul>
     {% if is_widget_enabled('yr') %}
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/yr/yr.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/yr/yr.html') }}'"
       ng-controller="YrCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('time') %}
     <li data-row="1" data-col="2" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/time/time.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/time/time.html') }}'"
       ng-controller="TimeCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('atb') %}
     <li data-row="1" data-col="3" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/atb/atb.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/atb/atb.html') }}'"
       ng-controller="AtbCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('hackernews') %}
     <li data-row="1" data-col="4" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/hackernews/hackernews.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/hackernews/hackernews.html') }}'"
       ng-controller="HackerNewsCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('sonos') %}
     <li data-row="2" data-col="1" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/sonos/sonos.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/sonos/sonos.html') }}'"
       ng-controller="SonosCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('calendar') %}
     <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/calendar/calendar.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/calendar/calendar.html') }}'"
       ng-controller="CalendarCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('uptime') %}
     <li data-row="2" data-col="3" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/uptime/uptime.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/uptime/uptime.html') }}'"
       ng-controller="UptimeCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('plex') %}
     <li data-row="2" data-col="4" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/plex/plex.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/plex/plex.html') }}'"
       ng-controller="PlexCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('nsb') %}
     <li data-row="3" data-col="1" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/nsb/nsb.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/nsb/nsb.html') }}'"
       ng-controller="NsbCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('ping') %}
     <li data-row="3" data-col="2" data-sizex="4" data-sizey="2"
-      ng-include src="'/static/widgets/ping/ping.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/ping/ping.html') }}'"
       ng-controller="PingCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('gmail') %}
     <li data-row="3" data-col="4" data-sizex="2" data-sizey="2"
-      ng-include src="'/static/widgets/gmail/gmail.html'"
+      ng-include src="'{{ url_for_mtime('static', filename='widgets/gmail/gmail.html') }}'"
       ng-controller="GmailCtrl">
     </li>
     {% endif %}
