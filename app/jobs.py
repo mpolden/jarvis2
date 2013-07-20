@@ -371,13 +371,13 @@ class Gmail(AbstractJob):
         self.mail = imaplib.IMAP4_SSL('imap.gmail.com')
         self.mail.login(self.email, self.password)
         count = self._get_count()
-        unread_count = self._get_unread_count()
+        unread = self._get_unread_count()
         self.mail.logout()
         return {
             'email': self.email,
             'folder': self.folder,
             'count': count,
-            'unread_count': unread_count
+            'unread': unread
         }
 
 
