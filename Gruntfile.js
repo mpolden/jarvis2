@@ -5,10 +5,11 @@ module.exports = function (grunt) {
   'use strict';
 
   grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-jsbeautifier');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-jsbeautifier');
 
   var less_files = {};
   grunt.file.recurse('app/static',
@@ -98,6 +99,15 @@ module.exports = function (grunt) {
     less: {
       development: {
         files: less_files
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          'app/static/js/jquery-knob/jquery.knob.min.js': [
+            'app/static/js/jquery-knob/jquery.knob.js'
+          ]
+        }
       }
     }
   });
