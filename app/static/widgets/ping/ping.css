@@ -31,6 +31,9 @@
   width: 100%;
 }
 #ping #legend ul {
-  margin: 0 auto;
-  width: 50px;
+  text-align: center;
+  list-style: none;
+}
+#ping #legend li {
+  display: inline;
 }
