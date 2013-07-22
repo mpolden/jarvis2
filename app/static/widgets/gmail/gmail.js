@@ -5,7 +5,7 @@ jarvis.controller('GmailCtrl', ['$scope',
     'use strict';
 
     $scope.$on('gmail', function (ev, body) {
-      var meter = $('#meter');
+      var meter = $('#gmail #meter');
       if (meter.length !== 0) {
         if (!meter.prev().is('canvas')) {
           meter.knob({
