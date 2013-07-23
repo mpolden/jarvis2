@@ -234,7 +234,7 @@ class Uptime(AbstractJob):
     def get(self):
         for host in self.hosts:
             ping_cmd = 'ping6' if ':' in host['ip'] else 'ping'
-            ping = '%s -c 1 %s' % (ping_cmd, host['ip'])
+            ping = '%s -w 1 -c 1 %s' % (ping_cmd, host['ip'])
             p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
             host['active'] = p.wait() == 0
         return {'hosts': self.hosts}
@@ -336,7 +336,7 @@ class Ping(AbstractJob):
 
     def _get_latency(self, host):
         ping_cmd = 'ping6' if ':' in host[1] else 'ping'
-        ping = '%s -c 1 %s' % (ping_cmd, host[1])
+        ping = '%s -w 1 -c 1 %s' % (ping_cmd, host[1])
         p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
         return self._parse_time(p.communicate()[0])
 
