@@ -21,7 +21,7 @@
     {% if is_widget_enabled('hackernews') %}
     <li data-row="1" data-col="4" data-sizex="2" data-sizey="2"
       ng-include src="'{{ url_for_mtime('static', filename='widgets/hackernews/hackernews.html') }}'"
-      ng-controller="HackerNewsCtrl">
+      ng-controller="HackernewsCtrl">
     </li>
     {% endif %}
     {% if is_widget_enabled('sonos') %}

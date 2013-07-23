@@ -1,10 +1,8 @@
 <div class="gridster" ng-controller="EventCtrl">
   <ul>
-    {% if is_widget_enabled(widget.lower()) %}
     <li data-row="1" data-col="1" data-sizex="{{ x }}" data-sizey="{{ y }}"
       ng-include src="'{{ url_for_mtime('static', filename='widgets/%s/%s.html' % ((widget.lower(),) * 2)) }}'"
-      ng-controller="{{ widget }}Ctrl">
+      ng-controller="{{ widget | capitalize }}Ctrl">
     </li>
-    {% endif %}
   </ul>
 </div>

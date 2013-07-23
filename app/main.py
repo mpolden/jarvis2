@@ -70,13 +70,12 @@ def _configure_bundles():
 @app.route('/<widget>')
 def index(widget=None):
     if widget is not None:
+        if not _is_enabled(widget):
+            abort(404)
         x = request.args.get('x', 2)
         y = request.args.get('y', 2)
-        widget_cls = jobs.find_cls(widget)
-        if widget_cls is None:
-            abort(404)
         return render_template('index.html', layout='layout_single.html',
-                               widget=widget_cls.__name__, x=x, y=y)
+                               widget=widget, x=x, y=y)
     return render_template('index.html')
 
 

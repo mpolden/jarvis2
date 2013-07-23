@@ -1,6 +1,6 @@
 var jarvis = jarvis || angular.module('jarvis', []);
 
-jarvis.controller('HackerNewsCtrl', ['$scope',
+jarvis.controller('HackernewsCtrl', ['$scope',
   function ($scope) {
     'use strict';
 
