@@ -10,7 +10,7 @@ lint-js:
 lint: lint-py lint-js
 
 test:
-	python app/tests.py -v
+	python app/tests.py
 
 clean:
 	rm -f *.pyc app/*.pyc
