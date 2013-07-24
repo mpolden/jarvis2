@@ -13,7 +13,9 @@ jarvis.controller('GmailCtrl', ['$scope',
             max: body.count
           });
         }
-        meter.trigger('configure', {max: body.count});
+        meter.trigger('configure', {
+          max: body.count
+        });
         meter.val(body.unread).trigger('change');
       }
       angular.extend($scope, body);
