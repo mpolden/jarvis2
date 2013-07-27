@@ -67,14 +67,6 @@ Development environment
 A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
 Run `vagrant up` in the repository root to provision a development environment.
 
-Deploying using Docker
-======================
-A experimental `Dockerfile` is included for use with
-[Docker](http://www.docker.io).
-
-A production-ready image can be built with `docker build -t jarvis2 $PWD` and
-then using `docker run -t jarvis2` to run the app.
-
 Deployment guide using nginx and uWSGI
 ======================================
 JARVIS is a [Flask](http://flask.pocoo.org) application, see the
