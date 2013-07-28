@@ -1,5 +1,4 @@
 bpython==0.12
-distribute==0.7.3
 flake8==2.0
 mccabe==0.2.1
 pep8==1.4.6
