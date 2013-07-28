@@ -9,6 +9,7 @@ from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
 from flask import Flask, render_template, Response, request, abort, url_for
 from flask.ext.assets import Environment, Bundle
+from random import randint
 
 
 app = Flask(__name__)
@@ -98,8 +99,9 @@ def events():
     return Response(consume(), mimetype='text/event-stream')
 
 
-def _is_enabled(name):
-    conf = app.config['JOBS']
+def _is_enabled(name, conf=None):
+    if conf is None:
+        conf = app.config['JOBS']
     return name in conf and conf[name].get('enabled')
 
 
@@ -118,14 +120,20 @@ def _inject_template_methods():
 @app.before_first_request
 def _configure_jobs():
     conf = app.config['JOBS']
+    offset = 0
     for cls in jobs.AbstractJob.__subclasses__():
         name = cls.__name__.lower()
-        if not _is_enabled(name):
+        if not _is_enabled(name, conf):
             print 'Skipping disabled job: %s' % (name,)
             continue
         job = cls(conf[name])
-        print 'Configuring job: %s (interval: %d secs)' % (name, job.interval)
-        start_date = datetime.now() + timedelta(seconds=1)
+        if app.debug:
+            start_date = datetime.now() + timedelta(seconds=1)
+        else:
+            offset += randint(4, 10)
+            start_date = datetime.now() + timedelta(seconds=offset)
+        print 'Configuring job: %s [start_date=%s, seconds=%s]' % \
+            (name, start_date, job.interval)
         sched.add_interval_job(_run_job,
                                seconds=job.interval,
                                start_date=start_date,
