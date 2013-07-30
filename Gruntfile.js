@@ -55,7 +55,8 @@ module.exports = function (grunt) {
             angular: true,
             $: true,
             EventSource: true,
-            Rickshaw: true
+            Rickshaw: true,
+            moment: true
           }
         },
         files: {

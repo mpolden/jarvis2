@@ -24,7 +24,7 @@ copy-resources:
 		app/static/css/rickshaw app/static/js/angular \
 		app/static/js/angular-truncate app/static/js/app app/static/js/d3 \
 		app/static/js/gridster app/static/js/jquery app/static/js/jquery-knob \
-		app/static/js/rickshaw
+		app/static/js/moment app/static/js/rickshaw
 	cp -p bower_components/angular/angular.min.js app/static/js/angular/
 	cp -p bower_components/angular-truncate/dist/angular-truncate.min.js \
 		app/static/js/angular-truncate/
@@ -36,6 +36,7 @@ copy-resources:
 	cp -p bower_components/jquery/jquery.min.js app/static/js/jquery/
 	cp -p bower_components/jquery-knob/js/jquery.knob.js \
 		app/static/js/jquery-knob/
+	cp -p bower_components/moment/min/moment.min.js app/static/js/moment/
 	cp -p bower_components/normalize-css/normalize.css \
 		app/static/css/normalize-css/
 	cp -p bower_components/rickshaw/rickshaw.css app/static/css/rickshaw/

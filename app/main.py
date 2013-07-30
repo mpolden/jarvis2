@@ -29,7 +29,8 @@ def _configure_bundles():
         'js/angular/angular.min.js',
         'js/angular-truncate/angular-truncate.min.js',
         'js/d3/d3.min.js',
-        'js/rickshaw/rickshaw.min.js'
+        'js/rickshaw/rickshaw.min.js',
+        'js/moment/moment.min.js'
     ]
     js = [
         'js/app/gridster.js',
