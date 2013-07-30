@@ -14,7 +14,6 @@ test:
 
 clean:
 	rm -f *.pyc app/*.pyc
-	rm -fr bower_components/
 	rm -fr app/static/.webassets-cache/
 	rm -fr app/static/assets/
 
