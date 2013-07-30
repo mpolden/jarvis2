@@ -88,3 +88,10 @@ JOBS['gmail'] = {
     'password': 'application-specific-password',
     'folder': 'Inbox'
 }
+
+JOBS['avinor'] = {
+    'enabled': False,
+    'interval': 180,
+    'from': 'TRD',
+    'to': 'OSL'
+}
