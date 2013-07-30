@@ -388,6 +388,7 @@ def find_cls(name):
 
 
 if __name__ == '__main__':
+    import json
     import sys
     from flask import Flask
     from pprint import pprint
@@ -403,10 +404,18 @@ if __name__ == '__main__':
                          AbstractJob.__subclasses__()])
         name = raw_input('Name of the job to run [%s]: ' % (jobs,)).lower()
 
+    print_json = name.endswith('.json')
+    if print_json:
+        name = name.rstrip('.json')
+
     cls = find_cls(name)
     if cls is None:
         print 'No such job: %s' % (name,)
         sys.exit(1)
 
     job = cls(conf[name])
-    pprint(job.get())
+    data = job.get()
+    if print_json:
+        print json.dumps(data, indent=2)
+    else:
+        pprint(data)
