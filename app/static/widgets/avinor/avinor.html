@@ -1,0 +1,18 @@
+<div id="avinor">
+  <p class="fade">Neste fly fra <em>{{ from }}</em> til <em>{{ to }}</em> går
+  </p>
+  <h1>{{ next.time }}</h1>
+  <h2>{{ next.day }}. {{ next.month }}</h2>
+  <table>
+    <tr class="fade">
+      <th>Flight</th>
+      <th>Avgang</th>
+    </tr>
+    <tr ng-repeat="flight in flights">
+      <td>{{ flight.flight_id }}</td>
+      <td>{{ flight.day }}. {{ flight.monthShort }} {{ flight.time }}
+      </td>
+    </tr>
+  </table>
+  <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
+</div>

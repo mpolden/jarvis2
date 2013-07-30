@@ -1,0 +1,25 @@
+#avinor {
+  height: 100%;
+  padding: 5px;
+  background: #81c6dd;
+  text-align: center;
+}
+#avinor h1 {
+  font-size: 40px;
+  margin: 8px;
+}
+#avinor h2 {
+  font-size: 18px;
+  margin: 12px 0 12px 0;
+}
+#avinor table {
+  width: 100%;
+  margin: 0 10px 0 10px;
+}
+#avinor th {
+  font-size: 14px;
+}
+#avinor em {
+  font-style: normal;
+  color: white;
+}
