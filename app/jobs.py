@@ -278,12 +278,6 @@ class Nsb(AbstractJob):
     def __init__(self, conf):
         self.from_location = conf['from']
         self.to_location = conf['to']
-        self.url = ('https://www.nsb.no/category2734.html'
-                    '?booking-from=%s'
-                    '&booking-to=%s'
-                    '&booking-type=single'
-                    '&booking-date=%s'
-                    '&booking-date_outward_hour=%s')
         self.interval = conf['interval']
 
     def _parse(self, html):
@@ -315,9 +309,14 @@ class Nsb(AbstractJob):
 
     def get(self):
         now = datetime.now()
-        params = (self.from_location, self.to_location,
-                  now.strftime('%d-%m-%Y'), now.strftime('%H'))
-        r = requests.get(self.url % params)
+        params = {
+            'booking-from': self.from_location,
+            'booking-to': self.to_location,
+            'booking-type': 'single',
+            'booking-date': now.strftime('%d-%m-%Y'),
+            'booking-date_outward_hour': now.strftime('%H')
+        }
+        r = requests.get('https://www.nsb.no/category2734.html', params=params)
 
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)
