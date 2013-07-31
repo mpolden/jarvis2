@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import jinja2
 import jobs
 import json
 import os
@@ -7,13 +8,18 @@ import Queue
 import SocketServer
 from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
-from flask import Flask, render_template, Response, request, abort, url_for
+from flask import Flask, render_template, Response, request, abort
 from flask.ext.assets import Environment, Bundle
 from random import randint
 
 
 app = Flask(__name__)
 app.config.from_envvar('JARVIS_SETTINGS')
+widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                            'static', 'widgets'))
+app.jinja_loader = jinja2.ChoiceLoader([
+    app.jinja_loader, jinja2.FileSystemLoader(widgets_path)
+])
 assets = Environment(app)
 sched = Scheduler()
 queues = {}
@@ -45,8 +51,6 @@ def _configure_bundles():
         'css/app/styles.css'
     ]
 
-    widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                   'static', 'widgets'))
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)
         for asset_file in os.listdir(os.path.join(widgets_path, widget)):
@@ -110,14 +114,11 @@ def _is_enabled(name, conf=None):
 
 @app.context_processor
 def _inject_template_methods():
-    def url_for_mtime(endpoint, **values):
-        if endpoint == 'static':
-            filename = values.get('filename', None)
-            if filename is not None:
-                file_path = os.path.join(app.root_path, endpoint, filename)
-                values['t'] = int(os.stat(file_path).st_mtime)
-        return url_for(endpoint, **values)
-    return dict(url_for_mtime=url_for_mtime, is_widget_enabled=_is_enabled)
+    def include_raw(name):
+        return jinja2.Markup(app.jinja_loader.get_source(app.jinja_env,
+                                                         name)[0])
+
+    return dict(is_widget_enabled=_is_enabled, include_raw=include_raw)
 
 
 @app.before_first_request
