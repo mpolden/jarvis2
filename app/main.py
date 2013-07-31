@@ -20,6 +20,8 @@ widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
 app.jinja_loader = jinja2.ChoiceLoader([
     app.jinja_loader, jinja2.FileSystemLoader(widgets_path)
 ])
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 assets = Environment(app)
 sched = Scheduler()
 queues = {}
