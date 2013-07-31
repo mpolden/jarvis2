@@ -97,7 +97,9 @@ def events():
                 break
             yield 'data: %s\n\n' % (data,)
 
-    return Response(consume(), mimetype='text/event-stream')
+    response = Response(consume(), mimetype='text/event-stream')
+    response.headers['X-Accel-Buffering'] = 'no'
+    return response
 
 
 def _is_enabled(name, conf=None):
