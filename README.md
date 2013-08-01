@@ -108,10 +108,10 @@ Configure app config in `/etc/uwsgi/apps-available/jarvis2.ini`:
     workers = 1
     threads = 20
     plugin = python
-    chdir = /path/to/jarvis2
+    chdir = /path/to/jarvis2/app
     home = /path/to/jarvis2/venv
     env = JARVIS_SETTINGS=config.py
-    module = app.main
+    module = main
     callable = app
 
 Enable uwsgi app and start uwsgi:
