@@ -1,8 +1,8 @@
 all: lint test
 
 lint-py:
-	pep8 *.py app/*.py
-	pyflakes *.py app/*.py
+	pep8 *.py app/*.py app/jobs/*.py support/*.py
+	pyflakes *.py app/*.py app/jobs/*.py support/*.py
 
 lint-js:
 	grunt jshint
@@ -13,7 +13,7 @@ test:
 	python app/tests.py
 
 clean:
-	rm -f *.pyc app/*.pyc
+	rm -f *.pyc app/*.pyc app/jobs/*.pyc support/*.pyc
 	rm -fr app/static/.webassets-cache/
 	rm -fr app/static/assets/
 
@@ -47,10 +47,10 @@ release:
 	grunt
 
 widget:
-	python app/create_widget.py $(NAME)
+	python support/create_widget.py $(NAME)
 
 run-job:
-	python app/jobs.py $(NAME)
+	python app/run.py job $(NAME)
 
 google-api-auth:
-	python app/google_api_auth.py
+	python support/google_api_auth.py
