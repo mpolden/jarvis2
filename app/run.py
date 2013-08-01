@@ -17,26 +17,26 @@ def _teardown(signal, frame):
 
 
 def _run_job(name=None):
-    import jobs
     import json
     import sys
     from flask import Flask
+    from jobs import load_jobs
     from pprint import pprint
 
     app = Flask(__name__)
     app.config.from_envvar('JARVIS_SETTINGS')
     conf = app.config['JOBS']
 
-    loaded_jobs = jobs.AbstractJob.load()
+    jobs = load_jobs()
     if name is None:
-        names = ' '.join(loaded_jobs.keys())
+        names = ' '.join(jobs.keys())
         name = raw_input('Name of the job to run [%s]: ' % (names,)).lower()
 
     print_json = name.endswith('.json')
     if print_json:
         name = name.rstrip('.json')
 
-    cls = loaded_jobs.get(name)
+    cls = jobs.get(name)
     if cls is None:
         print 'No such job: %s' % (name,)
         sys.exit(1)

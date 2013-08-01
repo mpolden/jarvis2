@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import jinja2
-import jobs
 import json
 import os
 import Queue
@@ -10,6 +9,7 @@ from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
 from flask import Flask, render_template, Response, request, abort
 from flask.ext.assets import Environment, Bundle
+from jobs import load_jobs
 from random import randint
 
 
@@ -127,7 +127,7 @@ def _inject_template_methods():
 def _configure_jobs():
     conf = app.config['JOBS']
     offset = 0
-    for name, cls in jobs.AbstractJob.load().items():
+    for name, cls in load_jobs().items():
         if not _is_enabled(name, conf):
             print 'Skipping disabled job: %s' % (name,)
             continue

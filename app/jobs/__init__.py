@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import os.path
 from abc import ABCMeta, abstractmethod
-from imp import find_module, load_module
+from importlib import import_module
 from pkgutil import iter_modules
+from os.path import dirname, basename
 
 
 class AbstractJob(object):
@@ -15,10 +15,13 @@ class AbstractJob(object):
 
     @classmethod
     def load(cls):
-        paths = [os.path.dirname(__file__)]
-        for _, name, _ in iter_modules(paths):
-            f, filename, fileinfo = find_module(name, paths)
-            load_module(name, f, filename, fileinfo)
-            f.close()
-        return dict([(c.__name__.lower(), c) for c in
-                     AbstractJob.__subclasses__()])
+        paths = [dirname(__file__)]
+        prefix = '%s.' % (basename(paths[0]),)
+        for _, name, is_pkg in iter_modules(paths, prefix):
+            if not is_pkg:
+                import_module(name)
+        return AbstractJob.__subclasses__()
+
+
+def load_jobs():
+    return dict([(cls.__name__.lower(), cls) for cls in AbstractJob.load()])
