@@ -1,8 +1,7 @@
 all: lint test
 
 lint-py:
-	pep8 *.py app/*.py app/jobs/*.py support/*.py
-	pyflakes *.py app/*.py app/jobs/*.py support/*.py
+	flake8 *.py app/*.py app/jobs/*.py support/*.py
 
 lint-js:
 	grunt jshint
@@ -48,6 +47,12 @@ release:
 
 widget:
 	python support/create_widget.py $(NAME)
+
+debug:
+	python app/run.py debug
+
+run:
+	python app/run.py
 
 run-job:
 	python app/run.py job $(NAME)
