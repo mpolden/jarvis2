@@ -4,7 +4,7 @@ import logging
 import os
 import signal
 import sys
-from app.main import app, queues, sched
+from main import app, queues, sched
 
 
 def _teardown(signal, frame):
