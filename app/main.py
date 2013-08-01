@@ -127,8 +127,7 @@ def _inject_template_methods():
 def _configure_jobs():
     conf = app.config['JOBS']
     offset = 0
-    for cls in jobs.AbstractJob.__subclasses__():
-        name = cls.__name__.lower()
+    for name, cls in jobs.AbstractJob.load().items():
         if not _is_enabled(name, conf):
             print 'Skipping disabled job: %s' % (name,)
             continue
