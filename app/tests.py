@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import jobs
+from jobs import yr, atb, hackernews, nsb, ping, calendar, gmail
 import json
 import os.path
 import unittest
@@ -17,8 +17,8 @@ class Yr(unittest.TestCase):
             self.xml = f.read()
 
     def test_parse(self):
-        yr = jobs.Yr({'interval': None, 'url': None})
-        data = yr._parse(self.xml)
+        y = yr.Yr({'interval': None, 'url': None})
+        data = y._parse(self.xml)
 
         self.assertEqual('Delvis skyet', data['description'])
         self.assertEqual('Trondheim', data['location'])
@@ -38,10 +38,10 @@ class Atb(unittest.TestCase):
             self.json = json.loads(f.read())
 
     def test_parse(self):
-        atb = jobs.Atb({'interval': None, 'url': None})
+        a = atb.Atb({'interval': None, 'url': None})
         now = datetime.now()
-        data = atb._parse(self.json, now=datetime(now.year, now.month, now.day,
-                                                  21, 30, 0, 0))
+        data = a._parse(self.json, now=datetime(now.year, now.month, now.day,
+                                                21, 30, 0, 0))
 
         departures = data['departures']
         self.assertEqual(5, len(departures))
@@ -52,10 +52,10 @@ class Atb(unittest.TestCase):
         self.assertEqual(10, departures[4]['eta'])
 
     def test_parse_gt_or_eq_zero(self):
-        atb = jobs.Atb({'interval': None, 'url': None})
+        a = atb.Atb({'interval': None, 'url': None})
         now = datetime.now()
-        data = atb._parse(self.json, now=datetime(now.year, now.month, now.day,
-                                                  21, 35, 0, 0))
+        data = a._parse(self.json, now=datetime(now.year, now.month, now.day,
+                                                21, 35, 0, 0))
 
         departures = data['departures']
         self.assertEqual(5, len(departures))
@@ -74,7 +74,7 @@ class HackerNews(unittest.TestCase):
                                     'hn.html'))
         with open(html_path, 'r') as f:
             self.html = f.read()
-        self.hn = jobs.HackerNews({'interval': None})
+        self.hn = hackernews.HackerNews({'interval': None})
 
     def test_parse(self):
         data = self.hn._parse(self.html)
@@ -98,8 +98,8 @@ class Nsb(unittest.TestCase):
         with open(os.path.join(test_data, 'nsb2.html')) as f:
             self.html2 = f.read()
 
-        self.nsb = jobs.Nsb({'interval': None, 'from': 'Lerkendal',
-                             'to': 'Rotvoll'})
+        self.nsb = nsb.Nsb({'interval': None, 'from': 'Lerkendal',
+                            'to': 'Rotvoll'})
 
     def test_parse(self):
         data = self.nsb._parse(self.html)
@@ -127,7 +127,7 @@ class Nsb(unittest.TestCase):
 class Ping(unittest.TestCase):
 
     def setUp(self):
-        self.ping = jobs.Ping({'interval': None, 'hosts': None})
+        self.ping = ping.Ping({'interval': None, 'hosts': None})
 
     def test_parse_time(self):
         s = ('PING google.com (173.194.69.139): 56 data bytes\n'
@@ -143,7 +143,7 @@ class Ping(unittest.TestCase):
 class Calendar(unittest.TestCase):
 
     def setUp(self):
-        self.calendar = jobs.Calendar({'interval': None, 'api_key': None})
+        self.calendar = calendar.Calendar({'interval': None, 'api_key': None})
 
     def test_parse_date(self):
         date = datetime(2013, 07, 17)
@@ -223,7 +223,7 @@ class Calendar(unittest.TestCase):
 class Gmail(unittest.TestCase):
 
     def setUp(self):
-        self.gmail = jobs.Gmail({'interval': None, 'email': None,
+        self.gmail = gmail.Gmail({'interval': None, 'email': None,
                                  'password': None, 'folder': None})
 
     def test_parse_count(self):
