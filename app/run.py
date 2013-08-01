@@ -16,10 +16,46 @@ def _teardown(signal, frame):
     raise KeyboardInterrupt
 
 
+def _run_job(name=None):
+    import jobs
+    import json
+    import sys
+    from flask import Flask
+    from pprint import pprint
+
+    app = Flask(__name__)
+    app.config.from_envvar('JARVIS_SETTINGS')
+    conf = app.config['JOBS']
+
+    loaded_jobs = jobs.AbstractJob.load()
+    if name is None:
+        names = ' '.join(loaded_jobs.keys())
+        name = raw_input('Name of the job to run [%s]: ' % (names,)).lower()
+
+    print_json = name.endswith('.json')
+    if print_json:
+        name = name.rstrip('.json')
+
+    cls = loaded_jobs.get(name)
+    if cls is None:
+        print 'No such job: %s' % (name,)
+        sys.exit(1)
+
+    job = cls(conf[name])
+    data = job.get()
+    if print_json:
+        print json.dumps(data, indent=2)
+    else:
+        pprint(data)
+
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == 'debug':
-        logging.basicConfig()
-        app.debug = True
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'debug':
+            logging.basicConfig()
+            app.debug = True
+        elif sys.argv[1] == 'job':
+            _run_job(sys.argv[2] if len(sys.argv) > 2 else None)
+            sys.exit(0)
     signal.signal(signal.SIGINT, _teardown)
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, use_reloader=False, threaded=True)
