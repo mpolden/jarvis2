@@ -28,7 +28,7 @@ def main():
         scope='https://www.googleapis.com/auth/calendar.readonly')
 
     credentials_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                       '.calendar.json'))
+                                       '..', 'app', 'jobs', '.calendar.json'))
     storage = Storage(credentials_file)
     credentials = storage.get()
     if credentials is None or credentials.invalid:

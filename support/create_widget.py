@@ -8,9 +8,11 @@ from jinja2 import Environment, FileSystemLoader
 class WidgetFactory(object):
 
     def __init__(self, name):
-        path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                            'templates', 'widget'))
-        self.env = Environment(loader=FileSystemLoader(path),
+        self.app_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                     '..', 'app'))
+
+        template_path = os.path.join(self.app_path, 'templates', 'widget')
+        self.env = Environment(loader=FileSystemLoader(template_path),
                                keep_trailing_newline=True)
         self.name = name
 
@@ -29,20 +31,18 @@ class WidgetFactory(object):
 
     def create_widget(self):
         contents = self._render_templates()
-        widget_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                  'static', 'widgets',
-                                                  self.name))
-        job_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                'jobs',
-                                                '%s.py' % (self.name,)))
+        widget_dir = os.path.join(self.app_path, 'static', 'widgets',
+                                  self.name)
+        job_file = os.path.join(self.app_path, 'jobs', '%s.py' % (self.name,))
+
         if os.path.isdir(widget_dir):
             print '%s already exists' % (widget_dir,)
             sys.exit(1)
         if os.path.isfile(job_file):
             print '%s already exists' % (job_file,)
             sys.exit(1)
-        os.mkdir(widget_dir)
 
+        os.mkdir(widget_dir)
         for filename in contents:
             if filename.endswith('.py'):
                 file_path = job_file
