@@ -44,11 +44,11 @@ Usage
 After installing dependencies and creating a config file, the app can be started
 by running:
 
-    JARVIS_SETTINGS=config.py ./run.py
+    JARVIS_SETTINGS=config.py ./app/run.py
 
 To start the app in debug mode, use:
 
-    JARVIS_SETTINGS=config.py ./run.py debug
+    JARVIS_SETTINGS=config.py ./app/run.py debug
 
 Run a job standalone and pretty-print output (useful for debugging):
 
