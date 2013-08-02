@@ -122,16 +122,13 @@ Enable uwsgi app and start uwsgi:
 Configure nginx site in `/etc/nginx/sites-available/jarvis2`:
 
     server {
-        location / {
-            try_files $uri @jarvis2;
+        location /static/ {
+            alias /path/to/jarvis2/app/static/;
         }
-        location @jarvis2 {
+        location / {
             include uwsgi_params;
             uwsgi_buffering off;
             uwsgi_pass unix:/tmp/uwsgi.sock;
-        }
-        location /static {
-            alias /path/to/jarvis2/app/static/;
         }
     }
 
