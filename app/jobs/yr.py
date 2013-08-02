@@ -11,24 +11,33 @@ class Yr(AbstractJob):
         self.url = conf['url']
         self.interval = conf['interval']
 
-    def _parse(self, xml):
-        tree = etree.fromstring(xml)
-        tabular = tree.xpath('/weatherdata/forecast/tabular/time[1]').pop()
-        weatherStation = tree.xpath(
-            '/weatherdata/observations/weatherstation[1]').pop()
-        windSpeed = weatherStation.xpath('windSpeed').pop()
+    def _parse_tree(self, tree, tabular_xpath=None):
+        if tabular_xpath is None:
+            tabular = tree.xpath('/weatherdata/forecast/tabular/time[1]').pop()
+            data_root = tree.xpath(
+                '/weatherdata/observations/weatherstation[1]').pop()
+        else:
+            tabular = tree.xpath(tabular_xpath).pop()
+            data_root = tabular
+
+        windSpeed = data_root.xpath('windSpeed').pop()
         return {
             'location': tree.xpath('/weatherdata/location/name').pop().text,
-            'temperature': weatherStation.xpath('temperature').pop().get(
-                'value'),
+            'temperature': data_root.xpath('temperature').pop().get('value'),
             'description': tabular.xpath('symbol').pop().get('name'),
             'wind': {
                 'speed': windSpeed.get('mps'),
                 'description': windSpeed.get('name'),
-                'direction': weatherStation.xpath('windDirection').pop().get(
-                    'name')
+                'direction': data_root.xpath('windDirection').pop().get('name')
             }
         }
+
+    def _parse(self, xml):
+        tree = etree.fromstring(xml)
+        data = self._parse_tree(tree)
+        data.update({'tomorrow': self._parse_tree(
+            tree, '/weatherdata/forecast/tabular/time[3]')})
+        return data
 
     def get(self):
         r = requests.get(self.url)
