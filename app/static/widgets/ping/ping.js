@@ -51,15 +51,12 @@ jarvis.controller('PingCtrl', ['$scope',
 
     $scope.$on('ping', function (ev, body) {
       if (graph === null) {
-        var element = document.querySelector('#chart');
-        if (element !== null) {
-          graph = createGraph(element, body.values);
-          graph.render();
-        }
+        var element = document.querySelector('#ping #chart');
+        graph = createGraph(element, body.values);
       } else {
         graph.series.addData(body.values);
-        graph.render();
       }
+      graph.render();
     });
   }
 ]);
