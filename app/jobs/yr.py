@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import requests
+from datetime import datetime, timedelta
 from jobs import AbstractJob
 from lxml import etree
 
@@ -35,8 +36,10 @@ class Yr(AbstractJob):
     def _parse(self, xml):
         tree = etree.fromstring(xml)
         data = self._parse_tree(tree)
-        data.update({'tomorrow': self._parse_tree(
-            tree, '/weatherdata/forecast/tabular/time[3]')})
+        tomorrow = datetime.now().date() + timedelta(days=1)
+        xpath = ('/weatherdata/forecast/tabular/time[@period=2 and'
+                 ' starts-with(@from, "%s")]') % (tomorrow.strftime('%F'),)
+        data.update({'tomorrow': self._parse_tree(tree, xpath)})
         return data
 
     def get(self):
