@@ -33,13 +33,17 @@ class Yr(AbstractJob):
             }
         }
 
+    def _parse_tree_date(self, tree, date=None):
+        if date is None:
+            date = datetime.now().date() + timedelta(days=1)
+        xpath = ('/weatherdata/forecast/tabular/time[@period=2 and'
+                 ' starts-with(@from, "%s")]') % (date.strftime('%F'),)
+        return self._parse_tree(tree, xpath)
+
     def _parse(self, xml):
         tree = etree.fromstring(xml)
         data = self._parse_tree(tree)
-        tomorrow = datetime.now().date() + timedelta(days=1)
-        xpath = ('/weatherdata/forecast/tabular/time[@period=2 and'
-                 ' starts-with(@from, "%s")]') % (tomorrow.strftime('%F'),)
-        data.update({'tomorrow': self._parse_tree(tree, xpath)})
+        data.update({'tomorrow': self._parse_tree_date(tree)})
         return data
 
     def get(self):

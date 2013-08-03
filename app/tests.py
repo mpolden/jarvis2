@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-from jobs import yr, atb, hackernews, nsb, ping, calendar, gmail
 import json
 import os.path
 import unittest
 from datetime import datetime, timedelta
+from lxml import etree
+from jobs import yr, atb, hackernews, nsb, ping, calendar, gmail
 
 
 class Yr(unittest.TestCase):
@@ -14,11 +16,11 @@ class Yr(unittest.TestCase):
                                    'test_data',
                                    'varsel.xml'))
         with open(xml_path, 'r') as f:
-            self.xml = f.read()
+            self.tree = etree.fromstring(f.read())
 
-    def test_parse(self):
+    def test_parse_tree(self):
         y = yr.Yr({'interval': None, 'url': None})
-        data = y._parse(self.xml)
+        data = y._parse_tree(self.tree)
 
         self.assertEqual('Delvis skyet', data['description'])
         self.assertEqual('Trondheim', data['location'])
@@ -26,6 +28,17 @@ class Yr(unittest.TestCase):
         self.assertEqual('Nord', data['wind']['direction'])
         self.assertEqual('0.7', data['wind']['speed'])
         self.assertEqual('Flau vind', data['wind']['description'])
+
+    def test_parse_tree_date(self):
+        y = yr.Yr({'interval': None, 'url': None})
+        data = y._parse_tree_date(self.tree, datetime(2013, 7, 1))
+
+        self.assertEqual('Regn', data['description'])
+        self.assertEqual('Trondheim', data['location'])
+        self.assertEqual('23', data['temperature'])
+        self.assertEqual(u'Sør', data['wind']['direction'])
+        self.assertEqual('3.6', data['wind']['speed'])
+        self.assertEqual('Lett bris', data['wind']['description'])
 
 
 class Atb(unittest.TestCase):
