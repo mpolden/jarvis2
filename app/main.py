@@ -2,6 +2,7 @@
 
 import jinja2
 import json
+import logging
 import os
 import Queue
 import SocketServer
@@ -13,6 +14,7 @@ from jobs import load_jobs
 from random import randint
 
 
+logging.basicConfig()
 app = Flask(__name__)
 app.config.from_envvar('JARVIS_SETTINGS')
 widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -22,6 +24,7 @@ app.jinja_loader = jinja2.ChoiceLoader([
 ])
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+logger = app.logger
 assets = Environment(app)
 sched = Scheduler()
 queues = {}
@@ -119,7 +122,6 @@ def _inject_template_methods():
     def include_raw(name):
         return jinja2.Markup(app.jinja_loader.get_source(app.jinja_env,
                                                          name)[0])
-
     return dict(is_widget_enabled=_is_enabled, include_raw=include_raw)
 
 
@@ -129,7 +131,7 @@ def _configure_jobs():
     offset = 0
     for name, cls in load_jobs().items():
         if not _is_enabled(name, conf):
-            print 'Skipping disabled job: %s' % (name,)
+            logger.info('Skipping disabled job: %s', name)
             continue
         job = cls(conf[name])
         if app.debug:
@@ -137,8 +139,8 @@ def _configure_jobs():
         else:
             offset += randint(4, 10)
             start_date = datetime.now() + timedelta(seconds=offset)
-        print 'Configuring job: %s [start_date=%s, seconds=%s]' % \
-            (name, start_date, job.interval)
+        logger.info('Configuring job: %s [start_date=%s, seconds=%s]', name,
+                    start_date, job.interval)
         sched.add_interval_job(_run_job,
                                seconds=job.interval,
                                start_date=start_date,

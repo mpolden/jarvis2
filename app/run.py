@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import logging
 import os
 import signal
 import sys
@@ -51,7 +50,6 @@ def _run_job(name=None):
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         if sys.argv[1] == 'debug':
-            logging.basicConfig()
             app.debug = True
         elif sys.argv[1] == 'job':
             _run_job(sys.argv[2] if len(sys.argv) > 2 else None)
