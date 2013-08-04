@@ -5,8 +5,8 @@ import json
 import os.path
 import unittest
 from datetime import datetime, timedelta
-from lxml import etree
 from jobs import yr, atb, hackernews, nsb, ping, calendar, gmail
+from lxml import etree
 
 
 class Yr(unittest.TestCase):

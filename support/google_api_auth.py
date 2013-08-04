@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-import sys
+from __future__ import print_function
 import os.path
-
-from oauth2client.file import Storage
-from oauth2client.client import OAuth2WebServerFlow
-from oauth2client.tools import run
+import sys
 from flask import Flask
+from oauth2client.client import OAuth2WebServerFlow
+from oauth2client.file import Storage
+from oauth2client.tools import run
 
 app = Flask(__name__, instance_relative_config=True,
             instance_path=os.path.abspath(os.path.join(
@@ -36,7 +36,7 @@ def main():
     if credentials is None or credentials.invalid:
         credentials = run(FLOW, storage)
     else:
-        print 'Google API credentials already exist: %s' % (credentials_file,)
+        print('Google API credentials already exist: %s' % (credentials_file,))
 
 
 if __name__ == '__main__':

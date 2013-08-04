@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import os
 import signal
 import sys
@@ -37,13 +38,13 @@ def _run_job(name=None):
 
     cls = jobs.get(name)
     if cls is None:
-        print 'No such job: %s' % (name,)
+        print('No such job: %s' % (name,))
         sys.exit(1)
 
     job = cls(conf[name])
     data = job.get()
     if print_json:
-        print json.dumps(data, indent=2)
+        print(json.dumps(data, indent=2))
     else:
         pprint(data)
 

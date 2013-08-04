@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import os
 import sys
 from jinja2 import Environment, FileSystemLoader
@@ -36,10 +37,10 @@ class WidgetFactory(object):
         job_file = os.path.join(self.app_path, 'jobs', '%s.py' % (self.name,))
 
         if os.path.isdir(widget_dir):
-            print '%s already exists' % (widget_dir,)
+            print('%s already exists' % (widget_dir,))
             sys.exit(1)
         if os.path.isfile(job_file):
-            print '%s already exists' % (job_file,)
+            print('%s already exists' % (job_file,))
             sys.exit(1)
 
         os.mkdir(widget_dir)
@@ -50,7 +51,7 @@ class WidgetFactory(object):
                 file_path = os.path.join(widget_dir, filename)
             with open(file_path, 'w') as f:
                 f.write(contents[filename])
-                print 'Created %s' % (file_path,)
+                print('Created %s' % (file_path,))
 
 
 if __name__ == '__main__':
