@@ -159,8 +159,8 @@ class Calendar(unittest.TestCase):
         self.calendar = calendar.Calendar({'interval': None, 'api_key': None})
 
     def test_parse_date(self):
-        date = datetime(2013, 07, 17)
-        dateTime = datetime(2013, 07, 17, 20)
+        date = datetime(2013, 7, 17)
+        dateTime = datetime(2013, 7, 17, 20)
 
         self.assertEqual(dateTime, self.calendar._parse_date(
             {'dateTime': dateTime.strftime('%Y-%m-%dT%H:%M:%S')}))
