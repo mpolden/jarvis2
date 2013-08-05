@@ -20,7 +20,7 @@ copy-resources:
 	mkdir -p app/static/css/gridster app/static/css/normalize-css \
 		app/static/css/rickshaw app/static/js/angular \
 		app/static/js/angular-truncate app/static/js/app app/static/js/d3 \
-		app/static/js/gridster app/static/js/jquery app/static/js/jquery-knob \
+		app/static/js/gridster app/static/js/jquery \
 		app/static/js/moment app/static/js/rickshaw \
 		app/static/js/gauge.js
 	rsync bower_components/angular/angular.min.js app/static/js/angular/
@@ -32,8 +32,6 @@ copy-resources:
 	rsync bower_components/gridster/dist/jquery.gridster.min.js \
 		app/static/js/gridster/
 	rsync bower_components/jquery/jquery.min.js app/static/js/jquery/
-	rsync bower_components/jquery-knob/js/jquery.knob.js \
-		app/static/js/jquery-knob/
 	rsync bower_components/moment/min/moment.min.js app/static/js/moment/
 	rsync bower_components/normalize-css/normalize.css \
 		app/static/css/normalize-css/
