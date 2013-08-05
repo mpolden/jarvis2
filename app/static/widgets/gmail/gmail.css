@@ -1,12 +1,19 @@
 #gmail {
   height: 100%;
   padding: 5px;
-  background: #8f6048;
+  background: #5a79a5;
   text-align: center;
 }
 #gmail h1 {
-  font-size: 25px;
+  font-size: 20px;
 }
 #gmail p {
   font-size: 15px;
+}
+#gmail .count {
+  font-size: 35px;
+  margin: 0;
+}
+#gmail canvas {
+  height: 130px;
 }

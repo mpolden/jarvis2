@@ -4,18 +4,29 @@ jarvis.controller('GmailCtrl', ['$scope',
   function ($scope) {
     'use strict';
 
+    var gauge = null;
+    var opts = {
+      lines: 8,
+      angle: 0.15,
+      lineWidth: 0.3,
+      pointer: {
+        length: 0.85,
+        strokeWidth: 0.045,
+        color: '#ffffff'
+      },
+      limitMax: 'true',
+      strokeColor: '#9caac6'
+    };
+
     $scope.$on('gmail', function (ev, body) {
-      var meter = $('#gmail #meter');
-      if (!meter.prev().is('canvas')) {
-        meter.knob({
-          min: 0,
-          max: body.count
-        });
+      if (gauge === null) {
+        var target = document.querySelector('#gmail canvas');
+        var textField = document.querySelector('#gmail #unread');
+        gauge = new Gauge(target).setOptions(opts);
+        gauge.setTextField(textField);
       }
-      meter.trigger('configure', {
-        max: body.count
-      });
-      meter.val(body.unread).trigger('change');
+      gauge.maxValue = body.count;
+      gauge.set(body.unread);
       angular.extend($scope, body);
     });
 

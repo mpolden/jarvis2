@@ -98,8 +98,8 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          'app/static/js/jquery-knob/jquery.knob.min.js': [
-            'app/static/js/jquery-knob/jquery.knob.js'
+          'app/static/js/gauge.js/gauge.min.js': [
+            'bower_components/gauge.js/dist/gauge.js'
           ]
         }
       }
