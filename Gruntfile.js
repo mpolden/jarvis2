@@ -71,6 +71,7 @@ module.exports = function (grunt) {
       scripts: {
         files: [
           'app/static/js/app/*.js',
+          'app/static/css/app/*.less',
           'app/static/widgets/*/*.js',
           'app/static/widgets/*/*.less'
         ],
