@@ -21,7 +21,8 @@ copy-resources:
 		app/static/css/rickshaw app/static/js/angular \
 		app/static/js/angular-truncate app/static/js/app app/static/js/d3 \
 		app/static/js/gridster app/static/js/jquery app/static/js/jquery-knob \
-		app/static/js/moment app/static/js/rickshaw
+		app/static/js/moment app/static/js/rickshaw \
+		app/static/js/gauge.js
 	rsync bower_components/angular/angular.min.js app/static/js/angular/
 	rsync bower_components/angular-truncate/dist/angular-truncate.min.js \
 		app/static/js/angular-truncate/
