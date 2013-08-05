@@ -1,8 +1,7 @@
 <div class="gridster" ng-controller="EventCtrl">
   <ul>
-    <li data-row="1" data-col="1" data-sizex="{{ x }}" data-sizey="{{ y }}"
-      ng-controller="{{ widget | capitalize }}Ctrl">
-      {{ include_raw('%s/%s.html' % ((widget.lower(),) * 2)) }}
+    <li data-row="1" data-col="1" data-sizex="{{ x }}" data-sizey="{{ y }}">
+      {{ include_raw('{widget}/{widget}.html'.format(widget=widget)) }}
     </li>
   </ul>
 </div>

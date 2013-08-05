@@ -1,68 +1,57 @@
 <div class="gridster" ng-controller="EventCtrl">
   <ul>
     {% if is_widget_enabled('yr') %}
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2"
-      ng-controller="YrCtrl">
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
       {{ include_raw('yr/yr.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('time') %}
-    <li data-row="1" data-col="2" data-sizex="2" data-sizey="2"
-      ng-controller="TimeCtrl">
+    <li data-row="1" data-col="2" data-sizex="2" data-sizey="2">
       {{ include_raw('time/time.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('atb') %}
-    <li data-row="1" data-col="3" data-sizex="2" data-sizey="2"
-      ng-controller="AtbCtrl">
+    <li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
       {{ include_raw('atb/atb.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('hackernews') %}
-    <li data-row="1" data-col="4" data-sizex="2" data-sizey="2"
-      ng-controller="HackernewsCtrl">
+    <li data-row="1" data-col="4" data-sizex="2" data-sizey="2">
       {{ include_raw('hackernews/hackernews.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('sonos') %}
-    <li data-row="2" data-col="1" data-sizex="2" data-sizey="2"
-      ng-controller="SonosCtrl">
+    <li data-row="2" data-col="1" data-sizex="2" data-sizey="2">
       {{ include_raw('sonos/sonos.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('calendar') %}
-    <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"
-      ng-controller="CalendarCtrl">
+    <li data-row="2" data-col="2" data-sizex="2" data-sizey="2">
       {{ include_raw('calendar/calendar.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('uptime') %}
-    <li data-row="2" data-col="3" data-sizex="2" data-sizey="2"
-      ng-controller="UptimeCtrl">
+    <li data-row="2" data-col="3" data-sizex="2" data-sizey="2">
       {{ include_raw('uptime/uptime.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('plex') %}
-    <li data-row="2" data-col="4" data-sizex="2" data-sizey="2"
-      ng-controller="PlexCtrl">
+    <li data-row="2" data-col="4" data-sizex="2" data-sizey="2">
       {{ include_raw('plex/plex.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('nsb') %}
-    <li data-row="3" data-col="1" data-sizex="2" data-sizey="2"
-      ng-controller="NsbCtrl">
+    <li data-row="3" data-col="1" data-sizex="2" data-sizey="2">
       {{ include_raw('nsb/nsb.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('ping') %}
-    <li data-row="3" data-col="2" data-sizex="4" data-sizey="2"
-      ng-controller="PingCtrl">
+    <li data-row="3" data-col="2" data-sizex="4" data-sizey="2">
       {{ include_raw('ping/ping.html') }}
     </li>
     {% endif %}
     {% if is_widget_enabled('gmail') %}
-    <li data-row="3" data-col="4" data-sizex="2" data-sizey="2"
-      ng-controller="GmailCtrl">
+    <li data-row="3" data-col="4" data-sizex="2" data-sizey="2">
       {{ include_raw('gmail/gmail.html') }}
     </li>
     {% endif %}
