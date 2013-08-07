@@ -49,8 +49,8 @@ def _configure_bundles():
     ]
     css_vendor = [
         'css/normalize-css/normalize.css',
-        'css/gridster/jquery.gridster.css',
-        'css/rickshaw/rickshaw.css'
+        'css/gridster/jquery.gridster.min.css',
+        'css/rickshaw/rickshaw.min.css'
     ]
     css = [
         'css/app/styles.css'
