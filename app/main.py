@@ -36,12 +36,12 @@ def _configure_bundles():
     js_vendor = [
         'js/jquery/jquery.min.js',
         'js/gridster/jquery.gridster.min.js',
-        'js/jquery-knob/jquery.knob.min.js',
         'js/angular/angular.min.js',
         'js/angular-truncate/angular-truncate.min.js',
         'js/d3/d3.min.js',
         'js/rickshaw/rickshaw.min.js',
-        'js/moment/moment.min.js'
+        'js/moment/moment.min.js',
+        'js/gauge.js/gauge.min.js'
     ]
     js = [
         'js/app/gridster.js',
