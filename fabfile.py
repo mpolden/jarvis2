@@ -30,9 +30,9 @@ def restart_client():
 
 
 @task(default=True)
-def deploy(update_dependencies=False):
+def deploy(update_deps=False):
     pull_code()
-    if update_dependencies:
+    if update_deps:
         update_dependencies()
     restart_server()
     restart_client()
