@@ -2,6 +2,7 @@
 
 from fabric.api import env, run, sudo, task
 from fabric.context_managers import cd, prefix
+from fabric.contrib.project import rsync_project
 
 env.use_ssh_config = True
 home = '~/jarvis2'
@@ -14,9 +15,16 @@ def pull_code():
 
 
 @task
+def push_code():
+    rsync_project(local_dir='.', remote_dir=home, exclude=('.git', '.vagrant'),
+                  extra_opts='--filter=":- .gitignore"')
+
+
+@task
 def update_dependencies():
     with prefix('workon jarvis2'):
-        run('pip install --use-mirrors -r %s/requirements.txt' % (home,))
+        run(('pip install --quiet --use-mirrors --upgrade'
+             ' -r {home}/requirements.txt').format(home=home))
 
 
 @task
@@ -31,7 +39,7 @@ def restart_client():
 
 @task(default=True)
 def deploy(update_deps=False):
-    pull_code()
+    push_code()
     if update_deps:
         update_dependencies()
     restart_server()
