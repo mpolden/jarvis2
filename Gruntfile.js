@@ -107,5 +107,5 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('hint', 'jshint');
-  grunt.registerTask('default', ['jsbeautifier', 'jshint', 'less', 'uglify']);
+  grunt.registerTask('default', ['jsbeautifier', 'jshint', 'less']);
 };
