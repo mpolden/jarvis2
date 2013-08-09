@@ -11,17 +11,17 @@ $script = <<SCRIPT
 
   # Install packages
   add-apt-repository -y ppa:chris-lea/node.js
-  apt-get -y update
-  apt-get -y install git make python-pip python-dev libxml2-dev libxslt1-dev \
-          nodejs zlib1g-dev
+  apt-get -y --quiet update
+  apt-get -y --quiet install git make python-pip python-dev libxml2-dev \
+          libxslt1-dev nodejs zlib1g-dev
 
   # Install npm packages
   npm install --silent -g bower grunt-cli
   cd /vagrant && npm install --silent
 
   # Install pip packages
-  pip install --use-mirrors -r /vagrant/requirements.txt
-  pip install --use-mirrors -r /vagrant/dev-requirements.txt
+  pip install --quiet --use-mirrors --upgrade -r /vagrant/requirements.txt \
+          -r /vagrant/dev-requirements.txt
 SCRIPT
 
 Vagrant.configure("2") do |config|
