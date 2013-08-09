@@ -4,6 +4,7 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 .gridster {
+  width: 1200px;
   margin: 0 auto;
 }
 .gridster ul {
