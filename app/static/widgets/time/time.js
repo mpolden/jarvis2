@@ -4,31 +4,13 @@ jarvis.controller('TimeCtrl', ['$scope',
   function ($scope) {
     'use strict';
 
-    var fmtTime = function (n) {
-      return n < 10 ? '0' + n : n;
-    };
-
-    var getDayName = function (date) {
-      return ['s\u00f8ndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag',
-        'l\u00f8rdag'][date.getDay()];
-    };
-
-    var getMonthName = function (date) {
-      return ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli',
-        'august', 'september', 'oktober', 'november',
-        'desember'][date.getMonth()];
-    };
-
     var setTime = function () {
-      var today = new Date(),
-        h = fmtTime(today.getHours()),
-        m = fmtTime(today.getMinutes()),
-        y = today.getFullYear();
+      var now = moment().lang('nb');
 
       $scope.$apply(function () {
-        $scope.time = h + ':' + m;
-        $scope.date = today.getDate() + '. ' + getMonthName(today) + ' ' + y;
-        $scope.day = getDayName(today);
+        $scope.time = now.format('HH:mm');
+        $scope.date = now.format('D. MMMM YYYY');
+        $scope.day = now.format('dddd');
       });
     };
 
