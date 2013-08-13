@@ -22,7 +22,7 @@ class Ping(AbstractJob):
         return self._parse_time(p.communicate()[0])
 
     def get(self):
-        data = {'values': {}}
+        values = {}
         for label, host in self.hosts:
-            data['values'][label] = self._get_latency(host)
-        return data
+            values[label] = self._get_latency(host)
+        return {'values': values}
