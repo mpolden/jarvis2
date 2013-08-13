@@ -41,6 +41,7 @@ def _configure_bundles():
         'js/d3/d3.min.js',
         'js/rickshaw/rickshaw.min.js',
         'js/moment/moment.min.js',
+        'js/moment/nb.js',
         'js/gauge.js/gauge.min.js'
     ]
     js = [
