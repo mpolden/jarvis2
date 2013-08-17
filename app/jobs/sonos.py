@@ -12,11 +12,15 @@ class Sonos(AbstractJob):
 
     def get(self):
         try:
+            zone_name = self.sonos.get_speaker_info()['zone_name']
             current_track = self.sonos.get_current_track_info()
             next_track = self.sonos.get_queue(
                 int(current_track['playlist_position']), 1).pop()
+            state = self.sonos.get_current_transport_info()[
+                'current_transport_state']
             return {
-                'room': self.sonos.get_speaker_info()['zone_name'],
+                'room': zone_name,
+                'state': state,
                 'current': current_track,
                 'next': next_track
             }

@@ -1,6 +1,7 @@
 <div id="sonos" ng-controller="SonosCtrl">
-  <p class="fade">Spilles av i {{ room | lowercase }}:</p>
+  <p class="fade">{{ state }}:</p>
   <h1>{{ current.artist }} &mdash; {{ current.title }}</h1>
+  <p class="fade duration">{{ current.position }} / {{ current.duration }}</p>
   <p class="fade next">Neste i kø:</p>
   <p>{{ next.artist }} &mdash; {{ next.title }}</p>
   <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
