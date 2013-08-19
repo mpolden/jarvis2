@@ -95,3 +95,15 @@ JOBS['avinor'] = {
     'from': 'TRD',
     'to': 'OSL'
 }
+
+JOBS['stats'] = {
+    'enabled': True,
+    'interval': 600,
+    # Nickname on #tihlde @ EFnet
+    'nick': 'nick',
+    # Max gauge limit
+    'max': {
+        'coffee': 8,
+        'beer': 10
+    }
+}

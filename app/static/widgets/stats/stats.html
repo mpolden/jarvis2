@@ -1,0 +1,18 @@
+<div id="stats" ng-controller="StatsCtrl">
+    <div ng-show="stats">
+        <h1>Dagens forbruk</h1>
+        <p class="values">
+            <span class="fade">Kaffe: </span>
+            <span id="coffee-count">0</span>
+            <span class="fade"> / {{ max.coffee }}</span>
+        </p>
+        <canvas id="coffee"></canvas>
+         <p class="values">
+            <span class="fade">Øl: </span>
+            <span id="beer-count">0</span>
+            <span class="fade"> / {{ max.beer }}</span>
+        </p>
+        <canvas id="beer"></canvas>
+        <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
+    </div>
+</div>
