@@ -2,8 +2,8 @@
   <p class="fade">Neste fly (<em>{{ next.flight_id }}</em>) fra <em>{{ from }}
     </em> til <em>{{ to }}</em> går
   </p>
-  <h1>{{ next.time }}</h1>
-  <h2>{{ next.day }}. {{ next.month }}</h2>
+  <h1>{{ next.date.format('HH:mm') }}</h1>
+  <h2>{{ next.date.format('dddd, D. MMMM') }}</h2>
   <table>
     <tr class="fade">
       <th>Flight</th>
@@ -11,8 +11,7 @@
     </tr>
     <tr ng-repeat="flight in flights">
       <td>{{ flight.flight_id }}</td>
-      <td>{{ flight.day }}. {{ flight.monthShort }} {{ flight.time }}
-      </td>
+      <td>{{ flight.date.format('D. MMM HH:mm') }}</td>
     </tr>
   </table>
   <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
