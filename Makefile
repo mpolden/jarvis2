@@ -33,6 +33,7 @@ copy-resources:
 	cp -p bower_components/angular-truncate/dist/angular-truncate.min.js \
 		app/static/js/angular-truncate/
 	cp -p bower_components/d3/d3.min.js app/static/js/d3/
+	cp -p bower_components/gauge.js/dist/gauge.min.js app/static/js/gauge.js/
 	cp -p bower_components/gridster/dist/jquery.gridster.min.css \
 		app/static/css/gridster/
 	cp -p bower_components/gridster/dist/jquery.gridster.min.js \

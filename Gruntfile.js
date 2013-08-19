@@ -94,15 +94,6 @@ module.exports = function (grunt) {
       development: {
         files: less_files
       }
-    },
-    uglify: {
-      dist: {
-        files: {
-          'app/static/js/gauge.js/gauge.min.js': [
-            'bower_components/gauge.js/dist/gauge.js'
-          ]
-        }
-      }
     }
   });
 
