@@ -1,8 +1,9 @@
 *.pyc
-app/static/assets/
+.calendar.json
+.vagrant/
 app/static/.webassets-cache/
-node_modules/
+app/static/assets/
 bower_components/
 config.py
 config_*.py
-.calendar.json
+node_modules/
