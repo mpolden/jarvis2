@@ -14,7 +14,7 @@ jarvis.controller('GmailCtrl', ['$scope',
         strokeWidth: 0.045,
         color: '#ffffff'
       },
-      limitMax: 'true',
+      limitMax: true,
       strokeColor: '#9caac6'
     };
 
