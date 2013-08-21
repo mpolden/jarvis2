@@ -143,6 +143,7 @@ def _configure_jobs():
         logger.info('Configuring job: %s [start_date=%s, seconds=%s]', name,
                     start_date, job.interval)
         sched.add_interval_job(_run_job,
+                               name=name,
                                seconds=job.interval,
                                start_date=start_date,
                                kwargs={'widget': name, 'job': job})
