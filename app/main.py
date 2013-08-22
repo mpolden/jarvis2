@@ -78,6 +78,7 @@ def _configure_bundles():
                                           filters='cssmin',
                                           output='assets/styles.min.css'))
 
+
 @app.route('/w/<widget>')
 @app.route('/widget/<widget>')
 def widget(widget):

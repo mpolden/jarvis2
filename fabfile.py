@@ -16,7 +16,7 @@ def pull_code():
 
 @task
 def push_code():
-    rsync_project(local_dir='.', remote_dir=home, exclude='.git',
+    rsync_project(local_dir='.', remote_dir=home, exclude='.git', delete=True,
                   extra_opts='--checksum --filter=":- .gitignore"')
 
 

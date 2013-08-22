@@ -45,4 +45,3 @@ class Plex(AbstractJob):
             return {'movies': movies, 'shows': shows}
         except requests.exceptions.ConnectionError:
             return {}
-
