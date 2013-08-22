@@ -35,10 +35,14 @@ class Plex(AbstractJob):
         return shows
 
     def get(self):
-        r = requests.get(self.movies)
-        movies = self._parse_movies(r.content)
+        try:
+            r = requests.get(self.movies)
+            movies = self._parse_movies(r.content)
 
-        r = requests.get(self.shows)
-        shows = self._parse_shows(r.content)
+            r = requests.get(self.shows)
+            shows = self._parse_shows(r.content)
 
-        return {'movies': movies, 'shows': shows}
+            return {'movies': movies, 'shows': shows}
+        except requests.exceptions.ConnectionError:
+            return {}
+
