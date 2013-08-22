@@ -12,7 +12,8 @@ class WidgetFactory(object):
         self.app_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                      '..', 'app'))
 
-        template_path = os.path.join(self.app_path, 'templates', 'widget')
+        template_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                     'templates', 'widget'))
         self.env = Environment(loader=FileSystemLoader(template_path),
                                keep_trailing_newline=True)
         self.name = name
