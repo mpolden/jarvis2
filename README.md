@@ -48,7 +48,7 @@ by running:
 
 To start the app in debug mode, use:
 
-    JARVIS_SETTINGS=config.py ./app/run.py debug
+    JARVIS_SETTINGS=config.py make debug
 
 Run a job standalone and pretty-print output (useful for debugging):
 
@@ -61,6 +61,10 @@ Create Google API credentials (required for Calendar widget):
 Create a new widget:
 
     make widget
+
+Create a new dashboard:
+
+    make dashboard
 
 Development environment
 =======================

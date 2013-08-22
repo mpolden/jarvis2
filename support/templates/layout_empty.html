@@ -1,0 +1,26 @@
+<div class="gridster" ng-controller="EventCtrl" ng-cloak>
+  <!-- the following div can be removed -->
+  <div style="padding-top: 5px">
+    <h1>Oh hai!</h1>
+    <p>
+      Your dashboard template has been created. Here's some example markup for
+      the <span style="color: #e7ad52">yr</span> widget:
+      <code style="color: #90ca77">
+        <pre>
+{% raw %}
+{% if is_widget_enabled('yr') %}
+&lt;li data-row="1" data-col="1" data-sizex="2" data-sizey="2"&gt;
+  {<span></span>{ include_raw('yr/yr.html') }<span></span>}
+&lt;/li&gt;
+{% endif %}
+{% endraw %}
+      </pre></code>
+      See <code style="color: #e7ad52">app/templates/layout.html</code>
+      for more examples.
+    </p>
+  </div>
+  <!-- end -->
+  <ul>
+    <!-- put widget elements here -->
+  </ul>
+</div>

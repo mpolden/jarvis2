@@ -54,6 +54,9 @@ release:
 widget:
 	python support/create_widget.py $(NAME)
 
+dashboard:
+	python support/create_dashboard.py $(NAME)
+
 debug:
 	python app/run.py debug
 
