@@ -4,7 +4,7 @@
   <h2>{{ today.summary }}</h2>
   <table>
     <tr ng-repeat="event in events">
-      <td class="fade summary">{{ event.summary | characters:24 }}</td>
+      <td class="fade summary">{{ event.summary | characters:20 }}</td>
       <td class="start">{{ event.start }}</td>
     </tr>
   </table>
