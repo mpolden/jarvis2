@@ -97,7 +97,7 @@ JOBS['avinor'] = {
 }
 
 JOBS['stats'] = {
-    'enabled': True,
+    'enabled': False,
     'interval': 600,
     # Nickname on #tihlde @ EFnet
     'nick': 'nick',
