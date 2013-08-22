@@ -11,5 +11,36 @@
     "rickshaw": "~1.4.1",
     "moment": "~2.1.0",
     "gauge.js": "gh-pages"
+  },
+  "exportsOverride": {
+    "jquery": {
+      "js": "jquery.min.js"
+    },
+    "gridster": {
+      "js": "dist/jquery.gridster.min.js",
+      "css": "dist/jquery.gridster.min.css"
+    },
+    "normalize-css": {
+      "css": "normalize.css"
+    },
+    "angular": {
+      "js": "angular.min.js"
+    },
+    "angular-truncate": {
+      "js": "dist/angular-truncate.min.js"
+    },
+    "d3": {
+      "js": "d3.min.js"
+    },
+    "rickshaw": {
+      "js": "rickshaw.min.js",
+      "css": "rickshaw.min.css"
+    },
+    "moment": {
+      "js": ["min/moment.min.js", "min/lang/nb.js"]
+    },
+    "gauge.js": {
+      "js": "dist/gauge.min.js"
+    }
   }
 }
