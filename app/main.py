@@ -10,6 +10,7 @@ from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
 from flask import Flask, render_template, Response, request, abort
 from flask.ext.assets import Environment, Bundle
+from flask.templating import TemplateNotFound
 from jobs import load_jobs
 from random import randint
 
@@ -77,17 +78,27 @@ def _configure_bundles():
                                           filters='cssmin',
                                           output='assets/styles.min.css'))
 
+@app.route('/w/<widget>')
+@app.route('/widget/<widget>')
+def widget(widget):
+    if not _is_enabled(widget):
+        abort(404)
+    x = request.args.get('x', 2)
+    y = request.args.get('y', 2)
+    return render_template('index.html', layout='layout_single.html',
+                           widget=widget, x=x, y=y)
+
 
 @app.route('/')
-@app.route('/<widget>')
-def index(widget=None):
-    if widget is not None:
-        if not _is_enabled(widget):
+@app.route('/d/<layout>')
+@app.route('/dashboard/<layout>')
+def dashboard(layout=None):
+    if layout is not None:
+        try:
+            return render_template('index.html',
+                                   layout='layouts/{0}.html'.format(layout))
+        except TemplateNotFound:
             abort(404)
-        x = request.args.get('x', 2)
-        y = request.args.get('y', 2)
-        return render_template('index.html', layout='layout_single.html',
-                               widget=widget, x=x, y=y)
     return render_template('index.html')
 
 

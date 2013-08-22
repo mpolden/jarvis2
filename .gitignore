@@ -3,6 +3,7 @@
 .vagrant/
 app/static/.webassets-cache/
 app/static/assets/
+app/templates/layouts/
 bower_components/
 config.py
 config_*.py
