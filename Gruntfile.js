@@ -84,7 +84,11 @@ module.exports = function (grunt) {
           'app/static/widgets/*/*.js',
           'app/static/widgets/*/*.less'
         ],
-        tasks: ['jshint', 'less']
+        tasks: ['jshint', 'less'],
+        options: {
+          livereload: true,
+          spawn: false
+        }
       }
     },
     jsbeautifier: {
