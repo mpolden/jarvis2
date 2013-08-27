@@ -2,14 +2,14 @@
   <p class="fade">Plex</p>
   <table>
     <tr ng-repeat="show in shows">
-      <td class="title">{{ show.name }}</td>
+      <td class="title">{{ show.name | characters:24 }}</td>
       <td class="year">{{ show.season }}x{{ show.episode }}</td>
     </tr>
   </table>
   <hr>
   <table>
     <tr ng-repeat="movie in movies">
-      <td class="title">{{ movie.title }}</td>
+      <td class="title">{{ movie.title | characters:24 }}</td>
       <td class="year">({{ movie.year }})</td>
     </tr>
   </table>
