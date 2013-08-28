@@ -167,7 +167,6 @@ def _run_job(widget, job):
     body = job.get()
     if not body:
         return
-    body['updated_at'] = datetime.now().strftime('%H:%M')
     json_data = json.dumps({
         'widget': widget,
         'body': body
