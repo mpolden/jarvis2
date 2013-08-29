@@ -1,12 +1,12 @@
 <div id="sonos" ng-controller="SonosCtrl">
   <p class="fade">{{ state }}<span ng-show="current != null">:</span></p>
   <div ng-show="current != null">
-    <h1>{{ current.artist }} &mdash; {{ current.title }}</h1>
+    <h1>{{ current.artist | characters:14 }} &mdash; {{ current.title | characters:20 }}</h1>
     <p class="fade duration">{{ current.position }} / {{ current.duration }}</p>
   </div>
   <div ng-show="next != null">
     <p class="fade next">Neste i kø:</p>
-    <p>{{ next.artist }} &mdash; {{ next.title }}</p>
+    <p>{{ next.artist | characters:20 }} &mdash; {{ next.title | characters:20 }} </p>
   </div>
   <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
 </div>
