@@ -7,7 +7,7 @@
     "normalize-css": "~2.1.2",
     "angular": "~1.0.7",
     "angular-truncate": "latest",
-    "d3": "~3.2.8",
+    "d3": "~3.3.2",
     "rickshaw": "~1.4.1",
     "moment": "~2.1.0",
     "gauge.js": "gh-pages"
