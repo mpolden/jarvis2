@@ -99,8 +99,10 @@ module.exports = function (grunt) {
         'app/static/widgets/*/*.js'
       ],
       options: {
-        indent_size: 2,
-        jslint_happy: true
+        js: {
+          indent_size: 2,
+          jslint_happy: true
+        }
       }
     },
     less: {
