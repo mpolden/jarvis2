@@ -4,7 +4,6 @@ module.exports = function (grunt) {
 
   'use strict';
 
-  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -21,13 +20,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    bower: {
-      install: {
-        options: {
-          targetDir: './app/static'
-        }
-      }
-    },
     jshint: {
       options: {
         bitwise: false,
