@@ -55,8 +55,8 @@ module.exports = function (grunt) {
         maxcomplexity: 5,
         maxlen: 80
       },
-      uses_defaults: 'Gruntfile.js',
-      with_overrides: {
+      gruntfile: 'Gruntfile.js',
+      src: {
         options: {
           browser: true,
           globals: {
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
       }
     },
     jsbeautifier: {
-      files: [
+      all: [
         'Gruntfile.js',
         'app/static/js/app/*.js',
         'app/static/widgets/*/*.js'
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
       }
     },
     less: {
-      development: {
+      src: {
         files: less_files
       }
     }
