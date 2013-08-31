@@ -23,7 +23,7 @@ def push_code():
 @task
 def update_dependencies():
     with prefix('workon jarvis2'):
-        run(('pip install --quiet --use-mirrors --upgrade'
+        run(('pip install --quiet --upgrade'
              ' -r {home}/requirements.txt').format(home=home))
 
 
