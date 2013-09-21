@@ -1,8 +1,8 @@
 bpython==0.12
-Fabric==1.7.0
+Fabric==1.8.0
 flake8==2.0
 mccabe==0.2.1
-paramiko==1.11.0
+paramiko==1.11.1
 pep8==1.4.6
 pip-tools==0.3.4
 pycrypto==2.6
