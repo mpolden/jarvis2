@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import json
 import os.path
 import unittest
 from datetime import datetime, timedelta
-from jobs import yr, atb, hackernews, nsb, ping, calendar, gmail
+from jobs import yr, hackernews, nsb, ping, calendar, gmail
 from lxml import etree
 
 
@@ -39,44 +38,6 @@ class Yr(unittest.TestCase):
         self.assertEqual(u'Sør', data['wind']['direction'])
         self.assertEqual('3.6', data['wind']['speed'])
         self.assertEqual('Lett bris', data['wind']['description'])
-
-
-class Atb(unittest.TestCase):
-
-    def setUp(self):
-        json_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                    'test_data',
-                                    'atb.json'))
-        with open(json_path, 'r') as f:
-            self.json = json.loads(f.read())
-
-    def test_parse(self):
-        a = atb.Atb({'interval': None, 'url': None})
-        now = datetime.now()
-        data = a._parse(self.json, now=datetime(now.year, now.month, now.day,
-                                                21, 30, 0, 0))
-
-        departures = data['departures']
-        self.assertEqual(5, len(departures))
-        self.assertEqual(5, departures[0]['eta'])
-        self.assertEqual(5, departures[1]['eta'])
-        self.assertEqual(5, departures[2]['eta'])
-        self.assertEqual(8, departures[3]['eta'])
-        self.assertEqual(10, departures[4]['eta'])
-
-    def test_parse_gt_or_eq_zero(self):
-        a = atb.Atb({'interval': None, 'url': None})
-        now = datetime.now()
-        data = a._parse(self.json, now=datetime(now.year, now.month, now.day,
-                                                21, 35, 0, 0))
-
-        departures = data['departures']
-        self.assertEqual(5, len(departures))
-        self.assertEqual(0, departures[0]['eta'])
-        self.assertEqual(0, departures[1]['eta'])
-        self.assertEqual(0, departures[2]['eta'])
-        self.assertEqual(3, departures[3]['eta'])
-        self.assertEqual(5, departures[4]['eta'])
 
 
 class HackerNews(unittest.TestCase):

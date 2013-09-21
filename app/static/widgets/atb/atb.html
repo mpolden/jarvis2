@@ -1,11 +1,11 @@
 <div id="atb" ng-controller="AtbCtrl">
   <p class="fade">Buss {{ next.line }} til {{ next.destination }} går</p>
-  <h1>{{ next.hour }}:{{ next.minute }}</h1>
-  <h2>{{ next.eta }}</h2>
+  <h1>{{ next.departureTime.format('HH:mm') }}</h1>
+  <h2>{{ next.departureTime.lang('nb').fromNow() }}</h2>
   <table>
     <tr ng-repeat="departure in upcoming">
       <td class="destination fade">{{ departure.line }} {{ departure.destination }}</td>
-      <td class="time">{{ departure.hour }}:{{ departure.minute }}</td>
+      <td class="time">{{ departure.departureTime.format('HH:mm') }}</td>
     </tr>
   </table>
   <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
