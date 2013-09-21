@@ -35,44 +35,14 @@ class Calendar(AbstractJob):
             return None
         return dateutil.parser.parse(d)
 
-    def get_current_event(self, items):
-        if len(items) == 0:
-            return None
-
-        event = None
-        for item in items:
-            date = self._parse_date(item['start'])
-            if date is None:
-                continue
-            today = date.now().date()
-            if date.date() == today:
-                event = (item, date)
-                break
-            elif date.date() < today:
-                event = (item, date)
-
-        if event is None:
-            return None
-
-        return {
-            'id': event[0]['id'],
-            'summary': event[0]['summary'],
-            'start': event[1].strftime('%H:%M')
-        }
-
-    def get_events(self, items, today):
-        if len(items) == 0:
-            return None
-
+    def _parse(self, items):
         events = []
         for item in items:
-            if today is not None and today['id'] == item['id']:
-                continue
             date = self._parse_date(item['start'])
             events.append({
                 'id': item['id'],
                 'summary': item['summary'],
-                'start': date.strftime('%d.%m %H:%M')
+                'date': date.strftime('%Y-%m-%d %H:%M:%S')
             })
         return events
 
@@ -89,10 +59,4 @@ class Calendar(AbstractJob):
         except BadStatusLine:
             return {}
 
-        items = result['items']
-        today = self.get_current_event(items)
-        events = self.get_events(items, today)
-        return {
-            'today': today,
-            'events': events
-        }
+        return {'events': self._parse(result['items'])}

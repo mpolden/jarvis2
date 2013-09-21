@@ -3,7 +3,7 @@
 
 import os.path
 import unittest
-from datetime import datetime, timedelta
+from datetime import datetime
 from jobs import yr, hackernews, nsb, ping, calendar, gmail
 from lxml import etree
 
@@ -130,68 +130,6 @@ class Calendar(unittest.TestCase):
             {'date': date.strftime('%Y-%m-%d')}))
 
         self.assertEqual(None, self.calendar._parse_date({}))
-
-    def test_get_current_event_today(self):
-        now = datetime.now()
-        date1 = now + timedelta(days=1)
-        date2 = now + timedelta(days=5)
-        date3 = now + timedelta(days=7)
-        items = [
-            {'id': 1, 'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
-             'summary': 'Event 1'},
-            {'id': 2, 'start': {'date': date1.strftime('%Y-%m-%d')},
-             'summary': 'Event 2'},
-            {'id': 3, 'start': {'date': date2.strftime('%Y-%m-%d')},
-             'summary': 'Event 3'},
-            {'id': 4, 'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
-             'summary': 'Event 4'}
-        ]
-        event = self.calendar.get_current_event(items)
-
-        self.assertEqual(None, self.calendar.get_current_event([]))
-        self.assertEqual(now.strftime('%H:%M'), event['start'])
-        self.assertEqual('Event 1', event['summary'])
-
-    def test_get_current_event_closest_today(self):
-        now = datetime.now()
-        date1 = now - timedelta(days=10)
-        date2 = now - timedelta(days=7)
-        date3 = now - timedelta(days=5)
-        date4 = now - timedelta(days=1)
-        items = [
-            {'id': 1, 'start': {'date': date1.strftime('%Y-%m-%d')},
-             'summary': 'Event 1'},
-            {'id': 2,
-             'start': {'dateTime': date2.strftime('%Y-%m-%dT%H:%M:%S')},
-             'summary': 'Event 2'},
-            {'id': 3, 'start': {'date': date3.strftime('%Y-%m-%d')},
-             'summary': 'Event 3'},
-            {'id': 4, 'start': {'date': date4.strftime('%Y-%m-%dT%H:%M:%S')},
-             'summary': 'Event 4'}
-        ]
-        event = self.calendar.get_current_event(items)
-
-        self.assertEqual(date1.strftime('%H:%M'), event['start'])
-        self.assertEqual('Event 4', event['summary'])
-
-    def test_get_events(self):
-        now = datetime.now()
-        date1 = now + timedelta(days=1)
-        date2 = now + timedelta(days=5)
-        date3 = now + timedelta(days=7)
-        items = [
-            {'id': 1, 'start': {'dateTime': now.strftime('%Y-%m-%dT%H:%M:%S')},
-             'summary': 'Event 1'},
-            {'id': 2, 'start': {'date': date1.strftime('%Y-%m-%d')},
-             'summary': 'Event 2'},
-            {'id': 3, 'start': {'date': date2.strftime('%Y-%m-%d')},
-             'summary': 'Event 3'},
-            {'id': 4, 'start': {'date': date3.strftime('%Y-%m-%dT%H:%M:%S')},
-             'summary': 'Event 4'}
-        ]
-        self.assertEqual(None, self.calendar.get_events([], None))
-        self.assertEqual(3, len(self.calendar.get_events(items, items[0])))
-        self.assertEqual(4, len(self.calendar.get_events(items, None)))
 
 
 class Gmail(unittest.TestCase):

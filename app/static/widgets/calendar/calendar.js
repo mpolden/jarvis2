@@ -5,14 +5,18 @@ jarvis.controller('CalendarCtrl', ['$scope',
     'use strict';
 
     $scope.$on('calendar', function (ev, body) {
-      if (body.today === null) {
-        body.today = {
-          summary: 'Ingen hendelser',
-          start: '--:--'
-        };
-      }
-      if (body.events.length > 4) {
-        body.events = body.events.slice(0, 4);
+      body.events.map(function (e) {
+        e.date = moment(e.date);
+      });
+      if (body.events.length > 0) {
+        var eventDate = body.events[0].date,
+          now = moment();
+        if (eventDate.isBefore(now) || eventDate.isSame(now, 'day')) {
+          body.today = body.events[0];
+          body.events = body.events.slice(1, 5);
+        } else {
+          body.events = body.events.slice(0, 4);
+        }
       }
       angular.extend($scope, body);
     });
