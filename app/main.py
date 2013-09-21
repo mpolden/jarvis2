@@ -41,8 +41,7 @@ def _configure_bundles():
         'js/angular-truncate/angular-truncate.min.js',
         'js/d3/d3.min.js',
         'js/rickshaw/rickshaw.min.js',
-        'js/moment/moment.min.js',
-        'js/moment/nb.js',
+        'js/moment/moment+langs.min.js',
         'js/gauge.js/gauge.min.js'
     ]
     js = [

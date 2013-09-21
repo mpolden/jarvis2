@@ -39,8 +39,7 @@ copy-resources:
 	cp -p bower_components/gridster/dist/jquery.gridster.min.js \
 		app/static/js/gridster/
 	cp -p bower_components/jquery/jquery.min.js app/static/js/jquery/
-	cp -p bower_components/moment/min/moment.min.js app/static/js/moment/
-	cp -p bower_components/moment/min/lang/nb.js app/static/js/moment/
+	cp -p bower_components/moment/min/moment+langs.min.js app/static/js/moment/
 	cp -p bower_components/normalize-css/normalize.css \
 		app/static/css/normalize-css/
 	cp -p bower_components/rickshaw/rickshaw.min.css app/static/css/rickshaw/
