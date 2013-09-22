@@ -78,7 +78,6 @@ module.exports = function (grunt) {
         tasks: ['jshint', 'less'],
         options: {
           livereload: true,
-          spawn: false,
           atBegin: true
         }
       }
