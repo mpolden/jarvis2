@@ -1,7 +1,7 @@
 all: lint test
 
 lint-py:
-	flake8 --max-complexity=10 *.py app/*.py app/jobs/*.py support/*.py
+	flake8 --max-complexity=8 *.py app/*.py app/jobs/*.py support/*.py
 
 lint-js:
 	grunt jshint
