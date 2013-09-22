@@ -7,7 +7,6 @@
     "grunt-contrib-watch": "~0.5.2",
     "grunt-jsbeautifier": "~0.2.2",
     "grunt-contrib-less": "~0.7.0",
-    "grunt-contrib-uglify": "~0.2.2",
     "bower": "~1.2.3"
   },
   "repository": {
