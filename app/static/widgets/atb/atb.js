@@ -12,7 +12,7 @@ jarvis.controller('AtbCtrl', ['$scope',
           // BusBuddy sometimes returns dates in the past
           departureTime.set('year', now.get('year'));
           departureTime.set('month', now.get('month'));
-          departureTime.set('day', now.get('day'));
+          departureTime.set('date', now.get('date'));
         }
         d.departureTime = departureTime;
       });
