@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
+
 import os
 import signal
 import sys
+
 from main import app, queues, sched
 
 
@@ -34,7 +36,7 @@ def _run_job(name=None):
 
     print_json = name.endswith('.json')
     if print_json:
-        name = name.rstrip('.json')
+        name = name.rpartition('.json')[0]
 
     cls = jobs.get(name)
     if cls is None:
