@@ -7,7 +7,7 @@ jarvis.controller('AvinorCtrl', ['$scope',
 
     $scope.$on('avinor', function (ev, body) {
       body.flights.map(function (flight) {
-        flight.date = moment(flight.schedule_time);
+        flight.date = moment(flight.schedule_time).lang('nb');
       });
       if (body.flights.length > 0) {
         body.next = body.flights[0];

@@ -6,7 +6,7 @@ jarvis.controller('AtbCtrl', ['$scope',
 
     $scope.$on('atb', function (ev, body) {
       body.departures.map(function (d) {
-        var departureTime = moment(d.registeredDepartureTime),
+        var departureTime = moment(d.registeredDepartureTime).lang('nb'),
           now = moment();
         if (departureTime.isBefore(now)) {
           // BusBuddy sometimes returns dates in the past

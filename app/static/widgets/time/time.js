@@ -5,12 +5,8 @@ jarvis.controller('TimeCtrl', ['$scope',
     'use strict';
 
     var setTime = function () {
-      var now = moment().lang('nb');
-
       $scope.$apply(function () {
-        $scope.time = now.format('HH:mm');
-        $scope.date = now.format('D. MMMM YYYY');
-        $scope.day = now.format('dddd');
+        $scope.now = moment().lang('nb');
       });
     };
 
