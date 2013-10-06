@@ -1,17 +1,11 @@
 #!/usr/bin/env python
 
 from fabric.api import env, run, sudo, task
-from fabric.context_managers import cd, prefix
+from fabric.context_managers import prefix
 from fabric.contrib.project import rsync_project
 
 env.use_ssh_config = True
 home = '~/jarvis2'
-
-
-@task
-def pull_code():
-    with cd(home):
-        run('git pull --rebase')
 
 
 @task
