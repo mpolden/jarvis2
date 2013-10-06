@@ -30,7 +30,7 @@ class Yr(unittest.TestCase):
 
     def test_parse_tree_date(self):
         y = yr.Yr({'interval': None, 'url': None})
-        data = y._parse_tree_date(self.tree, datetime(2013, 7, 1))
+        data = y._parse_tree(self.tree, datetime(2013, 7, 1))
 
         self.assertEqual('Regn', data['description'])
         self.assertEqual('Trondheim', data['location'])

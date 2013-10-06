@@ -1,9 +1,9 @@
 <div id="yr" ng-controller="YrCtrl">
-  <p class="fade">Været i {{ location }}</p>
-  <h1>{{ temperature }}&deg;</h1>
-  <p>{{ description }}</p>
-  <p class="wind">{{ wind.description }} ({{ wind.speed }} m/s) fra
-    {{ wind.direction | lowercase }}</p>
+  <p class="fade">Været i {{ today.location }}</p>
+  <h1>{{ today.temperature }}&deg;</h1>
+  <p>{{ today.description }}</p>
+  <p class="wind">{{ today.wind.description }} ({{ today.wind.speed }} m/s) fra
+    {{ today.wind.direction | lowercase }}</p>
   <p class="tomorrow">I morgen: {{ tomorrow.temperature }}&deg;
     ({{ tomorrow.description | lowercase }})</p>
   <p class="fade updated-at">Sist oppdatert: {{ updated_at }}</p>
