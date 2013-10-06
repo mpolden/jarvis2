@@ -25,9 +25,9 @@ def _run_job(name=None):
     from jobs import load_jobs
     from pprint import pprint
 
-    app = Flask(__name__)
-    app.config.from_envvar('JARVIS_SETTINGS')
-    conf = app.config['JOBS']
+    _app = Flask(__name__)
+    _app.config.from_envvar('JARVIS_SETTINGS')
+    conf = _app.config['JOBS']
 
     jobs = load_jobs()
     if name is None:

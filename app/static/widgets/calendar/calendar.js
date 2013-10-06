@@ -5,7 +5,7 @@ jarvis.controller('CalendarCtrl', ['$scope',
     'use strict';
 
     $scope.$on('calendar', function (ev, body) {
-      body.events.map(function (e) {
+      body.events.forEach(function (e) {
         e.date = moment(e.date).lang('nb');
       });
       if (body.events.length > 0) {

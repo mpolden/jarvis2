@@ -5,7 +5,7 @@ jarvis.controller('AtbCtrl', ['$scope',
     'use strict';
 
     $scope.$on('atb', function (ev, body) {
-      body.departures.map(function (d) {
+      body.departures.forEach(function (d) {
         var departureTime = moment(d.registeredDepartureTime).lang('nb'),
           now = moment();
         if (departureTime.isBefore(now)) {
