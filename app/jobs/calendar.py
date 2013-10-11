@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
-import dateutil.parser
-import httplib2
 import os
-from apiclient.discovery import build
-from datetime import datetime
 from httplib import BadStatusLine
-from jobs import AbstractJob
+
+import httplib2
+from apiclient.discovery import build
 from oauth2client.file import Storage
+
+from datetime import datetime
+from jobs import AbstractJob
 
 
 class Calendar(AbstractJob):
@@ -26,23 +27,14 @@ class Calendar(AbstractJob):
         self.service = build(serviceName='calendar', version='v3', http=http,
                              developerKey=self.api_key)
 
-    def _parse_date(self, date):
-        if 'dateTime' in date:
-            d = date['dateTime']
-        elif 'date' in date:
-            d = date['date']
-        else:
-            return None
-        return dateutil.parser.parse(d)
-
     def _parse(self, items):
         events = []
         for item in items:
-            date = self._parse_date(item['start'])
+            date = item['start'].get('dateTime') or item['start'].get('date')
             events.append({
                 'id': item['id'],
                 'summary': item['summary'],
-                'date': date.strftime('%Y-%m-%d %H:%M:%S')
+                'date': date
             })
         return events
 

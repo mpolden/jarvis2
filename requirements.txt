@@ -10,7 +10,6 @@ Jinja2==2.7.1
 lxml==3.2.3
 MarkupSafe==0.18
 pyquery==1.2.4
-python-dateutil==2.1
 python-gflags==2.0
 requests==2.0.0
 rjsmin==1.0.7
