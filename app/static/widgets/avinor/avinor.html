@@ -1,9 +1,10 @@
 <div id="avinor" ng-controller="AvinorCtrl">
   <p class="fade">Neste fly (<em>{{ next.flight_id }}</em>) fra <em>{{ from }}
     </em> til <em>{{ to }}</em> går
+    <em>{{ next.date.format('dddd, D. MMMM') }}</em>
   </p>
   <h1>{{ next.date.format('HH:mm') }}</h1>
-  <h2>{{ next.date.format('dddd, D. MMMM') }}</h2>
+  <h2>{{ next.date.fromNow() }}</h2>
   <table>
     <tr class="fade">
       <th>Flight</th>

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import dateutil.parser
 import requests
-from jobs import AbstractJob
 from lxml import etree
+
+from jobs import AbstractJob
 
 
 class Avinor(AbstractJob):
@@ -22,11 +22,9 @@ class Avinor(AbstractJob):
             if self.to_airport is not None and airport != self.to_airport:
                 continue
 
-            schedule_time = dateutil.parser.parse(flight.xpath(
-                'schedule_time').pop().text).strftime('%Y-%m-%dT%H:%M:%S')
             flights.append({
                 'airport': airport,
-                'schedule_time': schedule_time,
+                'schedule_time': flight.xpath('schedule_time').pop().text,
                 'flight_id': flight.xpath('flight_id').pop().text
             })
 

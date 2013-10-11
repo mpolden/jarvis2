@@ -6,18 +6,15 @@
 }
 #avinor h1 {
   font-size: 40px;
-  margin: 8px;
+  margin: 0;
 }
 #avinor h2 {
   font-size: 18px;
-  margin: 12px 0 12px 0;
+  margin: 14px 0 14px 0;
 }
 #avinor table {
   width: 100%;
   margin: 0 10px 0 10px;
-}
-#avinor th {
-  font-size: 14px;
 }
 #avinor em {
   font-style: normal;

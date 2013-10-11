@@ -6,16 +6,14 @@ jarvis.controller('AvinorCtrl', ['$scope',
     'use strict';
 
     $scope.$on('avinor', function (ev, body) {
-      body.flights.forEach(function (flight) {
-        flight.date = moment(flight.schedule_time).lang('nb');
+      body.flights = body.flights.map(function (f) {
+        f.date = moment(f.schedule_time).lang('nb');
+        return f;
+      }).filter(function (f) {
+        return f.date.isAfter();
       });
-      if (body.flights.length > 0) {
-        body.next = body.flights[0];
-        body.flights = body.flights.slice(1, 5);
-      } else {
-        body.next = null;
-        body.flights = [];
-      }
+      body.next = body.flights.shift() || null;
+      body.flights = body.flights.slice(0, 4);
       angular.extend($scope, body);
     });
 
