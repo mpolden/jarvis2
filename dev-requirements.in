@@ -1,0 +1,4 @@
+Fabric==1.8.0
+bpython==0.12
+flake8==2.0
+isort==1.3.2
