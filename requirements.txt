@@ -5,6 +5,7 @@ Jinja2==2.7.1
 Werkzeug==0.9.4
 cssmin==0.1.4
 cssselect==0.9
+docopt==0.6.1
 google-api-python-client==1.2
 httplib2==0.8
 itsdangerous==0.23

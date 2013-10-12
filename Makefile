@@ -56,13 +56,13 @@ dashboard:
 	python support/create_dashboard.py $(NAME)
 
 debug:
-	python app/run.py debug
+	python app/run.py --debug
 
 run:
 	python app/run.py
 
 run-job:
-	python app/run.py job $(NAME)
+	python app/run.py --job --name=$(NAME)
 
 google-api-auth:
 	python support/google_api_auth.py

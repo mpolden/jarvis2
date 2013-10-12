@@ -1,10 +1,25 @@
 #!/usr/bin/env python
 
+"""JARVIS 2 helper script
+
+Usage:
+  run.py -j [-n <job>] [-s]
+  run.py [-d]
+
+Options:
+  -h --help         Show usage
+  -d --debug        Run app in debug mode
+  -j --job          Run a job
+  -n --name=JOB     Name of job to run, will prompt if omitted
+  -s --json         Print job output as JSON
+
+"""
 from __future__ import print_function
 
 import os
 import signal
-import sys
+
+from docopt import docopt
 
 from main import app, queues, sched
 
@@ -18,7 +33,7 @@ def _teardown(signal, frame):
     raise KeyboardInterrupt
 
 
-def _run_job(name=None):
+def _run_job(name=None, print_json=False):
     import json
     import sys
     from flask import Flask
@@ -30,13 +45,9 @@ def _run_job(name=None):
     conf = _app.config['JOBS']
 
     jobs = load_jobs()
-    if name is None:
+    if name is None or len(name) == 0:
         names = ' '.join(jobs.keys())
         name = raw_input('Name of the job to run [%s]: ' % (names,)).lower()
-
-    print_json = name.endswith('.json')
-    if print_json:
-        name = name.rpartition('.json')[0]
 
     cls = jobs.get(name)
     if cls is None:
@@ -50,13 +61,21 @@ def _run_job(name=None):
     else:
         pprint(data)
 
-if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'debug':
-            app.debug = True
-        elif sys.argv[1] == 'job':
-            _run_job(sys.argv[2] if len(sys.argv) > 2 else None)
-            sys.exit(0)
+
+def _run_app(debug=False):
+    app.debug = debug
     signal.signal(signal.SIGINT, _teardown)
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, use_reloader=False, threaded=True)
+
+
+def main():
+    args = docopt(__doc__)
+    if args['--job']:
+        _run_job(args['--name'], args['--json'])
+    else:
+        _run_app(args['--debug'])
+
+
+if __name__ == '__main__':
+    main()
