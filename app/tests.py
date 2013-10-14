@@ -119,17 +119,18 @@ class Calendar(unittest.TestCase):
     def setUp(self):
         self.calendar = calendar.Calendar({'interval': None, 'api_key': None})
 
-    def test_parse_date(self):
-        date = datetime(2013, 7, 17)
-        dateTime = datetime(2013, 7, 17, 20)
-
-        self.assertEqual(dateTime, self.calendar._parse_date(
-            {'dateTime': dateTime.strftime('%Y-%m-%dT%H:%M:%S')}))
-
-        self.assertEqual(date, self.calendar._parse_date(
-            {'date': date.strftime('%Y-%m-%d')}))
-
-        self.assertEqual(None, self.calendar._parse_date({}))
+    def test_parse(self):
+        items = [
+            {'id': 'foo1', 'summary': 'Foo bar 1',
+             'start': {'dateTime': '2013-07-01T15:00:00+02:00'}},
+            {'id': 'foo2', 'summary': 'Foo bar 2',
+             'start': {'dateTime': '2013-08-01T15:00:00+02:00'}},
+        ]
+        expected = [{'date': '2013-07-01T15:00:00+02:00', 'id': 'foo1',
+                     'summary': 'Foo bar 1'},
+                    {'date': '2013-08-01T15:00:00+02:00', 'id': 'foo2',
+                     'summary': 'Foo bar 2'}]
+        self.assertEqual(self.calendar._parse(items), expected)
 
 
 class Gmail(unittest.TestCase):
