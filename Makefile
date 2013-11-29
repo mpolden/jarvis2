@@ -63,7 +63,7 @@ run:
 	python app/run.py
 
 run-job:
-	python app/run.py --job --name=$(NAME)
+	python app/run.py --job $(NAME)
 
 google-api-auth:
 	python support/google_api_auth.py

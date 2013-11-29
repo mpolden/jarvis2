@@ -3,14 +3,13 @@
 """JARVIS 2 helper script
 
 Usage:
-  run.py -j [-n <job>] [-s]
+  run.py -j [-s] [NAME]
   run.py [-d]
 
 Options:
   -h --help         Show usage
   -d --debug        Run app in debug mode
-  -j --job          Run a job
-  -n --name=JOB     Name of job to run, will prompt if omitted
+  -j --job          Run a job, will prompt if NAME is not given
   -s --json         Print job output as JSON
 
 """
@@ -72,7 +71,7 @@ def _run_app(debug=False):
 def main():
     args = docopt(__doc__)
     if args['--job']:
-        _run_job(args['--name'], args['--json'])
+        _run_job(args['NAME'], args['--json'])
     else:
         _run_app(args['--debug'])
 
