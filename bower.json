@@ -4,12 +4,12 @@
   "dependencies": {
     "jquery": "~2.0.3",
     "gridster": "latest",
-    "normalize-css": "~2.1.2",
-    "angular": "~1.0.7",
+    "normalize-css": "~2.1.3",
+    "angular": "~1.2.3",
     "angular-truncate": "latest",
-    "d3": "~3.3.2",
-    "rickshaw": "~1.4.1",
-    "moment": "~2.2.1",
+    "d3": "~3.3.10",
+    "rickshaw": "~1.4.5",
+    "moment": "~2.4.0",
     "gauge.js": "gh-pages"
   }
 }
