@@ -9,3 +9,4 @@ bower_components/
 config.py
 config_*.py
 node_modules/
+venv/

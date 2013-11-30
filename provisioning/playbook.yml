@@ -1,0 +1,50 @@
+---
+- hosts: all
+  sudo: yes
+
+  tasks:
+    - name: set timezone
+      copy: src=files/etc/timezone
+            dest=/etc/timezone
+            owner=root
+            group=root
+            mode=0644
+      notify:
+        - update timezone
+
+    - name: add nodejs repo
+      apt_repository: repo='ppa:chris-lea/node.js'
+
+    - name: install packages
+      apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+      with_items:
+        - git
+        - libxml2-dev
+        - libxslt1-dev
+        - make
+        - nodejs
+        - python-dev
+        - python-virtualenv
+        - zlib1g-dev
+      environment:
+        LANG: en_US.UTF-8
+
+    - name: install pip requirements
+      pip: requirements=/vagrant/requirements.txt virtualenv=/vagrant/venv
+
+    - name: install pip development requirements
+      pip: requirements=/vagrant/dev-requirements.txt virtualenv=/vagrant/venv
+
+    - name: install npm packages
+      npm: name={{ item }} global=yes state=latest
+      with_items:
+        - bower
+        - grunt-cli
+
+    - name: install local npm packages
+      sudo_user: vagrant
+      npm: path=/vagrant state=latest
+
+  handlers:
+    - name: update timezone
+      command: dpkg-reconfigure --frontend=noninteractive tzdata
