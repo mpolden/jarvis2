@@ -1,0 +1,20 @@
+server {
+    gzip on;
+    gzip_disable "msie6";
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    location /static/ {
+        alias {{ app_path }}/static/;
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_buffering off;
+        uwsgi_pass unix:/run/uwsgi/app/jarvis2/socket;
+    }
+}

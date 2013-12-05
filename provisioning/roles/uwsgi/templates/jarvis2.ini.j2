@@ -1,0 +1,10 @@
+[uwsgi]
+workers = 1
+threads = 20
+plugin = python
+chdir = {{ app_path }}
+home = {{ virtualenv_path }}
+env = JARVIS_SETTINGS={{ app_config }}
+module = main
+callable = app
+evil-reload-on-rss = 64
