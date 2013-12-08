@@ -7,6 +7,6 @@ google-api-python-client==1.2
 lxml==3.2.3
 pyquery==1.2.6
 python-gflags==2.0
-requests==2.0.1
+requests==2.1.0
 rjsmin==1.0.7
 soco==0.6
