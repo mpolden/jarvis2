@@ -1,11 +1,6 @@
 -e git+https://github.com/nvie/pip-tools.git@future#egg=pip-tools
-Fabric==1.8.0
-bpython==0.12
-ecdsa==0.10
+autopep8==0.9.7
 flake8==2.1.0
 mccabe==0.2.1
-paramiko==1.12.0
 pep8==1.4.6
-pycrypto==2.6.1
 pyflakes==0.7.3
-pygments==1.6
