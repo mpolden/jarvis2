@@ -2,8 +2,8 @@
 workers = 1
 threads = 20
 plugin = python
-chdir = {{ app_path }}
-home = {{ virtualenv_path }}
+chdir = {{ app_path }}/app
+home = {{ app_path }}/venv
 env = JARVIS_SETTINGS={{ app_config }}
 module = main
 callable = app

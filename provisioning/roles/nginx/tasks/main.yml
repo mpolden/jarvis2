@@ -18,5 +18,11 @@
         group=root
         state=link
 
+- name: disable default site
+  file: path=/etc/nginx/sites-enabled/default
+        state=absent
+  notify:
+    - restart nginx
+
 - name: make sure nginx is running
   service: name=nginx state=running enabled=yes

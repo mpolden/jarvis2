@@ -20,6 +20,8 @@
         owner=root
         group=root
         state=link
+  notify:
+    - restart uwsgi
 
 - name: make sure uwsgi is running
   service: name=uwsgi state=running enabled=yes

@@ -1,0 +1,57 @@
+---
+- name: install packages
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - git
+    - libxml2-dev
+    - libxslt1-dev
+    - python-dev
+    - python-virtualenv
+    - sudo
+    - zlib1g-dev
+
+- name: ensure sudo keeps SSH_AUTH_SOCK in environment
+  copy: src=env
+        dest=/etc/sudoers.d/env
+        mode=0440
+        owner=root
+        group=root
+
+- name: add host key for github.com
+  copy: src=ssh_known_hosts
+        dest=/etc/ssh/ssh_known_hosts
+        mode=0644
+        owner=root
+        group=root
+
+- name: clone repo from github
+  git: repo=https://github.com/martinp/jarvis2.git
+       dest={{ app_path }}
+  notify:
+    - restart uwsgi
+
+- name: install requirements
+  pip: requirements={{ app_path }}/requirements.txt
+       virtualenv={{ app_path }}/venv
+  notify:
+    - restart uwsgi
+
+- name: copy config
+  copy: src=config.py
+        dest={{ app_path }}/app/config.py
+        owner=root
+        group=root
+        mode=0644
+  notify:
+    - restart uwsgi
+
+- name: create generated directories
+  file: >
+        path={{ app_path }}/app/static/{{ item }}
+        owner=www-data
+        group=www-data
+        mode=0755
+        state=directory
+  with_items:
+    - assets
+    - .webassets-cache

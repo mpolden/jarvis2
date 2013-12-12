@@ -1,5 +1,5 @@
 ---
-- hosts: vagrant
+- hosts: development
   sudo: yes
   roles:
     - ntp
@@ -9,5 +9,13 @@
   sudo: yes
   roles:
     - ntp
-    - uwsgi
     - nginx
+    - deploy
+    - uwsgi
+  vars_prompt:
+    - name: app_path
+      prompt: "Where should the application be deployed?"
+      default: /opt/jarvis2
+    - name: app_config
+      prompt: "Which config file should be used?"
+      default: config.py
