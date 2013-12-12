@@ -19,3 +19,6 @@
     - name: app_config
       prompt: "Which config file should be used?"
       default: config.py
+    - name: google_credentials_file
+      prompt: "Which credentials file should be used?"
+      default: .calendar.json

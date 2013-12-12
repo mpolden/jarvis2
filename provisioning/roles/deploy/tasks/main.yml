@@ -45,6 +45,15 @@
   notify:
     - restart uwsgi
 
+- name: copy google api credentials
+  copy: src={{ google_credentials_file }}
+        dest={{ app_path }}/app/jobs/{{ google_credentials_file }}
+        owner=www-data
+        group=www-data
+        mode=0400
+  notify:
+    - restart uwsgi
+
 - name: create generated directories
   file: >
         path={{ app_path }}/app/static/{{ item }}
