@@ -14,7 +14,7 @@
     - python-virtualenv
     - zlib1g-dev
   environment:
-    LANG: en_US.UTF-8
+    LC_ALL: en_US.UTF-8
 
 - name: install pip requirements
   pip: requirements=/vagrant/requirements.txt virtualenv=/vagrant/venv
@@ -31,3 +31,17 @@
 - name: install local npm packages
   sudo_user: vagrant
   npm: path=/vagrant state=latest
+
+- name: hide login message
+  file: path=/home/vagrant/.hushlogin
+        owner=vagrant
+        group=vagrant
+        mode=0644
+        state=touch
+
+- name: install bash_profile
+  template: src=dot.bash_profile.j2
+            dest=/home/vagrant/.bash_profile
+            owner=vagrant
+            group=vagrant
+            mode=0644
