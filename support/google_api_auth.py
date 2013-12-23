@@ -16,10 +16,8 @@ config = app.config['JOBS']['calendar']
 
 
 def main():
-    if 'client_id' not in config \
-            or 'client_secret' not in config \
-            or 'api_key' not in config:
-        print ('Error: client_id, client_secret or api_key is not set.\n\n'
+    if 'client_id' not in config or 'client_secret' not in config:
+        print ('Error: client_id or client_secret is not set.\n\n'
                'Please create a client ID and server key here and update '
                'config.py:\n\nhttps://code.google.com/apis/console/#:access')
         sys.exit(1)
