@@ -107,3 +107,8 @@ JOBS['stats'] = {
         'beer': 10
     }
 }
+
+JOBS['steam'] = {
+    'enabled': True,
+    'interval': 600,
+}

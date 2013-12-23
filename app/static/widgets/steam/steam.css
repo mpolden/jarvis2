@@ -1,0 +1,37 @@
+#steam {
+  height: 100%;
+  padding: 5px 0 5px 0;
+  background: #343232;
+  text-align: center;
+}
+#steam .deals {
+  position: relative;
+}
+#steam .deal {
+  position: absolute;
+}
+#steam .hidden {
+  display: none;
+}
+#steam .steam-logo {
+  margin: 10px 0 16px 0;
+}
+#steam .game-logo {
+  width: 300px;
+  border-top: 1px solid #ffd540;
+  border-bottom: 1px solid #ffd540;
+}
+#steam .original-price {
+  text-decoration: line-through;
+  color: #ff4040;
+  font-size: 18px;
+}
+#steam .discount {
+  font-size: 24px;
+}
+#steam .final-price {
+  color: #8ef13c;
+}
+#steam p {
+  margin-top: 12px;
+}
