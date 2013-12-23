@@ -3,6 +3,7 @@ Flask-Assets==0.8
 Flask==0.10.1
 Jinja2==2.7.1
 Werkzeug==0.9.4
+clint==0.3.2
 cssmin==0.2.0
 cssselect==0.9.1
 docopt==0.6.1
