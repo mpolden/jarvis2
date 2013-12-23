@@ -66,6 +66,11 @@ Create a new dashboard:
 
     make dashboard
 
+Available widgets
+=================
+See [WIDGETS.md](https://github.com/martinp/jarvis2/blob/master/WIDGETS.md) for
+details on available widgets,
+
 Development environment
 =======================
 A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
