@@ -26,7 +26,6 @@
   npm: name={{ item }} global=yes state=latest
   with_items:
     - bower
-    - grunt-cli
     - gulp
 
 - name: install local npm packages
