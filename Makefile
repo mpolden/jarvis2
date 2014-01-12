@@ -4,7 +4,7 @@ lint-py:
 	flake8 --max-complexity=8 app/*.py app/jobs/*.py support/*.py
 
 lint-js:
-	grunt jshint
+	gulp jshint
 
 lint: lint-py lint-js
 
@@ -48,7 +48,7 @@ copy-resources:
 
 release: clean lint-py test copy-resources
 release:
-	grunt
+	gulp
 
 widget:
 	python support/create_widget.py $(NAME)

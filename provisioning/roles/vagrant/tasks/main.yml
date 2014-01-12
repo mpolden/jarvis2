@@ -27,6 +27,7 @@
   with_items:
     - bower
     - grunt-cli
+    - gulp
 
 - name: install local npm packages
   sudo_user: vagrant
