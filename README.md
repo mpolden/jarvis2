@@ -44,7 +44,7 @@ Usage
 After installing dependencies and creating a config file, the app can be started
 by running:
 
-    JARVIS_SETTINGS=config.py ./app/run.py
+    JARVIS_SETTINGS=config.py make run
 
 To start the app in debug mode, use:
 
@@ -74,7 +74,8 @@ details on available widgets,
 Development environment
 =======================
 A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
-Run `vagrant up` in the repository root to provision a development environment.
+Run `vagrant up dev` in the repository root to provision a development
+environment.
 
 Deployment guide using nginx and uWSGI
 ======================================
