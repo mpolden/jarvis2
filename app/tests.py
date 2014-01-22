@@ -78,7 +78,7 @@ class Nsb(unittest.TestCase):
     def test_parse(self):
         data = self.nsb._parse(self.html)
 
-        self.assertEqual('15. juli 2013', data['date'])
+        self.assertEqual('23. januar 2014', data['date'])
         self.assertEqual('Rotvoll', data['to'])
         self.assertEqual('Lerkendal', data['from'])
         self.assertEqual(5, len(data['departures']))
