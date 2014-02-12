@@ -11,7 +11,7 @@ class Atb(AbstractJob):
         self.interval = conf['interval']
 
     def get(self):
-        r = requests.get(self.url)
+        r = requests.get(self.url, timeout=5)
 
         if r.status_code == 200 and len(r.content) > 0:
             return r.json()
