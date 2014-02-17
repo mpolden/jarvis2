@@ -50,7 +50,7 @@
         dest={{ app_path }}/app/jobs/{{ google_credentials_file }}
         owner=www-data
         group=www-data
-        mode=0400
+        mode=0600
   notify:
     - restart uwsgi
 
