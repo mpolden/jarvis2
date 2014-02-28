@@ -22,6 +22,13 @@ class AbstractJob(object):
                 import_module(name)
         return AbstractJob.__subclasses__()
 
+    def __str__(self):
+        return '[name={}, interval={}, timeout={}, start_date={}]'.format(
+            self.__class__.__name__.lower(),
+            getattr(self, 'interval', None),
+            getattr(self, 'timeout', None),
+            getattr(self, 'start_date', None))
+
 
 def load_jobs():
     return dict([(cls.__name__.lower(), cls) for cls in AbstractJob.load()])
