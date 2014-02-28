@@ -49,15 +49,15 @@ def _configure_bundles():
                 css.append(asset_path)
 
     assets.register('js_all', Bundle(*(js_vendor + js),
-                                     output='assets/app.js'))
+                                     output='gen/app.js'))
     assets.register('css_all', Bundle(*(css_vendor + css),
-                                      output='assets/styles.css'))
+                                      output='gen/styles.css'))
     assets.register('js_min_all', Bundle(*(js_vendor + js),
                                          filters='rjsmin',
-                                         output='assets/app.min.js'))
+                                         output='gen/app.min.js'))
     assets.register('css_min_all', Bundle(*(css_vendor + css),
                                           filters='cssmin',
-                                          output='assets/styles.min.css'))
+                                          output='gen/styles.min.css'))
 
 
 @app.route('/w/<widget>')

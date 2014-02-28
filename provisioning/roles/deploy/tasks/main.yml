@@ -62,5 +62,5 @@
         mode=0755
         state=directory
   with_items:
-    - assets
+    - gen
     - .webassets-cache

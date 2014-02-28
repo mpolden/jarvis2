@@ -3,9 +3,8 @@
 .idea/
 .vagrant/
 app/static/.webassets-cache/
-app/static/assets/
+app/static/gen/
 app/templates/layouts/
-bower_components/
 config.py
 config_*.py
 node_modules/
