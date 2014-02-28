@@ -16,13 +16,14 @@ class Calendar(AbstractJob):
     def __init__(self, conf):
         self.interval = conf['interval']
         self.api_key = conf['api_key']
+        self.timeout = conf.get('timeout')
 
     def _auth(self):
         credentials_file = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '.calendar.json'))
         storage = Storage(credentials_file)
         credentials = storage.get()
-        http = httplib2.Http()
+        http = httplib2.Http(timeout=self.timeout)
         http = credentials.authorize(http)
         self.service = build(serviceName='calendar', version='v3', http=http,
                              developerKey=self.api_key)

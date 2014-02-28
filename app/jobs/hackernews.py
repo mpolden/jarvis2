@@ -10,6 +10,7 @@ class HackerNews(AbstractJob):
     def __init__(self, conf):
         self.url = 'https://news.ycombinator.com'
         self.interval = conf['interval']
+        self.timeout = conf.get('timeout')
 
     def _parse(self, html):
         d = pq(html)
@@ -31,7 +32,7 @@ class HackerNews(AbstractJob):
         return {'items': items}
 
     def get(self):
-        r = requests.get(self.url)
+        r = requests.get(self.url, timeout=self.timeout)
 
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)

@@ -7,7 +7,9 @@ JOBS['yr'] = {
     'interval': 60,
     # URL for data
     'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
-            'Trondheim/varsel.xml')
+            'Trondheim/varsel.xml'),
+    # Job timeout in seconds
+    'timeout': 5
 }
 
 JOBS['time'] = {
@@ -18,18 +20,21 @@ JOBS['atb'] = {
     'enabled': False,
     'interval': 60,
     'url': ('http://api.busbuddy.no/api/1.4.4/departures/yourLocationId'
-            '?apiKey=yourApiKey')
+            '?apiKey=yourApiKey'),
+    'timeout': 5
 }
 
 JOBS['hackernews'] = {
     'enabled': True,
-    'interval': 900
+    'interval': 900,
+    'timeout': 5
 }
 
 JOBS['sonos'] = {
     'enabled': False,
     'interval': 10,
-    'ip': 'ip.addr'
+    'ip': 'ip.addr',
+    'timeout': 5
 }
 
 JOBS['calendar'] = {
@@ -37,7 +42,8 @@ JOBS['calendar'] = {
     'interval': 600,
     'client_id': '',
     'client_secret': '',
-    'api_key': ''
+    'api_key': '',
+    'timeout': 5
 }
 
 JOBS['uptime'] = {
@@ -52,14 +58,16 @@ JOBS['uptime'] = {
             'label': 'Laptop',
             'ip': 'ip.addr'
         }
-    ]
+    ],
+    'timeout': 5
 }
 
 JOBS['plex'] = {
     'enabled': False,
     'interval': 900,
     'movies': 'http://ip:port/library/sections/2/recentlyAdded/',
-    'shows': 'http://ip:port/library/sections/1/recentlyAdded/'
+    'shows': 'http://ip:port/library/sections/1/recentlyAdded/',
+    'timeout': 5
 }
 
 JOBS['nsb'] = {
@@ -67,7 +75,8 @@ JOBS['nsb'] = {
     'interval': 900,
     # See http://www.nsb.no for valid locations
     'from': 'from_location',
-    'to': 'to_location'
+    'to': 'to_location',
+    'timeout': 5
 }
 
 JOBS['ping'] = {
@@ -76,7 +85,8 @@ JOBS['ping'] = {
     'hosts': [
         ('google.com', 'google.com'),
         ('gw', '10.0.0.1')
-    ]
+    ],
+    'timeout': 1
 }
 
 JOBS['gmail'] = {
@@ -93,7 +103,8 @@ JOBS['avinor'] = {
     'enabled': False,
     'interval': 180,
     'from': 'TRD',
-    'to': 'OSL'
+    'to': 'OSL',
+    'timeout': 5
 }
 
 JOBS['stats'] = {
@@ -105,10 +116,12 @@ JOBS['stats'] = {
     'max': {
         'coffee': 8,
         'beer': 10
-    }
+    },
+    timeout: 5
 }
 
 JOBS['steam'] = {
     'enabled': True,
     'interval': 600,
+    'timeout': 5
 }

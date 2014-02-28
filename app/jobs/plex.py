@@ -11,6 +11,7 @@ class Plex(AbstractJob):
         self.interval = conf['interval']
         self.movies = conf['movies']
         self.shows = conf['shows']
+        self.timeout = conf.get('timeout')
 
     def _parse_movies(self, xml):
         tree = etree.fromstring(xml)
@@ -36,7 +37,7 @@ class Plex(AbstractJob):
 
     def get(self):
         try:
-            r = requests.get(self.movies)
+            r = requests.get(self.movies, timeout=self.timeout)
             movies = self._parse_movies(r.content)
 
             r = requests.get(self.shows)

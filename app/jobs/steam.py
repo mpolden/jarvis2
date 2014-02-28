@@ -11,6 +11,7 @@ class Steam(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']
+        self.timeout = conf.get('timeout')
 
     def _parse(self, html):
         d = pq(html)
@@ -28,7 +29,8 @@ class Steam(AbstractJob):
         return {'deals': deals}
 
     def get(self):
-        r = requests.get('http://store.steampowered.com/')
+        r = requests.get('http://store.steampowered.com/',
+                         timeout=self.timeout)
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)
         return {}

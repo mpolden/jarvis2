@@ -11,6 +11,7 @@ class Yr(AbstractJob):
     def __init__(self, conf):
         self.url = conf['url']
         self.interval = conf['interval']
+        self.timeout = conf.get('timeout')
 
     def _parse_tree(self, tree, date=None):
         if date is None:
@@ -45,7 +46,7 @@ class Yr(AbstractJob):
         }
 
     def get(self):
-        r = requests.get(self.url)
+        r = requests.get(self.url, timeout=self.timeout)
 
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)

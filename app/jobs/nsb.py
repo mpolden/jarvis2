@@ -12,6 +12,7 @@ class Nsb(AbstractJob):
         self.from_location = conf['from']
         self.to_location = conf['to']
         self.interval = conf['interval']
+        self.timeout = conf.get('timeout')
 
     def _parse(self, html):
         d = pq(html)
@@ -51,7 +52,7 @@ class Nsb(AbstractJob):
             'redirect_to': 'https://www.nsb.no/bestill/velg-togavgang'
         }
         r = requests.get('https://www.nsb.no/bestill/travel-planner-validator',
-                         params=params)
+                         timeout=self.timeout, params=params)
 
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)

@@ -10,6 +10,7 @@ class Ping(AbstractJob):
     def __init__(self, conf):
         self.interval = conf['interval']
         self.hosts = conf['hosts']
+        self.timeout = conf.get('timeout', 1)
 
     def _parse_time(self, ping_output):
         time = re.search('time=(\d+(?:\.\d+)?)', ping_output)
@@ -17,7 +18,7 @@ class Ping(AbstractJob):
 
     def _get_latency(self, host):
         ping_cmd = 'ping6' if ':' in host else 'ping'
-        ping = '%s -w 1 -c 1 %s' % (ping_cmd, host)
+        ping = '%s -w %d -c 1 %s' % (ping_cmd, self.timeout, host)
         p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
         return self._parse_time(p.communicate()[0])
 

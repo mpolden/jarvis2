@@ -12,6 +12,7 @@ class Avinor(AbstractJob):
         self.interval = conf['interval']
         self.from_airport = conf['from']
         self.to_airport = conf['to']
+        self.timeout = conf.get('timeout')
 
     def _parse(self, xml):
         tree = etree.fromstring(xml)
@@ -41,7 +42,8 @@ class Avinor(AbstractJob):
             'airport': self.from_airport,
             'direction': 'D'
         }
-        r = requests.get('http://flydata.avinor.no/XmlFeed.asp', params=params)
+        r = requests.get('http://flydata.avinor.no/XmlFeed.asp',
+                         timeout=self.timeout, params=params)
 
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)

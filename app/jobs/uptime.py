@@ -9,11 +9,12 @@ class Uptime(AbstractJob):
     def __init__(self, conf):
         self.hosts = conf['hosts']
         self.interval = conf['interval']
+        self.timeout = conf.get('timeout', 1)
 
     def get(self):
         for host in self.hosts:
             ping_cmd = 'ping6' if ':' in host['ip'] else 'ping'
-            ping = '%s -w 1 -c 1 %s' % (ping_cmd, host['ip'])
+            ping = '%s -w %d -c 1 %s' % (ping_cmd, self.timeout, host['ip'])
             p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
             host['active'] = p.wait() == 0
         return {'hosts': self.hosts}

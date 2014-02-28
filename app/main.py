@@ -151,12 +151,13 @@ def _configure_jobs():
         else:
             offset += randint(4, 10)
             start_date = datetime.now() + timedelta(seconds=offset)
-        logger.info('Configuring job: %s [start_date=%s, seconds=%s]', name,
-                    start_date, job.interval)
+
+        job.start_date = start_date
+        logger.info('Scheduling job: %s', job)
         sched.add_interval_job(_run_job,
                                name=name,
                                seconds=job.interval,
-                               start_date=start_date,
+                               start_date=job.start_date,
                                kwargs={'widget': name, 'job': job})
     if not sched.running:
         sched.start()
