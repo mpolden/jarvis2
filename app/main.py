@@ -34,28 +34,10 @@ last_events = {}
 
 @app.before_first_request
 def _configure_bundles():
-    js_vendor = [
-        'js/jquery/jquery.min.js',
-        'js/gridster/jquery.gridster.min.js',
-        'js/angular/angular.min.js',
-        'js/angular-truncate/angular-truncate.min.js',
-        'js/d3/d3.min.js',
-        'js/rickshaw/rickshaw.min.js',
-        'js/moment/moment-with-langs.min.js',
-        'js/gauge.js/gauge.min.js'
-    ]
-    js = [
-        'js/app/gridster.js',
-        'js/app/main.js'
-    ]
-    css_vendor = [
-        'css/normalize-css/normalize.css',
-        'css/gridster/jquery.gridster.min.css',
-        'css/rickshaw/rickshaw.min.css'
-    ]
-    css = [
-        'css/app/styles.css'
-    ]
+    js_vendor = ['vendor/bundle.js']
+    js = ['js/gridster.js', 'js/main.js']
+    css_vendor = ['vendor/bundle.css']
+    css = ['css/styles.css']
 
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)
@@ -70,8 +52,8 @@ def _configure_bundles():
                                      output='assets/app.js'))
     assets.register('css_all', Bundle(*(css_vendor + css),
                                       output='assets/styles.css'))
-    assets.register('js_min_all', Bundle(Bundle(*js_vendor),
-                                         Bundle(*js, filters='rjsmin'),
+    assets.register('js_min_all', Bundle(*(js_vendor + js),
+                                         filters='rjsmin',
                                          output='assets/app.min.js'))
     assets.register('css_min_all', Bundle(*(css_vendor + css),
                                           filters='cssmin',
