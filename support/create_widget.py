@@ -87,7 +87,8 @@ class WidgetFactory(object):
         if os.path.isdir(self.widget_dir):
             filenames = map(lambda f, e: f + e, (self.name,) * 3,
                             ('.html', '.js', '.less'))
-            filenames += [self.job_file, self.widget_dir]
+            pyc_file = self.job_file + 'c'
+            filenames += [self.job_file, pyc_file, self.widget_dir]
             for filename in filenames:
                 file_path = os.path.join(self.widget_dir, filename)
                 if not os.path.exists(file_path):
