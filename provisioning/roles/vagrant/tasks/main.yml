@@ -25,7 +25,6 @@
 - name: install npm packages
   npm: name={{ item }} global=yes state=latest
   with_items:
-    - bower
     - gulp
 
 - name: install local npm packages
