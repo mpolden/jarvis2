@@ -23,6 +23,6 @@
     "url": "git://github.com/martinp/jarvis2.git"
   },
   "scripts": {
-    "install": "git clone https://github.com/bernii/gauge.js.git node_modules/gauge"
+    "install": "test -d node_modules/gauge || git clone -q https://github.com/bernii/gauge.js.git node_modules/gauge"
   }
 }
