@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
+var changed = require('gulp-changed');
 
 var paths = {
   src: {
@@ -33,18 +34,21 @@ gulp.task('lint', function() {
 
 gulp.task('less', function () {
   return gulp.src(paths.src.less)
+    .pipe(changed('app/static/'))
     .pipe(less())
     .pipe(gulp.dest('app/static/'));
 });
 
 gulp.task('bundle-js', function() {
-  gulp.src(paths.vendor.js)
+  return gulp.src(paths.vendor.js)
+    .pipe(changed('app/static/vendor/'))
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('app/static/vendor/'));
 });
 
 gulp.task('bundle-css', function() {
-  gulp.src(paths.vendor.css)
+  return gulp.src(paths.vendor.css)
+    .pipe(changed('app/static/vendor/'))
     .pipe(concat('bundle.css'))
     .pipe(gulp.dest('app/static/vendor/'));
 });

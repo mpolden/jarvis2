@@ -13,10 +13,10 @@
   },
   "devDependencies": {
     "gulp": "~3.5.0",
-    "gulp-browserify": "^0.4.6",
     "gulp-jshint": "~1.3.4",
     "gulp-less": "~1.1.7",
-    "gulp-concat": "^2.1.7"
+    "gulp-concat": "^2.1.7",
+    "gulp-changed": "^0.2.1"
   },
   "repository": {
     "type": "git",
