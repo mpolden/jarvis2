@@ -112,6 +112,18 @@ def events():
     return response
 
 
+@app.route('/events/<widget>', methods=['POST'])
+def create_event(widget):
+    if not _is_enabled(widget):
+        abort(404)
+    data = request.data
+    if not data:
+        abort(400)
+    body = json.loads(data)
+    _add_event(widget, body)
+    return '', 201
+
+
 def _is_enabled(name, conf=None):
     if conf is None:
         conf = app.config['JOBS']
@@ -152,10 +164,7 @@ def _configure_jobs():
         sched.start()
 
 
-def _run_job(widget, job):
-    body = job.get()
-    if not body:
-        return
+def _add_event(widget, body):
     json_data = json.dumps({
         'widget': widget,
         'body': body
@@ -163,6 +172,13 @@ def _run_job(widget, job):
     last_events[widget] = json_data
     for queue in queues.values():
         queue.put(json_data)
+
+
+def _run_job(widget, job):
+    body = job.get()
+    if not body:
+        return
+    _add_event(widget, body)
 
 
 def _close_stream(*args, **kwargs):
