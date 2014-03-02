@@ -15,7 +15,6 @@ from jobs import load_jobs
 from random import randint
 
 
-logging.basicConfig()
 app = Flask(__name__)
 app.config.from_envvar('JARVIS_SETTINGS')
 widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -25,11 +24,19 @@ app.jinja_loader = jinja2.ChoiceLoader([
 ])
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
-logger = app.logger
 assets = Environment(app)
 sched = Scheduler()
 queues = {}
 last_events = {}
+
+
+@app.before_first_request
+def _setup_logging():
+    logging.getLogger('apscheduler.scheduler').addHandler(
+        logging.StreamHandler())
+    if not app.debug:
+        app.logger.addHandler(logging.StreamHandler())
+        app.logger.setLevel(logging.INFO)
 
 
 @app.before_first_request
@@ -125,7 +132,7 @@ def _configure_jobs():
     offset = 0
     for name, cls in load_jobs().items():
         if not _is_enabled(name, conf):
-            logger.info('Skipping disabled job: %s', name)
+            app.logger.info('Skipping disabled job: %s', name)
             continue
         job = cls(conf[name])
         if app.debug:
@@ -135,7 +142,7 @@ def _configure_jobs():
             start_date = datetime.now() + timedelta(seconds=offset)
 
         job.start_date = start_date
-        logger.info('Scheduling job: %s', job)
+        app.logger.info('Scheduling job: %s', job)
         sched.add_interval_job(_run_job,
                                name=name,
                                seconds=job.interval,
