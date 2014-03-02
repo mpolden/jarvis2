@@ -13,8 +13,6 @@ Vagrant.configure("2") do |config|
     config.vm.network "private_network", ip: "172.16.1.10"
     # Flask port
     config.vm.network :forwarded_port, guest: 5000, host: 5000
-    # LiveReload port
-    config.vm.network :forwarded_port, guest: 35729, host: 35729
     config.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/playbook.yml"
       ansible.inventory_path = "provisioning/development"
