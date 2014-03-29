@@ -1,5 +1,5 @@
 ---
-- hosts: development
+- hosts: dev
   sudo: yes
   roles:
     - ntp
@@ -9,7 +9,7 @@
       prompt: "Which config file should be used in development?"
       default: config.py
 
-- hosts: production
+- hosts: prod
   sudo: yes
   roles:
     - ntp
