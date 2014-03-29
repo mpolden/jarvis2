@@ -89,5 +89,5 @@ environment.
 
 License
 -------
-Licensed under the MIT license. See the LICENSE file if you've never seen it
-before.
+Licensed under the MIT license. See the [LICENSE](LICENSE) file if you've never
+seen it before.
