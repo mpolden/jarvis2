@@ -1,3 +1,7 @@
+# Main configuration file for jarvis2
+#
+# Please see WIDGETS.md for more detailed documentation.
+
 JOBS = {}
 
 JOBS['yr'] = {
@@ -110,9 +114,7 @@ JOBS['avinor'] = {
 JOBS['stats'] = {
     'enabled': False,
     'interval': 600,
-    # Nickname on #tihlde @ EFnet
     'nick': 'nick',
-    # Max gauge limit
     'max': {
         'coffee': 8,
         'beer': 10

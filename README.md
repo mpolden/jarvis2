@@ -2,16 +2,20 @@ JARVIS v2
 =========
 JARVIS is a dashboard framework designed to run on the Raspberry Pi.
 
+It features live-updating widgets using
+[server-sent events](http://en.wikipedia.org/wiki/Server-sent_events) and can be
+easily extended to fit your needs.
+
 The framework is written in Python and is a new and improved version of the old
 [JARVIS](https://github.com/martinp/jarvis) project.
 
 Screenshots
-==========
+-----------
 ![Screenshot 1](https://github.com/martinp/jarvis2/raw/master/public/jarvis2.png)
 ![Screenshot 2](https://github.com/martinp/jarvis2/raw/master/public/jarvis2_1.png)
 
 Dependencies
-============
+------------
 JARVIS requires Python 2.6+ to run.
 
 Some dependencies have native bindings which requires these packages on
@@ -19,17 +23,17 @@ Debian/Ubuntu:
 
     aptitude install -y python-dev libxml2-dev libxslt1-dev zlib1g-dev
 
-Install Python packages:
+Install requirements:
 
-    pip install --use-mirrors -r requirements.txt
+    pip install -r requirements.txt
 
 For development it's recommended to use [virtualenv](http://www.virtualenv.org).
 
-Development dependencies require [node.js](http://nodejs.org) and can be
+Development dependencies require [Node.js](http://nodejs.org) and can be
 installed with `npm install`. These are *not* required to run the app.
 
 Configuration
-=============
+-------------
 All configuration of widgets is done in a single Python source file. The
 configuration is specified by setting the `JARVIS_SETTINGS` environment
 variable.
@@ -37,10 +41,10 @@ variable.
 A sample config (`app/config.py.sample`) is provided. This file can be used as a
 starting point for your own configuration.
 
-Copy `config.py.sample` to `config.py` and edit it to suit your needs.
+Copy `app/config.py.sample` to `app/config.py` and edit it to suit your needs.
 
 Usage
-=====
+-----
 After installing dependencies and creating a config file, the app can be started
 by running:
 
@@ -66,83 +70,24 @@ Create a new dashboard:
 
     make dashboard
 
-Available widgets
-=================
-See [WIDGETS.md](https://github.com/martinp/jarvis2/blob/master/WIDGETS.md) for
-details on available widgets,
+Widgets
+-------
+See [WIDGETS.md](WIDGETS.md) for documentation on available widgets.
+
+Deployment
+----------
+See [INSTALL.md](INSTALL.md) for a basic deployment guide.
 
 Development environment
-=======================
+-----------------------
 A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
+[Ansible](http://www.ansible.com) is used for provisioning the Vagrant box and
+must be installed on your host machine.
+
 Run `vagrant up dev` in the repository root to provision a development
 environment.
 
-Deployment guide using nginx and uWSGI
-======================================
-JARVIS is a [Flask](http://flask.pocoo.org) application, see the
-[uWSGI docs](http://uwsgi-docs.readthedocs.org/en/latest/WSGIquickstart.html)
-for a more detailed uWSGI deployment guide or check out the other deployment
-options described in the [Flask docs](http://flask.pocoo.org/docs/deploying)
-
-This guide assumes Debian or Ubuntu, but most steps should work for other
-distros.
-
-Clone repo:
-
-    export APP_PATH=/path/to/jarvis2
-    git clone https://github.com/martinp/jarvis2.git $APP_PATH
-
-Create virtualenv and install dependencies:
-
-    cd $APP_PATH
-    virtualenv venv
-    source venv/bin/active
-    pip install --use-mirrors -r requirements.txt
-
-Copy sample config and edit it to suit your needs:
-
-    cp $APP_PATH/app/config.py.sample $APP_PATH/app/config.py
-
-Create cache directories (needs to be writable by uwsgi process):
-
-    mkdir -p $APP_PATH/app/static/{.webassets-cache,assets}
-    chown www-data:www-data $APP_PATH/app/static/{.webassets-cache,assets}
-
-Install nginx and uwsgi:
-
-    aptitude install nginx uwsgi uwsgi-plugin-python
-
-Configure app config in `/etc/uwsgi/apps-available/jarvis2.ini`:
-
-    [uwsgi]
-    workers = 1
-    threads = 20
-    plugin = python
-    chdir = /path/to/jarvis2/app
-    home = /path/to/jarvis2/venv
-    env = JARVIS_SETTINGS=config.py
-    module = main
-    callable = app
-
-Enable uwsgi app and start uwsgi:
-
-    ln -s /etc/uwsgi/apps-available/jarvis2.ini /etc/uwsgi/apps-enabled/jarvis2.ini
-    service uwsgi start
-
-Configure nginx site in `/etc/nginx/sites-available/jarvis2`:
-
-    server {
-        location /static/ {
-            alias /path/to/jarvis2/app/static/;
-        }
-        location / {
-            include uwsgi_params;
-            uwsgi_buffering off;
-            uwsgi_pass unix:/tmp/uwsgi.sock;
-        }
-    }
-
-Enable nginx site and (re)start nginx:
-
-    ln -s /etc/nginx/sites-available/jarvis2 /etc/nginx/sites-enabled/jarvis2
-    service nginx start
+License
+-------
+Licensed under the MIT license. See the LICENSE file if you've never seen it
+before.
