@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "provisioning/playbook.yml"
     end
   end
-  config.vm.define "prod" do |prod|
+  config.vm.define "prod", autostart: false do |prod|
     # nginx port
     config.vm.network :forwarded_port, guest: 80, host: 8080
     config.vm.provision "ansible" do |ansible|

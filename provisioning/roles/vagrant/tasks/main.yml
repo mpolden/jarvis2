@@ -12,6 +12,7 @@
     - nodejs
     - python-dev
     - python-virtualenv
+    - virtualenvwrapper
     - zlib1g-dev
   environment:
     LC_ALL: en_US.UTF-8
