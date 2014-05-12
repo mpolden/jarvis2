@@ -4,7 +4,7 @@ Available widgets
 atb
 ---
 Displays bus routes in Trondheim, Norway. Requires an valid API key for
-BusBuddy. See the [BusBuddy API documentation](http://http://api.busbuddy.no)
+BusBuddy. See the [BusBuddy API documentation](http://api.busbuddy.no)
 for more information.
 
 ```python
