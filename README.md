@@ -11,8 +11,8 @@ The framework is written in Python and is a new and improved version of the old
 
 Screenshots
 -----------
-![Screenshot 1](https://github.com/martinp/jarvis2/raw/master/public/jarvis2.png)
-![Screenshot 2](https://github.com/martinp/jarvis2/raw/master/public/jarvis2_1.png)
+![Screenshot 1](docs/jarvis2.png)
+![Screenshot 2](docs/jarvis2_1.png)
 
 Dependencies
 ------------
@@ -72,11 +72,11 @@ Create a new dashboard:
 
 Widgets
 -------
-See [WIDGETS.md](WIDGETS.md) for documentation on available widgets.
+See [WIDGETS.md](docs/WIDGETS.md) for documentation on available widgets.
 
 Deployment
 ----------
-See [INSTALL.md](INSTALL.md) for a basic deployment guide.
+See [INSTALL.md](docs/INSTALL.md) for a basic deployment guide.
 
 Development environment
 -----------------------
