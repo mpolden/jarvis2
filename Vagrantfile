@@ -4,8 +4,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "precise64-current"
   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-  config.vm.synced_folder ".", "/vagrant", type: "rsync",
-      rsync__args: ["--verbose", "--archive", "-z"]
+  config.vm.synced_folder ".", "/vagrant"
   config.ssh.forward_agent = true
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
