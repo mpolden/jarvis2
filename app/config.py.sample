@@ -119,7 +119,7 @@ JOBS['stats'] = {
         'coffee': 8,
         'beer': 10
     },
-    timeout: 5
+    'timeout': 5
 }
 
 JOBS['steam'] = {
