@@ -17,7 +17,7 @@ Create virtualenv and install dependencies:
 
     cd $APP_PATH
     virtualenv venv
-    source venv/bin/active
+    source venv/bin/activate
     pip install --use-mirrors -r requirements.txt
 
 Copy sample config and edit it to suit your needs:
