@@ -3,11 +3,12 @@
 """JARVIS 2 - create widget
 
 Usage:
-  create_widget.py [-r] [-n] [NAME]
+  create_widget.py [-l | [-r] [-n] [NAME]]
 
 Options:
   -h --help         Show usage
   -n --dry-run      Show what would be done, but don't do anything
+  -l --list         List widgets
   -r --remove       Remove widget
 
 """
@@ -95,6 +96,16 @@ class WidgetFactory(object):
                     continue
                 self._remove_file(file_path)
 
+    def list_widgets(self):
+        if not os.path.isdir(self.widget_dir):
+            print('No such directory: {}'.format(self.widget_dir))
+            sys.exit(1)
+
+        for d in os.listdir(self.widget_dir):
+            widget_path = os.path.join(self.widget_dir, d)
+            name, _ = os.path.splitext(os.path.basename(d))
+            print('{} {}'.format(name, widget_path))
+
 
 class UselessFactory(WidgetFactory):
 
@@ -114,7 +125,9 @@ def get_factory(name, dry_run=False):
 
 if __name__ == '__main__':
     args = docopt(__doc__)
-    if args['--remove']:
+    if args['--list']:
+        get_factory('', True).list_widgets()
+    elif args['--remove']:
         name = args['NAME'] or raw_input('Name of the widget to remove: ')
         get_factory(name, args['--dry-run']).remove_widget()
     else:
