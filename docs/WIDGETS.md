@@ -1,6 +1,21 @@
 Available widgets
 =================
 
+Common options
+--------------
+
+All jobs have two common fields: `enabled` and `interval`.
+
+`enabled` should be `True` to enable the job. If the key is omitted or `False`,
+the job won't be enabled.
+
+`interval` specifies how often the job should run, in seconds. `interval` set to
+`60` will make the job run every 60 seconds.
+
+Most jobs also accept a `timeout` option. This option sets how long a job should
+wait for a request to complete, in seconds. Timeout should be lower than
+interval to prevent slow jobs from blocking future jobs.
+
 atb
 ---
 Displays bus routes in Trondheim, Norway. Requires an valid API key for
@@ -121,7 +136,7 @@ plex
 ----
 Displays latests TV shows and movies from Plex Media Server. Plex Media Server
 makes metadata for each section available as XML under the URL:
-http://<ip>:<port>/library/sections/<section_number>/recentlyAdded/
+http://ip:port/library/sections/section_number/recentlyAdded/
 
 ```python
 JOBS['plex'] = {
@@ -147,9 +162,9 @@ JOBS['sonos'] = {
 
 stats
 -----
-Displays beverage consumption stats from #tihlde on freenode. The `max` dict
-sets the upper limit for the gauges. `nick` is the nick you want to retrieve
-stats for.
+Displays beverage consumption stats from the IRC channel #tihlde on freenode.
+The `max` dict sets the upper limit for the gauges. `nick` is the nick you want
+to retrieve stats for.
 
 ```python
 JOBS['stats'] = {
