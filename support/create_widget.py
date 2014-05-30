@@ -49,7 +49,7 @@ class WidgetFactory(object):
             '%s.py' % (self.name,): job
         }
 
-    def _create_widget_dir(self, path):
+    def _create_widget_dir(self):
         os.mkdir(self.widget_dir)
         puts('Created %s' % (colored.green(self.widget_dir),))
 
@@ -68,7 +68,7 @@ class WidgetFactory(object):
             print('%s already exists' % (self.job_file,))
             sys.exit(1)
 
-        self._create_widget_dir(self.widget_dir)
+        self._create_widget_dir()
         for filename in contents:
             if filename.endswith('.py'):
                 file_path = self.job_file
@@ -98,7 +98,7 @@ class WidgetFactory(object):
 
 class UselessFactory(WidgetFactory):
 
-    def _create_widget_dir(self, path):
+    def _create_widget_dir(self):
         puts('Would create %s' % (colored.green(self.widget_dir),))
 
     def _write_file(self, file_path, contents):
