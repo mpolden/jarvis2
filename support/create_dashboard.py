@@ -45,6 +45,10 @@ class DashboardFactory(object):
             print('{} already exists'.format(self.layout))
             sys.exit(1)
 
+        if not os.path.isdir(self.layout_dir):
+            os.mkdir(self.layout_dir)
+            print('Created {}'.format(colored.green(self.layout_dir)))
+
         self._write_file(self.layout)
 
         print('Your dashboard will be available at /dashboard/{}'.format(
