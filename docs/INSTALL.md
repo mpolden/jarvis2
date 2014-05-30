@@ -26,8 +26,8 @@ Copy sample config and edit it to suit your needs:
 
 Create cache directories (needs to be writable by uwsgi process):
 
-    mkdir -p $APP_PATH/app/static/{.webassets-cache,assets}
-    chown www-data:www-data $APP_PATH/app/static/{.webassets-cache,assets}
+    mkdir -p $APP_PATH/app/static/{.webassets-cache,gen}
+    chown www-data:www-data $APP_PATH/app/static/{.webassets-cache,gen}
 
 Install nginx and uwsgi:
 
