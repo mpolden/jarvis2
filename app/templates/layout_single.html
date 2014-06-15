@@ -1,7 +1,7 @@
 <div class="gridster" ng-controller="EventCtrl" ng-cloak>
   <ul>
     <li data-row="1" data-col="1" data-sizex="{{ x }}" data-sizey="{{ y }}">
-      {{ include_raw('{widget}/{widget}.html'.format(widget=widget)) }}
+      {{ include_widget(widget, locale) }}
     </li>
   </ul>
 </div>

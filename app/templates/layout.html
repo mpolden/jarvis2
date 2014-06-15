@@ -2,57 +2,57 @@
   <ul>
     {% if is_widget_enabled('yr') %}
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
-      {{ include_raw('yr/yr.html') }}
+      {{ include_widget('yr', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('time') %}
     <li data-row="1" data-col="2" data-sizex="2" data-sizey="2">
-      {{ include_raw('time/time.html') }}
+      {{ include_widget('time', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('atb') %}
     <li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
-      {{ include_raw('atb/atb.html') }}
+      {{ include_widget('atb', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('hackernews') %}
     <li data-row="1" data-col="4" data-sizex="2" data-sizey="2">
-      {{ include_raw('hackernews/hackernews.html') }}
+      {{ include_widget('hackernews', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('avinor') %}
     <li data-row="2" data-col="1" data-sizex="2" data-sizey="2">
-      {{ include_raw('avinor/avinor.html') }}
+      {{ include_widget('avinor', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('calendar') %}
     <li data-row="2" data-col="2" data-sizex="2" data-sizey="2">
-      {{ include_raw('calendar/calendar.html') }}
+      {{ include_widget('calendar', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('uptime') %}
     <li data-row="2" data-col="3" data-sizex="2" data-sizey="2">
-      {{ include_raw('uptime/uptime.html') }}
+      {{ include_widget('uptime', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('plex') %}
     <li data-row="2" data-col="4" data-sizex="2" data-sizey="2">
-      {{ include_raw('plex/plex.html') }}
+      {{ include_widget('plex', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('nsb') %}
     <li data-row="3" data-col="1" data-sizex="2" data-sizey="2">
-      {{ include_raw('nsb/nsb.html') }}
+      {{ include_widget('nsb', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('ping') %}
     <li data-row="3" data-col="2" data-sizex="4" data-sizey="2">
-      {{ include_raw('ping/ping.html') }}
+      {{ include_widget('ping', locale) }}
     </li>
     {% endif %}
     {% if is_widget_enabled('gmail') %}
     <li data-row="3" data-col="4" data-sizex="2" data-sizey="2">
-      {{ include_raw('gmail/gmail.html') }}
+      {{ include_widget('gmail', locale) }}
     </li>
     {% endif %}
   </ul>

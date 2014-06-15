@@ -8,7 +8,7 @@ import Queue
 import SocketServer
 from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
-from flask import Flask, render_template, Response, request, abort
+from flask import Flask, render_template, Response, request, abort, safe_join
 from flask.ext.assets import Environment, Bundle
 from flask.templating import TemplateNotFound
 from jobs import load_jobs
@@ -74,21 +74,24 @@ def widget(widget):
         abort(404)
     x = request.args.get('x', 2)
     y = request.args.get('y', 2)
+    locale = request.args.get('locale')
     return render_template('index.html', layout='layout_single.html',
-                           widget=widget, x=x, y=y)
+                           widget=widget, x=x, y=y, locale=locale)
 
 
 @app.route('/')
 @app.route('/d/<layout>')
 @app.route('/dashboard/<layout>')
 def dashboard(layout=None):
+    locale = request.args.get('locale')
     if layout is not None:
         try:
             return render_template('index.html',
-                                   layout='layouts/{0}.html'.format(layout))
+                                   layout='layouts/{0}.html'.format(layout),
+                                   locale=locale)
         except TemplateNotFound:
             abort(404)
-    return render_template('index.html')
+    return render_template('index.html', locale=locale)
 
 
 @app.route('/events')
@@ -130,12 +133,26 @@ def _is_enabled(name, conf=None):
     return name in conf and conf[name].get('enabled')
 
 
+def _include_raw(name):
+    return jinja2.Markup(app.jinja_loader.get_source(
+        app.jinja_env, name)[0])
+
+
+def _include_widget(widget, locale):
+    default_template = safe_join(widget, '%s.html' % (widget,))
+    localized_template = safe_join(widget, '%s_%s.html' % (widget,
+                                                           locale))
+    template_path = safe_join(widgets_path, localized_template)
+    if locale is None or not os.path.exists(template_path):
+        return _include_raw(default_template)
+    return _include_raw(localized_template)
+
+
 @app.context_processor
 def _inject_template_methods():
-    def include_raw(name):
-        return jinja2.Markup(app.jinja_loader.get_source(app.jinja_env,
-                                                         name)[0])
-    return dict(is_widget_enabled=_is_enabled, include_raw=include_raw)
+    return dict(is_widget_enabled=_is_enabled,
+                include_raw=_include_raw,
+                include_widget=_include_widget)
 
 
 @app.before_first_request
