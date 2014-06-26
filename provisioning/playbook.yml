@@ -4,10 +4,6 @@
   roles:
     - ntp
     - vagrant
-  vars_prompt:
-    - name: app_config
-      prompt: "Which config file should be used in development?"
-      default: config.py
 
 - hosts: prod
   sudo: yes
@@ -16,13 +12,3 @@
     - nginx
     - deploy
     - uwsgi
-  vars_prompt:
-    - name: app_config
-      prompt: "Which config file should be used in production?"
-      default: config.py
-    - name: app_path
-      prompt: "Where should the application be deployed?"
-      default: /opt/jarvis2
-    - name: google_credentials_file
-      prompt: "Which credentials file should be used?"
-      default: .calendar.json
