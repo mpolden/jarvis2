@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
-import imaplib
-import re
+import os
+
+import httplib2
+from apiclient.discovery import build
+from oauth2client.file import Storage
+
 from jobs import AbstractJob
 
 
@@ -10,27 +14,33 @@ class Gmail(AbstractJob):
     def __init__(self, conf):
         self.interval = conf['interval']
         self.email = conf['email']
-        self.password = conf['password']
         self.folder = conf['folder']
+        self.timeout = 5
 
-    def _parse_count(self, message):
-        count = re.search('\w+ (\d+)', message)
-        return int(count.group(1)) if count is not None else 0
+    def _auth(self):
+        credentials_file = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '.gmail.json'))
+        storage = Storage(credentials_file)
+        credentials = storage.get()
+        http = httplib2.Http(timeout=self.timeout)
+        http = credentials.authorize(http)
+        self.service = build(serviceName='gmail', version='v1', http=http)
 
     def _get_count(self):
-        _, message = self.mail.status(self.folder, '(MESSAGES)')
-        return self._parse_count(message[0])
+        result = self.service.users().messages().list(
+            userId=self.email, q='label:{}'.format(self.folder)).execute()
+        return result.get('resultSizeEstimate', 0)
 
     def _get_unread_count(self):
-        _, message = self.mail.status(self.folder, '(UNSEEN)')
-        return self._parse_count(message[0])
+        result = self.service.users().messages().list(
+            userId=self.email, q='is:unread').execute()
+        return result.get('resultSizeEstimate', 0)
 
     def get(self):
-        self.mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        self.mail.login(self.email, self.password)
+        if not hasattr(self, 'service'):
+            self._auth()
         count = self._get_count()
         unread = self._get_unread_count()
-        self.mail.logout()
         return {
             'email': self.email,
             'folder': self.folder,

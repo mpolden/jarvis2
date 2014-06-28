@@ -4,7 +4,7 @@
 import os.path
 import unittest
 from datetime import datetime
-from jobs import yr, hackernews, nsb, ping, calendar, gmail
+from jobs import yr, hackernews, nsb, ping, calendar
 from lxml import etree
 
 
@@ -131,18 +131,6 @@ class Calendar(unittest.TestCase):
                     {'date': '2013-08-01T15:00:00+02:00', 'id': 'foo2',
                      'summary': 'Foo bar 2'}]
         self.assertEqual(self.calendar._parse(items), expected)
-
-
-class Gmail(unittest.TestCase):
-
-    def setUp(self):
-        self.gmail = gmail.Gmail({'interval': None, 'email': None,
-                                 'password': None, 'folder': None})
-
-    def test_parse_count(self):
-        self.assertEqual(0, self.gmail._parse_count('foo bar'))
-        self.assertEqual(10, self.gmail._parse_count('"INBOX" (UNSEEN 10)'))
-        self.assertEqual(20, self.gmail._parse_count('"INBOX" (MESSAGES 20)'))
 
 
 if __name__ == '__main__':

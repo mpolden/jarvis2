@@ -1,5 +1,6 @@
 *.pyc
 .calendar.json
+.gmail.json
 .idea/
 .vagrant/
 app/static/.webassets-cache/

@@ -97,10 +97,7 @@ JOBS['gmail'] = {
     'enabled': False,
     'interval': 600,
     'email': 'your.username@gmail.com',
-    # Generate a application-specific password at
-    # https://accounts.google.com/b/0/IssuedAuthSubTokens#accesscodes
-    'password': 'application-specific-password',
-    'folder': 'Inbox'
+    'folder': 'inbox'
 }
 
 JOBS['avinor'] = {
