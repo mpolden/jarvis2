@@ -26,6 +26,7 @@
 
 - name: clone repo from github
   git: repo=https://github.com/martinp/jarvis2.git
+       version=gmail-api
        dest={{ app_path }}
   notify:
     - restart uwsgi
@@ -46,11 +47,12 @@
     - restart uwsgi
 
 - name: copy google api credentials
-  copy: src={{ google_credentials_file }}
-        dest={{ app_path }}/app/jobs/{{ google_credentials_file }}
+  copy: src={{ item }}
+        dest={{ app_path }}/app/jobs/{{ item }}
         owner=www-data
         group=www-data
         mode=0600
+  with_items: google_credentials_files
   notify:
     - restart uwsgi
 
