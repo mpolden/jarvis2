@@ -117,7 +117,7 @@ class Ping(unittest.TestCase):
 class Calendar(unittest.TestCase):
 
     def setUp(self):
-        self.calendar = calendar.Calendar({'interval': None, 'api_key': None})
+        self.calendar = calendar.Calendar({'interval': None})
 
     def test_parse(self):
         items = [

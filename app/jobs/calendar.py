@@ -15,7 +15,6 @@ class Calendar(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']
-        self.api_key = conf['api_key']
         self.timeout = conf.get('timeout')
 
     def _auth(self):
@@ -25,8 +24,7 @@ class Calendar(AbstractJob):
         credentials = storage.get()
         http = httplib2.Http(timeout=self.timeout)
         http = credentials.authorize(http)
-        self.service = build(serviceName='calendar', version='v3', http=http,
-                             developerKey=self.api_key)
+        self.service = build(serviceName='calendar', version='v3', http=http)
 
     def _parse(self, items):
         events = []

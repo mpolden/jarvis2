@@ -46,7 +46,6 @@ JOBS['calendar'] = {
     'interval': 600,
     'client_id': '',
     'client_secret': '',
-    'api_key': '',
     'timeout': 5
 }
 
