@@ -58,7 +58,7 @@ JOBS['calendar'] = {
     'enabled': True,
     'interval': 600,
     'client_id': '',
-    'client_secret': '',
+    'client_secret': ''
 }
 ```
 
@@ -70,22 +70,25 @@ to run `make google-api-auth` to generate a credentials file.
 
 gmail
 -----
-Displays the current unread count and total mail count in your Gmail inbox.
-Uses IMAP to read the mail count.
+Displays the current unread count, and total mail count in the configured
+folder.
 
 ```python
 JOBS['gmail'] = {
     'enabled': True,
     'interval': 900,
+    'client_id': '',
+    'client_secret': '',
     'email': 'example@gmail.com',
-    'password': 'secret',
-    'folder': 'Inbox'
+    'folder': 'inbox'
 }
 ```
 
-The field `password` is an application-specific password, which can be
-generated
-[here](https://accounts.google.com/b/0/IssuedAuthSubTokens?hide_authsub=1).
+The values for `client_id` and `client_secret` can be created using the
+[Google Developer Console](https://code.google.com/apis/console/#:access).
+
+When you have set `client_id` and `client_secret` in your config file, you need
+to run `make google-api-auth` to generate a credentials file.
 
 hackernews
 ----------
