@@ -23,14 +23,8 @@
 - name: install pip development requirements
   pip: requirements=/vagrant/dev-requirements.txt virtualenv=/vagrant/venv
 
-- name: install npm packages
-  npm: name={{ item }} global=yes state=latest
-  with_items:
-    - gulp
-
-- name: install local npm packages
-  sudo_user: vagrant
-  npm: path=/vagrant state=latest
+- name: install jshint
+  npm: name=jshint global=yes state=latest
 
 - name: hide login message
   file: path=/home/vagrant/.hushlogin

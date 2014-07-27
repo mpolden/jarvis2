@@ -4,7 +4,7 @@ lint-py:
 	flake8 --max-complexity=8 app/*.py app/jobs/*.py support/*.py
 
 lint-js:
-	gulp lint
+	jshint app/static/js/*.js app/static/widgets/*/*.js
 
 lint: lint-py lint-js
 
@@ -16,9 +16,7 @@ clean:
 	rm -fr app/static/.webassets-cache/
 	rm -fr app/static/assets/
 
-release: clean lint-py test
-release:
-	gulp
+release: clean lint test
 
 widget:
 	python support/create_widget.py $(NAME)
