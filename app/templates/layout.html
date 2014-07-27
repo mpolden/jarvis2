@@ -1,58 +1,58 @@
-<div class="gridster" ng-controller="EventCtrl" ng-cloak>
+<div class="gridster">
   <ul>
     {% if is_widget_enabled('yr') %}
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
-      {{ include_widget('yr', locale) }}
+      <div id="yr"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('time') %}
     <li data-row="1" data-col="2" data-sizex="2" data-sizey="2">
-      {{ include_widget('time', locale) }}
+      <div id="time"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('atb') %}
     <li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
-      {{ include_widget('atb', locale) }}
+      <div id="atb"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('hackernews') %}
     <li data-row="1" data-col="4" data-sizex="2" data-sizey="2">
-      {{ include_widget('hackernews', locale) }}
+      <div id="hackernews"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('avinor') %}
     <li data-row="2" data-col="1" data-sizex="2" data-sizey="2">
-      {{ include_widget('avinor', locale) }}
+      <div id="avinor"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('calendar') %}
     <li data-row="2" data-col="2" data-sizex="2" data-sizey="2">
-      {{ include_widget('calendar', locale) }}
+      <div id="calendar"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('uptime') %}
     <li data-row="2" data-col="3" data-sizex="2" data-sizey="2">
-      {{ include_widget('uptime', locale) }}
+      <div id="uptime"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('plex') %}
     <li data-row="2" data-col="4" data-sizex="2" data-sizey="2">
-      {{ include_widget('plex', locale) }}
+      <div id="plex"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('nsb') %}
     <li data-row="3" data-col="1" data-sizex="2" data-sizey="2">
-      {{ include_widget('nsb', locale) }}
+      <div id="nsb"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('ping') %}
     <li data-row="3" data-col="2" data-sizex="4" data-sizey="2">
-      {{ include_widget('ping', locale) }}
+      <div id="ping"></div>
     </li>
     {% endif %}
     {% if is_widget_enabled('gmail') %}
     <li data-row="3" data-col="4" data-sizex="2" data-sizey="2">
-      {{ include_widget('gmail', locale) }}
+      <div id="gmail"></div>
     </li>
     {% endif %}
   </ul>
