@@ -41,9 +41,7 @@ def _setup_logging():
 
 @app.before_first_request
 def _configure_bundles():
-    js_vendor = ['vendor/bundle.js']
     js = ['js/gridster.js', 'js/main.js']
-    css_vendor = ['vendor/bundle.css']
     css = ['css/styles.css']
 
     for widget in os.listdir(widgets_path):
@@ -55,15 +53,11 @@ def _configure_bundles():
             elif asset_file.endswith('.css'):
                 css.append(asset_path)
 
-    assets.register('js_all', Bundle(*(js_vendor + js),
-                                     output='gen/app.js'))
-    assets.register('css_all', Bundle(*(css_vendor + css),
-                                      output='gen/styles.css'))
-    assets.register('js_min_all', Bundle(*(js_vendor + js),
-                                         filters='rjsmin',
+    assets.register('js_all', Bundle(*js, output='gen/app.js'))
+    assets.register('css_all', Bundle(*css, output='gen/styles.css'))
+    assets.register('js_min_all', Bundle(*js, filters='rjsmin',
                                          output='gen/app.min.js'))
-    assets.register('css_min_all', Bundle(*(css_vendor + css),
-                                          filters='cssmin',
+    assets.register('css_min_all', Bundle(*css, filters='cssmin',
                                           output='gen/styles.min.css'))
 
 
