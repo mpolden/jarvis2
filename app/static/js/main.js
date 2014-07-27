@@ -1,21 +1,17 @@
-/* jshint camelcase: false */
-var jarvis = jarvis || angular.module('jarvis', ['truncate']);
+(function () {
+  var source = new EventSource('/events');
 
-jarvis.controller('EventCtrl', ['$scope',
-  function ($scope) {
-    'use strict';
+  source.addEventListener('message', function (message) {
+    var o = JSON.parse(message.data);
 
-    var source = new EventSource('/events');
-
-    source.addEventListener('message', function (message) {
-      var o = JSON.parse(message.data);
-      if (angular.isObject(o.body) && Object.keys(o.body).length > 0) {
-        o.body.updated_at = moment().format('HH:mm');
-        $scope.$apply(function () {
-          $scope.$broadcast(o.widget, o.body);
-        });
+    if (typeof o === 'object' && Object.keys(o.body).length > 0) {
+      var el = document.getElementById(o.widget);
+      if (el === null) {
+        return;
       }
-    }, false);
-
-  }
-]);
+      o.body.updatedAt = moment().format('HH:mm');
+      var event = new CustomEvent(o.widget, {'detail': o.body});
+      el.dispatchEvent(event);
+    }
+  }, false);
+})();
