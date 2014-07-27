@@ -26,6 +26,7 @@
     "angular": true,
     "m": true,
     "$": true,
+    "jrvs": true,
     "EventSource": true,
     "Rickshaw": true,
     "moment": true,

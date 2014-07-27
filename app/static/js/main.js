@@ -1,3 +1,4 @@
+/* jshint unused: false */
 (function () {
   var source = new EventSource('/events');
 
@@ -15,3 +16,12 @@
     }
   }, false);
 })();
+
+var jrvs = {
+  'truncate': function (s, n) {
+    if (s.length > n) {
+      return s.substring(0, n) + '...';
+    }
+    return s;
+  }
+};
