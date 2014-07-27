@@ -1,16 +1,25 @@
-var jarvis = jarvis || angular.module('jarvis', []);
+var time = {
+  'el': document.getElementById('time')
+};
 
-jarvis.controller('TimeCtrl', ['$scope',
-  function ($scope) {
-    'use strict';
+time.controller = function () {
+  var ctrl = this;
+  ctrl.now = moment().lang('nb');
+  var setTime = function () {
+    ctrl.now = moment().lang('nb');
+    m.render(time.el, time.view(ctrl));
+  };
+  setInterval(setTime, 500);
+};
 
-    var setTime = function () {
-      $scope.$apply(function () {
-        $scope.now = moment().lang('nb');
-      });
-    };
+time.view = function (ctrl) {
+  return m('div', [
+    m('h1', ctrl.now.format('HH:mm')),
+    m('h2', ctrl.now.format('dddd')),
+    m('p', ctrl.now.format('D. MMMM YYYY'))
+  ]);
+};
 
-    setInterval(setTime, 500);
-
-  }
-]);
+if (time.el !== null) {
+  m.module(time.el, time);
+}
