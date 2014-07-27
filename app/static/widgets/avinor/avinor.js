@@ -1,21 +1,54 @@
-/* jshint camelcase: false */
-var jarvis = jarvis || angular.module('jarvis', []);
+var avinor = {
+  'el': document.getElementById('avinor')
+};
 
-jarvis.controller('AvinorCtrl', ['$scope',
-  function ($scope) {
-    'use strict';
+avinor.controller = function () {
+  var ctrl = this;
+  ctrl.data = {};
+  avinor.el.addEventListener('avinor', function (event) {
+    var data = event.detail;
 
-    $scope.$on('avinor', function (ev, body) {
-      body.flights = body.flights.map(function (f) {
-        f.date = moment(f.schedule_time).lang('nb');
-        return f;
-      }).filter(function (f) {
-        return f.date.isAfter();
-      });
-      body.next = body.flights.shift() || null;
-      body.flights = body.flights.slice(0, 4);
-      angular.extend($scope, body);
+    data.flights = data.flights.map(function (f) {
+      f.date = moment(f.schedule_time).lang('nb');
+      return f;
+    }).filter(function (f) {
+      return f.date.isAfter();
     });
+    data.next = data.flights.shift() || null;
+    data.flights = data.flights.slice(0, 4);
+    ctrl.data = data;
 
+    m.render(avinor.el, avinor.view(ctrl));
+  });
+};
+
+avinor.view = function (ctrl) {
+  if (Object.keys(ctrl.data).length === 0) {
+    return m('p', 'Waiting for data');
   }
-]);
+  var rows = ctrl.data.flights.map(function (flight) {
+    return m('tr', [
+      m('td', flight.flight_id),
+      m('td', flight.date.format('D. MMM HH:mm'))
+    ]);
+  });
+  return m('div', [
+    m('p.fade', 'Neste fly ' + ctrl.data.next.flight_id + ' fra ' +
+      ctrl.data.from + ' til ' + ctrl.data.to + ' går ' +
+      ctrl.data.next.date.format('dddd, D. MMMM')),
+    m('h1', ctrl.data.next.date.format('HH:mm')),
+    m('h2', ctrl.data.next.date.fromNow()),
+    m('table', [
+      m('tr.fade', [
+        m('th', 'Flight'),
+        m('th', 'Avgang')
+      ])
+    ].concat(rows)),
+    m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
+      ctrl.data.updatedAt)
+  ]);
+};
+
+if (avinor.el !== null) {
+  m.module(avinor.el, avinor);
+}
