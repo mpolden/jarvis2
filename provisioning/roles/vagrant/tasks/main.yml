@@ -1,7 +1,4 @@
 ---
-- name: add nodejs repo
-  apt_repository: repo='ppa:chris-lea/node.js'
-
 - name: install packages
   apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
   with_items:
@@ -10,6 +7,7 @@
     - libxslt1-dev
     - make
     - nodejs
+    - npm
     - python-dev
     - python-virtualenv
     - virtualenvwrapper
