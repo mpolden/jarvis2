@@ -41,8 +41,8 @@ def _setup_logging():
 
 @app.before_first_request
 def _configure_bundles():
-    js = ['js/gridster.js', 'js/main.js']
-    css = ['css/styles.css']
+    js = ['main.js']
+    css = ['main.css']
 
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)

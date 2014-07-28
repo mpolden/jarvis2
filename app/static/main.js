@@ -1,5 +1,13 @@
-/* jshint unused: false */
-(function () {
+var jrvs = {};
+
+jrvs.layout = function () {
+  $('.gridster ul').gridster({
+    widget_margins: [5, 5],
+    widget_base_dimensions: [145, 145]
+  });
+};
+
+jrvs.dispatch = function () {
   var source = new EventSource('/events');
 
   source.addEventListener('message', function (message) {
@@ -15,13 +23,16 @@
       el.dispatchEvent(event);
     }
   }, false);
-})();
-
-var jrvs = {
-  'truncate': function (s, n) {
-    if (s.length > n) {
-      return s.substring(0, n) + '...';
-    }
-    return s;
-  }
 };
+
+jrvs.truncate = function (s, n) {
+  if (s.length > n) {
+    return s.substring(0, n) + '...';
+  }
+  return s;
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  jrvs.layout();
+  jrvs.dispatch();
+});

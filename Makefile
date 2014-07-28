@@ -4,7 +4,7 @@ lint-py:
 	flake8 --max-complexity=8 app/*.py app/jobs/*.py support/*.py
 
 lint-js:
-	jshint app/static/js/*.js app/static/widgets/*/*.js
+	jshint app/static/*.js app/static/widgets/*/*.js
 
 lint: lint-py lint-js
 
