@@ -5,18 +5,11 @@
   text-align: center;
 }
 #stats h1 {
-  font-size: 18px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
-#stats #coffee,
-#stats #beer {
-  height: 85px;
+#stats table {
+  width: 100%;
 }
-#stats em {
-  font-style: normal;
-  color: white;
-}
-#stats .values {
-  font-size: 16px;
-  margin: 0;
+#stats tr {
+  font-size: 25px;
 }
