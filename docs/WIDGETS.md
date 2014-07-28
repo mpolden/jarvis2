@@ -181,17 +181,6 @@ JOBS['stats'] = {
 }
 ```
 
-steam
------
-Displays current Steam sales (if any).
-
-```python
-JOBS['steam'] = {
-    'enabled': True,
-    'interval': 600,
-}
-```
-
 uptime
 ------
 Ping one or more hosts and display their status (up or down).

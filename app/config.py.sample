@@ -117,9 +117,3 @@ JOBS['stats'] = {
     },
     'timeout': 5
 }
-
-JOBS['steam'] = {
-    'enabled': True,
-    'interval': 600,
-    'timeout': 5
-}
