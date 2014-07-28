@@ -1,12 +1,12 @@
 all: lint test
 
-lint-py:
+flake8:
 	flake8 --max-complexity=8 app/*.py app/jobs/*.py support/*.py
 
-lint-js:
+jshint:
 	jshint app/static/*.js app/static/widgets/*/*.js
 
-lint: lint-py lint-js
+lint: flake8 jshint
 
 test:
 	python app/tests.py
