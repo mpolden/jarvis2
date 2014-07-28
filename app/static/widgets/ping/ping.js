@@ -52,11 +52,11 @@ ping.createGraph = function (element, values) {
     unstack: true,
     series: series
   });
-  var _ = new Rickshaw.Graph.Legend({
+  new Rickshaw.Graph.Legend({
     element: document.querySelector('#legend'),
     graph: graph
   });
-  var _ = new Rickshaw.Graph.Axis.Y({
+  new Rickshaw.Graph.Axis.Y({
     element: document.querySelector('#y-axis'),
     graph: graph,
     orientation: 'left',
