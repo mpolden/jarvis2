@@ -23,13 +23,11 @@
   "maxlen": 80,
   "browser": true,
   "globals": {
-    "angular": true,
     "m": true,
     "$": true,
     "jrvs": true,
     "EventSource": true,
     "Rickshaw": true,
-    "moment": true,
-    "Gauge": true
+    "moment": true
   }
 }
