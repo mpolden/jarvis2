@@ -24,12 +24,12 @@ hn.view = function (c) {
       m('td.points', item.points)
     ]);
   });
-  return m('div', [
+  return [
     m('p.fade', 'Hacker News'),
     m('table', rows),
     m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
       c.data.updatedAt)
-  ]);
+  ];
 };
 
 if (hn.el !== null) {

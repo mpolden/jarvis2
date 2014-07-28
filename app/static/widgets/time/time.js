@@ -13,11 +13,11 @@ time.controller = function () {
 };
 
 time.view = function (ctrl) {
-  return m('div', [
+  return [
     m('h1', ctrl.now.format('HH:mm')),
     m('h2', ctrl.now.format('dddd')),
     m('p', ctrl.now.format('D. MMMM YYYY'))
-  ]);
+  ];
 };
 
 if (time.el !== null) {

@@ -30,7 +30,7 @@ nsb.view = function (c) {
       m('td', departure.duration + ' min')
     ]);
   });
-  return m('div', [
+  return [
     m('p.fade', 'Neste tog fra ' + c.data.from + ' til ' + c.data.to +
       ' går ' + c.data.date),
     m('h1', c.data.next.departure),
@@ -45,7 +45,7 @@ nsb.view = function (c) {
     ].concat(rows)),
     m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
       c.data.updatedAt)
-  ]);
+  ];
 };
 
 if (nsb.el !== null) {

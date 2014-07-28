@@ -32,7 +32,7 @@ avinor.view = function (ctrl) {
       m('td', flight.date.format('D. MMM HH:mm'))
     ]);
   });
-  return m('div', [
+  return [
     m('p.fade', 'Neste fly ' + ctrl.data.next.flight_id + ' fra ' +
       ctrl.data.from + ' til ' + ctrl.data.to + ' går ' +
       ctrl.data.next.date.format('dddd, D. MMMM')),
@@ -46,7 +46,7 @@ avinor.view = function (ctrl) {
     ].concat(rows)),
     m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
       ctrl.data.updatedAt)
-  ]);
+  ];
 };
 
 if (avinor.el !== null) {

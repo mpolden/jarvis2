@@ -36,7 +36,7 @@ calendar.view = function (c) {
       m('td.start', event.date.format('DD. MM HH:mm'))
     ]);
   });
-  return m('div', [
+  return [
     m('p.fade', 'I dag:'),
     m('h1', c.data.today ? c.data.today.date.format('HH:mm') : '--:--'),
     m('h2', c.data.today ?
@@ -44,7 +44,7 @@ calendar.view = function (c) {
     m('table', rows),
     m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
       c.data.updatedAt)
-  ]);
+  ];
 };
 
 if (calendar.el !== null) {

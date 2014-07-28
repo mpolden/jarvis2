@@ -15,7 +15,7 @@ gmail.view = function (c) {
   if (Object.keys(c.data).length === 0) {
     return m('p', 'Waiting for data');
   }
-  return m('div', [
+  return [
     m('h1', 'Uleste eposter'),
     m('p.fade', [
       m('span', c.data.email),
@@ -26,7 +26,7 @@ gmail.view = function (c) {
     m('p.fade', 'Totalt i ' + c.data.folder + ': ' + c.data.count),
     m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
       c.data.updatedAt)
-  ]);
+  ];
 };
 
 if (gmail.el !== null) {
