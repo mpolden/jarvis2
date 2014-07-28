@@ -3,7 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>JARVIS</title>
+    <title>
+      JARVIS
+      {% if widget  %}
+      &mdash; {{ widget|capitalize }}
+      {% endif %}
+    </title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.4/jquery.gridster.min.css">
