@@ -6,24 +6,29 @@ var ping = {
 
 ping.controller = function () {
   var ctrl = this;
-  ctrl.graph = null;
+  ctrl.data = {};
   ping.el.addEventListener('ping', function (event) {
     ctrl.data = event.detail;
     m.render(ping.el, ping.view(ctrl));
-    if (ctrl.graph === null) {
-      var chartEl = document.querySelector('#ping #chart');
-      ctrl.graph = ping.createGraph(chartEl, ctrl.data.values);
-    } else {
-      ctrl.graph.series.addData(ctrl.data.values);
-    }
-    ctrl.graph.render();
   });
 };
 
-ping.view = function () {
+ping.view = function (ctrl) {
+  if (Object.keys(ctrl.data).length === 0) {
+    return m('p', 'Waiting for data');
+  }
   return [
     m('div#y-axis'),
-    m('div#chart'),
+    m('div#chart', {
+      'config': function (element, isInitialized) {
+        if (isInitialized) {
+          ping.graph.series.addData(ctrl.data.values);
+        } else {
+          ping.graph = ping.createGraph(element, ctrl.data.values);
+        }
+        ping.graph.render();
+      }
+    }),
     m('div#legend')
   ];
 };
