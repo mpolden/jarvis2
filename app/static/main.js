@@ -1,38 +1,42 @@
-var jrvs = {};
+var jrvs = jrvs || {};
 
-jrvs.layout = function () {
-  $('.gridster ul').gridster({
-    widget_margins: [5, 5],
-    widget_base_dimensions: [145, 145]
-  });
-};
+(function () {
+  'use strict';
 
-jrvs.dispatch = function () {
-  var source = new EventSource('/events');
+  jrvs.layout = function () {
+    $('.gridster ul').gridster({
+      widget_margins: [5, 5],
+      widget_base_dimensions: [145, 145]
+    });
+  };
 
-  source.addEventListener('message', function (message) {
-    var o = JSON.parse(message.data);
+  jrvs.dispatch = function () {
+    var source = new EventSource('/events');
 
-    if (typeof o === 'object' && Object.keys(o.body).length > 0) {
-      var el = document.getElementById(o.widget);
-      if (el === null) {
-        return;
+    source.addEventListener('message', function (message) {
+      var o = JSON.parse(message.data);
+
+      if (typeof o === 'object' && Object.keys(o.body).length > 0) {
+        var el = document.getElementById(o.widget);
+        if (el === null) {
+          return;
+        }
+        o.body.updatedAt = moment().format('HH:mm');
+        var event = new CustomEvent(o.widget, {'detail': o.body});
+        el.dispatchEvent(event);
       }
-      o.body.updatedAt = moment().format('HH:mm');
-      var event = new CustomEvent(o.widget, {'detail': o.body});
-      el.dispatchEvent(event);
+    }, false);
+  };
+
+  jrvs.truncate = function (s, n) {
+    if (s.length > n) {
+      return s.substring(0, n) + '...';
     }
-  }, false);
-};
+    return s;
+  };
 
-jrvs.truncate = function (s, n) {
-  if (s.length > n) {
-    return s.substring(0, n) + '...';
-  }
-  return s;
-};
-
-document.addEventListener('DOMContentLoaded', function () {
-  jrvs.layout();
-  jrvs.dispatch();
-});
+  document.addEventListener('DOMContentLoaded', function () {
+    jrvs.layout();
+    jrvs.dispatch();
+  });
+})();

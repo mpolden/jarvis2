@@ -1,54 +1,58 @@
-var avinor = {
-  'el': document.getElementById('avinor')
-};
+(function () {
+  'use strict';
 
-avinor.controller = function () {
-  var ctrl = this;
-  ctrl.data = {};
-  avinor.el.addEventListener('avinor', function (event) {
-    var data = event.detail;
+  var avinor = {
+    'el': document.getElementById('avinor')
+  };
 
-    data.flights = data.flights.map(function (f) {
-      f.date = moment(f.schedule_time).lang('nb');
-      return f;
-    }).filter(function (f) {
-      return f.date.isAfter();
+  avinor.controller = function () {
+    var ctrl = this;
+    ctrl.data = {};
+    avinor.el.addEventListener('avinor', function (event) {
+      var data = event.detail;
+
+      data.flights = data.flights.map(function (f) {
+        f.date = moment(f.schedule_time).lang('nb');
+        return f;
+      }).filter(function (f) {
+        return f.date.isAfter();
+      });
+      data.next = data.flights.shift() || null;
+      data.flights = data.flights.slice(0, 4);
+      ctrl.data = data;
+
+      m.render(avinor.el, avinor.view(ctrl));
     });
-    data.next = data.flights.shift() || null;
-    data.flights = data.flights.slice(0, 4);
-    ctrl.data = data;
+  };
 
-    m.render(avinor.el, avinor.view(ctrl));
-  });
-};
+  avinor.view = function (ctrl) {
+    if (Object.keys(ctrl.data).length === 0) {
+      return m('p', 'Waiting for data');
+    }
+    var rows = ctrl.data.flights.map(function (flight) {
+      return m('tr', [
+        m('td', flight.flight_id),
+        m('td', flight.date.format('D. MMM HH:mm'))
+      ]);
+    });
+    return [
+      m('p.fade', 'Neste fly ' + ctrl.data.next.flight_id + ' fra ' +
+        ctrl.data.from + ' til ' + ctrl.data.to + ' går ' +
+        ctrl.data.next.date.format('dddd, D. MMMM')),
+      m('h1', ctrl.data.next.date.format('HH:mm')),
+      m('h2', ctrl.data.next.date.fromNow()),
+      m('table', [
+        m('tr.fade', [
+          m('th', 'Flight'),
+          m('th', 'Avgang')
+        ])
+      ].concat(rows)),
+      m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
+        ctrl.data.updatedAt)
+    ];
+  };
 
-avinor.view = function (ctrl) {
-  if (Object.keys(ctrl.data).length === 0) {
-    return m('p', 'Waiting for data');
+  if (avinor.el !== null) {
+    m.module(avinor.el, avinor);
   }
-  var rows = ctrl.data.flights.map(function (flight) {
-    return m('tr', [
-      m('td', flight.flight_id),
-      m('td', flight.date.format('D. MMM HH:mm'))
-    ]);
-  });
-  return [
-    m('p.fade', 'Neste fly ' + ctrl.data.next.flight_id + ' fra ' +
-      ctrl.data.from + ' til ' + ctrl.data.to + ' går ' +
-      ctrl.data.next.date.format('dddd, D. MMMM')),
-    m('h1', ctrl.data.next.date.format('HH:mm')),
-    m('h2', ctrl.data.next.date.fromNow()),
-    m('table', [
-      m('tr.fade', [
-        m('th', 'Flight'),
-        m('th', 'Avgang')
-      ])
-    ].concat(rows)),
-    m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
-      ctrl.data.updatedAt)
-  ];
-};
-
-if (avinor.el !== null) {
-  m.module(avinor.el, avinor);
-}
+})();
