@@ -11,7 +11,8 @@ ping.controller = function () {
     ctrl.data = event.detail;
     m.render(ping.el, ping.view(ctrl));
     if (ctrl.graph === null) {
-      ctrl.graph = ping.createGraph(ping.el, ctrl.data.values);
+      var chartEl = document.querySelector('#ping #chart');
+      ctrl.graph = ping.createGraph(chartEl, ctrl.data.values);
     } else {
       ctrl.graph.series.addData(ctrl.data.values);
     }
