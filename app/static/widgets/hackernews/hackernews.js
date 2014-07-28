@@ -3,14 +3,15 @@ var hn = {
 };
 
 hn.controller = function () {
-  this.data = {};
+  var ctrl = this;
+  ctrl.data = {};
   hn.el.addEventListener('hackernews', function (event) {
     var body = event.detail;
     if (body.items && body.items.length > 0) {
       body.items = body.items.slice(0, 10);
     }
-    this.data = body;
-    m.render(hn.el, hn.view(this));
+    ctrl.data = body;
+    m.render(hn.el, hn.view(ctrl));
   });
 };
 
