@@ -6,7 +6,7 @@
     - libxml2-dev
     - libxslt1-dev
     - make
-    - nodejs
+    - nodejs-legacy
     - npm
     - python-dev
     - python-virtualenv
