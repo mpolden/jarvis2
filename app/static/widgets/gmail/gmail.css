@@ -7,13 +7,7 @@
 #gmail h1 {
   font-size: 20px;
 }
-#gmail p {
-  font-size: 15px;
-}
 #gmail .count {
-  font-size: 35px;
+  font-size: 90px;
   margin: 0;
-}
-#gmail canvas {
-  height: 130px;
 }
