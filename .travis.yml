@@ -5,7 +5,8 @@ python:
   - 2.7
 
 install:
+  - npm install jshint
   - pip install -r requirements.txt
   - pip install -r dev-requirements.txt
 
-script: make flake8 test
+script: make
