@@ -1,5 +1,8 @@
 JARVIS v2
 =========
+
+[![Build Status](https://travis-ci.org/martinp/jarvis2.png)](https://travis-ci.org/martinp/jarvis2)
+
 JARVIS is a dashboard framework designed to run on the Raspberry Pi.
 
 It features live-updating widgets using
