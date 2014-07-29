@@ -25,7 +25,7 @@ from jinja2 import Environment, FileSystemLoader
 class WidgetFactory(object):
 
     def __init__(self, name):
-        self.name = name
+        self.name = name.lower()
         self.app_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                      '..', 'app'))
         self.widget_dir = os.path.join(self.app_path, 'static', 'widgets',
@@ -39,14 +39,12 @@ class WidgetFactory(object):
 
     def _render_templates(self):
         js = self.env.get_template('widget.js').render(name=self.name)
-        less = self.env.get_template('widget.less').render(name=self.name)
-        html = self.env.get_template('widget.html').render(name=self.name)
+        css = self.env.get_template('widget.css').render(name=self.name)
         job = self.env.get_template('job.py').render(name=self.name)
 
         return {
             '%s.js' % (self.name,): js,
-            '%s.less' % (self.name,): less,
-            '%s.html' % (self.name,): html,
+            '%s.css' % (self.name,): css,
             '%s.py' % (self.name,): job
         }
 
@@ -86,8 +84,8 @@ class WidgetFactory(object):
 
     def remove_widget(self):
         if os.path.isdir(self.widget_dir):
-            filenames = map(lambda f, e: f + e, (self.name,) * 3,
-                            ('.html', '.js', '.less'))
+            filenames = map(lambda f, e: f + e, (self.name,) * 2,
+                            ('.js', '.css'))
             pyc_file = self.job_file + 'c'
             filenames += [self.job_file, pyc_file, self.widget_dir]
             for filename in filenames:
