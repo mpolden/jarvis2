@@ -1,4 +1,4 @@
-<div class="gridster" ng-controller="EventCtrl" ng-cloak>
+<div class="gridster">
   <!-- the following div can be removed -->
   <div style="padding-top: 5px">
     <h1>Oh hai!</h1>
@@ -10,7 +10,7 @@
 {% raw %}
 {% if is_widget_enabled('yr') %}
 &lt;li data-row="1" data-col="1" data-sizex="2" data-sizey="2"&gt;
-  {<span></span>{ include_raw('yr/yr.html') }<span></span>}
+  &lt;div id="yr"&gt;&lt;/div&gt;
 &lt;/li&gt;
 {% endif %}
 {% endraw %}
