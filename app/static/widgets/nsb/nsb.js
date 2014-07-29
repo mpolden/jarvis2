@@ -34,11 +34,22 @@
       ]);
     });
     return [
-      m('p.fade', 'Neste tog fra ' + c.data.from + ' til ' + c.data.to +
-        ' går ' + c.data.date),
+      m('p.fade', [
+        'Neste tog fra ',
+        m('em', c.data.from),
+        ' til ',
+        m('em', c.data.to),
+        ' går ',
+        m('em', c.data.date)
+      ]),
       m('h1', c.data.next.departure),
-      m('h2.fade', 'Ankomst: ' + c.data.next.arrival + ' (' +
-        c.data.next.duration + ' min)'),
+      m('h2.fade', [
+        'Ankomst: ',
+        m('em', c.data.next.arrival),
+        ' (',
+        m('em', c.data.next.duration + ' min'),
+        ')'
+      ]),
       m('table', [
         m('tr.fade', [
           m('th', 'Avgang'),

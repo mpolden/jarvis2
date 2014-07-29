@@ -36,9 +36,16 @@
       ]);
     });
     return [
-      m('p.fade', 'Neste fly ' + ctrl.data.next.flight_id + ' fra ' +
-        ctrl.data.from + ' til ' + ctrl.data.to + ' går ' +
-        ctrl.data.next.date.format('dddd, D. MMMM')),
+      m('p.fade', [
+        'Neste fly (',
+        m('em', ctrl.data.next.flight_id),
+        ') fra ',
+        m('em', ctrl.data.from),
+        ' til ',
+        m('em', ctrl.data.to),
+        ' går ',
+        m('em', ctrl.data.next.date.format('dddd, D. MMMM'))
+      ]),
       m('h1', ctrl.data.next.date.format('HH:mm')),
       m('h2', ctrl.data.next.date.fromNow()),
       m('table', [
