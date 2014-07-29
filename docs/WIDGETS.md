@@ -181,6 +181,24 @@ JOBS['stats'] = {
 }
 ```
 
+stockquotes
+-----------
+Displays current stock quotes using the
+[Yahoo YQL API](https://developer.yahoo.com/yql/).
+
+```python
+JOBS['stockquotes'] = {
+    'enabled': True,
+    'interval': 900,
+    'symbols': [
+        'YHOO',
+        'AAPL',
+        'GOOG',
+        'MSFT'
+    ]
+}
+```
+
 uptime
 ------
 Ping one or more hosts and display their status (up or down).

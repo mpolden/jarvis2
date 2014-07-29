@@ -1,0 +1,15 @@
+#stockquotes {
+    height: 100%;
+    padding: 5px;
+    background: #c46252;
+    text-align: center;
+}
+
+#stockquotes h1 {
+    font-size: 20px;
+}
+
+#stockquotes table {
+    width: 100%;
+    font-size: 18px;
+}

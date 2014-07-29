@@ -117,3 +117,14 @@ JOBS['stats'] = {
     },
     'timeout': 5
 }
+
+JOBS['stockquotes'] = {
+    'enabled': True,
+    'interval': 900,
+    'symbols': [
+        'YHOO',
+        'AAPL',
+        'GOOG',
+        'MSFT'
+    ]
+}
