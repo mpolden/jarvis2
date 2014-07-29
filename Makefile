@@ -14,7 +14,7 @@ test:
 clean:
 	rm -f *.pyc app/*.pyc app/jobs/*.pyc support/*.pyc
 	rm -fr app/static/.webassets-cache/
-	rm -fr app/static/assets/
+	rm -fr app/static/gen/
 
 release: clean lint test
 
