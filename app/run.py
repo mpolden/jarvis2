@@ -53,7 +53,12 @@ def _run_job(name=None, print_json=False):
         print('No such job: %s' % (name,))
         sys.exit(1)
 
-    job = cls(conf[name])
+    job_conf = conf.get(name)
+    if job_conf is None:
+        print('No config found for job: %s' % (name,))
+        sys.exit(1)
+
+    job = cls(job_conf)
     data = job.get()
     if print_json:
         print(json.dumps(data, indent=2))
