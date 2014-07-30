@@ -16,7 +16,14 @@ class Sonos(AbstractJob):
 
         current_track = np if np['playlist_position'] != '0' else None
         queue = self.sonos.get_queue(int(np['playlist_position']), 1)
-        next_track = queue.pop() if len(queue) > 0 else None
+        next_item = queue.pop() if len(queue) > 0 else None
+        next_track = {}
+        if next_item is not None:
+            next_track = {
+                'artist': next_item.creator,
+                'title': next_item.title,
+                'album': next_item.album
+            }
 
         state = self.sonos.get_current_transport_info()[
             'current_transport_state']
