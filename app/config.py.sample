@@ -8,7 +8,7 @@ JOBS['yr'] = {
     # Enable job
     'enabled': True,
     # Run job every N seconds
-    'interval': 60,
+    'interval': 600,
     # URL for data
     'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
             'Trondheim/varsel.xml'),
