@@ -33,7 +33,7 @@ JOBS['atb'] = {
 
 avinor
 ------
-Displays future flights for the configured destionation. This widget uses
+Displays future flights for the configured destination. This widget uses
 [data provided by Avinor](http://www.avinor.no/avinor/trafikk/50_Flydata).
 
 ```python
@@ -51,7 +51,7 @@ The `from` and `to` fields are
 calendar
 --------
 Displays current and upcoming events in your Google Calendar. This widget uses
-the Googles Calendar API to retrieve data.
+the Google Calendar API to retrieve data.
 
 ```python
 JOBS['calendar'] = {
@@ -106,7 +106,7 @@ JOBS['hackernews'] = {
 nsb
 ---
 Displays upcoming train departures from a configured location. Scrapes data
-directly from http://www.nsb.no.
+directly from https://www.nsb.no.
 
 ```python
 JOBS['nsb'] = {
@@ -137,9 +137,9 @@ JOBS['ping'] = {
 
 plex
 ----
-Displays latests TV shows and movies from Plex Media Server. Plex Media Server
+Displays latest TV shows and movies from Plex Media Server. Plex Media Server
 makes metadata for each section available as XML under the URL:
-http://ip:port/library/sections/section_number/recentlyAdded/
+`http://<ip>:32400/library/sections/section_number/recentlyAdded/`.
 
 ```python
 JOBS['plex'] = {
@@ -166,8 +166,8 @@ JOBS['sonos'] = {
 stats
 -----
 Displays beverage consumption stats from the IRC channel #tihlde on freenode.
-The `max` dict sets the upper limit for the gauges. `nick` is the nick you want
-to retrieve stats for.
+The `max` dict sets the wanted limit for each beverage. `nick` is the nick you
+want to retrieve stats for.
 
 ```python
 JOBS['stats'] = {
@@ -217,7 +217,8 @@ JOBS['uptime'] = {
 yr
 --
 Displays weather data from http://www.yr.no. The `url` field specifies the
-XML feed to use.
+XML feed to use. Note that Yr requires a polling interval of at least 10
+minutes (600 seconds).
 
 ```python
 JOBS['yr'] = {
