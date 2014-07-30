@@ -41,6 +41,10 @@ def _configure_bundles():
     css = ['main.css']
 
     for widget in os.listdir(widgets_path):
+        if not _is_enabled(widget):
+            app.logger.info('Excluding disabled widget from bundle: %s',
+                            widget)
+            continue
         widget_path = os.path.join('widgets', widget)
         for asset_file in os.listdir(os.path.join(widgets_path, widget)):
             asset_path = os.path.join(widget_path, asset_file)
