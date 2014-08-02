@@ -1,5 +1,8 @@
 all: lint test
 
+fmt:
+	autopep8 --in-place app/*.py app/jobs/*.py support/*.py
+
 flake8:
 	flake8 --max-complexity=8 app/*.py app/jobs/*.py support/*.py
 
