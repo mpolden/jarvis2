@@ -12,8 +12,7 @@ class Yr(unittest.TestCase):
 
     def setUp(self):
         xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                   'test_data',
-                                   'varsel.xml'))
+                                                'test_data', 'varsel.xml'))
         with open(xml_path, 'r') as f:
             self.tree = etree.fromstring(f.read())
 
@@ -44,8 +43,7 @@ class HackerNews(unittest.TestCase):
 
     def setUp(self):
         html_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                    'test_data',
-                                    'hn.html'))
+                                                 'test_data', 'hn.html'))
         with open(html_path, 'r') as f:
             self.html = f.read()
         self.hn = hackernews.HackerNews({'interval': None})
@@ -65,7 +63,7 @@ class Nsb(unittest.TestCase):
 
     def setUp(self):
         test_data = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                    'test_data'))
+                                                 'test_data'))
         with open(os.path.join(test_data, 'nsb.html')) as f:
             self.html = f.read()
 
