@@ -32,9 +32,6 @@ Install requirements:
 
 For development it's recommended to use [virtualenv](http://www.virtualenv.org).
 
-Development dependencies require [Node.js](http://nodejs.org) and can be
-installed with `npm install`. These are *not* required to run the app.
-
 Configuration
 -------------
 All configuration of widgets is done in a single Python source file. The
@@ -61,7 +58,7 @@ Run a job standalone and pretty-print output (useful for debugging):
 
     JARVIS_SETTINGS=config.py make run-job
 
-Create Google API credentials (required for Calendar widget):
+Create Google API credentials (required for calendar and gmail widget):
 
     JARVIS_SETTINGS=config.py make google-api-auth
 
@@ -87,8 +84,7 @@ A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
 [Ansible](http://www.ansible.com) is used for provisioning the Vagrant box and
 must be installed on your host machine.
 
-Run `vagrant up dev` in the repository root to provision a development
-environment.
+Run `vagrant up` in the repository root to provision a development environment.
 
 License
 -------
