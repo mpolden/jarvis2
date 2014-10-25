@@ -34,7 +34,7 @@
     }
     var rows = c.data.events.map(function (event) {
       return m('tr', [
-        m('td', {'class': 'fade summary'}, jrvs.truncate(event.summary, 20)),
+        m('td', {'class': 'fade summary'}, jrvs.truncate(event.summary, 19)),
         m('td.start', event.date.format('DD. MM HH:mm'))
       ]);
     });
