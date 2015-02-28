@@ -30,7 +30,7 @@
       return m('tr', [
         m('td', departure.departure),
         m('td', departure.arrival),
-        m('td', departure.duration + ' min')
+        m('td', departure.duration)
       ]);
     });
     return [
@@ -47,7 +47,7 @@
         'Ankomst: ',
         m('em', c.data.next.arrival),
         ' (',
-        m('em', c.data.next.duration + ' min'),
+        m('em', c.data.next.duration),
         ')'
       ]),
       m('table', [

@@ -70,6 +70,9 @@ class Nsb(unittest.TestCase):
         with open(os.path.join(test_data, 'nsb2.html')) as f:
             self.html2 = f.read()
 
+        with open(os.path.join(test_data, 'nsb3.html')) as f:
+            self.html3 = f.read()
+
         self.nsb = nsb.Nsb({'interval': None, 'from': 'Lerkendal',
                             'to': 'Rotvoll'})
 
@@ -82,7 +85,7 @@ class Nsb(unittest.TestCase):
         self.assertEqual(5, len(data['departures']))
         self.assertEqual('06:17', data['departures'][0]['arrival'])
         self.assertEqual('05:56', data['departures'][0]['departure'])
-        self.assertEqual(21, data['departures'][0]['duration'])
+        self.assertEqual('21 min', data['departures'][0]['duration'])
 
     def test_parse_multiple_dates(self):
         data = self.nsb._parse(self.html2)
@@ -93,7 +96,19 @@ class Nsb(unittest.TestCase):
         self.assertEqual(5, len(data['departures']))
         self.assertEqual('19:17', data['departures'][0]['arrival'])
         self.assertEqual('18:56', data['departures'][0]['departure'])
-        self.assertEqual(21, data['departures'][0]['duration'])
+        self.assertEqual('21 min', data['departures'][0]['duration'])
+
+    def test_parse_varying_duration(self):
+        data = self.nsb._parse(self.html3)
+
+        self.assertEqual('28. februar 2015', data['date'])
+        self.assertEqual('Rotvoll', data['to'])
+        self.assertEqual('Lerkendal', data['from'])
+        self.assertEqual(5, len(data['departures']))
+        self.assertEqual('19:43', data['departures'][0]['arrival'])
+        self.assertEqual('19:02', data['departures'][0]['departure'])
+        self.assertEqual('41 min', data['departures'][0]['duration'])
+        self.assertEqual('1 t 4 min', data['departures'][2]['duration'])
 
 
 class Ping(unittest.TestCase):

@@ -22,8 +22,7 @@ class Nsb(AbstractJob):
                            d.find('.depart')]
         arrival_times = [el.text_content().strip() for el in
                          d.find('.arrive')]
-        durations = [int(el.text_content().rstrip(' min')) for el in
-                     d.find('.duration')]
+        durations = [el.text_content().strip() for el in d.find('.duration')]
 
         departures = []
         for departure, arrival, duration in zip(departure_times, arrival_times,
