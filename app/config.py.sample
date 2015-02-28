@@ -23,8 +23,7 @@ JOBS['time'] = {
 JOBS['atb'] = {
     'enabled': False,
     'interval': 60,
-    'url': ('http://api.busbuddy.no/api/1.4.4/departures/yourLocationId'
-            '?apiKey=yourApiKey'),
+    'url': 'http://atbapi.tar.io/api/v1/departures/yourLocationId',
     'timeout': 5
 }
 

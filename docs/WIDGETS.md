@@ -18,16 +18,14 @@ interval to prevent slow jobs from blocking future jobs.
 
 atb
 ---
-Displays bus routes in Trondheim, Norway. Requires an valid API key for
-BusBuddy. See the [BusBuddy API documentation](http://api.busbuddy.no)
-for more information.
+Displays bus routes in Trondheim, Norway. Uses the API provided by
+[atbapi](https://github.com/martinp/atbapi).
 
 ```python
 JOBS['atb'] = {
     'enabled': True,
     'interval': 60,
-    'url': ('http://api.busbuddy.no/api/1.4.4/departures/yourLocationId'
-            '?apiKey=MY_API_KEY')
+    'url': 'http://atbapi.tar.io/api/v1/departures/yourLocationId'
 }
 ```
 
