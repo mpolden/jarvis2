@@ -15,7 +15,7 @@ itsdangerous==0.24
 lxml==3.3.5
 pyquery==1.2.8
 python-gflags==2.0
-requests==2.3.0
+requests==2.5.1
 rjsmin==1.0.9
-soco==0.8
+soco==0.10
 webassets==0.10.1
