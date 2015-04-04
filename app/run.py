@@ -19,6 +19,7 @@ import os
 import signal
 
 from docopt import docopt
+from six.moves import input
 
 from main import app, queues, sched
 
@@ -46,7 +47,7 @@ def _run_job(name=None, print_json=False):
     jobs = load_jobs()
     if name is None or len(name) == 0:
         names = ' '.join(jobs.keys())
-        name = raw_input('Name of the job to run [%s]: ' % (names,)).lower()
+        name = input('Name of the job to run [%s]: ' % (names,)).lower()
 
     cls = jobs.get(name)
     if cls is None:

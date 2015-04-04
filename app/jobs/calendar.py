@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
 import os
-from httplib import BadStatusLine
+
+try:
+    from http.client import BadStatusLine
+except ImportError:
+    from httplib import BadStatusLine
 
 import httplib2
 from apiclient.discovery import build

@@ -19,6 +19,7 @@ import sys
 
 from clint.textui import colored, puts
 from docopt import docopt
+from six.moves import input
 from shutil import copyfile
 
 
@@ -91,8 +92,8 @@ if __name__ == '__main__':
     if args['--list']:
         get_factory('', True).list_dashboards()
     elif args['--remove']:
-        name = args['NAME'] or raw_input('Name of the dashboard to remove: ')
+        name = args['NAME'] or input('Name of the dashboard to remove: ')
         get_factory(name, args['--dry-run']).remove_dashboard()
     else:
-        name = args['NAME'] or raw_input('Name of the dashboard to create: ')
+        name = args['NAME'] or input('Name of the dashboard to create: ')
         get_factory(name, args['--dry-run']).create_dashboard()

@@ -19,6 +19,7 @@ import sys
 
 from clint.textui import colored, puts
 from docopt import docopt
+from six.moves import input
 from jinja2 import Environment, FileSystemLoader
 
 
@@ -126,8 +127,8 @@ if __name__ == '__main__':
     if args['--list']:
         get_factory('', True).list_widgets()
     elif args['--remove']:
-        name = args['NAME'] or raw_input('Name of the widget to remove: ')
+        name = args['NAME'] or input('Name of the widget to remove: ')
         get_factory(name, args['--dry-run']).remove_widget()
     else:
-        name = args['NAME'] or raw_input('Name of the widget to create: ')
+        name = args['NAME'] or input('Name of the widget to create: ')
         get_factory(name, args['--dry-run']).create_widget()

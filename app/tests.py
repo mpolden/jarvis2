@@ -13,7 +13,7 @@ class Yr(unittest.TestCase):
     def setUp(self):
         xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                 'test_data', 'varsel.xml'))
-        with open(xml_path, 'r') as f:
+        with open(xml_path, 'rb') as f:
             self.tree = etree.fromstring(f.read())
 
     def test_parse_tree(self):

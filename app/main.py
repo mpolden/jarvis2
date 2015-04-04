@@ -3,8 +3,16 @@
 import json
 import logging
 import os
-import Queue
-import SocketServer
+
+try:
+    import queue
+except ImportError:
+    import Queue as queue
+try:
+    import socketserver
+except ImportError:
+    import SocketServer as socketserver
+
 from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
 from flask import Flask, render_template, Response, request, abort
@@ -90,7 +98,7 @@ def dashboard(layout=None):
 @app.route('/events')
 def events():
     remote_port = request.environ['REMOTE_PORT']
-    current_queue = Queue.Queue()
+    current_queue = queue.Queue()
     queues[remote_port] = current_queue
 
     for event in last_events.values():
@@ -163,8 +171,8 @@ def _add_event(widget, body):
         'body': body
     })
     last_events[widget] = json_data
-    for queue in queues.values():
-        queue.put(json_data)
+    for q in queues.values():
+        q.put(json_data)
 
 
 def _run_job(widget, job):
@@ -180,4 +188,4 @@ def _close_stream(*args, **kwargs):
         del queues[remote_port]
 
 
-SocketServer.BaseServer.handle_error = _close_stream
+socketserver.BaseServer.handle_error = _close_stream

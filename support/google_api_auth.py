@@ -15,6 +15,7 @@ import os.path
 import sys
 
 from docopt import docopt
+from six.moves import input
 from flask import Flask
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
@@ -34,9 +35,9 @@ def create_credentials(name):
     config = get_config(name)
     if 'client_id' not in config \
             or 'client_secret' not in config:
-        print ('Error: client_id, client_secret is not set.\n\n'
-               'Please create a client ID here and update '
-               'config.py:\n\nhttps://code.google.com/apis/console/#:access')
+        print('Error: client_id, client_secret is not set.\n\n'
+              'Please create a client ID here and update '
+              'config.py:\n\nhttps://code.google.com/apis/console/#:access')
         sys.exit(1)
 
     FLOW = OAuth2WebServerFlow(
@@ -59,8 +60,8 @@ def main():
     name = args['NAME']
 
     if name is None:
-        name = raw_input(('Enter widget to generate credentials for (gmail'
-                          ' or calendar): '))
+        name = input(('Enter widget to generate credentials for (gmail'
+                      ' or calendar): '))
 
     if name not in ('calendar', 'gmail'):
         print('Name must be either \'gmail\' or \'calendar\'')
