@@ -2,7 +2,6 @@
 
 import requests
 from jobs import AbstractJob
-from lxml import etree
 
 
 class Plex(AbstractJob):
@@ -13,35 +12,31 @@ class Plex(AbstractJob):
         self.shows = conf['shows']
         self.timeout = conf.get('timeout')
 
-    def _parse_movies(self, xml):
-        tree = etree.fromstring(xml)
-        movies = []
-        for movie in tree.xpath('/MediaContainer/Video'):
-            movies.append({
-                'title': movie.get('title'),
-                'year': movie.get('year')
-            })
-        return movies
+    def _parse_movies(self, data):
+        return [{'title': m.get('title'),
+                 'year': m.get('year')}
+                for m in data['_children']]
 
-    def _parse_shows(self, xml):
-        tree = etree.fromstring(xml)
-        shows = []
-        for show in tree.xpath('/MediaContainer/Video'):
-            shows.append({
-                'name': show.get('grandparentTitle'),
-                'title': show.get('title'),
-                'episode': show.get('index').zfill(2),
-                'season': show.get('parentIndex').zfill(2)
-            })
-        return shows
+    def _parse_shows(self, data):
+        return [{'title': s.get('title'),
+                 'year': s.get('year'),
+                 'name': s.get('grandparentTitle'),
+                 'episode': '{0:02d}'.format(s.get('index')),
+                 'season': '{0:02d}'.format(s.get('parentIndex'))}
+                for s in data['_children']]
+
+    def _get_json(self, url):
+        headers = {'Accept': 'application/json'}
+        r = requests.get(url, headers=headers, timeout=self.timeout)
+        return r.json()
 
     def get(self):
         try:
-            r = requests.get(self.movies, timeout=self.timeout)
-            movies = self._parse_movies(r.content)
+            data = self._get_json(self.movies)
+            movies = self._parse_movies(data)
 
-            r = requests.get(self.shows)
-            shows = self._parse_shows(r.content)
+            data = self._get_json(self.shows)
+            shows = self._parse_shows(data)
 
             return {'movies': movies, 'shows': shows}
         except requests.exceptions.ConnectionError:
