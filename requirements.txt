@@ -10,8 +10,7 @@ cssmin==0.2.0
 cssselect==0.9.1
 docopt==0.6.2
 google-api-python-client==1.4.0
-# https://github.com/google/google-api-python-client/issues/3 - need httplib2 master
--e git+https://github.com/jcgregorio/httplib2.git@71a3b7b206395564c1923e24f9da4b200b30d44e#egg=httplib2
+httplib2==0.9.1
 itsdangerous==0.24
 lxml==3.3.5
 oauth2client==1.4.7
