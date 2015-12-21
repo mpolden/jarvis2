@@ -25,9 +25,12 @@ Displays bus routes in Trondheim, Norway. Uses the API provided by
 JOBS['atb'] = {
     'enabled': True,
     'interval': 60,
-    'url': 'http://atbapi.tar.io/api/v1/departures/yourLocationId'
+    'url': 'https://atbapi.tar.io/api/v1/departures/<location-id>'
 }
 ```
+
+A list of possible location IDs is available here:
+https://atbapi.tar.io/api/v1/busstops
 
 avinor
 ------
