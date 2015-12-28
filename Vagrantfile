@@ -2,7 +2,10 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "chef/ubuntu-14.04"
+  config.vm.box = "debian/jessie64"
+  # Versions later than 8.2.1 don't have VirtualBox guest additions
+  # preinstalled, so synced_folder defaults to rsync
+  config.vm.box_version = "8.2.1"
   config.vm.synced_folder ".", "/vagrant"
   config.ssh.forward_agent = true
   config.vm.provider :virtualbox do |vb|
