@@ -14,14 +14,14 @@ Vagrant.configure("2") do |config|
   config.vm.define "dev", primary: true do |dev|
     # Flask port
     config.vm.network :forwarded_port, guest: 5000, host: 5000
-    config.vm.provision "ansible" do |ansible|
+    config.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "provisioning/playbook.yml"
     end
   end
   config.vm.define "prod", autostart: false do |prod|
     # nginx port
     config.vm.network :forwarded_port, guest: 80, host: 8080
-    config.vm.provision "ansible" do |ansible|
+    config.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "provisioning/playbook.yml"
     end
   end
