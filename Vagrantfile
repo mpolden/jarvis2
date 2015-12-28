@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+Vagrant.require_version ">= 1.8"
+
 Vagrant.configure("2") do |config|
   config.vm.box = "debian/jessie64"
   # Versions later than 8.2.1 don't have VirtualBox guest additions
