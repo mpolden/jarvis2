@@ -81,8 +81,7 @@ See [INSTALL.md](docs/INSTALL.md) for a basic deployment guide.
 Development environment
 -----------------------
 A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
-[Ansible](http://www.ansible.com) is used for provisioning the Vagrant box and
-must be installed on your host machine.
+Version `1.8+` is required for the `ansible_local` provisioner to work.
 
 Run `vagrant up` in the repository root to provision a development environment.
 
