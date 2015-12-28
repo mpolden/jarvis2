@@ -17,8 +17,9 @@ class HackerNews(AbstractJob):
 
         titles = [el.text for el in
                   d.find('td.title a')
-                  .not_('a[href="news2"]')
-                  .not_('a[href^="item"]')]
+                  .not_('a[href^="from"]')  # Source link
+                  .not_('a[rel="nofollow"]')]  # "More" link
+
         points = [int(el.text.rstrip(' points')) for el in
                   d.find('td.subtext span')]
 
