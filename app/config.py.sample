@@ -21,9 +21,9 @@ JOBS['time'] = {
 }
 
 JOBS['atb'] = {
-    'enabled': False,
+    'enabled': True,
     'interval': 60,
-    'url': 'http://atbapi.tar.io/api/v1/departures/yourLocationId',
+    'url': 'https://atbapi.tar.io/api/v1/departures/16011376',
     'timeout': 5
 }
 
@@ -73,12 +73,12 @@ JOBS['plex'] = {
 }
 
 JOBS['nsb'] = {
-    'enabled': False,
+    'enabled': True,
     'interval': 900,
     # See http://www.nsb.no for valid locations
-    'from': 'from_location',
-    'to': 'to_location',
-    'timeout': 5
+    'from': 'Trondheim S',
+    'to': 'Oslo S',
+    'timeout': 10
 }
 
 JOBS['ping'] = {
@@ -99,7 +99,7 @@ JOBS['gmail'] = {
 }
 
 JOBS['avinor'] = {
-    'enabled': False,
+    'enabled': True,
     'interval': 180,
     'from': 'TRD',
     'to': 'OSL',
