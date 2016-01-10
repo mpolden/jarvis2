@@ -19,7 +19,7 @@ class Stats(AbstractJob):
             'q': 'statsByTimestamp(\'{nick}\', {today})'.format(nick=self.nick,
                                                                 today=today)
         }
-        r = requests.get('http://skynet.tihlde.org:3000',
+        r = requests.get('http://hilde.nerdvana.tihlde.org:3000',
                          timeout=self.timeout, params=params)
         if r.status_code == 200 and len(r.content) > 0:
             return {
