@@ -51,11 +51,12 @@ class HackerNews(unittest.TestCase):
     def test_parse(self):
         data = self.hn._parse(self.html)
 
-        self.assertEqual(27, len(data['items']))
-        self.assertTrue('points' in data['items'][0])
-        self.assertTrue('title' in data['items'][0])
-        self.assertEqual(122, data['items'][0]['points'])
-        self.assertEqual('Introducing d3-scale', data['items'][0]['title'])
+        self.assertEqual(28, len(data['items']))
+        self.assertTrue('points' in data['items'][3])
+        self.assertTrue('title' in data['items'][3])
+        self.assertEqual(76, data['items'][3]['points'])
+        self.assertEqual('Building an OpenBSD Router',
+                         data['items'][3]['title'])
 
 
 class Nsb(unittest.TestCase):
