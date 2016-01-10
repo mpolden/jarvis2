@@ -18,7 +18,7 @@ pyasn1==0.1.7
 pyasn1-modules==0.0.5
 pyquery==1.2.8
 requests==2.5.1
-rjsmin==1.0.9
+rjsmin==1.0.12
 rsa==3.1.4
 simplejson==3.6.5
 six==1.9.0
