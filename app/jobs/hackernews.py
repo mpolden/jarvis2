@@ -21,7 +21,7 @@ class HackerNews(AbstractJob):
                   .not_('a[rel="nofollow"]')]  # "More" link
 
         points = [int(el.text.rstrip(' points')) for el in
-                  d.find('td.subtext span')]
+                  d.find('td.subtext span.score')]
 
         items = []
         for title, num_points in zip(titles, points):
