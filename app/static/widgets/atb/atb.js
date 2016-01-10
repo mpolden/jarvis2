@@ -11,7 +11,7 @@
     atb.el.addEventListener('atb', function (event) {
       var body = event.detail;
       body.departures.forEach(function (d) {
-        var departureTime = moment(d.registeredDepartureTime).lang('nb'),
+        var departureTime = moment(d.registeredDepartureTime).locale('nb'),
             now = moment();
         if (departureTime.isBefore(now)) {
           // BusBuddy sometimes returns dates in the past

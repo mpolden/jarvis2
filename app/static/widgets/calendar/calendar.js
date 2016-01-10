@@ -13,7 +13,7 @@
         return;
       }
       body.events.forEach(function (e) {
-        e.date = moment(e.date).lang('nb');
+        e.date = moment(e.date).locale('nb');
       });
       var eventDate = body.events[0].date,
           now = moment();

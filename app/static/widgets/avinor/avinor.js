@@ -12,7 +12,7 @@
       var data = event.detail;
 
       data.flights = data.flights.map(function (f) {
-        f.date = moment(f.schedule_time).lang('nb');
+        f.date = moment(f.schedule_time).locale('nb');
         return f;
       }).filter(function (f) {
         return f.date.isAfter();

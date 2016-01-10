@@ -7,9 +7,9 @@
 
   time.controller = function () {
     var ctrl = this;
-    ctrl.now = moment().lang('nb');
+    ctrl.now = moment().locale('nb');
     var setTime = function () {
-      ctrl.now = moment().lang('nb');
+      ctrl.now = moment().locale('nb');
       m.render(time.el, time.view(ctrl));
     };
     setInterval(setTime, 500);
