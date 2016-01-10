@@ -48,6 +48,6 @@
   };
 
   if (plex.el !== null) {
-    m.module(plex.el, plex);
+    m.mount(plex.el, plex);
   }
 })();

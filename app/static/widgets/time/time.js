@@ -24,6 +24,6 @@
   };
 
   if (time.el !== null) {
-    m.module(time.el, time);
+    m.mount(time.el, time);
   }
 })();

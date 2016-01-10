@@ -76,6 +76,6 @@
   };
 
   if (ping.el !== null) {
-    m.module(ping.el, ping);
+    m.mount(ping.el, ping);
   }
 })();

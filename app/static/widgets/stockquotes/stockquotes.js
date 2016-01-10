@@ -40,6 +40,6 @@
   };
 
   if (stockquotes.el !== null) {
-    m.module(stockquotes.el, stockquotes);
+    m.mount(stockquotes.el, stockquotes);
   }
 })();

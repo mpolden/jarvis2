@@ -56,6 +56,6 @@
   };
 
   if (atb.el !== null) {
-    m.module(atb.el, atb);
+    m.mount(atb.el, atb);
   }
 })();

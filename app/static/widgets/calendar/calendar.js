@@ -50,6 +50,6 @@
   };
 
   if (calendar.el !== null) {
-    m.module(calendar.el, calendar);
+    m.mount(calendar.el, calendar);
   }
 })();

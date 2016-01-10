@@ -60,6 +60,6 @@
   };
 
   if (avinor.el !== null) {
-    m.module(avinor.el, avinor);
+    m.mount(avinor.el, avinor);
   }
 })();

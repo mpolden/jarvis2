@@ -33,6 +33,6 @@
   };
 
   if (yr.el !== null) {
-    m.module(yr.el, yr);
+    m.mount(yr.el, yr);
   }
 })();

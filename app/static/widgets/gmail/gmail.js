@@ -33,6 +33,6 @@
   };
 
   if (gmail.el !== null) {
-    m.module(gmail.el, gmail);
+    m.mount(gmail.el, gmail);
   }
 })();

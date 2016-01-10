@@ -63,6 +63,6 @@
   };
 
   if (nsb.el !== null) {
-    m.module(nsb.el, nsb);
+    m.mount(nsb.el, nsb);
   }
 })();

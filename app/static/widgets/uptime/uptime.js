@@ -37,6 +37,6 @@
   };
 
   if (uptime.el !== null) {
-    m.module(uptime.el, uptime);
+    m.mount(uptime.el, uptime);
   }
 })();

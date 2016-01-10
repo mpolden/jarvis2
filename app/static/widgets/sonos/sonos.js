@@ -60,6 +60,6 @@
   };
 
   if (sonos.el !== null) {
-    m.module(sonos.el, sonos);
+    m.mount(sonos.el, sonos);
   }
 })();

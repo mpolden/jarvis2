@@ -46,6 +46,6 @@
   };
 
   if (stats.el !== null) {
-    m.module(stats.el, stats);
+    m.mount(stats.el, stats);
   }
 })();
