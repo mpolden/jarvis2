@@ -11,6 +11,9 @@ class Plex(AbstractJob):
         self.movies = conf['movies']
         self.shows = conf['shows']
         self.timeout = conf.get('timeout')
+        self.verify = conf.get('verify', True)
+        if not self.verify:
+            requests.packages.urllib3.disable_warnings()
 
     def _parse_movies(self, data):
         return [{'title': m.get('title'),
@@ -27,7 +30,8 @@ class Plex(AbstractJob):
 
     def _get_json(self, url):
         headers = {'Accept': 'application/json'}
-        r = requests.get(url, headers=headers, timeout=self.timeout)
+        r = requests.get(url, headers=headers, timeout=self.timeout,
+                         verify=self.verify)
         return r.json()
 
     def get(self):

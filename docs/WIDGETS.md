@@ -146,10 +146,14 @@ makes metadata for each section available as XML under the URL:
 JOBS['plex'] = {
     'enabled': True,
     'interval': 900,
-    'movies': 'http://127.0.0.1:32400/library/sections/2/recentlyAdded/',
-    'shows': 'http://127.0.0.1:32400/library/sections/1/recentlyAdded/'
+    'movies': 'https://127.0.0.1:32400/library/sections/2/recentlyAdded/',
+    'shows': 'https://127.0.0.1:32400/library/sections/1/recentlyAdded/',
+    'verify': True
 }
 ```
+
+If `verify` is set to `False`, certificate warnings are ignored when using
+HTTPS. Default is `True`.
 
 sonos
 -----
