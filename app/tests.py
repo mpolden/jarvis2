@@ -45,7 +45,7 @@ class Yr(unittest.TestCase):
             tree = etree.fromstring(f.read())
         y = yr.Yr({'interval': None, 'url': None})
         data = y._parse_tree(tree)
-        self.assertIsNone(data['wind'])
+        self.assertTrue(data['wind'] is None)
 
 
 class HackerNews(unittest.TestCase):
