@@ -14,6 +14,15 @@
     });
   };
 
+  yr.formatWind = function (wind) {
+    if (wind === null) {
+      return '';
+    }
+    return wind.description + ' (' +
+      wind.speed + ' m/s) fra ' +
+      wind.direction.toLowerCase();
+  };
+
   yr.view = function (ctrl) {
     if (Object.keys(ctrl.data).length === 0) {
       return m('p', 'Waiting for data');
@@ -22,9 +31,7 @@
       m('p.fade', 'Været i ' + ctrl.data.today.location),
       m('h1', ctrl.data.today.temperature + '°'),
       m('p', ctrl.data.today.description),
-      m('p.wind', ctrl.data.today.wind.description + ' (' +
-        ctrl.data.today.wind.speed + ' m/s) fra ' +
-        ctrl.data.today.wind.direction.toLowerCase()),
+      m('p.wind', yr.formatWind(ctrl.data.today.wind)),
       m('p.tomorrow', 'I morgen: ' + ctrl.data.tomorrow.temperature +
         '° (' + ctrl.data.tomorrow.description.toLowerCase() + ')'),
       m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +

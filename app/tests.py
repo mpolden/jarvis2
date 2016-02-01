@@ -38,6 +38,15 @@ class Yr(unittest.TestCase):
         self.assertEqual('3.6', data['wind']['speed'])
         self.assertEqual('Lett bris', data['wind']['description'])
 
+    def test_parse_tree_missing_wind(self):
+        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                'test_data', 'varsel2.xml'))
+        with open(xml_path, 'rb') as f:
+            tree = etree.fromstring(f.read())
+        y = yr.Yr({'interval': None, 'url': None})
+        data = y._parse_tree(tree)
+        self.assertIsNone(data['wind'])
+
 
 class HackerNews(unittest.TestCase):
 

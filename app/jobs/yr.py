@@ -25,16 +25,22 @@ class Yr(AbstractJob):
             tabular = tree.xpath(date_xpath).pop()
             data_root = tabular
 
-        windSpeed = data_root.xpath('windSpeed').pop()
+        windSpeed = next(iter(data_root.xpath('windSpeed')), None)
+        windDirection = next(iter(data_root.xpath('windDirection')), None)
+
+        wind = None
+        if None not in (windSpeed, windDirection):
+            wind = {
+                'speed': windSpeed.get('mps'),
+                'description': windSpeed.get('name'),
+                'direction': windDirection.get('name')
+            }
+
         return {
             'location': tree.xpath('/weatherdata/location/name').pop().text,
             'temperature': data_root.xpath('temperature').pop().get('value'),
             'description': tabular.xpath('symbol').pop().get('name'),
-            'wind': {
-                'speed': windSpeed.get('mps'),
-                'description': windSpeed.get('name'),
-                'direction': data_root.xpath('windDirection').pop().get('name')
-            }
+            'wind': wind
         }
 
     def _parse(self, xml):
