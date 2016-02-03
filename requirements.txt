@@ -25,3 +25,4 @@ six==1.10.0
 soco==0.11.1
 uritemplate==0.6
 webassets==0.11.1
+argparse==*
