@@ -20,7 +20,6 @@ from six.moves import input
 from flask import Flask
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
-from oauth2client import tools
 from oauth2client.tools import run_flow
 
 app = Flask(__name__, instance_relative_config=True,
