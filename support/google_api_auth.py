@@ -45,8 +45,8 @@ def create_credentials(name):
         client_id=config['client_id'],
         client_secret=config['client_secret'],
         scope='https://www.googleapis.com/auth/{}.readonly'.format(name))
-        
-    parser = argparse.ArgumentParser(parents=[tools.argparser])
+
+    parser = argparse.ArgumentParser(parents=[argparser])
     run_flags = parser.parse_args()
 
     credentials_file = os.path.join(app.instance_path, 'jobs',
@@ -54,7 +54,7 @@ def create_credentials(name):
     storage = Storage(credentials_file)
     credentials = storage.get()
     if credentials is None or credentials.invalid:
-        credentials = tools.run_flow(FLOW, storage, run_flags)
+        credentials = run_flow(FLOW, storage, run_flags)
     else:
         print('Google API credentials already exist: %s' % (credentials_file,))
 
