@@ -20,7 +20,8 @@ from six.moves import input
 from flask import Flask
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
-from oauth2client.tools import run_flow
+from oauth2client import tools
+
 
 app = Flask(__name__, instance_relative_config=True,
             instance_path=os.path.abspath(os.path.join(
@@ -46,7 +47,7 @@ def create_credentials(name):
         client_secret=config['client_secret'],
         scope='https://www.googleapis.com/auth/{}.readonly'.format(name))
 
-    parser = argparse.ArgumentParser(parents=[argparser])
+    parser = argparse.ArgumentParser(parents=[tools.argparser])
     run_flags = parser.parse_args()
 
     credentials_file = os.path.join(app.instance_path, 'jobs',
@@ -54,7 +55,7 @@ def create_credentials(name):
     storage = Storage(credentials_file)
     credentials = storage.get()
     if credentials is None or credentials.invalid:
-        credentials = run_flow(FLOW, storage, run_flags)
+        credentials = tools.run_flow(FLOW, storage, run_flags)
     else:
         print('Google API credentials already exist: %s' % (credentials_file,))
 
