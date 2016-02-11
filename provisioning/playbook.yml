@@ -1,12 +1,12 @@
 ---
 - hosts: dev
-  sudo: yes
+  become: yes
   roles:
     - ntp
     - vagrant
 
 - hosts: prod
-  sudo: yes
+  become: yes
   roles:
     - ntp
     - nginx
