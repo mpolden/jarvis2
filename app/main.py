@@ -16,7 +16,7 @@ except ImportError:
 from apscheduler.scheduler import Scheduler
 from datetime import datetime, timedelta
 from flask import Flask, render_template, Response, request, abort
-from flask.ext.assets import Environment, Bundle
+from flask_assets import Environment, Bundle
 from flask.templating import TemplateNotFound
 from jobs import load_jobs
 from random import randint
