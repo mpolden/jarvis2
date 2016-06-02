@@ -38,3 +38,7 @@ run-job:
 
 google-api-auth:
 	python support/google_api_auth.py
+
+update-deps:
+	pip install -U -r requirements-to-freeze.txt
+	pip freeze | grep -vE 'argparse|wsgiref' > requirements.txt
