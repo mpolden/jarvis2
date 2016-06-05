@@ -51,7 +51,7 @@
         owner=www-data
         group=www-data
         mode=0600
-  with_items: google_credentials_files
+  with_items: "{{ google_credentials_files }}"
   notify:
     - restart uwsgi
 
