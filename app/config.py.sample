@@ -70,6 +70,7 @@ JOBS['plex'] = {
     'movies': 'https://ip:port/library/sections/2/recentlyAdded/',
     'shows': 'https://ip:port/library/sections/1/recentlyAdded/',
     'verify': False,
+    'plex_token': '',
     'timeout': 5
 }
 

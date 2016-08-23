@@ -142,13 +142,17 @@ Displays latest TV shows and movies from Plex Media Server. Plex Media Server
 makes metadata for each section available as XML under the URL:
 `http://<ip>:32400/library/sections/section_number/recentlyAdded/`.
 
+You will need to generate an Plex App token, generate with ```JARVIS_SETTINGS=config.py make plex-app-token```
+and place it in your config.
+
 ```python
 JOBS['plex'] = {
     'enabled': True,
     'interval': 900,
     'movies': 'https://127.0.0.1:32400/library/sections/2/recentlyAdded/',
     'shows': 'https://127.0.0.1:32400/library/sections/1/recentlyAdded/',
-    'verify': True
+    'verify': True,
+    'plex_token': ''
 }
 ```
 

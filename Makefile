@@ -39,6 +39,9 @@ run-job:
 google-api-auth:
 	python support/google_api_auth.py
 
+plex-app-token:
+	python support/plex_app_token.py
+
 update-deps:
 	pip install -U -r requirements-to-freeze.txt
 	pip freeze | grep -vE 'argparse|wsgiref' > requirements.txt
