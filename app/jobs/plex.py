@@ -10,6 +10,7 @@ class Plex(AbstractJob):
         self.interval = conf['interval']
         self.movies = conf['movies']
         self.shows = conf['shows']
+        self.token = conf['plex_token']
         self.timeout = conf.get('timeout')
         self.verify = conf.get('verify', True)
         if not self.verify:
@@ -29,7 +30,9 @@ class Plex(AbstractJob):
                 for s in data['_children']]
 
     def _get_json(self, url):
-        headers = {'Accept': 'application/json'}
+        headers = {'Accept': 'application/json',
+                   'X-Plex-Token': self.token}
+
         r = requests.get(url, headers=headers, timeout=self.timeout,
                          verify=self.verify)
         return r.json()
