@@ -139,18 +139,22 @@ JOBS['ping'] = {
 plex
 ----
 Displays latest TV shows and movies from Plex Media Server. Plex Media Server
-makes metadata for each section available as XML under the URL:
-`http://<ip>:32400/library/sections/section_number/recentlyAdded/`.
+makes metadata for each section available as XML at the following URL:
+`https://<ip>:32400/library/sections/<section-number>/recentlyAdded?X-Plex-Token=<secret-token>`.
 
 ```python
 JOBS['plex'] = {
     'enabled': True,
     'interval': 900,
-    'movies': 'https://127.0.0.1:32400/library/sections/2/recentlyAdded/',
-    'shows': 'https://127.0.0.1:32400/library/sections/1/recentlyAdded/',
+    'movies': 'https://127.0.0.1:32400/library/sections/2/recentlyAdded?X-Plex-Token=secret',
+    'shows': 'https://127.0.0.1:32400/library/sections/1/recentlyAdded?X-Plex-Token=secret',
     'verify': True
 }
 ```
+
+Please see the
+[Plex documentation](https://support.plex.tv/hc/en-us/articles/204059436-Finding-your-account-token-X-Plex-Token)
+for instruction on how to find your token.
 
 If `verify` is set to `False`, certificate warnings are ignored when using
 HTTPS. Default is `True`.
