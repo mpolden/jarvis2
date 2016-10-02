@@ -17,12 +17,16 @@ class Nsb(AbstractJob):
     def _parse(self, html):
         d = pq(html)
 
-        date = d.find('.date')[0].text_content().strip()
-        departure_times = [el.text_content().strip() for el in
-                           d.find('.depart')]
-        arrival_times = [el.text_content().strip() for el in
-                         d.find('.arrive')]
-        durations = [el.text_content().strip() for el in d.find('.duration')]
+        date = d.find('.travel-date:first').text().strip()
+        all_times = [el.text_content().strip() for el in
+                     d.find('.nsb-time span')
+                      .not_('.nsb-time-corrected')
+                      .not_('.nsb-visually-hidden')]
+        durations = [el.text_content().strip() for el in
+                     d.find('.nsb-time-total')]
+
+        departure_times = all_times[::2]  # filter even elements
+        arrival_times = all_times[1::2]  # filter odd elements
 
         departures = []
         for departure, arrival, duration in zip(departure_times, arrival_times,
@@ -45,13 +49,14 @@ class Nsb(AbstractJob):
         params = {
             'from': self.from_location,
             'to': self.to_location,
-            'type': 'single',
             'date': now.strftime('%d.%m.%Y'),
-            'hour': now.strftime('%H'),
-            'redirect_to': 'https://www.nsb.no/bestill/velg-togavgang'
+            'hour': 'now',
+            'redirect_to': 'https://www.nsb.no/bestill/velg-togavgang',
+            'travelPlannerStationValidatorVersion': 'v1'
         }
-        r = requests.get('https://www.nsb.no/bestill/travel-planner-validator',
-                         timeout=self.timeout, params=params)
+
+        url = 'https://www.nsb.no/bestill/travel-planner-validator-v2'
+        r = requests.get(url, timeout=self.timeout, params=params)
 
         if r.status_code == 200 and len(r.content) > 0:
             return self._parse(r.content)
