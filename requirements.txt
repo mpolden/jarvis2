@@ -1,6 +1,6 @@
 APScheduler==2.1.2
 Flask==0.11
-Flask-Assets==0.11
+Flask-Assets==0.12
 Jinja2==2.8
 MarkupSafe==0.23
 Werkzeug==0.11.10
