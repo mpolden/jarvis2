@@ -3,7 +3,7 @@
 import requests
 from datetime import datetime, timedelta
 from jobs import AbstractJob
-from lxml import etree
+from xml.etree import ElementTree as etree
 
 
 class Yr(AbstractJob):
@@ -15,18 +15,17 @@ class Yr(AbstractJob):
 
     def _parse_tree(self, tree, date=None):
         if date is None:
-            tabular = tree.xpath('/weatherdata/forecast/tabular/time[1]').pop()
-            data_root = tree.xpath(
-                '/weatherdata/observations/weatherstation[1]').pop()
+            tabular = tree.findall('./forecast/tabular/time[1]').pop()
+            data_root = tree.findall('./observations/weatherstation[1]').pop()
         else:
-            date_xpath = ('/weatherdata/forecast/tabular/time[@period=2 and'
-                          ' starts-with(@from, "{date}")]').format(
-                date=date.strftime('%F'))
-            tabular = tree.xpath(date_xpath).pop()
+            date_prefix = date.strftime('%F')
+            period_xpath = "./forecast/tabular/time[@period='2']"
+            tabular = next((el for el in tree.findall(period_xpath)
+                            if el.get('from').startswith(date_prefix)))
             data_root = tabular
 
-        windSpeed = next(iter(data_root.xpath('windSpeed')), None)
-        windDirection = next(iter(data_root.xpath('windDirection')), None)
+        windSpeed = next(iter(data_root.findall('windSpeed')), None)
+        windDirection = next(iter(data_root.findall('windDirection')), None)
 
         wind = None
         if None not in (windSpeed, windDirection):
@@ -37,9 +36,9 @@ class Yr(AbstractJob):
             }
 
         return {
-            'location': tree.xpath('/weatherdata/location/name').pop().text,
-            'temperature': data_root.xpath('temperature').pop().get('value'),
-            'description': tabular.xpath('symbol').pop().get('name'),
+            'location': tree.findall('./location/name').pop().text,
+            'temperature': data_root.findall('temperature').pop().get('value'),
+            'description': tabular.findall('symbol').pop().get('name'),
             'wind': wind
         }
 

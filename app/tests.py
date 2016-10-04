@@ -5,7 +5,7 @@ import os.path
 import unittest
 from datetime import datetime
 from jobs import yr, hackernews, nsb, ping, calendar
-from lxml import etree
+from xml.etree import ElementTree as etree
 
 
 class Yr(unittest.TestCase):

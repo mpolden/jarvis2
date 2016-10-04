@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
 import requests
-from lxml import etree
-
 from jobs import AbstractJob
+from xml.etree import ElementTree as etree
 
 
 class Avinor(AbstractJob):
