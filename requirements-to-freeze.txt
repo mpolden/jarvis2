@@ -9,6 +9,5 @@ google-api-python-client
 lxml
 pyquery
 requests
-rjsmin
 six
 soco
