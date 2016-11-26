@@ -18,7 +18,7 @@ class Plex(AbstractJob):
     def _parse_movies(self, data):
         return [{'title': m.get('title'),
                  'year': m.get('year')}
-                for m in data['_children']]
+                for m in data['MediaContainer']['Metadata']]
 
     def _parse_shows(self, data):
         return [{'title': s.get('title'),
@@ -26,7 +26,7 @@ class Plex(AbstractJob):
                  'name': s.get('grandparentTitle'),
                  'episode': '{0:02d}'.format(s.get('index')),
                  'season': '{0:02d}'.format(s.get('parentIndex'))}
-                for s in data['_children']]
+                for s in data['MediaContainer']['Metadata']]
 
     def _get_json(self, url):
         headers = {'Accept': 'application/json'}
