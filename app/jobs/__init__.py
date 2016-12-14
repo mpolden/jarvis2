@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 
 from abc import ABCMeta, abstractmethod
-from pkgutil import iter_modules
+from importlib import import_module
 from os.path import dirname, basename
-
-# import_module wasn't added until 2.7
-try:
-    from importlib import import_module
-except ImportError:
-    def import_module(name):
-        __import__(name)
+from pkgutil import iter_modules
 
 
 class AbstractJob(object):
