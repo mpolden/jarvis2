@@ -20,7 +20,7 @@
   pip: requirements=/vagrant/requirements.txt virtualenv=/vagrant/venv
 
 - name: install pip development requirements
-  pip: requirements=/vagrant/dev-requirements.txt virtualenv=/vagrant/venv
+  pip: requirements=/vagrant/requirements-dev.txt virtualenv=/vagrant/venv
 
 - name: install jshint
   npm: name=jshint global=yes state=latest
