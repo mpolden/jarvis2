@@ -37,7 +37,7 @@
     - restart uwsgi
 
 - name: copy config
-  copy: src=config.py
+  copy: src=../../../../app/config.py
         dest={{ app_path }}/app/config.py
         owner=root
         group=root
@@ -46,7 +46,7 @@
     - restart uwsgi
 
 - name: copy google api credentials
-  copy: src={{ item }}
+  copy: src=../../../../app/jobs/{{ item }}
         dest={{ app_path }}/app/jobs/{{ item }}
         owner=www-data
         group=www-data
