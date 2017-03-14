@@ -11,7 +11,7 @@ distros.
 Clone repo:
 
     export APP_PATH=/path/to/jarvis2
-    git clone https://github.com/martinp/jarvis2.git $APP_PATH
+    git clone https://github.com/mpolden/jarvis2.git $APP_PATH
 
 Create virtualenv and install dependencies:
 

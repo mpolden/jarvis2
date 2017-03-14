@@ -25,7 +25,7 @@
         group=root
 
 - name: clone repo from github
-  git: repo=https://github.com/martinp/jarvis2.git
+  git: repo=https://github.com/mpolden/jarvis2.git
        dest={{ app_path }}
   notify:
     - restart uwsgi

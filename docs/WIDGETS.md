@@ -19,7 +19,7 @@ interval to prevent slow jobs from blocking future jobs.
 atb
 ---
 Displays bus routes in Trondheim, Norway. Uses the API provided by
-[atbapi](https://github.com/martinp/atbapi).
+[atbapi](https://github.com/mpolden/atbapi).
 
 ```python
 JOBS['atb'] = {
