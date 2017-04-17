@@ -85,6 +85,15 @@ Version `1.8+` is required for the `ansible_local` provisioner to work.
 
 Run `vagrant up` in the repository root to provision a development environment.
 
+Deploying using Docker
+----------------------
+An fully working `Dockerfile` is included for use with [Docker](http://www.docker.io).
+
+A production-ready image can be built with `docker build -t jarvis2 .` and
+then using `docker run -t jarvis2` to run the app.
+
+Port exposed on 5000 and volume at /app for easy configuration.
+
 License
 -------
 Licensed under the MIT license. See the [LICENSE](LICENSE) file if you've never
