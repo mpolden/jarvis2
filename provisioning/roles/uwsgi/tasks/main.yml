@@ -24,4 +24,4 @@
     - restart uwsgi
 
 - name: make sure uwsgi is running
-  service: name=uwsgi state=running enabled=yes
+  service: name=uwsgi state=started enabled=yes

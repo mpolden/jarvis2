@@ -8,5 +8,5 @@
   when: ntp.install_service
 
 - name: make sure ntp is running
-  service: name=ntp state=running enabled=yes
+  service: name=ntp state=started enabled=yes
   when: ntp.install_service
