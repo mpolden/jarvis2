@@ -29,7 +29,7 @@ class Stockquotes(AbstractJob):
         params = {
             'q': self._build_query(),
             'format': 'json',
-            'env': 'http://datatables.org/alltables.env'
+            'env': 'store://datatables.org/alltableswithkeys'
         }
         r = requests.get('https://query.yahooapis.com/v1/public/yql',
                          timeout=self.timeout, params=params)
