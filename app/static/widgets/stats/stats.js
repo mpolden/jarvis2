@@ -1,51 +1,46 @@
-(function () {
-  'use strict';
+var stats = stats || {};
 
-  var stats = {
-    'el': document.getElementById('stats')
-  };
+stats.state = {
+  data: {},
+  update: function (event) {
+    stats.state.data = event.detail;
+    m.redraw();
+  }
+};
 
-  stats.controller = function () {
-    var ctrl = this;
-    ctrl.data = {};
-    stats.el.addEventListener('stats', function (event) {
-      ctrl.data = event.detail;
-      m.render(stats.el, stats.view(ctrl));
-    });
-  };
-
-  stats.view = function (c) {
-    if (Object.keys(c.data).length === 0) {
-      return m('p', 'Waiting for data');
-    }
-    return [
-      m('h1', 'Dagens forbruk'),
-      m('table', [
-        m('tr.fade', [
-          m('th', 'Drikke'),
-          m('th', 'Antall')
-        ]),
-        m('tr', [
-          m('td', 'Kaffe'),
-          m('td', [
-            m('span', c.data.stats.coffee),
-            m('span.fade', ' / ' + c.data.max.coffee)
-          ])
-        ]),
-        m('tr', [
-          m('td', 'Øl'),
-          m('td', [
-            m('span', c.data.stats.beer),
-            m('span.fade', ' / ' + c.data.max.beer)
-          ])
+stats.view = function () {
+  if (Object.keys(stats.state.data).length === 0) {
+    return m('p', 'Waiting for data');
+  }
+  return [
+    m('h1', 'Dagens forbruk'),
+    m('table', [
+      m('tr.fade', [
+        m('th', 'Drikke'),
+        m('th', 'Antall')
+      ]),
+      m('tr', [
+        m('td', 'Kaffe'),
+        m('td', [
+          m('span', stats.state.data.stats.coffee),
+          m('span.fade', ' / ' + stats.state.data.max.coffee)
         ])
       ]),
-      m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
-        c.data.updatedAt)
-    ];
-  };
+      m('tr', [
+        m('td', 'Øl'),
+        m('td', [
+          m('span', stats.state.data.stats.beer),
+          m('span.fade', ' / ' + stats.state.data.max.beer)
+        ])
+      ])
+    ]),
+    m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
+      stats.state.data.updatedAt)
+  ];
+};
 
-  if (stats.el !== null) {
-    m.mount(stats.el, stats);
-  }
-})();
+stats.oncreate = function () {
+  jrvs.subscribe('stats');
+};
+
+jrvs.mount('stats');

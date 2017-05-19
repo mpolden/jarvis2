@@ -1,38 +1,33 @@
-(function () {
-  'use strict';
+var gmail = gmail || {};
 
-  var gmail = {
-    'el': document.getElementById('gmail')
-  };
-
-  gmail.controller = function () {
-    var ctrl = this;
-    ctrl.data = {};
-    gmail.el.addEventListener('gmail', function (event) {
-      ctrl.data = event.detail;
-      m.render(gmail.el, gmail.view(ctrl));
-    });
-  };
-
-  gmail.view = function (c) {
-    if (Object.keys(c.data).length === 0) {
-      return m('p', 'Waiting for data');
-    }
-    return [
-      m('h1', 'Uleste eposter'),
-      m('p.fade', [
-        m('span', c.data.email),
-        m('br'),
-        m('span', c.data.folder)
-      ]),
-      m('p.count', c.data.unread),
-      m('p.fade', 'Totalt i ' + c.data.folder + ': ' + c.data.count),
-      m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
-        c.data.updatedAt)
-    ];
-  };
-
-  if (gmail.el !== null) {
-    m.mount(gmail.el, gmail);
+gmail.state = {
+  data: {},
+  update: function (event) {
+    gmail.state.data = event.detail;
+    m.redraw();
   }
-})();
+};
+
+gmail.view = function () {
+  if (Object.keys(gmail.state.data).length === 0) {
+    return m('p', 'Waiting for data');
+  }
+  return [
+    m('h1', 'Uleste eposter'),
+    m('p.fade', [
+      m('span', gmail.state.data.email),
+      m('br'),
+      m('span', gmail.state.data.folder)
+    ]),
+    m('p.count', gmail.state.data.unread),
+    m('p.fade', 'Totalt i ' + gmail.state.data.folder + ': ' + gmail.state.data.count),
+    m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
+      gmail.state.data.updatedAt)
+  ];
+};
+
+gmail.oncreate = function () {
+  jrvs.subscribe('gmail');
+};
+
+jrvs.mount('gmail');
