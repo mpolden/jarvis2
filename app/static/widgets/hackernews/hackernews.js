@@ -31,7 +31,7 @@ hn.view = function () {
 };
 
 hn.oncreate = function () {
-  jrvs.subscribe('hackernews', 'hn');
+  jrvs.subscribe('hackernews', hn);
 };
 
 jrvs.mount('hackernews', hn);

@@ -32,13 +32,16 @@ jrvs.truncate = function (s, n) {
   return s;
 };
 
-jrvs.subscribe = function (widget, namespace) {
-  namespace = namespace || widget;
-  if (typeof window[namespace].state.update !== 'function') {
-    throw namespace + '.state.update is not a function';
+jrvs.subscribe = function (elementId, namespace) {
+  namespace = namespace || window[elementId];
+  if (typeof namespace.state.update !== 'function') {
+    throw 'expected state.update to be a function, but is ' + namespace.state.update;
   }
-  var element = document.getElementById(widget);
-  element.addEventListener(element.id, window[namespace].state.update);
+  var element = document.getElementById(elementId);
+  if (element === null) {
+    throw 'element with id ' + elementId + ' does not exist';
+  }
+  element.addEventListener(element.id, namespace.state.update);
 };
 
 jrvs.mount = function (elementId, namespace) {
