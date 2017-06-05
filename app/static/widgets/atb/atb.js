@@ -1,7 +1,5 @@
 var atb = atb || {};
 
-atb.data = {};
-
 atb.parseState = function (data) {
   var body = data;
   body.departures.forEach(function (d) {
