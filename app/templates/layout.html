@@ -55,6 +55,11 @@
       <div data-widget="email" data-job="gmail"></div>
     </li>
     {% endif %}
+    {% if is_job_enabled('imap') %}
+    <li data-row="3" data-col="4" data-sizex="2" data-sizey="2">
+      <div data-widget="email" data-job="imap"></div>
+    </li>
+    {% endif %}
     {% if is_job_enabled('avinor') %}
     <li data-row="4" data-col="1" data-sizex="2" data-sizey="2">
       <div data-widget="avinor"></div>

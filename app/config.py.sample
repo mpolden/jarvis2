@@ -108,6 +108,16 @@ JOBS['gmail'] = {
     'folder': 'inbox'
 }
 
+JOBS['imap'] = {
+    'enabled': False,
+    'interval': 600,
+    'email': 'email-address-to-display',
+    'url': 'imap://username:password@host:port',
+    'tls': True,
+    'starttls': False,
+    'folder': 'INBOX'
+}
+
 JOBS['avinor'] = {
     'enabled': True,
     'interval': 180,

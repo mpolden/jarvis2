@@ -109,6 +109,23 @@ JOBS['hackernews'] = {
 }
 ```
 
+imap
+----------
+Uses IMAP to display the current unread count, and total email count in the configured
+folder.
+
+```python
+JOBS['imap'] = {
+    'enabled': True,
+    'interval': 900,
+    'email': 'email-address-to-display,
+    'url': 'imap://username:password@host:port',
+    'tls': True,
+    'starttls': False,
+    'folder': 'INBOX'
+}
+```
+
 nsb
 ---
 Displays upcoming train departures from a configured location. Scrapes data
