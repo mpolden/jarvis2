@@ -1,18 +1,11 @@
 var stockquotes = stockquotes || {};
 
-stockquotes.state = {
-  data: {},
-  update: function (event) {
-    stockquotes.state.data = event.detail;
-    m.redraw();
-  }
-};
-
-stockquotes.view = function () {
-  if (Object.keys(stockquotes.state.data).length === 0) {
+stockquotes.view = function (vnode) {
+  if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
-  var rows = stockquotes.state.data.map(function (quote) {
+  var state = vnode.attrs.data;
+  var rows = state.map(function (quote) {
     return m('tr', [
       m('td', quote.symbol),
       m('td', quote.ask),
@@ -29,12 +22,6 @@ stockquotes.view = function () {
       ])
     ].concat(rows)),
     m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
-      stockquotes.state.data.updatedAt)
+      state.updatedAt)
   ];
 };
-
-stockquotes.oncreate = function () {
-  jrvs.subscribe('stockquotes');
-};
-
-jrvs.mount('stockquotes');

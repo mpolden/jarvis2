@@ -1,27 +1,23 @@
 var avinor = avinor || {};
 
-avinor.state = {
-  data: {},
-  update: function (event) {
-    var data = event.detail;
-    data.flights = data.flights.map(function (f) {
-      f.date = moment(f.schedule_time).locale('nb');
-      return f;
-    }).filter(function (f) {
-      return f.date.isAfter();
-    });
-    data.next = data.flights.shift() || null;
-    data.flights = data.flights.slice(0, 4);
-    avinor.state.data = data;
-    m.redraw();
-  }
+avinor.parseState = function (data) {
+  data.flights = data.flights.map(function (f) {
+    f.date = moment(f.schedule_time).locale('nb');
+    return f;
+  }).filter(function (f) {
+    return f.date.isAfter();
+  });
+  data.next = data.flights.shift() || null;
+  data.flights = data.flights.slice(0, 4);
+  return data;
 };
 
-avinor.view = function () {
-  if (Object.keys(avinor.state.data).length === 0) {
+avinor.view = function (vnode) {
+  if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
-  var rows = avinor.state.data.flights.map(function (flight) {
+  var state = avinor.parseState(vnode.attrs.data);
+  var rows = state.flights.map(function (flight) {
     return m('tr', [
       m('td', flight.flight_id),
       m('td', flight.date.format('D. MMM HH:mm'))
@@ -30,16 +26,16 @@ avinor.view = function () {
   return [
     m('p.fade', [
       'Neste fly (',
-      m('em', avinor.state.data.next.flight_id),
+      m('em', state.next.flight_id),
       ') fra ',
-      m('em', avinor.state.data.from),
+      m('em', state.from),
       ' til ',
-      m('em', avinor.state.data.to),
+      m('em', state.to),
       ' går ',
-      m('em', avinor.state.data.next.date.format('dddd, D. MMMM'))
+      m('em', state.next.date.format('dddd, D. MMMM'))
     ]),
-    m('h1', avinor.state.data.next.date.format('HH:mm')),
-    m('h2', avinor.state.data.next.date.fromNow()),
+    m('h1', state.next.date.format('HH:mm')),
+    m('h2', state.next.date.fromNow()),
     m('table', [
       m('tr.fade', [
         m('th', 'Flight'),
@@ -47,12 +43,6 @@ avinor.view = function () {
       ])
     ].concat(rows)),
     m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
-      avinor.state.data.updatedAt)
+      state.updatedAt)
   ];
 };
-
-avinor.oncreate = function () {
-  jrvs.subscribe('avinor');
-};
-
-jrvs.mount('avinor');

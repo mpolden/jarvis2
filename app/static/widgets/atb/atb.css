@@ -1,27 +1,27 @@
-#atb {
+[data-widget="atb"] {
   height: 100%;
   padding: 5px;
   background: #90ca77;
   text-align: center;
 }
-#atb h1 {
+[data-widget="atb"] h1 {
   font-size: 55px;
   margin: 0;
 }
-#atb h2 {
+[data-widget="atb"] h2 {
   font-size: 20px;
 }
-#atb p {
+[data-widget="atb"] p {
   font-size: 16px;
 }
-#atb table {
+[data-widget="atb"] table {
   margin: 0 10px 0 10px;
 }
-#atb .time {
+[data-widget="atb"] .time {
   text-align: right;
   white-space: nowrap;
 }
-#atb .destination {
+[data-widget="atb"] .destination {
   text-align: left;
   width: 100%;
 }

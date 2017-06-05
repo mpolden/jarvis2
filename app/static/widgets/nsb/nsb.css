@@ -1,24 +1,24 @@
-#nsb {
+[data-widget="nsb"] {
   height: 100%;
   padding: 5px;
   background: #6e8243;
   text-align: center;
 }
-#nsb h1 {
+[data-widget="nsb"] h1 {
   font-size: 45px;
   margin: 8px;
 }
-#nsb h2 {
+[data-widget="nsb"] h2 {
   font-size: 16px;
   margin: 12px 0 12px 0;
 }
-#nsb table {
+[data-widget="nsb"] table {
   width: 100%;
 }
-#nsb th {
+[data-widget="nsb"] th {
   font-size: 14px;
 }
-#nsb em {
+[data-widget="nsb"] em {
   font-style: normal;
   color: white;
 }

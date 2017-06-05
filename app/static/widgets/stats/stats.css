@@ -1,16 +1,16 @@
-#stats {
+[data-widget="stats"] {
   height: 100%;
   padding: 5px;
   background: #3d362d;
   text-align: center;
 }
-#stats h1 {
+[data-widget="stats"] h1 {
   font-size: 20px;
   margin-bottom: 50px;
 }
-#stats table {
+[data-widget="stats"] table {
   width: 100%;
 }
-#stats tr {
+[data-widget="stats"] tr {
   font-size: 25px;
 }

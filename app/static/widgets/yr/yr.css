@@ -1,23 +1,23 @@
-#yr {
+[data-widget="yr"] {
   height: 100%;
   padding: 5px;
   background: #81c6dd;
   text-align: center;
 }
-#yr h1 {
+[data-widget="yr"] h1 {
   font-size: 55px;
   margin: 0;
 }
-#yr h2 {
+[data-widget="yr"] h2 {
   font-size: 30px;
 }
-#yr p {
+[data-widget="yr"] p {
   font-size: 20px;
 }
-#yr .wind {
+[data-widget="yr"] .wind {
   margin-bottom: 10px;
 }
-#yr .tomorrow {
+[data-widget="yr"] .tomorrow {
   font-size: 16px;
   margin: 0;
 }

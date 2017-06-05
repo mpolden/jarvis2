@@ -69,15 +69,16 @@ def _configure_bundles():
                                           output='gen/styles.min.css'))
 
 
-@app.route('/w/<widget>')
-@app.route('/widget/<widget>')
-def widget(widget):
-    if not _is_enabled(widget):
+@app.route('/w/<job>')
+@app.route('/widget/<job>')
+def widget(job):
+    if not _is_enabled(job):
         abort(404)
     x = request.args.get('x', 2)
     y = request.args.get('y', 2)
+    widget = request.args.get('widget', job)
     return render_template('index.html', layout='layout_single.html',
-                           widget=widget, x=x, y=y)
+                           widget=widget, job=job, x=x, y=y)
 
 
 @app.route('/')

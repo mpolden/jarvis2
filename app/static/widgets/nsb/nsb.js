@@ -1,26 +1,23 @@
 var nsb = nsb || {};
 
-nsb.state = {
-  data: {},
-  update: function (event) {
-    var body = event.detail;
-    if (body.departures.length > 0) {
-      body.next = body.departures[0];
-      body.upcoming = body.departures.slice(1, 5);
-    } else {
-      body.next = null;
-      body.upcoming = [];
-    }
-    nsb.state.data = body;
-    m.redraw();
+nsb.parseState = function (data) {
+  var body = data;
+  if (body.departures.length > 0) {
+    body.next = body.departures[0];
+    body.upcoming = body.departures.slice(1, 5);
+  } else {
+    body.next = null;
+    body.upcoming = [];
   }
+  return body;
 };
 
-nsb.view = function () {
-  if (Object.keys(nsb.state.data).length === 0) {
+nsb.view = function (vnode) {
+  if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
-  var rows = nsb.state.data.upcoming.map(function (departure) {
+  var state = nsb.parseState(vnode.attrs.data);
+  var rows = state.upcoming.map(function (departure) {
     return m('tr', [
       m('td', departure.departure),
       m('td', departure.arrival),
@@ -30,18 +27,18 @@ nsb.view = function () {
   return [
     m('p.fade', [
       'Neste tog fra ',
-      m('em', nsb.state.data.from),
+      m('em', state.from),
       ' til ',
-      m('em', nsb.state.data.to),
+      m('em', state.to),
       ' går ',
-      m('em', nsb.state.data.date)
+      m('em', state.date)
     ]),
-    m('h1', nsb.state.data.next.departure),
+    m('h1', state.next.departure),
     m('h2.fade', [
       'Ankomst: ',
-      m('em', nsb.state.data.next.arrival),
+      m('em', state.next.arrival),
       ' (',
-      m('em', nsb.state.data.next.duration),
+      m('em', state.next.duration),
       ')'
     ]),
     m('table', [
@@ -52,12 +49,6 @@ nsb.view = function () {
       ])
     ].concat(rows)),
     m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
-      nsb.state.data.updatedAt)
+      state.updatedAt)
   ];
 };
-
-nsb.oncreate = function () {
-  jrvs.subscribe('nsb');
-};
-
-jrvs.mount('nsb');

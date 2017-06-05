@@ -1,39 +1,39 @@
-#ping {
+[data-widget="ping"] {
   height: 100%;
   padding: 5px;
   background: #333333;
 }
-#ping #chart {
+[data-widget="ping"] #chart {
   position: absolute;
   top: 10px;
   right: 0;
 }
-#ping #y-axis {
+[data-widget="ping"] #y-axis {
   position: absolute;
   top: 10px;
   left: 0;
   width: 55px;
   height: 270px;
 }
-#ping .y_ticks {
+[data-widget="ping"] .y_ticks {
   fill: #ffffff;
 }
-#ping .y_axis {
+[data-widget="ping"] .y_axis {
   height: 100%;
 }
-#ping .rickshaw_legend {
+[data-widget="ping"] .rickshaw_legend {
   padding: 0;
 }
-#ping #legend {
+[data-widget="ping"] #legend {
   position: absolute;
   bottom: 0;
   background: none;
   width: 100%;
 }
-#ping #legend ul {
+[data-widget="ping"] #legend ul {
   text-align: center;
   list-style: none;
 }
-#ping #legend li {
+[data-widget="ping"] #legend li {
   display: inline;
 }

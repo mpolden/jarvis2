@@ -1,17 +1,10 @@
 var stats = stats || {};
 
-stats.state = {
-  data: {},
-  update: function (event) {
-    stats.state.data = event.detail;
-    m.redraw();
-  }
-};
-
-stats.view = function () {
-  if (Object.keys(stats.state.data).length === 0) {
+stats.view = function (vnode) {
+  if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
+  var state = vnode.attrs.data;
   return [
     m('h1', 'Dagens forbruk'),
     m('table', [
@@ -22,25 +15,19 @@ stats.view = function () {
       m('tr', [
         m('td', 'Kaffe'),
         m('td', [
-          m('span', stats.state.data.stats.coffee),
-          m('span.fade', ' / ' + stats.state.data.max.coffee)
+          m('span', state.stats.coffee),
+          m('span.fade', ' / ' + state.max.coffee)
         ])
       ]),
       m('tr', [
         m('td', 'Øl'),
         m('td', [
-          m('span', stats.state.data.stats.beer),
-          m('span.fade', ' / ' + stats.state.data.max.beer)
+          m('span', state.stats.beer),
+          m('span.fade', ' / ' + state.max.beer)
         ])
       ])
     ]),
     m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
-      stats.state.data.updatedAt)
+      state.updatedAt)
   ];
 };
-
-stats.oncreate = function () {
-  jrvs.subscribe('stats');
-};
-
-jrvs.mount('stats');

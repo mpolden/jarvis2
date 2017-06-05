@@ -7,20 +7,23 @@ jrvs.layout = function () {
   });
 };
 
-jrvs.dispatch = function () {
+jrvs.subscribe = function () {
   var source = new EventSource('/events');
 
   source.addEventListener('message', function (message) {
     var o = JSON.parse(message.data);
 
     if (typeof o === 'object' && Object.keys(o.body).length > 0) {
-      var el = document.getElementById(o.widget);
+      var el = document.querySelector('[data-job="' + o.widget + '"]');
+      // If no specific job name is given, just use widget name for the job name
+      if (el === null) {
+        el = document.querySelector('[data-widget="' + o.widget + '"]');
+      }
       if (el === null) {
         return;
       }
       o.body.updatedAt = moment().format('HH:mm');
-      var event = new CustomEvent(o.widget, {'detail': o.body});
-      el.dispatchEvent(event);
+      m.render(el, m(window[el.dataset.widget], {data: o.body}));
     }
   }, false);
 };
@@ -32,31 +35,7 @@ jrvs.truncate = function (s, n) {
   return s;
 };
 
-jrvs.subscribe = function (elementId, namespace) {
-  namespace = namespace || window[elementId];
-  if (typeof namespace.state.update !== 'function') {
-    throw 'expected state.update to be a function, but is ' + namespace.state.update;
-  }
-  var element = document.getElementById(elementId);
-  if (element === null) {
-    throw 'element with id ' + elementId + ' does not exist';
-  }
-  element.addEventListener(element.id, namespace.state.update);
-};
-
-jrvs.mount = function (elementId, namespace) {
-  namespace = namespace || window[elementId];
-  if (typeof namespace !== 'object') {
-    throw 'expected namespace to be an object, but is ' + namespace;
-  }
-  var element = document.getElementById(elementId);
-  if (element === null) {
-    return;
-  }
-  m.mount(element, namespace);
-};
-
 document.addEventListener('DOMContentLoaded', function () {
   jrvs.layout();
-  jrvs.dispatch();
+  jrvs.subscribe();
 });

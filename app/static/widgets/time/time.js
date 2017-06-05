@@ -1,25 +1,30 @@
 var time = time || {};
 
-time.state = {
-  now: null,
-  update: function () {
-    time.state.now = moment().locale('nb');
-    m.redraw();
-  }
+time.update = function (vnode) {
+  vnode.state = {now: moment().locale('nb')};
+  m.redraw();
 };
 
-time.view = function () {
+time.view = function (vnode) {
+  var state = vnode.state;
   return [
-    m('h1', time.state.now.format('HH:mm')),
-    m('h2', time.state.now.format('dddd')),
-    m('p', time.state.now.format('D. MMMM YYYY'))
+    m('h1', state.now.format('HH:mm')),
+    m('h2', state.now.format('dddd')),
+    m('p', state.now.format('D. MMMM YYYY'))
   ];
 };
 
-time.oninit = time.state.update;
+time.oninit = time.update;
 
-time.oncreate = function () {
-  setInterval(time.state.update, 500);
+time.oncreate = function (vnode) {
+  setInterval(function () {
+    time.update(vnode);
+  }, 500);
 };
 
-jrvs.mount('time');
+(function () {
+  var el = document.querySelector('[data-widget="time"]');
+  if (el !== null) {
+    m.mount(el, time);
+  }
+})();

@@ -1,20 +1,20 @@
-#hackernews {
+[data-widget="hn"] {
   height: 100%;
   padding: 5px;
   background: #e9b64d;
   text-align: center;
 }
-#hackernews p {
+[data-widget="hn"] p {
   font-size: 16px;
 }
-#hackernews table {
+[data-widget="hn"] table {
   margin: 0 6px 0 6px;
 }
-#hackernews .title {
+[data-widget="hn"] .title {
   text-align: left;
   width: 100%;
 }
-#hackernews .points {
+[data-widget="hn"] .points {
   text-align: right;
   white-space: nowrap;
 }

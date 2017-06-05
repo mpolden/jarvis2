@@ -1,21 +1,21 @@
-#uptime {
+[data-widget="uptime"] {
   height: 100%;
   padding: 5px;
   background: #B95835;
   text-align: center;
 }
-#uptime p {
+[data-widget="uptime"] p {
   font-size: 18px;
 }
-#uptime table {
+[data-widget="uptime"] table {
   margin: 0 10px 0 10px;
 }
-#uptime .label {
+[data-widget="uptime"] .label {
   text-align: left;
   width: 100%;
   font-size: 20px;
 }
-#uptime .active {
+[data-widget="uptime"] .active {
   text-align: right;
   white-space: nowrap;
   font-size: 20px;

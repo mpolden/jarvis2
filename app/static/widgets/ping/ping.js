@@ -2,31 +2,21 @@
 
 var ping = ping || {};
 
-ping.element = document.getElementById('ping');
-
-ping.state = {
-  data: {},
-  graph: null,
-  update: function (event) {
-    ping.state.data = event.detail;
-    m.redraw();
-  }
-};
-
-ping.view = function () {
-  if (Object.keys(ping.state.data).length === 0) {
+ping.view = function (vnode) {
+  if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
+  var state = vnode.attrs.data;
   return [
     m('div#y-axis'),
     m('div#chart', {
       oncreate: function (vnode) {
-        ping.state.graph = ping.createGraph(vnode.dom, ping.state.data.values);
-        ping.state.graph.render();
+        vnode.state.graph = ping.createGraph(vnode.dom, state.values);
+        vnode.state.graph.render();
       },
-      onupdate: function () {
-        ping.state.graph.series.addData(ping.state.data.values);
-        ping.state.graph.render();
+      onupdate: function (vnode) {
+        vnode.state.graph.series.addData(state.values);
+        vnode.state.graph.render();
       }
     }),
     m('div#legend')
@@ -73,9 +63,3 @@ ping.createGraph = function (element, values) {
   });
   return graph;
 };
-
-ping.oncreate = function () {
-  jrvs.subscribe('ping');
-};
-
-jrvs.mount('ping');

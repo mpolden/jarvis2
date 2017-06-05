@@ -1,27 +1,27 @@
-#calendar {
+[data-widget="calendar"] {
   height: 100%;
   padding: 5px;
   background: #3D3242;
   text-align: center;
 }
-#calendar h1 {
+[data-widget="calendar"] h1 {
   font-size: 55px;
   margin: 0 0 10px 0;
 }
-#calendar h2 {
+[data-widget="calendar"] h2 {
   font-size: 25px;
 }
-#calendar p {
+[data-widget="calendar"] p {
   font-size: 16px;
 }
-#calendar table {
+[data-widget="calendar"] table {
   margin: 0 10px 0 10px;
 }
-#calendar .summary {
+[data-widget="calendar"] .summary {
   text-align: left;
   width: 100%;
 }
-#calendar .start {
+[data-widget="calendar"] .start {
   text-align: right;
   white-space: nowrap;
 }
