@@ -1,13 +1,13 @@
-[data-widget="gmail"] {
+[data-widget="email"] {
   height: 100%;
   padding: 5px;
   background: #5a79a5;
   text-align: center;
 }
-[data-widget="gmail"] h1 {
+[data-widget="email"] h1 {
   font-size: 20px;
 }
-[data-widget="gmail"] .count {
+[data-widget="email"] .count {
   font-size: 90px;
   margin: 0;
 }

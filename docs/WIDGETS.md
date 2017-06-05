@@ -76,7 +76,7 @@ to run `make google-api-auth` to generate a credentials file.
 
 gmail
 -----
-Displays the current unread count, and total mail count in the configured
+Displays the current unread count, and total email count in the configured
 folder.
 
 ```python
