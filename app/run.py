@@ -68,6 +68,7 @@ def _run_job(name=None, print_json=False):
 
 
 def _run_app(debug=False):
+    app.jinja_env.auto_reload = debug
     app.debug = debug
     signal.signal(signal.SIGINT, _teardown)
     port = int(os.environ.get('PORT', 5000))
