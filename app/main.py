@@ -143,11 +143,18 @@ def _inject_template_methods():
 def _configure_jobs():
     conf = app.config['JOBS']
     offset = 0
-    for name, cls in load_jobs().items():
-        if not _is_enabled(name, conf):
-            app.logger.info('Skipping disabled job: %s', name)
+    jobs = load_jobs()
+
+    for job_id, config in conf.items():
+        job_name = config.get('job_name', job_id)
+        if not config.get('enabled'):
+            app.logger.info('Skipping disabled job: %s', job_name)
             continue
-        job = cls(conf[name])
+        if job_name not in jobs:
+            app.logger.info('Skipping job with ID %s (no such job: %s)',
+                            job_id, job_name)
+            continue
+        job = jobs[job_name](config)
         if app.debug:
             start_date = datetime.now() + timedelta(seconds=1)
         else:
@@ -155,12 +162,12 @@ def _configure_jobs():
             start_date = datetime.now() + timedelta(seconds=offset)
 
         job.start_date = start_date
-        app.logger.info('Scheduling job: %s', job)
+        app.logger.info('Scheduling job with ID %s: %s', job_id, job)
         sched.add_interval_job(_run_job,
-                               name=name,
+                               name=job_id,
                                seconds=job.interval,
                                start_date=job.start_date,
-                               kwargs={'widget': name, 'job': job})
+                               kwargs={'widget': job_id, 'job': job})
     if not sched.running:
         sched.start()
 

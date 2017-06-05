@@ -27,6 +27,15 @@ JOBS['atb'] = {
     'timeout': 5
 }
 
+# Add additional atb job for another departure
+JOBS['atb-16010382'] = {
+    'enabled': True,
+    'interval': 60,
+    'url': 'http://atbapi.tar.io/api/v1/departures/16010382',
+    'timeout': 5,
+    'job_name': 'atb'
+}
+
 JOBS['hackernews'] = {
     'enabled': True,
     'interval': 900,

@@ -4,13 +4,18 @@ Available widgets
 Common options
 --------------
 
-All jobs have two common fields: `enabled` and `interval`.
+All jobs have the following fields: `enabled`, `interval` and `job_name`.
 
 `enabled` should be `True` to enable the job. If the key is omitted or `False`,
 the job won't be enabled.
 
 `interval` specifies how often the job should run, in seconds. `interval` set to
 `60` will make the job run every 60 seconds.
+
+`job_name` specifies which job implementation should used for this job
+definition. Valid job names are the ones found in `app/jobs/`, excluding the
+`.py` extensions. Specifying `job_name` allows a job to be reused, it defaults
+to the job ID.
 
 Most jobs also accept a `timeout` option. This option sets how long a job should
 wait for a request to complete, in seconds. Timeout should be lower than
