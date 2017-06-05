@@ -133,7 +133,7 @@ def _is_enabled(name, conf=None):
 
 @app.context_processor
 def _inject_template_methods():
-    return dict(is_widget_enabled=_is_enabled)
+    return dict(is_job_enabled=_is_enabled)
 
 
 @app.before_first_request
