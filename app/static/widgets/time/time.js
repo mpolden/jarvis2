@@ -1,12 +1,12 @@
 var time = time || {};
 
 time.update = function (vnode) {
-  vnode.state = {now: moment().locale('nb')};
+  vnode.state.data = {now: moment().locale('nb')};
   m.redraw();
 };
 
 time.view = function (vnode) {
-  var state = vnode.state;
+  var state = vnode.state.data;
   return [
     m('h1', state.now.format('HH:mm')),
     m('h2', state.now.format('dddd')),
