@@ -30,7 +30,7 @@ atb.view = function (vnode) {
   var state = atb.parseState(vnode.attrs.data);
   var rows = state.upcoming.map(function (departure) {
     return m('tr', [
-      m('td', {'class': 'destination fade'}, departure.line + ' ' +
+      m('td', {'class': 'destination'}, departure.line + ' ' +
         departure.destination),
       m('td.time', departure.departureTime.format('HH:mm'))
     ]);
