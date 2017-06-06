@@ -1,11 +1,11 @@
 APScheduler==2.1.2
-Flask==0.11.1
+Flask==0.12.2
 Flask-Assets==0.12
-Jinja2==2.8
-MarkupSafe==0.23
-Werkzeug==0.11.11
+Jinja2==2.9.6
+MarkupSafe==1.0
+Werkzeug==0.12.2
 args==0.1.0
-click==6.6
+click==6.7
 clint==0.5.1
 cssmin==0.2.0
 cssselect==0.9.2
@@ -24,4 +24,4 @@ simplejson==3.8.2
 six==1.10.0
 soco==0.12
 uritemplate==3.0.0
-webassets==0.12.0
+webassets==0.12.1
