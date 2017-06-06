@@ -3,16 +3,15 @@ body {
   color: #fff;
   font-family: "Montserrat", sans-serif;
 }
-.gridster {
-  width: 1240px;
-  margin: 0 auto;
+
+.container {
+    width: 1240px;
 }
-.gridster ul {
-  list-style: none;
-}
+
 .fade {
   color: rgba(255, 255, 255, 0.7);
 }
+
 .updated-at {
   color: rgba(0, 0, 0, 0.3);
   font-size: 12px !important;
@@ -20,8 +19,14 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 3px;
+  bottom: 8px;
 }
-* {
-  box-sizing: border-box;
+
+[data-widget] {
+    height: 300px !important;
+    width: 100%;
+}
+
+[class*="col-"] {
+    padding: 5px;
 }

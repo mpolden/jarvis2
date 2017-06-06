@@ -70,11 +70,10 @@ def _configure_bundles():
 def widget(job):
     if not _is_enabled(job):
         abort(404)
-    x = request.args.get('x', 2)
-    y = request.args.get('y', 2)
+    x = request.args.get('x', 3)
     widget = request.args.get('widget', job)
     return render_template('index.html', layout='layout_single.html',
-                           widget=widget, job=job, x=x, y=y)
+                           widget=widget, job=job, x=x)
 
 
 @app.route('/')

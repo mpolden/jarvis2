@@ -11,8 +11,8 @@
     </title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.0/rickshaw.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap-grid.min.css">
     {% if config['DEBUG'] %}
     {% assets "css_all" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}">
@@ -29,8 +29,6 @@
     {% else %}
     {% include 'layout.html' %}
     {% endif %}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/mithril/1.1.1/mithril.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/nb.js"></script>

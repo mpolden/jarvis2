@@ -1,12 +1,5 @@
 var jrvs = jrvs || {};
 
-jrvs.layout = function () {
-  $('.gridster ul').gridster({
-    widget_margins: [5, 5],
-    widget_base_dimensions: [145, 145]
-  });
-};
-
 jrvs.subscribe = function () {
   var source = new EventSource('/events');
 
@@ -35,7 +28,4 @@ jrvs.truncate = function (s, n) {
   return s;
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-  jrvs.layout();
-  jrvs.subscribe();
-});
+document.addEventListener('DOMContentLoaded', jrvs.subscribe);
