@@ -4,12 +4,9 @@ Flask-Assets==0.12
 Jinja2==2.9.6
 MarkupSafe==1.0
 Werkzeug==0.12.2
-args==0.1.0
 click==6.7
-clint==0.5.1
 cssmin==0.2.0
 cssselect==0.9.2
-docopt==0.6.2
 google-api-python-client==1.5.5
 httplib2==0.9.2
 itsdangerous==0.24

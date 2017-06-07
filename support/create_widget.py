@@ -1,24 +1,11 @@
 #!/usr/bin/env python
 
-"""JARVIS 2 - create widget
-
-Usage:
-  create_widget.py [-l | [-r] [-n] [NAME]]
-
-Options:
-  -h --help         Show usage
-  -n --dry-run      Show what would be done, but don't do anything
-  -l --list         List widgets
-  -r --remove       Remove widget
-
-"""
 from __future__ import print_function
 
+import argparse
 import os
 import sys
 
-from clint.textui import colored, puts
-from docopt import docopt
 from six.moves import input
 from jinja2 import Environment, FileSystemLoader
 
@@ -51,12 +38,12 @@ class WidgetFactory(object):
 
     def _create_widget_dir(self):
         os.mkdir(self.widget_dir)
-        puts('Created %s' % (colored.green(self.widget_dir),))
+        print('Created {}'.format(self.widget_dir))
 
     def _write_file(self, file_path, contents):
         with open(file_path, 'w') as f:
             f.write(contents)
-            puts('Created %s' % (colored.green(file_path),))
+            print('Created {}'.format(file_path))
 
     def create_widget(self):
         contents = self._render_templates()
@@ -81,7 +68,7 @@ class WidgetFactory(object):
             os.remove(file_path)
         else:
             os.rmdir(file_path)
-        puts('Removed %s' % (colored.red(file_path),))
+        print('Removed {}'.format(file_path))
 
     def remove_widget(self):
         if os.path.isdir(self.widget_dir):
@@ -106,29 +93,39 @@ class WidgetFactory(object):
             print('{} {}'.format(name, widget_path))
 
 
-class UselessFactory(WidgetFactory):
+class DryrunFactory(WidgetFactory):
 
     def _create_widget_dir(self):
-        puts('Would create %s' % (colored.green(self.widget_dir),))
+        print('Would create {}'.format(self.widget_dir))
 
     def _write_file(self, file_path, contents):
-        puts('Would create %s' % (colored.green(file_path),))
+        print('Would create {}'.format(file_path))
 
     def _remove_file(self, file_path):
-        puts('Would remove %s' % (colored.red(file_path),))
+        print('Would remove {}'.format(file_path))
 
 
 def get_factory(name, dry_run=False):
-    return UselessFactory(name) if dry_run else WidgetFactory(name)
+    return DryrunFactory(name) if dry_run else WidgetFactory(name)
 
 
 if __name__ == '__main__':
-    args = docopt(__doc__)
-    if args['--list']:
+    parser = argparse.ArgumentParser(description='Create a new widget.')
+    parser.add_argument('-n', '--dry-run', dest='dry_run', action='store_true',
+                        help=('Show what would be done, but don\'t'
+                              ' do anything'))
+    parser.add_argument('-l', '--list', dest='list_widgets',
+                        action='store_true', help='List widgets')
+    parser.add_argument('-r', '--remove', dest='remove', action='store_true',
+                        help='Remove widget')
+    parser.add_argument('name', metavar='NAME', nargs='?')
+    args = parser.parse_args()
+
+    if args.list_widgets:
         get_factory('', True).list_widgets()
-    elif args['--remove']:
-        name = args['NAME'] or input('Name of the widget to remove: ')
-        get_factory(name, args['--dry-run']).remove_widget()
+    elif args.remove:
+        name = args.name or input('Name of the widget to remove: ')
+        get_factory(name, args.dry_run).remove_widget()
     else:
-        name = args['NAME'] or input('Name of the widget to create: ')
-        get_factory(name, args['--dry-run']).create_widget()
+        name = args.name or input('Name of the widget to create: ')
+        get_factory(name, args.dry_run).create_widget()

@@ -2,9 +2,7 @@ APScheduler==2.1.2
 Flask
 Flask-Assets
 Jinja2
-clint
 cssmin
-docopt
 google-api-python-client
 lxml
 pyquery

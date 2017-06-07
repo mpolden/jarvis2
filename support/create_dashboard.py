@@ -1,24 +1,11 @@
 #!/usr/bin/env python
 
-"""JARVIS 2 - create dashboard
-
-Usage:
-  create_dashboard.py [-l | [-r] [-n] [NAME]]
-
-Options:
-  -h --help         Show usage
-  -n --dry-run      Show what would be done, but don't do anything
-  -l --list         List dashboards
-  -r --remove       Remove dashboard
-
-"""
 from __future__ import print_function
 
+import argparse
 import os
 import sys
 
-from clint.textui import colored, puts
-from docopt import docopt
 from six.moves import input
 from shutil import copyfile
 
@@ -36,11 +23,11 @@ class DashboardFactory(object):
         layout_template = os.path.abspath(os.path.join(
             os.path.dirname(__file__), 'templates', 'layout_empty.html'))
         copyfile(layout_template, file_path)
-        puts('Created {}'.format(colored.green(file_path)))
+        print('Created {}'.format(file_path))
 
     def _remove_file(self, file_path):
         os.remove(file_path)
-        puts('Removed {}'.format(colored.red(file_path)))
+        print('Removed {}'.format(file_path))
 
     def create_dashboard(self):
         if os.path.isfile(self.layout):
@@ -49,7 +36,7 @@ class DashboardFactory(object):
 
         if not os.path.isdir(self.layout_dir):
             os.mkdir(self.layout_dir)
-            print('Created {}'.format(colored.green(self.layout_dir)))
+            print('Created {}'.format(self.layout_dir))
 
         self._write_file(self.layout)
 
@@ -74,13 +61,13 @@ class DashboardFactory(object):
 class DryrunFactory(DashboardFactory):
 
     def _create_dir(self):
-        puts('Would create {}'.format(colored.green(self.dashboard_dir)))
+        print('Would create {}'.format(self.dashboard_dir))
 
     def _write_file(self, file_path):
-        puts('Would create {}'.format(colored.green(file_path)))
+        print('Would create {}'.format(file_path))
 
     def _remove_file(self, file_path):
-        puts('Would remove {}'.format(colored.red(file_path)))
+        print('Would remove {}'.format(file_path))
 
 
 def get_factory(name, dry_run=False):
@@ -88,12 +75,22 @@ def get_factory(name, dry_run=False):
 
 
 if __name__ == '__main__':
-    args = docopt(__doc__)
-    if args['--list']:
+    parser = argparse.ArgumentParser(description='Create a new dashboard.')
+    parser.add_argument('-n', '--dry-run', dest='dry_run', action='store_true',
+                        help=('Show what would be done, but don\'t'
+                              ' do anything'))
+    parser.add_argument('-l', '--list', dest='list_dashboards',
+                        action='store_true', help='List dashboards')
+    parser.add_argument('-r', '--remove', dest='remove', action='store_true',
+                        help='Remove dashboard')
+    parser.add_argument('name', metavar='NAME', nargs='?')
+    args = parser.parse_args()
+
+    if args.list_dashboards:
         get_factory('', True).list_dashboards()
-    elif args['--remove']:
-        name = args['NAME'] or input('Name of the dashboard to remove: ')
-        get_factory(name, args['--dry-run']).remove_dashboard()
+    elif args.remove:
+        name = args.name or input('Name of the dashboard to remove: ')
+        get_factory(name, args.dry_run).remove_dashboard()
     else:
-        name = args['NAME'] or input('Name of the dashboard to create: ')
-        get_factory(name, args['--dry-run']).create_dashboard()
+        name = args.name or input('Name of the dashboard to create: ')
+        get_factory(name, args.dry_run).create_dashboard()

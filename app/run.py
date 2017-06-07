@@ -1,24 +1,11 @@
 #!/usr/bin/env python
 
-"""JARVIS 2 helper script
-
-Usage:
-  run.py -j [-s] [NAME]
-  run.py [-d]
-
-Options:
-  -h --help         Show usage
-  -d --debug        Run app in debug mode
-  -j --job          Run a job, will prompt if NAME is not given
-  -s --json         Print job output as JSON
-
-"""
 from __future__ import print_function
 
+import argparse
 import os
 import signal
 
-from docopt import docopt
 from six.moves import input
 
 from main import app, queues, sched
@@ -76,11 +63,20 @@ def _run_app(debug=False):
 
 
 def main():
-    args = docopt(__doc__)
-    if args['--job']:
-        _run_job(args['NAME'], args['--json'])
+    parser = argparse.ArgumentParser(description='Helper script.')
+    parser.add_argument('-d', '--debug', dest='debug', action='store_true',
+                        help='Run app in debug mode')
+    parser.add_argument('-j', '--job', dest='job', action='store_true',
+                        help='Run a job, will prompt if NAME is not given')
+    parser.add_argument('-s', '--json', dest='json', action='store_true',
+                        help='Print job output as JSON')
+    parser.add_argument('name', metavar='NAME', nargs='?')
+    args = parser.parse_args()
+
+    if args.job:
+        _run_job(args.name, args.json)
     else:
-        _run_app(args['--debug'])
+        _run_app(args.debug)
 
 
 if __name__ == '__main__':
