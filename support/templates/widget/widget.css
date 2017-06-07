@@ -1,5 +1,4 @@
-#{{ name|lower }} {
-    height: 100%;
+[data-widget="{{ name|lower }}"] {
     padding: 5px;
     background: #81c6dd;
 }

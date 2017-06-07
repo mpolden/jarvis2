@@ -9,4 +9,4 @@ class {{ name|capitalize }}(AbstractJob):
         self.interval = conf['interval']
 
     def get(self):
-        return {}
+        return {'foo': 'bar'}
