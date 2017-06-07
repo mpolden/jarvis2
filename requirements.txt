@@ -1,4 +1,4 @@
-APScheduler==2.1.2
+APScheduler==3.3.1
 Flask==0.12.2
 Flask-Assets==0.12
 Jinja2==2.9.6
@@ -9,6 +9,8 @@ chardet==3.0.3
 click==6.7
 cssmin==0.2.0
 cssselect==1.0.1
+funcsigs==1.0.2
+futures==3.1.1
 google-api-python-client==1.6.2
 httplib2==0.10.3
 idna==2.5
@@ -18,10 +20,12 @@ oauth2client==4.1.1
 pyasn1==0.2.3
 pyasn1-modules==0.0.9
 pyquery==1.2.17
+pytz==2017.2
 requests==2.17.3
 rsa==3.4.2
 six==1.10.0
 soco==0.12
+tzlocal==1.4
 uritemplate==3.0.0
 urllib3==1.21.1
 webassets==0.12.1

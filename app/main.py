@@ -13,7 +13,7 @@ try:
 except ImportError:
     import SocketServer as socketserver
 
-from apscheduler.scheduler import Scheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
 from flask import Flask, render_template, Response, request, abort
 from flask_assets import Environment, Bundle
@@ -29,7 +29,7 @@ widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 assets = Environment(app)
-sched = Scheduler()
+sched = BackgroundScheduler()
 queues = {}
 last_events = {}
 
@@ -159,11 +159,13 @@ def _configure_jobs():
 
         job.start_date = start_date
         app.logger.info('Scheduling job with ID %s: %s', job_id, job)
-        sched.add_interval_job(_run_job,
-                               name=job_id,
-                               seconds=job.interval,
-                               start_date=job.start_date,
-                               kwargs={'widget': job_id, 'job': job})
+        sched.add_job(_run_job,
+                      'interval',
+                      name=job_id,
+                      next_run_time=job.start_date,
+                      coalesce=True,
+                      seconds=job.interval,
+                      kwargs={'widget': job_id, 'job': job})
     if not sched.running:
         sched.start()
 

@@ -1,4 +1,4 @@
-APScheduler==2.1.2
+APScheduler
 Flask
 Flask-Assets
 Jinja2
