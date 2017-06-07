@@ -2,13 +2,19 @@
 - hosts: dev
   become: yes
   roles:
-    - ntp
-    - vagrant
+    - role: ntp
+      tags: ntp
+    - role: vagrant
+      tags: vagrant
 
 - hosts: prod
   become: yes
   roles:
-    - ntp
-    - nginx
-    - deploy
-    - uwsgi
+    - role: ntp
+      tags: ntp
+    - role: nginx
+      tags: nginx
+    - role: deploy
+      tags: deploy
+    - role: uwsgi
+      tags: uwsgi
