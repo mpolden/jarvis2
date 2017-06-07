@@ -72,8 +72,9 @@ def widget(job):
         abort(404)
     x = request.args.get('x', 3)
     widget = request.args.get('widget', job)
+    widgets = _enabled_jobs()
     return render_template('index.html', layout='layout_single.html',
-                           widget=widget, job=job, x=x)
+                           widget=widget, job=job, x=x, widgets=widgets)
 
 
 @app.route('/')
@@ -81,14 +82,15 @@ def widget(job):
 @app.route('/dashboard/<layout>')
 def dashboard(layout=None):
     locale = request.args.get('locale')
+    widgets = _enabled_jobs()
     if layout is not None:
         try:
             return render_template('index.html',
                                    layout='layouts/{0}.html'.format(layout),
-                                   locale=locale)
+                                   locale=locale, widgets=widgets)
         except TemplateNotFound:
             abort(404)
-    return render_template('index.html', locale=locale)
+    return render_template('index.html', locale=locale, widgets=widgets)
 
 
 @app.route('/events')
@@ -122,6 +124,11 @@ def create_event(widget):
     body = json.loads(data)
     _add_event(widget, body)
     return '', 201
+
+
+def _enabled_jobs():
+    conf = app.config['JOBS']
+    return [name for name in conf.keys() if conf[name].get('enabled')]
 
 
 def _is_enabled(name, conf=None):

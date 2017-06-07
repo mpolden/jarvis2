@@ -7,18 +7,28 @@ jrvs.subscribe = function () {
     var o = JSON.parse(message.data);
 
     if (typeof o === 'object' && Object.keys(o.body).length > 0) {
-      var el = document.querySelector('[data-job="' + o.widget + '"]');
-      // If no specific job name is given, just use widget name for the job name
-      if (el === null) {
-        el = document.querySelector('[data-widget="' + o.widget + '"]');
-      }
-      if (el === null) {
-        return;
-      }
+      var el = jrvs.findWidget(o.widget);
       o.body.updatedAt = moment().format('HH:mm');
-      m.render(el, m(window[el.dataset.widget], {data: o.body}));
+      jrvs.render(el, {data: o.body});
     }
   }, false);
+};
+
+jrvs.findWidget = function (name) {
+  var el = document.querySelector('[data-job="' + name + '"]');
+  // If no job is specified, we default to using the widget name
+  if (el === null) {
+    return document.querySelector('[data-widget="' + name + '"]');
+  }
+  return el;
+};
+
+jrvs.render = function (widgetElement, data) {
+  if (widgetElement === null) {
+    return;
+  }
+  m.render(widgetElement, m(window[widgetElement.dataset.widget],
+                            data || {'data': {}}));
 };
 
 jrvs.truncate = function (s, n) {
@@ -28,4 +38,12 @@ jrvs.truncate = function (s, n) {
   return s;
 };
 
-document.addEventListener('DOMContentLoaded', jrvs.subscribe);
+jrvs.widgets = [];
+
+document.addEventListener('DOMContentLoaded', function () {
+  jrvs.subscribe();
+  // Pre-render widgets until data is available
+  jrvs.widgets.forEach(function (name) {
+    jrvs.render(jrvs.findWidget(name));
+  });
+});
