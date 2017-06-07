@@ -29,18 +29,16 @@ widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 assets = Environment(app)
-sched = BackgroundScheduler()
+sched = BackgroundScheduler(logger=app.logger)
 queues = {}
 last_events = {}
 
 
 @app.before_first_request
 def _setup_logging():
-    logging.getLogger('apscheduler.scheduler').addHandler(
-        logging.StreamHandler())
     if not app.debug:
         app.logger.addHandler(logging.StreamHandler())
-        app.logger.setLevel(logging.INFO)
+    app.logger.setLevel(logging.INFO)
 
 
 @app.before_first_request
