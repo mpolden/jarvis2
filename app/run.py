@@ -6,7 +6,11 @@ import argparse
 import os
 import signal
 
-from six.moves import input
+try:
+    # Python 2
+   input = raw_input
+except NameError:
+   pass
 
 from main import app, queues, sched
 

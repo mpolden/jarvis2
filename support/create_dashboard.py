@@ -6,7 +6,11 @@ import argparse
 import os
 import sys
 
-from six.moves import input
+try:
+    # Python 2
+   input = raw_input
+except NameError:
+   pass
 from shutil import copyfile
 
 
