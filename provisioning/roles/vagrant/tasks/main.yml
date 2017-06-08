@@ -10,6 +10,7 @@
     - nodejs-legacy
     - npm
     - python-dev
+    - python3-dev
     - python-virtualenv
     - virtualenvwrapper
     - zlib1g-dev
