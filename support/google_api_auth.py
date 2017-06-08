@@ -1,26 +1,17 @@
 #!/usr/bin/env python
 
-"""Create Google API credentials
-
-Usage:
-  google_api_auth.py [NAME]
-
-Options:
-  -h --help         Show usage
-
-"""
 from __future__ import print_function
 
 import os.path
 import sys
 import argparse
 
-from docopt import docopt
 try:
     # Python 2
    input = raw_input
 except NameError:
    pass
+
 from flask import Flask
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
@@ -51,8 +42,7 @@ def create_credentials(name):
         client_secret=config['client_secret'],
         scope='https://www.googleapis.com/auth/{}.readonly'.format(name))
 
-    parser = argparse.ArgumentParser(parents=[tools.argparser])
-    run_flags = parser.parse_args()
+    run_flags = tools.argparser.parse_args(args=[])
 
     credentials_file = os.path.join(app.instance_path, 'jobs',
                                     '.{}.json'.format(name))
@@ -65,8 +55,10 @@ def create_credentials(name):
 
 
 def main():
-    args = docopt(__doc__)
-    name = args['NAME']
+    parser = argparse.ArgumentParser(description='Create Google API credentials.')
+    parser.add_argument('name', metavar='NAME', nargs='?')
+    args = parser.parse_args()
+    name = args.name
 
     if name is None:
         name = input(('Enter widget to generate credentials for (gmail'
