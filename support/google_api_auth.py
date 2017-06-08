@@ -8,9 +8,9 @@ import argparse
 
 try:
     # Python 2
-   input = raw_input
+    input = raw_input
 except NameError:
-   pass
+    pass
 
 from flask import Flask
 from oauth2client.client import OAuth2WebServerFlow
@@ -55,7 +55,9 @@ def create_credentials(name):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Create Google API credentials.')
+    parser = argparse.ArgumentParser(
+       description='Create Google API credentials.'
+    )
     parser.add_argument('name', metavar='NAME', nargs='?')
     args = parser.parse_args()
     name = args.name

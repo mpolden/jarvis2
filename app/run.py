@@ -8,9 +8,9 @@ import signal
 
 try:
     # Python 2
-   input = raw_input
+    input = raw_input
 except NameError:
-   pass
+    pass
 
 from main import app, queues, sched
 

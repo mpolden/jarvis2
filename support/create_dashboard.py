@@ -8,9 +8,9 @@ import sys
 
 try:
     # Python 2
-   input = raw_input
+    input = raw_input
 except NameError:
-   pass
+    pass
 from shutil import copyfile
 
 
