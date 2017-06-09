@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import re
+from datetime import datetime
 from jobs import AbstractJob
 from subprocess import Popen, PIPE
 
@@ -23,7 +24,14 @@ class Ping(AbstractJob):
         return self._parse_time(p.communicate()[0].decode())
 
     def get(self):
-        values = {}
+        values = []
         for label, host in self.hosts:
-            values[label] = self._get_latency(host)
-        return {'values': values}
+            latency = self._get_latency(host)
+            now = datetime.now()
+            values.append({
+                'label': label,
+                'host': host,
+                'time': now.strftime('%H:%M:%S'),
+                'latency': latency
+            })
+        return values
