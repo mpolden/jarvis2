@@ -25,9 +25,9 @@ class Ping(AbstractJob):
 
     def get(self):
         values = []
+        now = datetime.now()
         for label, host in self.hosts:
             latency = self._get_latency(host)
-            now = datetime.now()
             values.append({
                 'label': label,
                 'host': host,
