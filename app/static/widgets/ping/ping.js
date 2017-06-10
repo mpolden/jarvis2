@@ -28,9 +28,7 @@ ping.graph = function (vnode, update) {
   });
   x.domain(d3.extent(times));
   y.domain([
-    d3.min(data, function (d) {
-      return d3.min(d.values, function (v) { return v.latency; });
-    }),
+    0,
     d3.max(data, function (d) {
       return d3.max(d.values, function (v) { return v.latency; });
     })
