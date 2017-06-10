@@ -13,7 +13,5 @@ class Atb(AbstractJob):
 
     def get(self):
         r = requests.get(self.url, timeout=self.timeout)
-
-        if r.status_code == 200 and len(r.content) > 0:
-            return r.json()
-        return {}
+        r.raise_for_status()
+        return r.json()

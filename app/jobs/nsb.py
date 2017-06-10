@@ -57,7 +57,5 @@ class Nsb(AbstractJob):
 
         url = 'https://www.nsb.no/bestill/travel-planner-validator-v2'
         r = requests.get(url, timeout=self.timeout, params=params)
-
-        if r.status_code == 200 and len(r.content) > 0:
-            return self._parse(r.content)
-        return {}
+        r.raise_for_status()
+        return self._parse(r.content)

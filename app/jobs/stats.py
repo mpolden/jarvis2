@@ -21,10 +21,9 @@ class Stats(AbstractJob):
         }
         r = requests.get('http://hilde.nerdvana.tihlde.org:3000',
                          timeout=self.timeout, params=params)
-        if r.status_code == 200 and len(r.content) > 0:
-            return {
-                'stats': r.json(),
-                'max': self.max,
-                'nick': self.nick
-            }
-        return {}
+        r.raise_for_status()
+        return {
+            'stats': r.json(),
+            'max': self.max,
+            'nick': self.nick
+        }

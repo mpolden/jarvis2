@@ -1,16 +1,10 @@
 #!/usr/bin/env python
 
 import os
-
-try:
-    from http.client import BadStatusLine
-except ImportError:
-    from httplib import BadStatusLine
-
 import httplib2
+
 from apiclient.discovery import build
 from oauth2client.file import Storage
-
 from datetime import datetime
 from jobs import AbstractJob
 
@@ -46,12 +40,8 @@ class Calendar(AbstractJob):
             self._auth()
 
         now = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-        try:
-            result = self.service.events().list(calendarId='primary',
-                                                orderBy='startTime',
-                                                singleEvents=True,
-                                                timeMin=now).execute()
-        except BadStatusLine:
-            return {}
-
+        result = self.service.events().list(calendarId='primary',
+                                            orderBy='startTime',
+                                            singleEvents=True,
+                                            timeMin=now).execute()
         return {'events': self._parse(result['items'])}

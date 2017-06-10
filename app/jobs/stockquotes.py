@@ -33,7 +33,5 @@ class Stockquotes(AbstractJob):
         }
         r = requests.get('https://query.yahooapis.com/v1/public/yql',
                          timeout=self.timeout, params=params)
-
-        if r.status_code == 200 and len(r.content) > 0:
-            return self._parse(r.json())
-        return {}
+        r.raise_for_status()
+        return self._parse(r.json())

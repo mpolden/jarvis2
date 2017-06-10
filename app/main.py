@@ -188,10 +188,11 @@ def _add_event(widget, body):
 
 
 def _run_job(widget, job):
-    body = job.get()
-    if not body:
-        return
-    _add_event(widget, body)
+    try:
+        body = job.get()
+        _add_event(widget, body)
+    except Exception:
+        app.logger.exception('Failed to execute {} job'.format(widget))
 
 
 def _close_stream(*args, **kwargs):

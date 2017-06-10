@@ -32,16 +32,14 @@ class Plex(AbstractJob):
         headers = {'Accept': 'application/json'}
         r = requests.get(url, headers=headers, timeout=self.timeout,
                          verify=self.verify)
+        r.raise_for_status()
         return r.json()
 
     def get(self):
-        try:
-            data = self._get_json(self.movies)
-            movies = self._parse_movies(data)
+        data = self._get_json(self.movies)
+        movies = self._parse_movies(data)
 
-            data = self._get_json(self.shows)
-            shows = self._parse_shows(data)
+        data = self._get_json(self.shows)
+        shows = self._parse_shows(data)
 
-            return {'movies': movies, 'shows': shows}
-        except requests.exceptions.ConnectionError:
-            return {}
+        return {'movies': movies, 'shows': shows}

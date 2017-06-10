@@ -44,7 +44,5 @@ class Avinor(AbstractJob):
         }
         r = requests.get('http://flydata.avinor.no/XmlFeed.asp',
                          timeout=self.timeout, params=params)
-
-        if r.status_code == 200 and len(r.content) > 0:
-            return self._parse(r.content)
-        return {}
+        r.raise_for_status()
+        return self._parse(r.content)
