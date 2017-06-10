@@ -65,16 +65,16 @@ def _configure_bundles():
                                               output='gen/styles.min.css'))
 
 
-@app.route('/w/<job>')
-@app.route('/widget/<job>')
-def widget(job):
-    if not _is_enabled(job):
+@app.route('/w/<job_id>')
+@app.route('/widget/<job_id>')
+def widget(job_id):
+    if not _is_enabled(job_id):
         abort(404)
     x = request.args.get('x', 3)
-    widget = request.args.get('widget', job)
+    widget = request.args.get('widget', job_id)
     widgets = _enabled_jobs()
     return render_template('index.html', layout='layout_single.html',
-                           widget=widget, job=job, x=x, widgets=widgets)
+                           widget=widget, job=job_id, x=x, widgets=widgets)
 
 
 @app.route('/')
@@ -114,27 +114,27 @@ def events():
     return response
 
 
-@app.route('/events/<widget>', methods=['POST'])
-def create_event(widget):
-    if not _is_enabled(widget):
+@app.route('/events/<job_id>', methods=['POST'])
+def create_event(job_id):
+    if not _is_enabled(job_id):
         abort(404)
     data = request.data
     if not data:
         abort(400)
     body = json.loads(data)
-    _add_event(widget, body)
+    _add_event(job_id, body)
     return '', 201
 
 
 def _enabled_jobs():
     conf = app.config['JOBS']
-    return [name for name in conf.keys() if conf[name].get('enabled')]
+    return [job_id for job_id in conf.keys() if conf[job_id].get('enabled')]
 
 
-def _is_enabled(name, conf=None):
+def _is_enabled(job_id, conf=None):
     if conf is None:
         conf = app.config['JOBS']
-    return name in conf and conf[name].get('enabled')
+    return job_id in conf and conf[job_id].get('enabled')
 
 
 @app.context_processor
@@ -149,15 +149,15 @@ def _configure_jobs():
     jobs = load_jobs()
 
     for job_id, config in conf.items():
-        job_name = config.get('job_name', job_id)
+        job_impl = config.get('job_impl', job_id)
         if not config.get('enabled'):
-            app.logger.info('Skipping disabled job: %s', job_name)
+            app.logger.info('Skipping disabled job: %s', job_id)
             continue
-        if job_name not in jobs:
-            app.logger.info('Skipping job with ID %s (no such job: %s)',
-                            job_id, job_name)
+        if job_impl not in jobs:
+            app.logger.info(('Skipping job with ID %s (no such '
+                             'implementation: %s)'), job_id, job_impl)
             continue
-        job = jobs[job_name](config)
+        job = jobs[job_impl](config)
         if app.debug:
             start_date = datetime.now() + timedelta(seconds=1)
         else:
@@ -165,34 +165,35 @@ def _configure_jobs():
             start_date = datetime.now() + timedelta(seconds=offset)
 
         job.start_date = start_date
-        app.logger.info('Scheduling job with ID %s: %s', job_id, job)
+        app.logger.info('Scheduling job with ID %s (implementation: %s): %s',
+                        job_id, job_impl, job)
         sched.add_job(_run_job,
                       'interval',
                       name=job_id,
                       next_run_time=job.start_date,
                       coalesce=True,
                       seconds=job.interval,
-                      kwargs={'widget': job_id, 'job': job})
+                      kwargs={'job_id': job_id, 'job': job})
     if not sched.running:
         sched.start()
 
 
-def _add_event(widget, body):
+def _add_event(job_id, body):
     json_data = json.dumps({
-        'widget': widget,
+        'job': job_id,
         'body': body
     })
-    last_events[widget] = json_data
+    last_events[job_id] = json_data
     for q in queues.values():
         q.put(json_data)
 
 
-def _run_job(widget, job):
+def _run_job(job_id, job):
     try:
         body = job.get()
-        _add_event(widget, body)
+        _add_event(job_id, body)
     except Exception:
-        app.logger.exception('Failed to execute {} job'.format(widget))
+        app.logger.exception('Failed to execute job with ID: ' + job_id)
 
 
 def _close_stream(*args, **kwargs):

@@ -12,10 +12,10 @@ the job won't be enabled.
 `interval` specifies how often the job should run, in seconds. `interval` set to
 `60` will make the job run every 60 seconds.
 
-`job_name` specifies which job implementation should used for this job
-definition. Valid job names are the ones found in `app/jobs/`, excluding the
-`.py` extensions. Specifying `job_name` allows a job to be reused, it defaults
-to the job ID.
+`job_impl` specifies which job implementation should used for this job. Valid
+job implementations are the ones found in `app/jobs/`, excluding the `.py`
+extension. Specifying `job_impl` allows an implementation to be reused, it
+defaults to the job key.
 
 Most jobs also accept a `timeout` option. This option sets how long a job should
 wait for a request to complete, in seconds. Timeout should be lower than

@@ -7,16 +7,16 @@ jrvs.subscribe = function () {
     var o = JSON.parse(message.data);
 
     if (typeof o === 'object' && Object.keys(o.body).length > 0) {
-      var el = jrvs.findWidget(o.widget);
+      var el = jrvs.widgetForJob(o.job);
       o.body.updatedAt = moment().format('HH:mm');
       jrvs.render(el, {data: o.body});
     }
   }, false);
 };
 
-jrvs.findWidget = function (name) {
+jrvs.widgetForJob = function (name) {
   var el = document.querySelector('[data-job="' + name + '"]');
-  // If no job is specified, we default to using the widget name
+  // If no job is specified, assume job name == widget name
   if (el === null) {
     return document.querySelector('[data-widget="' + name + '"]');
   }
