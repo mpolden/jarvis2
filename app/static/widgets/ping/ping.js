@@ -16,16 +16,25 @@ ping.graph = function (vnode, update) {
       .x(function(d) { return x(d.time); })
       .y(function(d) { return y(d.latency); });
 
+  var timeParse = d3.timeParse('%H:%M:%S');
+
+  // Convert all times to objects
   var data = Object.keys(vnode.state.data).map(function (k) {
-    return {id: k, values: vnode.state.data[k]};
+    return {
+      id: k,
+      values: vnode.state.data[k].map(function (v) {
+        v.time = timeParse(v.time);
+        return v;
+      })
+    };
   });
 
-  // Scale according to ranges of the data
-  var times = Object.keys(vnode.state.data).reduce(function (acc, k) {
-    return acc.concat(vnode.state.data[k]);
-  }, []).map(function (v) {
-    return v.time;
-  });
+  // Get time values for X axis
+  var times = Object.keys(data).reduce(function (acc, k) {
+    return acc.concat(data[k].values);
+  }, []).map(function (v) { return v.time; });
+
+  // Set scale ranges
   x.domain(d3.extent(times));
   y.domain([
     0,
@@ -127,43 +136,17 @@ ping.graph = function (vnode, update) {
   }
 };
 
-ping.updateState = function (vnode) {
-  if (Object.keys(vnode.attrs.data).length === 0) {
-    return;
-  }
-  vnode.attrs.data.forEach(function (d) {
-    if (typeof vnode.state.data[d.label] === 'undefined') {
-      vnode.state.data[d.label] = [];
-    }
-    var timeParse = d3.timeParse('%H:%M:%S');
-    d.time = timeParse(d.time);
-    vnode.state.data[d.label].push(d);
-    if (vnode.state.data[d.label].length > 10) {
-      vnode.state.data[d.label].shift();
-    }
-  });
-};
-
-ping.oninit = function(vnode) {
-  vnode.state.data = {};
-};
-
-ping.oncreate = ping.updateState;
-
-ping.onupdate = ping.updateState;
-
 ping.view = function (vnode) {
-  if (Object.keys(vnode.state.data).length === 0) {
+  if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
-  return [
-    m('div', {
-      oncreate: function () {
-        ping.graph(vnode, false);
-      },
-      onupdate: function () {
-        ping.graph(vnode, true);
-      }
-    }),
-  ];
+  vnode.state.data = vnode.attrs.data.values;
+  return m('div', {
+    oncreate: function () {
+      ping.graph(vnode, false);
+    },
+    onupdate: function () {
+      ping.graph(vnode, true);
+    }
+  });
 };
