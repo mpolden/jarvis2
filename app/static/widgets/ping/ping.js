@@ -12,7 +12,7 @@ ping.graph = function (vnode, update) {
   var z = d3.scaleOrdinal(d3.schemeCategory10);
 
   var line = d3.line()
-      .curve(d3.curveBasis)
+      .curve(d3.curveLinear)
       .x(function(d) { return x(d.time); })
       .y(function(d) { return y(d.latency); });
 
