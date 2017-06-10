@@ -21,8 +21,8 @@ ping.graph = function (vnode, update) {
   });
 
   // Scale according to ranges of the data
-  var times = Object.values(vnode.state.data).reduce(function (acc, val) {
-    return acc.concat(val);
+  var times = Object.keys(vnode.state.data).reduce(function (acc, k) {
+    return acc.concat(vnode.state.data[k]);
   }, []).map(function (v) {
     return v.time;
   });
