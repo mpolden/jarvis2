@@ -239,8 +239,8 @@ JOBS['uptime'] = {
     'enabled': True,
     'interval': 60,
     'hosts': [
-        {'label': 'Desktop', 'ip': '10.0.0.11'},
-        {'label': 'Laptop', 'ip': '10.0.0.10'}
+        ('Desktop', '10.0.0.11'),
+        ('Laptop', '10.0.0.10')
     ]
 }
 ```

@@ -12,9 +12,14 @@ class Uptime(AbstractJob):
         self.timeout = conf.get('timeout', 1)
 
     def get(self):
-        for host in self.hosts:
-            ping_cmd = 'ping6' if ':' in host['ip'] else 'ping'
-            ping = '%s -w %d -c 1 %s' % (ping_cmd, self.timeout, host['ip'])
+        hosts = []
+        for label, ip in self.hosts:
+            ping_cmd = 'ping6' if ':' in ip else 'ping'
+            ping = '%s -w %d -c 1 %s' % (ping_cmd, self.timeout, ip)
             p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
-            host['active'] = p.wait() == 0
-        return {'hosts': self.hosts}
+            hosts.append({
+                'label': label,
+                'ip': ip,
+                'active': p.wait() == 0
+            })
+        return {'hosts': hosts}
