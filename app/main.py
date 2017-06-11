@@ -37,7 +37,12 @@ last_events = {}
 @app.before_first_request
 def _setup_logging():
     if not app.debug:
-        app.logger.addHandler(logging.StreamHandler())
+        formatter = logging.Formatter(
+            '%(asctime)s %(levelname)s - %(message)s'
+        )
+        handler = logging.StreamHandler()
+        handler.setFormatter(formatter)
+        app.logger.addHandler(handler)
     app.logger.setLevel(logging.INFO)
 
 
