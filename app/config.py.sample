@@ -10,7 +10,7 @@ JOBS['yr'] = {
     # Run job every N seconds
     'interval': 600,
     # URL for data
-    'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
+    'url': ('https://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
             'Trondheim/varsel.xml'),
     # Job timeout in seconds
     'timeout': 5
@@ -31,7 +31,7 @@ JOBS['atb'] = {
 JOBS['atb-16010382'] = {
     'enabled': True,
     'interval': 60,
-    'url': 'http://atbapi.tar.io/api/v1/departures/16010382',
+    'url': 'https://atbapi.tar.io/api/v1/departures/16010382',
     'timeout': 5,
     'job_name': 'atb'
 }
@@ -85,7 +85,7 @@ JOBS['plex'] = {
 JOBS['nsb'] = {
     'enabled': True,
     'interval': 900,
-    # See http://www.nsb.no for valid locations
+    # See https://nsb.no for valid locations
     'from': 'Trondheim S',
     'to': 'Oslo S',
     'timeout': 10

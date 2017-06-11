@@ -12,8 +12,8 @@ the job won't be enabled.
 `interval` specifies how often the job should run, in seconds. `interval` set to
 `60` will make the job run every 60 seconds.
 
-`job_impl` specifies which job implementation should used for this job. Valid
-job implementations are the ones found in `app/jobs/`, excluding the `.py`
+`job_impl` specifies which job implementation to use for this job. Valid job
+implementations are the ones found in `app/jobs/`, excluding the `.py`
 extension. Specifying `job_impl` allows an implementation to be reused, it
 defaults to the job key.
 
@@ -40,7 +40,7 @@ https://atbapi.tar.io/api/v1/busstops
 avinor
 ------
 Displays future flights for the configured destination. This widget uses
-[data provided by Avinor](http://www.avinor.no/avinor/trafikk/50_Flydata).
+[data provided by Avinor](https://avinor.no/konsern/tjenester/flydata/flydata-i-xml-format).
 
 ```python
 JOBS['avinor'] = {
@@ -247,15 +247,15 @@ JOBS['uptime'] = {
 
 yr
 --
-Displays weather data from http://www.yr.no. The `url` field specifies the
-XML feed to use. Note that Yr requires a polling interval of at least 10
-minutes (600 seconds).
+Displays weather data from https://www.yr.no. The `url` field specifies the XML
+feed to use. Note that Yr requires a polling interval of at least 10 minutes
+(600 seconds).
 
 ```python
 JOBS['yr'] = {
     'enabled': True,
     'interval': 600,
-    'url': ('http://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
+    'url': ('https://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
             'Trondheim/varsel.xml')
 }
 ```
