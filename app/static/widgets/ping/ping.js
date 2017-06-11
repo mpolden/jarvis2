@@ -22,8 +22,7 @@ ping.graph.create = function (vnode) {
 
   var xAxis = d3.axisBottom(x)
       .tickFormat(d3.timeFormat(':%S'));
-  var yAxis = d3.axisLeft(y)
-      .tickFormat(function (v) { return v + ' ms'; });
+  var yAxis = d3.axisLeft(y);
 
   // Create SVG
   var svg = d3.select(vnode.dom).append('svg')
@@ -42,7 +41,11 @@ ping.graph.create = function (vnode) {
   // Y axis
   svg.append('g')
     .attr('class', 'y-axis')
-    .call(yAxis);
+    .call(yAxis)
+    .append('text')
+    .attr('y', -10)
+    .attr('x', 40)
+    .text('Latency (ms)');
 
   var update = function (vnode) {
     // Parse all times
