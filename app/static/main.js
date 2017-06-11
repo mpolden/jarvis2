@@ -44,6 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
   jrvs.subscribe();
   // Pre-render widgets until data is available
   jrvs.widgets.forEach(function (name) {
-    jrvs.render(jrvs.findWidget(name));
+    jrvs.render(jrvs.widgetForJob(name));
   });
 });
