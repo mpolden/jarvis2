@@ -1,8 +1,6 @@
 /* jshint maxstatements: 50 */
 
-var ping = ping || {};
-
-ping.graph = {};
+var ping = ping || {graph: {}};
 
 ping.graph.create = function (vnode) {
   var margin = {top: 20, right: 50, bottom: 50, left: 60};
@@ -47,12 +45,12 @@ ping.graph.create = function (vnode) {
     .attr('x', 40)
     .text('Latency (ms)');
 
-  var update = function (vnode) {
+  return function (data) {
     // Parse all times
-    var data = Object.keys(vnode.state.data).map(function (k) {
+    data = Object.keys(data).map(function (k) {
       return {
         id: k,
-        values: vnode.state.data[k].map(function (v) {
+        values: data[k].map(function (v) {
           v.time = timeParse(v.time);
           return v;
         })
@@ -112,7 +110,6 @@ ping.graph.create = function (vnode) {
     // X axis
     svg.select('.x-axis')
       .transition()
-      .duration(750)
       .call(xAxis)
       .selectAll('text')
       .style('text-anchor', 'end')
@@ -124,21 +121,20 @@ ping.graph.create = function (vnode) {
     svg.select('.y-axis')
       .call(yAxis);
   };
-  update(vnode);
-  return update;
 };
 
 ping.view = function (vnode) {
   if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
-  vnode.state.data = vnode.attrs.data.values;
+  var data = vnode.attrs.data.values;
   return m('div', {
-    oncreate: function () {
+    oncreate: function (vnode) {
       ping.graph.update = ping.graph.create(vnode);
+      ping.graph.update(data);
     },
     onupdate: function () {
-      ping.graph.update(vnode);
+      ping.graph.update(data);
     }
   });
 };
