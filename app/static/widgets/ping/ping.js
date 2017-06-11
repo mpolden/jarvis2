@@ -2,7 +2,9 @@
 
 var ping = ping || {};
 
-ping.graph = function (vnode, update) {
+ping.graph = {};
+
+ping.graph.create = function (vnode) {
   var margin = {top: 20, right: 50, bottom: 50, left: 60};
   var width = vnode.dom.clientWidth - margin.left - margin.right;
   var height = 300 - margin.top - margin.bottom;
@@ -18,97 +20,83 @@ ping.graph = function (vnode, update) {
 
   var timeParse = d3.timeParse('%H:%M:%S');
 
-  // Convert all times to objects
-  var data = Object.keys(vnode.state.data).map(function (k) {
-    return {
-      id: k,
-      values: vnode.state.data[k].map(function (v) {
-        v.time = timeParse(v.time);
-        return v;
-      })
-    };
-  });
-
-  // Get time values for X axis
-  var times = Object.keys(data).reduce(function (acc, k) {
-    return acc.concat(data[k].values);
-  }, []).map(function (v) { return v.time; });
-
-  // Set scale ranges
-  x.domain(d3.extent(times));
-  y.domain([
-    0,
-    d3.max(data, function (d) {
-      return d3.max(d.values, function (v) { return v.latency; });
-    })
-  ]);
-  z.domain(data.map(function(d) { return d.id; }));
-
   var xAxis = d3.axisBottom(x)
-      .tickValues(times)
       .tickFormat(d3.timeFormat(':%S'));
   var yAxis = d3.axisLeft(y)
       .tickFormat(function (v) { return v + ' ms'; });
-  var svg;
-  var device;
-  if (update) {
-    svg = d3.select(vnode.dom);
-    device = svg.selectAll('.device').data(data);
 
-    // Update each line
-    device.select('.line')
-      .transition()
-      .duration(750)
-      .attr('d', function (d) { return line(d.values); });
-
-    // Update line label
-    device.select('text')
-      .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-      .attr('transform', function(d) {
-        return 'translate(' + x(d.value.time) + ',' + y(d.value.latency) + ')';
-      })
-      .attr('x', 3)
-      .attr('dy', '0.35em')
-      .style('font', '10px sans-serif')
-      .text(function(d) { return d.id; });
-
-    // Update X axis
-    svg.select('.x-axis')
-      .transition()
-      .duration(750)
-      .call(xAxis)
-      // Re-draw tick labels with same rotation
-      .selectAll('text')
-      .style('text-anchor', 'end')
-      .attr('dx', '-.8em')
-      .attr('dy', '.15em')
-      .attr('transform', 'rotate(-45)');
-
-    // Update Y axis
-    svg.select('.y-axis')
-      .transition()
-      .duration(750)
-      .call(yAxis);
-  } else {
-    // Create SVG
-    svg = d3.select(vnode.dom).append('svg')
+  // Create SVG
+  var svg = d3.select(vnode.dom).append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
       .attr('transform',
             'translate(' + margin.left + ',' + margin.top + ')');
 
-    device = svg.selectAll('.device')
-      .data(data)
-      .enter().append('g')
-      .attr('class', 'device');
+  // X axis
+  svg.append('g')
+    .attr('class', 'x-axis')
+    .attr('transform', 'translate(0,' + height + ')')
+    .call(xAxis);
 
-    // Draw each line
-    device.append('path')
-      .attr('class', 'line')
+  // Y axis
+  svg.append('g')
+    .attr('class', 'y-axis')
+    .call(yAxis);
+
+  var update = function (vnode) {
+    // Parse all times
+    var data = Object.keys(vnode.state.data).map(function (k) {
+      return {
+        id: k,
+        values: vnode.state.data[k].map(function (v) {
+          v.time = timeParse(v.time);
+          return v;
+        })
+      };
+    });
+
+    // Set time values for X axis
+    var times = Object.keys(data).reduce(function (acc, k) {
+      return acc.concat(data[k].values);
+    }, []).map(function (v) { return v.time; });
+    xAxis.tickValues(times);
+
+    // Set scale ranges
+    x.domain(d3.extent(times));
+    y.domain([
+      0,
+      d3.max(data, function (d) {
+        return d3.max(d.values, function (v) { return v.latency; });
+      })
+    ]);
+    z.domain(data.map(function(d) { return d.id; }));
+
+    // Join data
+    var device = svg.selectAll('.device')
+        .data(data);
+
+    var deviceGroups = device.enter()
+        .append('g')
+        .attr('class', 'device')
+        .merge(device);
+
+    // Update each line
+    deviceGroups
+      .append('path')
+      .attr('class', 'line');
+
+    device.select('.line')
+      .transition()
+      .duration(750)
       .attr('d', function (d) { return line(d.values); });
 
-    device.append('text')
+    // Update label for each line
+    deviceGroups
+      .append('text')
+      .attr('class', 'label');
+
+    device.select('.label')
       .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
       .attr('transform', function(d) {
         return 'translate(' + x(d.value.time) + ',' + y(d.value.latency) + ')';
@@ -119,9 +107,9 @@ ping.graph = function (vnode, update) {
       .text(function(d) { return d.id; });
 
     // X axis
-    svg.append('g')
-      .attr('class', 'x-axis')
-      .attr('transform', 'translate(0,' + height + ')')
+    svg.select('.x-axis')
+      .transition()
+      .duration(750)
       .call(xAxis)
       .selectAll('text')
       .style('text-anchor', 'end')
@@ -130,10 +118,11 @@ ping.graph = function (vnode, update) {
       .attr('transform', 'rotate(-45)');
 
     // Y axis
-    svg.append('g')
-      .attr('class', 'y-axis')
+    svg.select('.y-axis')
       .call(yAxis);
-  }
+  };
+  update(vnode);
+  return update;
 };
 
 ping.view = function (vnode) {
@@ -143,10 +132,10 @@ ping.view = function (vnode) {
   vnode.state.data = vnode.attrs.data.values;
   return m('div', {
     oncreate: function () {
-      ping.graph(vnode, false);
+      ping.graph.update = ping.graph.create(vnode);
     },
     onupdate: function () {
-      ping.graph(vnode, true);
+      ping.graph.update(vnode);
     }
   });
 };
