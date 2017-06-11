@@ -24,11 +24,8 @@ from random import randint
 
 app = Flask(__name__)
 app.config.from_envvar('JARVIS_SETTINGS')
-widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                            'static', 'widgets'))
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
-assets = Environment(app)
 sched = BackgroundScheduler(logger=app.logger)
 queues = {}
 last_events = {}
@@ -50,6 +47,8 @@ def _setup_logging():
 def _configure_bundles():
     js = ['main.js']
     css = ['main.css']
+    widgets_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                'static', 'widgets'))
 
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join('widgets', widget)
@@ -60,6 +59,7 @@ def _configure_bundles():
             elif asset_file.endswith('.css'):
                 css.append(asset_path)
 
+    assets = Environment(app)
     if app.debug:
         assets.register('js_all', Bundle(*js, output='gen/app.js'))
         assets.register('css_all', Bundle(*css, output='gen/styles.css'))

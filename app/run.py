@@ -27,13 +27,8 @@ def _teardown(signal, frame):
 def _run_job(name=None, print_json=False):
     import json
     import sys
-    from flask import Flask
     from jobs import load_jobs
     from pprint import pprint
-
-    _app = Flask(__name__)
-    _app.config.from_envvar('JARVIS_SETTINGS')
-    conf = _app.config['JOBS']
 
     jobs = load_jobs()
     if name is None or len(name) == 0:
@@ -45,7 +40,7 @@ def _run_job(name=None, print_json=False):
         print('No such job: %s' % (name,))
         sys.exit(1)
 
-    job_conf = conf.get(name)
+    job_conf = app.config['JOBS'].get(name)
     if job_conf is None:
         print('No config found for job: %s' % (name,))
         sys.exit(1)
