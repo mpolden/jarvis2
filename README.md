@@ -9,9 +9,6 @@ It features live-updating widgets using
 [server-sent events](http://en.wikipedia.org/wiki/Server-sent_events) and can be
 easily extended to fit your needs.
 
-The framework is written in Python and is a new and improved version of the old
-[JARVIS](https://github.com/mpolden/jarvis) project.
-
 Screenshots
 -----------
 ![Screenshot 1](docs/jarvis2.png)
