@@ -137,7 +137,7 @@ def _inject_template_methods():
 
 
 @app.before_first_request
-def _configure_jobs():
+def _schedule_jobs():
     conf = app.config['JOBS']
     offset = 0
     jobs = load_jobs()
