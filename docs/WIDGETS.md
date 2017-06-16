@@ -4,7 +4,7 @@ Available widgets
 Common options
 --------------
 
-All jobs have the following fields: `enabled`, `interval` and `job_name`.
+All jobs have the following fields: `enabled`, `interval` and `job_impl`.
 
 `enabled` should be `True` to enable the job. If the key is omitted or `False`,
 the job won't be enabled.
