@@ -23,24 +23,13 @@ from random import randint
 
 
 app = Flask(__name__)
+app.logger.setLevel(logging.INFO)
 app.config.from_envvar('JARVIS_SETTINGS')
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 sched = BackgroundScheduler(logger=app.logger)
 queues = {}
 last_events = {}
-
-
-@app.before_first_request
-def _setup_logging():
-    if not app.debug:
-        formatter = logging.Formatter(
-            '%(asctime)s %(levelname)s - %(message)s'
-        )
-        handler = logging.StreamHandler()
-        handler.setFormatter(formatter)
-        app.logger.addHandler(handler)
-    app.logger.setLevel(logging.INFO)
 
 
 @app.before_first_request
