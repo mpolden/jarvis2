@@ -9,6 +9,10 @@ class Sonos(AbstractJob):
     def __init__(self, conf):
         self.interval = conf['interval']
         self.sonos = SoCo(conf['ip'])
+        # In case of grouped devices the playback information needs to be
+        # retrieved from the coordinator device
+        if self.sonos.group.coordinator.uid != self.sonos.uid:
+            self.sonos = self.sonos.group.coordinator
 
     def get(self):
         zone_name = self.sonos.get_speaker_info()['zone_name']
