@@ -1,12 +1,12 @@
 JARVIS v2
 =========
 
-[![Build Status](https://travis-ci.org/mpolden/jarvis2.png)](https://travis-ci.org/mpolden/jarvis2)
+[![Build Status](https://travis-ci.org/mpolden/jarvis2.svg)](https://travis-ci.org/mpolden/jarvis2)
 
 JARVIS is a dashboard framework designed to run on the Raspberry Pi.
 
 It features live-updating widgets using
-[server-sent events](http://en.wikipedia.org/wiki/Server-sent_events) and can be
+[server-sent events](https://en.wikipedia.org/wiki/Server-sent_events) and can be
 easily extended to fit your needs.
 
 Screenshots
@@ -27,7 +27,7 @@ Install requirements:
 
     pip install -r requirements.txt
 
-For development it's recommended to use [virtualenv](http://www.virtualenv.org).
+For development it's recommended to use [virtualenv](https://virtualenv.pypa.io).
 
 Configuration
 -------------
@@ -77,7 +77,7 @@ See [INSTALL.md](docs/INSTALL.md) for a basic deployment guide.
 
 Development environment
 -----------------------
-A `Vagrantfile` is included for use with [Vagrant](http://www.vagrantup.com).
+A `Vagrantfile` is included for use with [Vagrant](https://www.vagrantup.com).
 Version `1.8+` is required for the `ansible_local` provisioner to work.
 
 Run `vagrant up` in the repository root to provision a development environment.
