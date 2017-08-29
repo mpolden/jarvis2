@@ -20,7 +20,7 @@ sonos.view = function (vnode) {
   var current = [];
   var state = vnode.attrs.data;
   state.state = sonos.stateName(state.state);
-  if (state.current) {
+  if (Object.keys(state.current).length > 0) {
     current = [
       m('h1', jrvs.truncate(state.current.artist, 14) + ' - ' +
         jrvs.truncate(state.current.title, 16)),
@@ -29,7 +29,7 @@ sonos.view = function (vnode) {
     ];
   }
   var next = [];
-  if (state.next) {
+  if (Object.keys(state.next).length > 0) {
     next = [
       m('p', {'class': 'fade next'}, 'Neste i kø:'),
       m('p', jrvs.truncate(state.next.artist, 15) + ' - ' +
