@@ -4,13 +4,10 @@
   background: #e18942;
   text-align: center;
 }
-[data-widget="sonos"] h1 {
-  font-size: 25px;
-  margin: 0;
+[data-widget="sonos"] h1, h2, p {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 [data-widget="sonos"] p {
   font-size: 18px;
-}
-[data-widget="sonos"] .duration {
-  font-size: 14px;
 }

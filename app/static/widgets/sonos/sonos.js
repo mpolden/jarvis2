@@ -22,18 +22,18 @@ sonos.view = function (vnode) {
   state.state = sonos.stateName(state.state);
   if (Object.keys(state.current).length > 0) {
     current = [
-      m('h1', jrvs.truncate(state.current.artist, 14) + ' - ' +
-        jrvs.truncate(state.current.title, 16)),
-      m('p', {'class': 'fade duration'}, state.current.position + ' / ' +
-        state.current.duration)
+      m('h1', jrvs.truncate(state.current.title, 28)),
+      m('p.fade', 'av'),
+      m('h2', jrvs.truncate(state.current.artist, 20)),
+      m('p.fade',
+        m('small', state.current.position + ' / ' + state.current.duration)
+       )
     ];
   }
   var next = [];
   if (Object.keys(state.next).length > 0) {
     next = [
-      m('p', {'class': 'fade next'}, 'Neste i kø:'),
-      m('p', jrvs.truncate(state.next.artist, 15) + ' - ' +
-        jrvs.truncate(state.next.title, 20))
+      m('p.fade', m('small', 'Neste: ' + state.next.title)),
     ];
   }
   return [
