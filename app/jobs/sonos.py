@@ -8,18 +8,22 @@ class Sonos(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']
-        self.sonos = SoCo(conf['ip'])
+        self._device = SoCo(conf['ip'])
+
+    @property
+    def device(self):
         # In case of grouped devices the playback information needs to be
         # retrieved from the coordinator device
-        if self.sonos.group.coordinator.uid != self.sonos.uid:
-            self.sonos = self.sonos.group.coordinator
+        if self._device.group.coordinator.uid != self._device.uid:
+            self._device = self._device.group.coordinator
+        return self._device
 
     def get(self):
-        zone_name = self.sonos.get_speaker_info()['zone_name']
-        np = self.sonos.get_current_track_info()
+        zone_name = self.device.get_speaker_info()['zone_name']
+        np = self.device.get_current_track_info()
 
         current_track = np if np['playlist_position'] != '0' else None
-        queue = self.sonos.get_queue(int(np['playlist_position']), 1)
+        queue = self.device.get_queue(int(np['playlist_position']), 1)
         next_item = queue.pop() if len(queue) > 0 else None
         next_track = {}
         if next_item is not None:
@@ -29,7 +33,7 @@ class Sonos(AbstractJob):
                 'album': next_item.album
             }
 
-        state = self.sonos.get_current_transport_info()[
+        state = self.device.get_current_transport_info()[
             'current_transport_state']
 
         return {
