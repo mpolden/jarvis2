@@ -2,6 +2,7 @@ body {
   background-color: #191818;
   color: #fff;
   font-family: "Montserrat", sans-serif;
+  overflow-wrap: break-word;
 }
 
 .container {
