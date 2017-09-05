@@ -7,6 +7,14 @@ from jobs import AbstractJob
 from subprocess import Popen, PIPE
 
 
+def _items(d):
+    try:
+        return d.iteritems()
+    except AttributeError:
+        # iteritems does not exist in Python 3
+        return d.items()
+
+
 class Ping(AbstractJob):
 
     def __init__(self, conf):
@@ -38,4 +46,4 @@ class Ping(AbstractJob):
                 'time': now.strftime('%H:%M:%S'),
                 'latency': latency
             })
-        return {'values': {k: list(v) for k, v in self.values.iteritems()}}
+        return {'values': {k: list(v) for k, v in _items(self.values)}}
