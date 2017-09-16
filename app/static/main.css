@@ -7,6 +7,7 @@ body {
 
 .container {
     width: 1240px;
+    max-width: 1240px;
 }
 
 .fade {
