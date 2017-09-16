@@ -23,7 +23,7 @@ sonos.view = function (vnode) {
   if (Object.keys(state.current).length > 0) {
     current = [
       m('h1', jrvs.truncate(state.current.title, 28)),
-      m('p.fade', 'av'),
+      m('p.fade', state.current.artist.length > 0 ? 'av' : ''),
       m('h2', jrvs.truncate(state.current.artist, 20)),
       m('p.fade',
         m('small', state.current.position + ' / ' + state.current.duration)
