@@ -5,12 +5,18 @@ body {
   overflow-wrap: break-word;
 }
 
-.container {
-    width: 1240px;
-}
-
 .fade {
   color: rgba(255, 255, 255, 0.7);
+}
+
+.col-3, .col-6 {
+  width: 290px;
+  float: left;
+  margin: 5px 10px;
+}
+
+.col-6 {
+  width: 600px;
 }
 
 .updated-at {
@@ -24,10 +30,7 @@ body {
 }
 
 [data-widget] {
-    height: 300px !important;
-    width: 100%;
-}
-
-[class*="col-"] {
-    padding: 5px;
+  position: relative;
+  height: 290px !important;
+  width: 100%;
 }
