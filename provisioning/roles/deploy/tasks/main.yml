@@ -30,7 +30,12 @@
   notify:
     - restart uwsgi
 
-- name: install requirements
+- name: install pip in virtualenv
+  pip: name=pip
+       version=9.0.1
+       virtualenv={{ app_path }}/venv
+
+- name: install requirements in virtualenv
   pip: requirements={{ app_path }}/requirements.txt
        virtualenv={{ app_path }}/venv
   notify:
