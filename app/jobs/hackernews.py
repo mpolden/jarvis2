@@ -35,4 +35,4 @@ class HackerNews(AbstractJob):
     def get(self):
         r = requests.get(self.url, timeout=self.timeout)
         r.raise_for_status()
-        return self._parse(r.content)
+        return self._parse(r.text)
