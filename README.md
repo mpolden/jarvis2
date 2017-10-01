@@ -1,5 +1,5 @@
-JARVIS v2
-=========
+JARVIS
+======
 
 [![Build Status](https://travis-ci.org/mpolden/jarvis2.svg)](https://travis-ci.org/mpolden/jarvis2)
 
@@ -78,8 +78,6 @@ See [INSTALL.md](docs/INSTALL.md) for a basic deployment guide.
 Development environment
 -----------------------
 A `Vagrantfile` is included for use with [Vagrant](https://www.vagrantup.com).
-Version `1.8+` is required for the `ansible_local` provisioner to work.
-
 Run `vagrant up` in the repository root to provision a development environment.
 
 License
