@@ -25,7 +25,7 @@ class DashboardFactory(object):
 
     def _write_file(self, file_path):
         layout_template = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), 'templates', 'layout_empty.html'))
+            os.path.dirname(__file__), 'templates', 'layout_empty.html.j2'))
         copyfile(layout_template, file_path)
         print('Created {}'.format(file_path))
 

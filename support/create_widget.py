@@ -30,9 +30,9 @@ class WidgetFactory(object):
                                keep_trailing_newline=True)
 
     def _render_templates(self):
-        js = self.env.get_template('widget.js').render(name=self.name)
-        css = self.env.get_template('widget.css').render(name=self.name)
-        job = self.env.get_template('job.py').render(name=self.name)
+        js = self.env.get_template('widget.js.j2').render(name=self.name)
+        css = self.env.get_template('widget.css.j2').render(name=self.name)
+        job = self.env.get_template('job.py.j2').render(name=self.name)
 
         return {
             '%s.js' % (self.name,): js,
