@@ -1,7 +1,4 @@
-all: lint test
-
-fmt:
-	autopep8 --in-place app/*.py app/jobs/*.py support/*.py
+all: clean lint test
 
 flake8:
 	flake8 --max-complexity=8 app/*.py app/jobs/*.py support/*.py
@@ -18,8 +15,6 @@ clean:
 	rm -f *.pyc app/*.pyc app/jobs/*.pyc support/*.pyc
 	rm -fr app/static/.webassets-cache/
 	rm -fr app/static/gen/
-
-release: clean lint test
 
 widget:
 	python support/create_widget.py $(NAME)
@@ -38,7 +33,3 @@ run-job:
 
 google-api-auth:
 	python support/google_api_auth.py
-
-update-deps:
-	pip install -U -r requirements-to-freeze.txt
-	pip freeze | grep -vE 'argparse|wsgiref' > requirements.txt
