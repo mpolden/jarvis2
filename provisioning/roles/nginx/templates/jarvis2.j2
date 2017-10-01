@@ -9,7 +9,7 @@ server {
     gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
     location /static/ {
-        alias {{ app_path }}/app/static/;
+        alias {{ app_path }}/jarvis/static/;
     }
 
     location / {

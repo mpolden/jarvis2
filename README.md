@@ -30,10 +30,10 @@ All configuration of widgets is done in a single Python source file. The
 configuration is specified by setting the `JARVIS_SETTINGS` environment
 variable.
 
-A sample config (`app/config.py.sample`) is provided. This file can be used as a
+A sample config (`jarvis/config.py.sample`) is provided. This file can be used as a
 starting point for your own configuration.
 
-Copy `app/config.py.sample` to `app/config.py` and edit it to suit your needs.
+Copy `jarvis/config.py.sample` to `jarvis/config.py` and edit it to suit your needs.
 
 Usage
 -----

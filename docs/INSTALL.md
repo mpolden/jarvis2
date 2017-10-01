@@ -22,12 +22,12 @@ Create virtualenv and install dependencies:
 
 Copy sample config and edit it to suit your needs:
 
-    cp $APP_PATH/app/config.py.sample $APP_PATH/app/config.py
+    cp $APP_PATH/jarvis/config.py.sample $APP_PATH/jarvis/config.py
 
 Create cache directories (needs to be writable by uwsgi process):
 
-    mkdir -p $APP_PATH/app/static/{.webassets-cache,gen}
-    chown www-data:www-data $APP_PATH/app/static/{.webassets-cache,gen}
+    mkdir -p $APP_PATH/jarvis/static/{.webassets-cache,gen}
+    chown www-data:www-data $APP_PATH/jarvis/static/{.webassets-cache,gen}
 
 Install nginx and uwsgi:
 
@@ -39,10 +39,10 @@ Configure app config in `/etc/uwsgi/apps-available/jarvis2.ini`:
     workers = 1
     threads = 20
     plugin = python
-    chdir = /path/to/jarvis2/app
+    chdir = /path/to/jarvis2/jarvis
     home = /path/to/jarvis2/venv
     env = JARVIS_SETTINGS=config.py
-    module = main
+    module = app
     callable = app
 
 Enable uwsgi app and start uwsgi:
@@ -54,7 +54,7 @@ Configure nginx site in `/etc/nginx/sites-available/jarvis2`:
 
     server {
         location /static/ {
-            alias /path/to/jarvis2/app/static/;
+            alias /path/to/jarvis2/jarvis/static/;
         }
         location / {
             include uwsgi_params;

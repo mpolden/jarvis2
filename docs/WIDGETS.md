@@ -13,7 +13,7 @@ the job won't be enabled.
 `60` will make the job run every 60 seconds.
 
 `job_impl` specifies which job implementation to use for this job. Valid job
-implementations are the ones found in `app/jobs/`, excluding the `.py`
+implementations are the ones found in `jarvis/jobs/`, excluding the `.py`
 extension. Specifying `job_impl` allows an implementation to be reused, it
 defaults to the job key.
 

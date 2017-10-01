@@ -2,9 +2,9 @@
 .calendar.json
 .gmail.json
 /.vagrant/
-/app/static/.webassets-cache/
-/app/static/gen/
-/app/templates/layouts/
+/jarvis/static/.webassets-cache/
+/jarvis/static/gen/
+/jarvis/templates/layouts/
 /inventory
 /venv/
 /venv2/

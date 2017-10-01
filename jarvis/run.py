@@ -12,7 +12,7 @@ try:
 except NameError:
     pass
 
-from main import app, queues, sched
+from app import app, queues, sched
 
 
 def _teardown(signal, frame):

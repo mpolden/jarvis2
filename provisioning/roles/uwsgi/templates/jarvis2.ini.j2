@@ -2,9 +2,9 @@
 workers = 1
 threads = 20
 plugin = python
-chdir = {{ app_path }}/app
+chdir = {{ app_path }}/jarvis
 home = {{ app_path }}/venv
 env = JARVIS_SETTINGS={{ app_config }}
-module = main
+module = app
 callable = app
 evil-reload-on-rss = 48

@@ -38,8 +38,8 @@
     - restart uwsgi
 
 - name: copy config
-  copy: src=../../../../app/config.py
-        dest={{ app_path }}/app/config.py
+  copy: src=../../../../jarvis/config.py
+        dest={{ app_path }}/jarvis/config.py
         owner=root
         group=root
         mode=0644
@@ -47,8 +47,8 @@
     - restart uwsgi
 
 - name: copy google api credentials
-  copy: src=../../../../app/jobs/{{ item }}
-        dest={{ app_path }}/app/jobs/{{ item }}
+  copy: src=../../../../jarvis/jobs/{{ item }}
+        dest={{ app_path }}/jarvis/jobs/{{ item }}
         owner=www-data
         group=www-data
         mode=0600
@@ -59,7 +59,7 @@
 
 - name: create generated directories
   file: >
-        path={{ app_path }}/app/static/{{ item }}
+        path={{ app_path }}/jarvis/static/{{ item }}
         owner=www-data
         group=www-data
         mode=0755
