@@ -12,6 +12,7 @@ from multiprocessing import Process
 from werkzeug.serving import run_simple
 from xml.etree import ElementTree as etree
 from requests import Session
+from requests.packages.urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 
 
@@ -36,7 +37,9 @@ class App(unittest.TestCase):
 
     def get(self, path, **kwargs):
         s = Session()
-        s.mount('http://', HTTPAdapter(max_retries=10))
+        s.mount('http://', HTTPAdapter(
+            max_retries=Retry(total=100, backoff_factor=0.1))
+        )
         return s.get(self.url(path), **kwargs)
 
     def test_api(self):
