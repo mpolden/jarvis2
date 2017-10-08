@@ -18,11 +18,6 @@ Dependencies
 ------------
 JARVIS requires Python 2.7+ or Python 3.3+ to run.
 
-Some dependencies have native bindings which requires these packages on
-Debian/Ubuntu:
-
-    aptitude install -y python-dev libxml2-dev libxslt1-dev zlib1g-dev
-
 Install requirements:
 
     pip install -r requirements.txt
