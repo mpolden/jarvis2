@@ -3,7 +3,6 @@
 
 import logging
 import os.path
-import requests
 import unittest
 
 from app import app
@@ -12,6 +11,8 @@ from jobs import yr, hackernews, nsb, ping, calendar, avinor
 from multiprocessing import Process
 from werkzeug.serving import run_simple
 from xml.etree import ElementTree as etree
+from requests import Session
+from requests.adapters import HTTPAdapter
 
 
 class App(unittest.TestCase):
@@ -33,8 +34,13 @@ class App(unittest.TestCase):
     def url(self, path):
         return 'http://127.0.0.1:8080' + path
 
+    def get(self, path, **kwargs):
+        s = Session()
+        s.mount('http://', HTTPAdapter(max_retries=10))
+        return s.get(self.url(path), **kwargs)
+
     def test_api(self):
-        with requests.get(self.url('/events'), stream=True) as r:
+        with self.get('/events', stream=True) as r:
             data = next(r.iter_lines(chunk_size=1)).decode('utf-8')
         self.assertEqual('data: {"body":{"data":"spam"},"job":"mock"}', data)
 
