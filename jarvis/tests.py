@@ -4,6 +4,7 @@
 import logging
 import os.path
 import unittest
+import json
 
 from app import app
 from datetime import datetime
@@ -35,17 +36,62 @@ class App(unittest.TestCase):
     def url(self, path):
         return 'http://127.0.0.1:8080' + path
 
-    def get(self, path, **kwargs):
+    def session(self):
         s = Session()
         s.mount('http://', HTTPAdapter(
             max_retries=Retry(total=100, backoff_factor=0.1))
         )
-        return s.get(self.url(path), **kwargs)
+        return s
 
-    def test_api(self):
-        with self.get('/events', stream=True) as r:
+    def get(self, path, **kwargs):
+        return self.session().get(self.url(path), **kwargs)
+
+    def post(self, path, **kwargs):
+        return self.session().post(self.url(path), **kwargs)
+
+    def test_widget(self):
+        r = self.get('/widget/foo')
+        self.assertEqual(404, r.status_code)
+
+        r = self.get('/widget/mock')
+        self.assertEqual(200, r.status_code)
+        self.assertEqual('text/html; charset=utf-8', r.headers['content-type'])
+
+        r = self.get('/w/mock')
+        self.assertEqual(200, r.status_code)
+        self.assertEqual('text/html; charset=utf-8', r.headers['content-type'])
+
+    def test_dashboard(self):
+        r = self.get('/dashboard/foo')
+        self.assertEqual(404, r.status_code)
+
+        r = self.get('/')
+        self.assertEqual(200, r.status_code)
+        self.assertEqual('text/html; charset=utf-8', r.headers['content-type'])
+
+    def test_events(self):
+        r = self.get('/events', stream=True)
+        with r:
             data = next(r.iter_lines(chunk_size=1)).decode('utf-8')
+        self.assertEqual(200, r.status_code)
+        self.assertEqual('text/event-stream; charset=utf-8',
+                         r.headers['content-type'])
         self.assertEqual('data: {"body":{"data":"spam"},"job":"mock"}', data)
+
+    def test_events_post(self):
+        r = self.post('/events/foo')
+        self.assertEqual(404, r.status_code)
+
+        r = self.post('/events/mock', data=json.dumps({'data': 'eggs'}))
+        self.assertEqual(201, r.status_code)
+
+        r = self.get('/events', stream=True)
+        with r:
+            data = next(r.iter_lines(chunk_size=1)).decode('utf-8')
+        self.assertEqual(200, r.status_code)
+        self.assertEqual('text/event-stream; charset=utf-8',
+                         r.headers['content-type'])
+        self.assertEqual('data: {"body":{"data":"eggs"},"job":"mock"}', data)
 
     def tearDown(self):
         self.p.terminate()
