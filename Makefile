@@ -1,12 +1,16 @@
 all: clean lint test
 
-flake8:
+lint-py:
 	flake8 --max-complexity=8 app/*.py app/jobs/*.py support/*.py
 
-jshint:
+lint-js:
+ifdef TRAVIS
 	jshint app/static/*.js app/static/widgets/*/*.js
+else
+	@echo "lint-js: Skipping, not running on Travis"
+endif
 
-lint: flake8 jshint
+lint: lint-py lint-js
 
 test:
 	python app/tests.py
