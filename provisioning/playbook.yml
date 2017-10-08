@@ -1,15 +1,4 @@
 ---
-- hosts: dev
-  become: yes
-  pre_tasks:
-    - name: update apt cache
-      apt: update_cache=yes cache_valid_time=259200
-  roles:
-    - role: ntp
-      tags: ntp
-    - role: vagrant
-      tags: vagrant
-
 - hosts: prod
   become: yes
   pre_tasks:

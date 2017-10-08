@@ -70,11 +70,6 @@ Deployment
 ----------
 See [INSTALL.md](docs/INSTALL.md) for a basic deployment guide.
 
-Development environment
------------------------
-A `Vagrantfile` is included for use with [Vagrant](https://www.vagrantup.com).
-Run `vagrant up` in the repository root to provision a development environment.
-
 License
 -------
 Licensed under the MIT license. See the [LICENSE](LICENSE) file if you've never
