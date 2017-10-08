@@ -3,12 +3,8 @@
   apt: pkg={{ item }} state=latest
   with_items:
     - git
-    - libxml2-dev
-    - libxslt1-dev
-    - python-dev
     - python-virtualenv
     - sudo
-    - zlib1g-dev
 
 - name: ensure sudo keeps SSH_AUTH_SOCK in environment
   copy: src=env
