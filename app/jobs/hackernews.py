@@ -2,7 +2,7 @@
 
 import requests
 from jobs import AbstractJob
-from pyquery import PyQuery as pq
+from bs4 import BeautifulSoup
 
 
 class HackerNews(AbstractJob):
@@ -13,15 +13,17 @@ class HackerNews(AbstractJob):
         self.timeout = conf.get('timeout')
 
     def _parse(self, html):
-        d = pq(html)
+        d = BeautifulSoup(html, 'html.parser')
 
-        titles = [el.text for el in
-                  d.find('td.title a')
-                  .not_('a[href^="from"]')  # Source link
-                  .not_('a[rel="nofollow"]')]  # "More" link
+        def source_link(el): return el.attrs.get('href', '').startswith('from')
+
+        def more_link(el): return el.text == 'More'
+
+        titles = [el.text for el in d.select('td.title a')
+                  if not source_link(el) and not more_link(el)]
 
         points = [int(el.text.rstrip(' points')) for el in
-                  d.find('td.subtext span.score')]
+                  d.select('td.subtext span.score')]
 
         items = []
         for title, num_points in zip(titles, points):

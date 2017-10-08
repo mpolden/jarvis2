@@ -60,7 +60,7 @@ class HackerNews(unittest.TestCase):
     def test_parse(self):
         data = self.hn._parse(self.html)
 
-        self.assertEqual(28, len(data['items']))
+        self.assertEqual(30, len(data['items']))
         self.assertTrue('points' in data['items'][3])
         self.assertTrue('title' in data['items'][3])
         self.assertEqual(76, data['items'][3]['points'])
