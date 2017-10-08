@@ -4,7 +4,7 @@
 import os.path
 import unittest
 from datetime import datetime
-from jobs import yr, hackernews, nsb, ping, calendar
+from jobs import yr, hackernews, nsb, ping, calendar, avinor
 from xml.etree import ElementTree as etree
 
 
@@ -126,6 +126,23 @@ class Calendar(unittest.TestCase):
                     {'date': '2013-08-01T15:00:00+02:00', 'id': 'foo2',
                      'summary': 'Foo bar 2'}]
         self.assertEqual(self.calendar._parse(items), expected)
+
+
+class Avinor(unittest.TestCase):
+
+    def setUp(self):
+        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                'test_data', 'flights.xml'))
+        with open(xml_path, 'rb') as f:
+            self.xml = f.read()
+
+    def test_parse(self):
+        a = avinor.Avinor({'interval': None,
+                           'url': None,
+                           'from': 'TRD',
+                           'to': 'OSL'})
+        data = a._parse(self.xml)
+        self.assertEquals(34, len(data['flights']))
 
 
 if __name__ == '__main__':

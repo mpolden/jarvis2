@@ -17,15 +17,15 @@ class Avinor(AbstractJob):
         tree = etree.fromstring(xml)
 
         flights = []
-        for flight in tree.xpath('/airport/flights/flight'):
-            airport = flight.xpath('airport').pop().text
+        for flight in tree.findall('./flights/flight'):
+            airport = flight.findall('airport').pop().text
             if self.to_airport is not None and airport != self.to_airport:
                 continue
 
             flights.append({
                 'airport': airport,
-                'schedule_time': flight.xpath('schedule_time').pop().text,
-                'flight_id': flight.xpath('flight_id').pop().text
+                'schedule_time': flight.findall('schedule_time').pop().text,
+                'flight_id': flight.findall('flight_id').pop().text
             })
 
         return {

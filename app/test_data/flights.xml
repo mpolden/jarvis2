@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<airport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://flydata.avinor.no/XmlFeed.xsd"
+         name="TRD">
+  <flights lastUpdate="2017-10-08T10:10:06Z">
+    <flight uniqueID="7063219">
+      <airline>FH</airline>
+      <flight_id>FH854</flight_id>
+      <dom_int>I</dom_int>
+      <schedule_time>2017-10-07T18:35:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>AYT</airport>
+    </flight>
+    <flight uniqueID="7049506">
+      <airline>WF</airline>
+      <flight_id>WF482</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T10:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>EVE</airport>
+      <gate>29</gate>
+    </flight>
+    <flight uniqueID="7048698">
+      <airline>KL</airline>
+      <flight_id>KL1174</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-08T10:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>AMS</airport>
+      <gate>46</gate>
+      <status code="D" time="2017-10-08T09:59:00Z"/>
+    </flight>
+    <flight uniqueID="7048587">
+      <airline>DY</airline>
+      <flight_id>DY757</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T10:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7049068">
+      <airline>SK</airline>
+      <flight_id>SK4159</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T10:05:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+      <gate>30</gate>
+    </flight>
+    <flight uniqueID="7049540">
+      <airline>WF</airline>
+      <flight_id>WF569</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T10:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+      <via_airport>KSU</via_airport>
+      <gate>26</gate>
+    </flight>
+    <flight uniqueID="7049586">
+      <airline>WF</airline>
+      <flight_id>WF711</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T10:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BNN</airport>
+      <gate>27</gate>
+    </flight>
+    <flight uniqueID="7048591">
+      <airline>DY</airline>
+      <flight_id>DY759</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T11:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7049604">
+      <airline>WF</airline>
+      <flight_id>WF731</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T11:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>SSJ</airport>
+      <gate>28</gate>
+    </flight>
+    <flight uniqueID="7049514">
+      <airline>WF</airline>
+      <flight_id>WF485</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T11:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRF</airport>
+      <gate>29</gate>
+      <status code="E" time="2017-10-08T12:30:00Z"/>
+      <delayed>Y</delayed>
+    </flight>
+    <flight uniqueID="7049178">
+      <airline>SK</airline>
+      <flight_id>SK4566</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T11:50:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TOS</airport>
+      <via_airport>BOO</via_airport>
+      <gate>32</gate>
+    </flight>
+    <flight uniqueID="7048950">
+      <airline>SK</airline>
+      <flight_id>SK361</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T11:50:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>30</gate>
+    </flight>
+    <flight uniqueID="7049532">
+      <airline>WF</airline>
+      <flight_id>WF555</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T12:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRD</airport>
+      <via_airport>AES,KSU</via_airport>
+      <gate>27</gate>
+    </flight>
+    <flight uniqueID="7048595">
+      <airline>DY</airline>
+      <flight_id>DY761</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T13:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7048909">
+      <airline>SK</airline>
+      <flight_id>SK2889</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-08T13:05:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>CPH</airport>
+      <gate>43</gate>
+    </flight>
+    <flight uniqueID="7049590">
+      <airline>WF</airline>
+      <flight_id>WF713</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T13:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>BNN</via_airport>
+      <gate>28</gate>
+    </flight>
+    <flight uniqueID="6975333">
+      <airline>SK</airline>
+      <flight_id>SK4165</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T13:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+      <gate>31</gate>
+    </flight>
+    <flight uniqueID="7048956">
+      <airline>SK</airline>
+      <flight_id>SK365</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T13:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>30</gate>
+    </flight>
+    <flight uniqueID="7049624">
+      <airline>WF</airline>
+      <flight_id>WF751</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T13:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>MJF</airport>
+      <gate>27</gate>
+    </flight>
+    <flight uniqueID="7049154">
+      <airline>SK</airline>
+      <flight_id>SK4485</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T14:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>SVG</airport>
+      <gate>33</gate>
+    </flight>
+    <flight uniqueID="7049510">
+      <airline>WF</airline>
+      <flight_id>WF483</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T14:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRF</airport>
+      <gate>29</gate>
+    </flight>
+    <flight uniqueID="7048964">
+      <airline>SK</airline>
+      <flight_id>SK371</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T14:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>32</gate>
+    </flight>
+    <flight uniqueID="7048343">
+      <airline>DY</airline>
+      <flight_id>DY172</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T14:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+      <gate>37</gate>
+    </flight>
+    <flight uniqueID="7049078">
+      <airline>SK</airline>
+      <flight_id>SK4175</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T14:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>SVG</airport>
+      <via_airport>BGO</via_airport>
+      <gate>34</gate>
+    </flight>
+    <flight uniqueID="7048583">
+      <airline>DY</airline>
+      <flight_id>DY755</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T14:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7048968">
+      <airline>SK</airline>
+      <flight_id>SK375</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T15:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>30</gate>
+    </flight>
+    <flight uniqueID="7048597">
+      <airline>DY</airline>
+      <flight_id>DY765</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T15:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>36</gate>
+    </flight>
+    <flight uniqueID="7049182">
+      <airline>SK</airline>
+      <flight_id>SK4572</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T15:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TOS</airport>
+      <via_airport>BOO</via_airport>
+      <gate>32</gate>
+    </flight>
+    <flight uniqueID="7049660">
+      <airline>WF</airline>
+      <flight_id>WF784</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T15:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRD</airport>
+      <via_airport>OSY,RVK</via_airport>
+      <gate>27</gate>
+    </flight>
+    <flight uniqueID="7048700">
+      <airline>KL</airline>
+      <flight_id>KL1176</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-08T15:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>AMS</airport>
+      <gate>46</gate>
+    </flight>
+    <flight uniqueID="7048283">
+      <airline>DY</airline>
+      <flight_id>DY1038</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-08T15:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>KRK</airport>
+      <gate>47</gate>
+    </flight>
+    <flight uniqueID="7048603">
+      <airline>DY</airline>
+      <flight_id>DY769</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T15:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7049646">
+      <airline>WF</airline>
+      <flight_id>WF775</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T15:45:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>MQN</via_airport>
+      <gate>28</gate>
+    </flight>
+    <flight uniqueID="7049070">
+      <airline>SK</airline>
+      <flight_id>SK4163</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T16:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+      <gate>33</gate>
+    </flight>
+    <flight uniqueID="7048970">
+      <airline>SK</airline>
+      <flight_id>SK377</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T16:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>32</gate>
+    </flight>
+    <flight uniqueID="7049628">
+      <airline>WF</airline>
+      <flight_id>WF753</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T16:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>MJF</via_airport>
+      <gate>26</gate>
+    </flight>
+    <flight uniqueID="7044489">
+      <airline>DY</airline>
+      <flight_id>DY771</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T16:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>36</gate>
+    </flight>
+    <flight uniqueID="7049568">
+      <airline>WF</airline>
+      <flight_id>WF605</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T16:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>KRS</airport>
+      <gate>29</gate>
+    </flight>
+    <flight uniqueID="7049331">
+      <airline>VF</airline>
+      <flight_id>VF233</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T16:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TOS</airport>
+      <via_airport>BOO,SKN</via_airport>
+      <gate>27</gate>
+    </flight>
+    <flight uniqueID="7048942">
+      <airline>SK</airline>
+      <flight_id>SK349</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T16:55:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>30</gate>
+    </flight>
+    <flight uniqueID="7048607">
+      <airline>DY</airline>
+      <flight_id>DY773</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7063279">
+      <airline>SK</airline>
+      <flight_id>SK4193</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+      <via_airport>AES</via_airport>
+      <gate>31</gate>
+    </flight>
+    <flight uniqueID="7049186">
+      <airline>SK</airline>
+      <flight_id>SK4576</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TOS</airport>
+      <via_airport>BOO</via_airport>
+      <gate>33</gate>
+    </flight>
+    <flight uniqueID="7049156">
+      <airline>SK</airline>
+      <flight_id>SK4487</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>SVG</airport>
+      <gate>34</gate>
+    </flight>
+    <flight uniqueID="7048974">
+      <airline>SK</airline>
+      <flight_id>SK379</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>32</gate>
+    </flight>
+    <flight uniqueID="7049598">
+      <airline>WF</airline>
+      <flight_id>WF717</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BNN</airport>
+      <gate>26</gate>
+    </flight>
+    <flight uniqueID="7049612">
+      <airline>WF</airline>
+      <flight_id>WF739</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>SSJ</via_airport>
+      <gate>25</gate>
+    </flight>
+    <flight uniqueID="7049666">
+      <airline>WF</airline>
+      <flight_id>WF796</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRD</airport>
+      <via_airport>RVK,OSY</via_airport>
+      <gate>27</gate>
+    </flight>
+    <flight uniqueID="7049518">
+      <airline>WF</airline>
+      <flight_id>WF487</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRF</airport>
+      <gate>29</gate>
+    </flight>
+    <flight uniqueID="7048609">
+      <airline>DY</airline>
+      <flight_id>DY775</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>36</gate>
+    </flight>
+    <flight uniqueID="7048984">
+      <airline>SK</airline>
+      <flight_id>SK389</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T17:50:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>30</gate>
+    </flight>
+    <flight uniqueID="7048613">
+      <airline>DY</airline>
+      <flight_id>DY777</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T18:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7048980">
+      <airline>SK</airline>
+      <flight_id>SK385</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T19:05:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>32</gate>
+    </flight>
+    <flight uniqueID="7049086">
+      <airline>SK</airline>
+      <flight_id>SK4187</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T19:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+      <gate>30</gate>
+    </flight>
+    <flight uniqueID="7048751">
+      <airline>LO</airline>
+      <flight_id>LO8432</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-08T19:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TLL</airport>
+      <gate>42</gate>
+    </flight>
+    <flight uniqueID="7048617">
+      <airline>DY</airline>
+      <flight_id>DY779</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T19:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+      <gate>35</gate>
+    </flight>
+    <flight uniqueID="7049522">
+      <airline>WF</airline>
+      <flight_id>WF489</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T19:50:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRF</airport>
+      <gate>29</gate>
+    </flight>
+    <flight uniqueID="7048906">
+      <airline>SK</airline>
+      <flight_id>SK2881</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-08T19:50:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>CPH</airport>
+      <gate>43</gate>
+    </flight>
+    <flight uniqueID="7048217">
+      <airline>D8</airline>
+      <flight_id>D82833</flight_id>
+      <dom_int>I</dom_int>
+      <schedule_time>2017-10-08T20:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>LGW</airport>
+      <gate>49</gate>
+    </flight>
+    <flight uniqueID="7049654">
+      <airline>WF</airline>
+      <flight_id>WF777</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-08T20:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>MQN</airport>
+      <gate>28</gate>
+    </flight>
+    <flight uniqueID="7051515">
+      <airline>SK</airline>
+      <flight_id>SK2885</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-09T04:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>CPH</airport>
+    </flight>
+    <flight uniqueID="7052553">
+      <airline>WF</airline>
+      <flight_id>WF790</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T04:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRD</airport>
+      <via_airport>RVK,OSY</via_airport>
+    </flight>
+    <flight uniqueID="7051817">
+      <airline>SK</airline>
+      <flight_id>SK4481</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T04:05:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>SVG</airport>
+    </flight>
+    <flight uniqueID="7051254">
+      <airline>KL</airline>
+      <flight_id>KL1172</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-09T04:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>AMS</airport>
+    </flight>
+    <flight uniqueID="7051545">
+      <airline>SK</airline>
+      <flight_id>SK335</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T04:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051691">
+      <airline>SK</airline>
+      <flight_id>SK4137</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T04:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>SVG</airport>
+      <via_airport>BGO</via_airport>
+    </flight>
+    <flight uniqueID="7051451">
+      <airline>SK</airline>
+      <flight_id>SK2472</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-09T04:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>ARN</airport>
+    </flight>
+    <flight uniqueID="7051551">
+      <airline>SK</airline>
+      <flight_id>SK339</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T04:35:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051131">
+      <airline>DY</airline>
+      <flight_id>DY741</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T04:40:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051843">
+      <airline>SK</airline>
+      <flight_id>SK4552</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T04:50:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TOS</airport>
+      <via_airport>BOO</via_airport>
+    </flight>
+    <flight uniqueID="7051135">
+      <airline>DY</airline>
+      <flight_id>DY743</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T05:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051553">
+      <airline>SK</airline>
+      <flight_id>SK341</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T05:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051139">
+      <airline>DY</airline>
+      <flight_id>DY745</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T05:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051555">
+      <airline>SK</airline>
+      <flight_id>SK343</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T05:50:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051141">
+      <airline>DY</airline>
+      <flight_id>DY747</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7052495">
+      <airline>WF</airline>
+      <flight_id>WF747</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>MJF</via_airport>
+    </flight>
+    <flight uniqueID="7052477">
+      <airline>WF</airline>
+      <flight_id>WF727</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>SSJ</via_airport>
+    </flight>
+    <flight uniqueID="7052447">
+      <airline>WF</airline>
+      <flight_id>WF707</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:15:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>BNN</via_airport>
+    </flight>
+    <flight uniqueID="7052523">
+      <airline>WF</airline>
+      <flight_id>WF769</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>MQN</airport>
+    </flight>
+    <flight uniqueID="7052365">
+      <airline>WF</airline>
+      <flight_id>WF537</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>MOL</airport>
+    </flight>
+    <flight uniqueID="7052343">
+      <airline>WF</airline>
+      <flight_id>WF481</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRF</airport>
+    </flight>
+    <flight uniqueID="7051559">
+      <airline>SK</airline>
+      <flight_id>SK345</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7050884">
+      <airline>DY</airline>
+      <flight_id>DY165</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BGO</airport>
+    </flight>
+    <flight uniqueID="7051697">
+      <airline>SK</airline>
+      <flight_id>SK4143</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>SVG</airport>
+      <via_airport>BGO</via_airport>
+    </flight>
+    <flight uniqueID="7051145">
+      <airline>DY</airline>
+      <flight_id>DY749</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T06:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051847">
+      <airline>SK</airline>
+      <flight_id>SK4556</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T07:05:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TOS</airport>
+      <via_airport>BOO</via_airport>
+    </flight>
+    <flight uniqueID="7051147">
+      <airline>DY</airline>
+      <flight_id>DY751</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T07:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051561">
+      <airline>SK</airline>
+      <flight_id>SK347</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T07:20:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051711">
+      <airline>SK</airline>
+      <flight_id>SK4147</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T08:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>AES</airport>
+    </flight>
+    <flight uniqueID="7051563">
+      <airline>SK</airline>
+      <flight_id>SK351</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T08:30:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051851">
+      <airline>SK</airline>
+      <flight_id>SK4558</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T09:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TOS</airport>
+      <via_airport>BOO</via_airport>
+    </flight>
+    <flight uniqueID="7052527">
+      <airline>WF</airline>
+      <flight_id>WF771</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T09:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>BOO</airport>
+      <via_airport>MQN</via_airport>
+    </flight>
+    <flight uniqueID="7052559">
+      <airline>WF</airline>
+      <flight_id>WF792</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T09:10:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>TRD</airport>
+      <via_airport>RVK,OSY</via_airport>
+    </flight>
+    <flight uniqueID="7050822">
+      <airline>DY</airline>
+      <flight_id>DY1078</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-09T09:25:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>RIX</airport>
+    </flight>
+    <flight uniqueID="7052347">
+      <airline>WF</airline>
+      <flight_id>WF482</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T10:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>EVE</airport>
+    </flight>
+    <flight uniqueID="7051151">
+      <airline>DY</airline>
+      <flight_id>DY757</flight_id>
+      <dom_int>D</dom_int>
+      <schedule_time>2017-10-09T10:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>OSL</airport>
+    </flight>
+    <flight uniqueID="7051256">
+      <airline>KL</airline>
+      <flight_id>KL1174</flight_id>
+      <dom_int>S</dom_int>
+      <schedule_time>2017-10-09T10:00:00Z</schedule_time>
+      <arr_dep>D</arr_dep>
+      <airport>AMS</airport>
+    </flight>
+  </flights>
+</airport>
