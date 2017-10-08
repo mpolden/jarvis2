@@ -11,7 +11,7 @@ flask = "==0.12.2"
 "jinja2" = "==2.9.6"
 cssmin = "==0.2.0"
 "google-api-python-client" = "==1.6.2"
-requests = "==2.17.3"
+requests = "==2.18.4"
 soco = "==0.12"
 "beautifulsoup4" = "==4.6.0"
 
