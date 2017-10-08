@@ -3,7 +3,7 @@
 import requests
 from datetime import datetime
 from jobs import AbstractJob
-from pyquery import PyQuery as pq
+from bs4 import BeautifulSoup
 
 
 class Nsb(AbstractJob):
@@ -15,15 +15,17 @@ class Nsb(AbstractJob):
         self.timeout = conf.get('timeout')
 
     def _parse(self, html):
-        d = pq(html)
+        d = BeautifulSoup(html, 'html.parser')
 
-        date = d.find('.travel-date:first').text().strip()
-        all_times = [el.text_content().strip() for el in
-                     d.find('.nsb-time span')
-                      .not_('.nsb-time-corrected')
-                      .not_('.nsb-visually-hidden')]
-        durations = [el.text_content().strip() for el in
-                     d.find('.nsb-time-total')]
+        def is_time(el):
+            classes = el.attrs.get('class', [])
+            return not any(cls in classes for cls in
+                           ('nsb-time-corrected', 'nsb-visually-hidden'))
+
+        date = d.select_one('.travel-date').text.strip()
+        all_times = [el.text.strip() for el in d.select('.nsb-time span')
+                     if is_time(el)]
+        durations = [el.text.strip() for el in d.select('.nsb-time-total')]
 
         departure_times = all_times[::2]  # filter even elements
         arrival_times = all_times[1::2]  # filter odd elements
