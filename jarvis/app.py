@@ -24,7 +24,6 @@ from random import randint
 
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
-app.config.from_envvar('JARVIS_SETTINGS')
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 sched = BackgroundScheduler(logger=app.logger)
@@ -120,15 +119,20 @@ def create_event(job_id):
     return '', 201
 
 
+def _config():
+    if 'JOBS' in app.config:
+        return app.config
+    app.config.from_envvar('JARVIS_SETTINGS')
+    return app.config
+
+
 def _enabled_jobs():
-    conf = app.config['JOBS']
+    conf = _config()['JOBS']
     return [job_id for job_id in conf.keys() if conf[job_id].get('enabled')]
 
 
-def _is_enabled(job_id, conf=None):
-    if conf is None:
-        conf = app.config['JOBS']
-    return job_id in conf and conf[job_id].get('enabled')
+def _is_enabled(job_id):
+    return job_id in _enabled_jobs()
 
 
 @app.context_processor
@@ -138,7 +142,7 @@ def _inject_template_methods():
 
 @app.before_first_request
 def _schedule_jobs():
-    conf = app.config['JOBS']
+    conf = _config()['JOBS']
     offset = 0
     jobs = load_jobs()
 

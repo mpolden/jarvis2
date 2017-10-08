@@ -1,11 +1,46 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import logging
 import os.path
+import requests
 import unittest
+
+from app import app
 from datetime import datetime
 from jobs import yr, hackernews, nsb, ping, calendar, avinor
+from multiprocessing import Process
+from werkzeug.serving import run_simple
 from xml.etree import ElementTree as etree
+
+
+class App(unittest.TestCase):
+
+    def setUp(self):
+        app.testing = True
+        app.debug = True
+        app.config['JOBS'] = {
+            'mock': {
+                'enabled': True,
+                'interval': 60
+            }
+        }
+        app.logger.setLevel(logging.WARN)
+        logging.getLogger('werkzeug').setLevel(logging.WARN)
+        self.p = Process(target=run_simple, args=('127.0.0.1', 8080, app))
+        self.p.start()
+
+    def url(self, path):
+        return 'http://127.0.0.1:8080' + path
+
+    def test_api(self):
+        with requests.get(self.url('/events'), stream=True) as r:
+            data = next(r.iter_lines(chunk_size=1))
+        self.assertEqual('data: {"body":{"data":"spam"},"job":"mock"}', data)
+
+    def tearDown(self):
+        self.p.terminate()
+        self.p.join()
 
 
 class Yr(unittest.TestCase):
