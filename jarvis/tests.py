@@ -35,7 +35,7 @@ class App(unittest.TestCase):
 
     def test_api(self):
         with requests.get(self.url('/events'), stream=True) as r:
-            data = next(r.iter_lines(chunk_size=1))
+            data = next(r.iter_lines(chunk_size=1)).decode('utf-8')
         self.assertEqual('data: {"body":{"data":"spam"},"job":"mock"}', data)
 
     def tearDown(self):
@@ -177,7 +177,7 @@ class Avinor(unittest.TestCase):
                            'from': 'TRD',
                            'to': 'OSL'})
         data = a._parse(self.xml)
-        self.assertEquals(34, len(data['flights']))
+        self.assertEqual(34, len(data['flights']))
 
 
 if __name__ == '__main__':

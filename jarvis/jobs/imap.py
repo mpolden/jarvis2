@@ -22,7 +22,7 @@ class IMAP(AbstractJob):
         self.folder = conf['folder']
 
     def _parse_count(self, message):
-        count = re.search('\w+ (\d+)', message.decode('utf-8'))
+        count = re.search(r'\w+ (\d+)', message.decode('utf-8'))
         return int(count.group(1)) if count is not None else 0
 
     def _get_count(self):

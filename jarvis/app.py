@@ -178,8 +178,8 @@ def _schedule_jobs():
 
 def _add_event(job_id, body):
     json_data = json.dumps({
-        'job': job_id,
-        'body': body
+        'body': body,
+        'job': job_id
     }, separators=(',', ':'))
     last_events[job_id] = json_data
     for q in queues.values():
