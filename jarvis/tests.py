@@ -4,7 +4,6 @@
 import logging
 import os.path
 import unittest
-import json
 
 from app import app
 from datetime import datetime
@@ -30,7 +29,8 @@ class App(unittest.TestCase):
         }
         app.logger.setLevel(logging.WARN)
         logging.getLogger('werkzeug').setLevel(logging.WARN)
-        self.p = Process(target=run_simple, args=('127.0.0.1', 8080, app))
+        self.p = Process(target=run_simple, args=('127.0.0.1', 8080, app),
+                         kwargs={'use_debugger': app.debug})
         self.p.start()
 
     def url(self, path):
@@ -82,7 +82,7 @@ class App(unittest.TestCase):
         r = self.post('/events/foo')
         self.assertEqual(404, r.status_code)
 
-        r = self.post('/events/mock', data=json.dumps({'data': 'eggs'}))
+        r = self.post('/events/mock', json={'data': 'eggs'})
         self.assertEqual(201, r.status_code)
 
         r = self.get('/events', stream=True)

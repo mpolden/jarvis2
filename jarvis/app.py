@@ -111,10 +111,9 @@ def events():
 def create_event(job_id):
     if not _is_enabled(job_id):
         abort(404)
-    data = request.data
-    if not data:
+    body = request.get_json()
+    if not body:
         abort(400)
-    body = json.loads(data)
     _add_event(job_id, body)
     return '', 201
 
