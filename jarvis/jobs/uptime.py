@@ -2,6 +2,7 @@
 
 from jobs import AbstractJob
 from subprocess import Popen, PIPE
+from sys import platform
 
 
 class Uptime(AbstractJob):
@@ -15,7 +16,12 @@ class Uptime(AbstractJob):
         hosts = []
         for label, ip in self.hosts:
             ping_cmd = 'ping6' if ':' in ip else 'ping'
-            ping = '%s -w %d -c 1 %s' % (ping_cmd, self.timeout, ip)
+            deadline_flag = '-w'
+            # ping on darwin uses -t for deadline/timeout
+            if platform == 'darwin':
+                deadline_flag = '-t'
+            ping = '%s %s %d -c 1 %s' % (ping_cmd, deadline_flag, self.timeout,
+                                         ip)
             p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
             hosts.append({
                 'label': label,
