@@ -57,8 +57,9 @@ def _run_app(debug=False):
     app.jinja_env.auto_reload = debug
     app.debug = debug
     signal.signal(signal.SIGINT, _teardown)
+    host = os.environ.get('HOST', 'localhost')
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, use_reloader=False, threaded=True)
+    app.run(host=host, port=port, use_reloader=False, threaded=True)
 
 
 def main():
