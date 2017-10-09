@@ -12,7 +12,7 @@ try:
 except NameError:
     pass
 
-from app import app, queues, sched
+from app import app, queues, sched, _config
 
 
 def _teardown(signal, frame):
@@ -40,7 +40,7 @@ def _run_job(name=None, print_json=False):
         print('No such job: %s' % (name,))
         sys.exit(1)
 
-    job_conf = app.config['JOBS'].get(name)
+    job_conf = _config()['JOBS'].get(name)
     if job_conf is None:
         print('No config found for job: %s' % (name,))
         sys.exit(1)
