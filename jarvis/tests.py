@@ -9,7 +9,6 @@ from app import app
 from datetime import datetime
 from jobs import yr, hackernews, nsb, ping, calendar, avinor
 from multiprocessing import Process
-from werkzeug.serving import run_simple
 from xml.etree import ElementTree as etree
 from requests import Session
 from requests.packages.urllib3.util.retry import Retry
@@ -29,8 +28,13 @@ class App(unittest.TestCase):
         }
         app.logger.setLevel(logging.WARN)
         logging.getLogger('werkzeug').setLevel(logging.WARN)
-        self.p = Process(target=run_simple, args=('127.0.0.1', 8080, app),
-                         kwargs={'use_debugger': app.debug})
+        # Run the application in a separate process so that streamed responses
+        # are not blocked on running the client in the same thread
+        self.p = Process(target=app.run, kwargs={
+            'host': '127.0.0.1',
+            'port': 8080,
+            'use_reloader': False
+        })
         self.p.start()
 
     def url(self, path):
