@@ -1,4 +1,0 @@
----
-ntp:
-  timezone: Europe/Oslo
-  install_service: true

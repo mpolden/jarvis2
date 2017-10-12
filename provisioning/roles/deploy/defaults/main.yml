@@ -1,6 +1,0 @@
----
-app_config: config.py
-app_path: /opt/jarvis2
-google_credentials_files:
-  - .calendar.json
-  - .gmail.json
