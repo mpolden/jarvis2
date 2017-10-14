@@ -33,7 +33,7 @@ JOBS['atb-16010382'] = {
     'interval': 60,
     'url': 'https://atbapi.tar.io/api/v1/departures/16010382',
     'timeout': 5,
-    'job_name': 'atb'
+    'job_impl': 'atb'
 }
 
 JOBS['hackernews'] = {
