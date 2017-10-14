@@ -1,7 +1,7 @@
 Deployment guide
 ================
 JARVIS is a [Flask](http://flask.pocoo.org) application, see the
-[uWSGI docs](http://uwsgi-docs.readthedocs.org/en/latest/WSGIquickstart.html)
+[uWSGI docs](https://uwsgi-docs.readthedocs.org/en/latest/WSGIquickstart.html)
 for a more detailed uWSGI deployment guide or check out the other deployment
 options described in the [Flask docs](http://flask.pocoo.org/docs/deploying)
 
@@ -18,7 +18,7 @@ Create virtualenv and install dependencies:
     cd $APP_PATH
     virtualenv venv
     source venv/bin/activate
-    pip install --use-mirrors -r requirements.txt
+    pip install -r requirements.txt
 
 Copy sample config and edit it to suit your needs:
 
@@ -33,7 +33,7 @@ Install nginx and uwsgi:
 
     aptitude install nginx uwsgi uwsgi-plugin-python
 
-Configure app config in `/etc/uwsgi/apps-available/jarvis2.ini`:
+Configure app config in `/etc/uwsgi/apps-available/jarvis.ini`:
 
     [uwsgi]
     workers = 1
@@ -47,10 +47,10 @@ Configure app config in `/etc/uwsgi/apps-available/jarvis2.ini`:
 
 Enable uwsgi app and start uwsgi:
 
-    ln -s /etc/uwsgi/apps-available/jarvis2.ini /etc/uwsgi/apps-enabled/jarvis2.ini
-    service uwsgi start
+    ln -s /etc/uwsgi/apps-available/jarvis.ini /etc/uwsgi/apps-enabled/jarvis.ini
+    systemctl restart uwsgi
 
-Configure nginx site in `/etc/nginx/sites-available/jarvis2`:
+Configure nginx site in `/etc/nginx/sites-available/jarvis`:
 
     server {
         location /static/ {
@@ -59,11 +59,11 @@ Configure nginx site in `/etc/nginx/sites-available/jarvis2`:
         location / {
             include uwsgi_params;
             uwsgi_buffering off;
-            uwsgi_pass unix:/tmp/uwsgi.sock;
+            uwsgi_pass unix:/run/uwsgi/app/jarvis/socket;
         }
     }
 
 Enable nginx site and (re)start nginx:
 
-    ln -s /etc/nginx/sites-available/jarvis2 /etc/nginx/sites-enabled/jarvis2
-    service nginx start
+    ln -s /etc/nginx/sites-available/jarvis /etc/nginx/sites-enabled/jarvis
+    systemctl restart nginx
