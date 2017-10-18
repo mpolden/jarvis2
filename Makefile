@@ -28,13 +28,25 @@ dashboard:
 	python support/create_dashboard.py $(NAME)
 
 debug:
+ifndef JARVIS_SETTINGS
+	$(error JARVIS_SETTINGS must be set)
+endif
 	python $(APP_ROOT)/run.py --debug
 
 run:
+ifndef JARVIS_SETTINGS
+	$(error JARVIS_SETTINGS must be set)
+endif
 	python $(APP_ROOT)/run.py
 
 run-job:
+ifndef JARVIS_SETTINGS
+	$(error JARVIS_SETTINGS must be set)
+endif
 	python $(APP_ROOT)/run.py --job $(NAME)
 
 google-api-auth:
+ifndef JARVIS_SETTINGS
+	$(error JARVIS_SETTINGS must be set)
+endif
 	python support/google_api_auth.py
