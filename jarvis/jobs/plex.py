@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import requests
+from urllib3.exceptions import InsecureRequestWarning
 from jobs import AbstractJob
 
 
@@ -13,7 +14,9 @@ class Plex(AbstractJob):
         self.timeout = conf.get('timeout')
         self.verify = conf.get('verify', True)
         if not self.verify:
-            requests.packages.urllib3.disable_warnings()
+            requests.packages.urllib3.disable_warnings(
+                category=InsecureRequestWarning
+            )
 
     def _parse_movies(self, data):
         return [{'title': m.get('title'),
