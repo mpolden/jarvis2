@@ -34,11 +34,13 @@ class Yr(AbstractJob):
                 'description': windSpeed.get('name'),
                 'direction': windDirection.get('name')
             }
-
+        temperature = next(iter(data_root.findall('temperature')), None)
+        if temperature is not None:
+            temperature = temperature.get('value')
         return {
             'location': tree.findall('./location/name').pop().text,
-            'temperature': data_root.findall('temperature').pop().get('value'),
             'description': tabular.findall('symbol').pop().get('name'),
+            'temperature': temperature,
             'wind': wind
         }
 

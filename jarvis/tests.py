@@ -139,7 +139,16 @@ class Yr(unittest.TestCase):
             tree = etree.fromstring(f.read())
         y = yr.Yr({'interval': None, 'url': None})
         data = y._parse_tree(tree)
-        self.assertTrue(data['wind'] is None)
+        self.assertIsNone(data['wind'])
+
+    def test_parse_tree_missing_temperature(self):
+        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                'test_data', 'varsel3.xml'))
+        with open(xml_path, 'rb') as f:
+            tree = etree.fromstring(f.read())
+        y = yr.Yr({'interval': None, 'url': None})
+        data = y._parse_tree(tree)
+        self.assertIsNone(data['temperature'])
 
 
 class HackerNews(unittest.TestCase):

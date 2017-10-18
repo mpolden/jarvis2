@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<weatherdata>
+  <location>
+    <name>Trondheim</name>
+    <type>By</type>
+    <country>Norge</country>
+    <timezone id="Europe/Oslo" utcoffsetMinutes="120" />
+    <location altitude="8" latitude="63.4305052822546" longitude="10.3950584066009" geobase="ssr" geobaseid="211102" />
+  </location>
+  <credit>
+    <!--For å bruke gratis værdata fra yr.no, MÅ du vise følgende tekst godt synlig på nettsiden din. Teksten skal være en lenke til URL-en som er spesifisert.-->
+    <!--Les mer om vilkår for bruk av gratis værdata + retningslinjer på 
+http://om.yr.no/verdata/ -->
+    <link text="Værvarsel fra yr.no, levert av NRK og Meteorologisk institutt" url="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/" />
+  </credit>
+  <links>
+    <link id="xmlSource" url="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/varsel.xml" />
+    <link id="xmlSourceHourByHour" url="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/varsel_time_for_time.xml" />
+    <link id="overview" url="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/" />
+    <link id="hourByHour" url="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/time_for_time.html" />
+    <link id="longTermForecast" url="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/langtidsvarsel.html" />
+    <link id="radar" url="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/radar.html" />
+  </links>
+  <meta>
+    <lastupdate>2013-06-30T19:29:28</lastupdate>
+    <nextupdate>2013-07-01T08:00:00</nextupdate>
+  </meta>
+  <sun rise="2013-06-30T03:09:59" set="2013-06-30T23:33:05" />
+  <forecast>
+    <text>
+      <location name="Trondheim">
+        <time from="2013-06-30" to="2013-07-01">
+          <title>søndag og mandag</title>
+          <body>&lt;strong&gt;Sør-Trøndelag:&lt;/strong&gt; Skiftande bris, i dag nordaust opp i frisk bris 10 m/s på kysten. Stort sett opphaldsver, periodar med sol. Frå måndag ettermiddag vest og sørvest bris. Skya. Regnbyer.</body>
+        </time>
+        <time from="2013-07-02" to="2013-07-02">
+          <title>tirsdag</title>
+          <body>&lt;strong&gt;Møre og Romsdal og Trøndelag:&lt;/strong&gt; Sørvest bris, til dels frisk bris 10 m/s på kysten., Frå tysdag ettermiddag skiftande bris For det meste skya, enkelte regnbyer. Tysdag kveld stort sett opphaldsver og lettare skydekke.</body>
+        </time>
+        <time from="2013-07-03" to="2013-07-03">
+          <title>onsdag</title>
+          <body>&lt;strong&gt;Møre og Romsdal og Trøndelag:&lt;/strong&gt; Skiftende bris, på kysten nord og nordøst bris. Til dels pent vær, men i indre strøk utrygt for enkelte regnbyger, særlig i Trøndelag. Litt høyere temperatur.</body>
+        </time>
+        <time from="2013-07-04" to="2013-07-05">
+          <title>torsdag og fredag</title>
+          <body>&lt;strong&gt;Trøndelag:&lt;/strong&gt; For det meste bris mellom sørøst og nordøst. Stort sett oppholdsvær og perioder med sol. Litt høyere temperatur. Fredag skiftende bris, på kysten sørvestlig bris, kan hende kuling. Enkelte regnbyger. Litt kjøligere.</body>
+        </time>
+        <time from="2013-07-06" to="2013-07-09">
+          <title>lørdag til tirsdag</title>
+          <body>&lt;strong&gt;Norge og Spitsbergen:&lt;/strong&gt; Det ventes lavtrykksaktivitet over områdene fra Island til Svalbard. Høytrykk ser ut til å forsterke seg over området Nordvest-Europa og deler av Skandinavia.På Spitsbergen ventes skiftende vindforhold, perioder med kuling. Litt regn av og til. Omtrent uendret temperatur. I Nord- Norge ventes skiftende vindforhold, kan hende perioder med sørvestlig kuling på kysten. Litt regn av og til, vesentlig vest for Nordkapp. Varierende temperaturer, men etter hvert kjøligere, særlig i nord. I Sør- Norge ventes for det meste rolige vindforhold. Kan hende perioder med litt nedbør nord for Stad og Dovre, ellers lite eller ingen nedbør. Varmere, særlig sør for Stad og Dovre.</body>
+        </time>
+      </location>
+    </text>
+    <tabular>
+      <time from="2013-06-30T23:00:00" to="2013-07-01T00:00:00" period="3">
+        <!-- Valid from 2013-06-30T23:00:00 to 2013-07-01T00:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-06-30T23:00:00 -->
+        <windDirection deg="358.8" code="N" name="Nord" />
+        <windSpeed mps="1.9" name="Svak vind" />
+        <temperature unit="celsius" value="17" />
+        <pressure unit="hPa" value="1007.7" />
+      </time>
+      <time from="2013-07-01T00:00:00" to="2013-07-01T06:00:00" period="0">
+        <!-- Valid from 2013-07-01T00:00:00 to 2013-07-01T06:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="mf/03n.76" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-01T00:00:00 -->
+        <windDirection deg="267.4" code="W" name="Vest" />
+        <windSpeed mps="1.3" name="Flau vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1007.5" />
+      </time>
+      <time from="2013-07-01T06:00:00" to="2013-07-01T12:00:00" period="1">
+        <!-- Valid from 2013-07-01T06:00:00 to 2013-07-01T12:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-01T06:00:00 -->
+        <windDirection deg="164.0" code="SSE" name="Sør-sørøst" />
+        <windSpeed mps="1.9" name="Svak vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1005.1" />
+      </time>
+      <time from="2013-07-01T12:00:00" to="2013-07-01T18:00:00" period="2">
+        <!-- Valid from 2013-07-01T12:00:00 to 2013-07-01T18:00:00 -->
+        <symbol number="9" name="Regn" var="09" />
+        <precipitation value="1.2" minvalue="0" maxvalue="4.0" />
+        <!-- Valid at 2013-07-01T12:00:00 -->
+        <windDirection deg="180.4" code="S" name="Sør" />
+        <windSpeed mps="3.6" name="Lett bris" />
+        <temperature unit="celsius" value="23" />
+        <pressure unit="hPa" value="1004.0" />
+      </time>
+      <time from="2013-07-01T18:00:00" to="2013-07-02T00:00:00" period="3">
+        <!-- Valid from 2013-07-01T18:00:00 to 2013-07-02T00:00:00 -->
+        <symbol number="9" name="Regn" var="09" />
+        <precipitation value="2.2" minvalue="0.5" maxvalue="4.7" />
+        <!-- Valid at 2013-07-01T18:00:00 -->
+        <windDirection deg="309.1" code="NW" name="Nordvest" />
+        <windSpeed mps="5.9" name="Laber bris" />
+        <temperature unit="celsius" value="19" />
+        <pressure unit="hPa" value="1004.9" />
+      </time>
+      <time from="2013-07-02T00:00:00" to="2013-07-02T06:00:00" period="0">
+        <!-- Valid from 2013-07-02T00:00:00 to 2013-07-02T06:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0.5" minvalue="0.1" maxvalue="1.3" />
+        <!-- Valid at 2013-07-02T00:00:00 -->
+        <windDirection deg="301.4" code="WNW" name="Vest-nordvest" />
+        <windSpeed mps="2.5" name="Svak vind" />
+        <temperature unit="celsius" value="13" />
+        <pressure unit="hPa" value="1008.1" />
+      </time>
+      <time from="2013-07-02T06:00:00" to="2013-07-02T12:00:00" period="1">
+        <!-- Valid from 2013-07-02T06:00:00 to 2013-07-02T12:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0.1" minvalue="0" maxvalue="0.2" />
+        <!-- Valid at 2013-07-02T06:00:00 -->
+        <windDirection deg="237.8" code="WSW" name="Vest-sørvest" />
+        <windSpeed mps="1.6" name="Svak vind" />
+        <temperature unit="celsius" value="12" />
+        <pressure unit="hPa" value="1008.2" />
+      </time>
+      <time from="2013-07-02T12:00:00" to="2013-07-02T18:00:00" period="2">
+        <!-- Valid from 2013-07-02T12:00:00 to 2013-07-02T18:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-02T12:00:00 -->
+        <windDirection deg="327.4" code="NNW" name="Nord-nordvest" />
+        <windSpeed mps="1.7" name="Svak vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1008.4" />
+      </time>
+      <time from="2013-07-02T18:00:00" to="2013-07-03T00:00:00" period="3">
+        <!-- Valid from 2013-07-02T18:00:00 to 2013-07-03T00:00:00 -->
+        <symbol number="2" name="Lettskyet" var="02d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-02T18:00:00 -->
+        <windDirection deg="14.6" code="NNE" name="Nord-nordøst" />
+        <windSpeed mps="2.6" name="Svak vind" />
+        <temperature unit="celsius" value="18" />
+        <pressure unit="hPa" value="1007.9" />
+      </time>
+      <time from="2013-07-03T00:00:00" to="2013-07-03T06:00:00" period="0">
+        <!-- Valid from 2013-07-03T00:00:00 to 2013-07-03T06:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="mf/03n.83" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-03T00:00:00 -->
+        <windDirection deg="35.3" code="NE" name="Nordøst" />
+        <windSpeed mps="3.0" name="Svak vind" />
+        <temperature unit="celsius" value="14" />
+        <pressure unit="hPa" value="1007.7" />
+      </time>
+      <time from="2013-07-03T08:00:00" to="2013-07-03T14:00:00" period="1">
+        <!-- Valid from 2013-07-03T08:00:00 to 2013-07-03T14:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-03T08:00:00 -->
+        <windDirection deg="62.1" code="ENE" name="Øst-nordøst" />
+        <windSpeed mps="1.0" name="Flau vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1007.1" />
+      </time>
+      <time from="2013-07-03T14:00:00" to="2013-07-03T20:00:00" period="2">
+        <!-- Valid from 2013-07-03T14:00:00 to 2013-07-03T20:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-03T14:00:00 -->
+        <windDirection deg="153.1" code="SSE" name="Sør-sørøst" />
+        <windSpeed mps="2.5" name="Svak vind" />
+        <temperature unit="celsius" value="19" />
+        <pressure unit="hPa" value="1006.6" />
+      </time>
+      <time from="2013-07-03T20:00:00" to="2013-07-04T02:00:00" period="3">
+        <!-- Valid from 2013-07-03T20:00:00 to 2013-07-04T02:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-03T20:00:00 -->
+        <windDirection deg="250.5" code="WSW" name="Vest-sørvest" />
+        <windSpeed mps="2.0" name="Svak vind" />
+        <temperature unit="celsius" value="18" />
+        <pressure unit="hPa" value="1007.6" />
+      </time>
+      <time from="2013-07-04T02:00:00" to="2013-07-04T08:00:00" period="0">
+        <!-- Valid from 2013-07-04T02:00:00 to 2013-07-04T08:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="mf/03n.86" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-04T02:00:00 -->
+        <windDirection deg="133.3" code="SE" name="Sørøst" />
+        <windSpeed mps="2.1" name="Svak vind" />
+        <temperature unit="celsius" value="14" />
+        <pressure unit="hPa" value="1009.8" />
+      </time>
+      <time from="2013-07-04T08:00:00" to="2013-07-04T14:00:00" period="1">
+        <!-- Valid from 2013-07-04T08:00:00 to 2013-07-04T14:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-04T08:00:00 -->
+        <windDirection deg="127.2" code="SE" name="Sørøst" />
+        <windSpeed mps="2.9" name="Svak vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1009.8" />
+      </time>
+      <time from="2013-07-04T14:00:00" to="2013-07-04T20:00:00" period="2">
+        <!-- Valid from 2013-07-04T14:00:00 to 2013-07-04T20:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-04T14:00:00 -->
+        <windDirection deg="147.4" code="SSE" name="Sør-sørøst" />
+        <windSpeed mps="3.3" name="Svak vind" />
+        <temperature unit="celsius" value="21" />
+        <pressure unit="hPa" value="1009.4" />
+      </time>
+      <time from="2013-07-04T20:00:00" to="2013-07-05T02:00:00" period="3">
+        <!-- Valid from 2013-07-04T20:00:00 to 2013-07-05T02:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-04T20:00:00 -->
+        <windDirection deg="119.2" code="ESE" name="Øst-sørøst" />
+        <windSpeed mps="2.5" name="Svak vind" />
+        <temperature unit="celsius" value="19" />
+        <pressure unit="hPa" value="1008.8" />
+      </time>
+      <time from="2013-07-05T02:00:00" to="2013-07-05T08:00:00" period="0">
+        <!-- Valid from 2013-07-05T02:00:00 to 2013-07-05T08:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="mf/03n.90" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-05T02:00:00 -->
+        <windDirection deg="80.2" code="E" name="Øst" />
+        <windSpeed mps="1.8" name="Svak vind" />
+        <temperature unit="celsius" value="16" />
+        <pressure unit="hPa" value="1009.4" />
+      </time>
+      <time from="2013-07-05T08:00:00" to="2013-07-05T14:00:00" period="1">
+        <!-- Valid from 2013-07-05T08:00:00 to 2013-07-05T14:00:00 -->
+        <symbol number="9" name="Regn" var="09" />
+        <precipitation value="1.7" />
+        <!-- Valid at 2013-07-05T08:00:00 -->
+        <windDirection deg="113.1" code="ESE" name="Øst-sørøst" />
+        <windSpeed mps="2.0" name="Svak vind" />
+        <temperature unit="celsius" value="14" />
+        <pressure unit="hPa" value="1009.8" />
+      </time>
+      <time from="2013-07-05T14:00:00" to="2013-07-05T20:00:00" period="2">
+        <!-- Valid from 2013-07-05T14:00:00 to 2013-07-05T20:00:00 -->
+        <symbol number="9" name="Regn" var="09" />
+        <precipitation value="2.2" />
+        <!-- Valid at 2013-07-05T14:00:00 -->
+        <windDirection deg="292.9" code="WNW" name="Vest-nordvest" />
+        <windSpeed mps="3.4" name="Lett bris" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1011.8" />
+      </time>
+      <time from="2013-07-05T20:00:00" to="2013-07-06T02:00:00" period="3">
+        <!-- Valid from 2013-07-05T20:00:00 to 2013-07-06T02:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0.7" />
+        <!-- Valid at 2013-07-05T20:00:00 -->
+        <windDirection deg="305.2" code="NW" name="Nordvest" />
+        <windSpeed mps="2.5" name="Svak vind" />
+        <temperature unit="celsius" value="14" />
+        <pressure unit="hPa" value="1020.1" />
+      </time>
+      <time from="2013-07-06T02:00:00" to="2013-07-06T08:00:00" period="0">
+        <!-- Valid from 2013-07-06T02:00:00 to 2013-07-06T08:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-06T02:00:00 -->
+        <windDirection deg="80.4" code="E" name="Øst" />
+        <windSpeed mps="1.7" name="Svak vind" />
+        <temperature unit="celsius" value="12" />
+        <pressure unit="hPa" value="1022.1" />
+      </time>
+      <time from="2013-07-06T08:00:00" to="2013-07-06T14:00:00" period="1">
+        <!-- Valid from 2013-07-06T08:00:00 to 2013-07-06T14:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-06T08:00:00 -->
+        <windDirection deg="62.1" code="ENE" name="Øst-nordøst" />
+        <windSpeed mps="2.0" name="Svak vind" />
+        <temperature unit="celsius" value="13" />
+        <pressure unit="hPa" value="1022.1" />
+      </time>
+      <time from="2013-07-06T14:00:00" to="2013-07-06T20:00:00" period="2">
+        <!-- Valid from 2013-07-06T14:00:00 to 2013-07-06T20:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-06T14:00:00 -->
+        <windDirection deg="78.5" code="ENE" name="Øst-nordøst" />
+        <windSpeed mps="2.6" name="Svak vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1025.1" />
+      </time>
+      <time from="2013-07-06T20:00:00" to="2013-07-07T02:00:00" period="3">
+        <!-- Valid from 2013-07-06T20:00:00 to 2013-07-07T02:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="03d" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-06T20:00:00 -->
+        <windDirection deg="42.7" code="NE" name="Nordøst" />
+        <windSpeed mps="2.5" name="Svak vind" />
+        <temperature unit="celsius" value="14" />
+        <pressure unit="hPa" value="1023.9" />
+      </time>
+      <time from="2013-07-07T02:00:00" to="2013-07-07T08:00:00" period="0">
+        <!-- Valid from 2013-07-07T02:00:00 to 2013-07-07T08:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="mf/03n.96" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-07T02:00:00 -->
+        <windDirection deg="216.7" code="SW" name="Sørvest" />
+        <windSpeed mps="1.4" name="Flau vind" />
+        <temperature unit="celsius" value="12" />
+        <pressure unit="hPa" value="1023.5" />
+      </time>
+      <time from="2013-07-07T08:00:00" to="2013-07-07T14:00:00" period="1">
+        <!-- Valid from 2013-07-07T08:00:00 to 2013-07-07T14:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-07T08:00:00 -->
+        <windDirection deg="271.4" code="W" name="Vest" />
+        <windSpeed mps="1.1" name="Flau vind" />
+        <temperature unit="celsius" value="14" />
+        <pressure unit="hPa" value="1025.4" />
+      </time>
+      <time from="2013-07-07T14:00:00" to="2013-07-07T20:00:00" period="2">
+        <!-- Valid from 2013-07-07T14:00:00 to 2013-07-07T20:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-07T14:00:00 -->
+        <windDirection deg="288.9" code="WNW" name="Vest-nordvest" />
+        <windSpeed mps="2.5" name="Svak vind" />
+        <temperature unit="celsius" value="16" />
+        <pressure unit="hPa" value="1026.3" />
+      </time>
+      <time from="2013-07-07T20:00:00" to="2013-07-08T02:00:00" period="3">
+        <!-- Valid from 2013-07-07T20:00:00 to 2013-07-08T02:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-07T20:00:00 -->
+        <windDirection deg="280.5" code="W" name="Vest" />
+        <windSpeed mps="2.3" name="Svak vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1026.1" />
+      </time>
+      <time from="2013-07-08T02:00:00" to="2013-07-08T08:00:00" period="0">
+        <!-- Valid from 2013-07-08T02:00:00 to 2013-07-08T08:00:00 -->
+        <symbol number="3" name="Delvis skyet" var="mf/03n.00" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-08T02:00:00 -->
+        <windDirection deg="329.1" code="NNW" name="Nord-nordvest" />
+        <windSpeed mps="1.3" name="Flau vind" />
+        <temperature unit="celsius" value="12" />
+        <pressure unit="hPa" value="1026.3" />
+      </time>
+      <time from="2013-07-08T08:00:00" to="2013-07-08T14:00:00" period="1">
+        <!-- Valid from 2013-07-08T08:00:00 to 2013-07-08T14:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-08T08:00:00 -->
+        <windDirection deg="282.6" code="WNW" name="Vest-nordvest" />
+        <windSpeed mps="0.8" name="Flau vind" />
+        <temperature unit="celsius" value="13" />
+        <pressure unit="hPa" value="1026.5" />
+      </time>
+      <time from="2013-07-08T14:00:00" to="2013-07-08T20:00:00" period="2">
+        <!-- Valid from 2013-07-08T14:00:00 to 2013-07-08T20:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-08T14:00:00 -->
+        <windDirection deg="200.9" code="SSW" name="Sør-sørvest" />
+        <windSpeed mps="2.3" name="Svak vind" />
+        <temperature unit="celsius" value="17" />
+        <pressure unit="hPa" value="1025.5" />
+      </time>
+      <time from="2013-07-08T20:00:00" to="2013-07-09T02:00:00" period="3">
+        <!-- Valid from 2013-07-08T20:00:00 to 2013-07-09T02:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-08T20:00:00 -->
+        <windDirection deg="274.6" code="W" name="Vest" />
+        <windSpeed mps="2.4" name="Svak vind" />
+        <temperature unit="celsius" value="15" />
+        <pressure unit="hPa" value="1024.5" />
+      </time>
+      <time from="2013-07-09T02:00:00" to="2013-07-09T08:00:00" period="0">
+        <!-- Valid from 2013-07-09T02:00:00 to 2013-07-09T08:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-09T02:00:00 -->
+        <windDirection deg="220.2" code="SW" name="Sørvest" />
+        <windSpeed mps="1.3" name="Flau vind" />
+        <temperature unit="celsius" value="12" />
+        <pressure unit="hPa" value="1025.3" />
+      </time>
+      <time from="2013-07-09T08:00:00" to="2013-07-09T14:00:00" period="1">
+        <!-- Valid from 2013-07-09T08:00:00 to 2013-07-09T14:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-09T08:00:00 -->
+        <windDirection deg="67.5" code="ENE" name="Øst-nordøst" />
+        <windSpeed mps="0.9" name="Flau vind" />
+        <temperature unit="celsius" value="14" />
+        <pressure unit="hPa" value="1025.4" />
+      </time>
+      <time from="2013-07-09T14:00:00" to="2013-07-09T20:00:00" period="2">
+        <!-- Valid from 2013-07-09T14:00:00 to 2013-07-09T20:00:00 -->
+        <symbol number="4" name="Skyet" var="04" />
+        <precipitation value="0" />
+        <!-- Valid at 2013-07-09T14:00:00 -->
+        <windDirection deg="280.4" code="W" name="Vest" />
+        <windSpeed mps="2.4" name="Svak vind" />
+        <temperature unit="celsius" value="16" />
+        <pressure unit="hPa" value="1023.1" />
+      </time>
+    </tabular>
+  </forecast>
+  <observations>
+    <weatherstation stno="68860" sttype="eklima" name="Trondheim (Voll)" distance="3671" lat="63.41060" lon="10.45390" source="Meteorologisk Institutt">
+    </weatherstation>
+    <weatherstation stno="67140" sttype="eklima" name="Skjetlein" distance="11141" lat="63.34040" lon="10.29740" source="Meteorologisk Institutt">
+    </weatherstation>
+    <weatherstation stno="69655" sttype="eklima" name="Frosta" distance="21125" lat="63.56570" lon="10.69400" source="Meteorologisk Institutt">
+    </weatherstation>
+  </observations>
+</weatherdata>

@@ -9,6 +9,13 @@ yr.formatWind = function (wind) {
     wind.direction.toLowerCase();
 };
 
+yr.formatTemperature = function(temperature) {
+  if (temperature === null) {
+    temperature = '-';
+  }
+  return temperature + '°';
+}
+
 yr.view = function (vnode) {
   if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
@@ -16,11 +23,12 @@ yr.view = function (vnode) {
   var state = vnode.attrs.data;
   return [
     m('p.fade', 'Været i ' + state.today.location),
-    m('h1', state.today.temperature + '°'),
+    m('h1', yr.formatTemperature(state.today.temperature)),
     m('p', state.today.description),
     m('p.wind', yr.formatWind(state.today.wind)),
-    m('p.tomorrow', 'I morgen: ' + state.tomorrow.temperature +
-      '° (' + state.tomorrow.description.toLowerCase() + ')'),
+    m('p.tomorrow', 'I morgen: ' +
+      yr.formatTemperature(state.tomorrow.temperature) +
+      '(' + state.tomorrow.description.toLowerCase() + ')'),
     m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
       state.updatedAt)
   ];
