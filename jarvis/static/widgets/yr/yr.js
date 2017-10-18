@@ -14,7 +14,7 @@ yr.formatTemperature = function(temperature) {
     temperature = '-';
   }
   return temperature + '°';
-}
+};
 
 yr.view = function (vnode) {
   if (Object.keys(vnode.attrs.data).length === 0) {
