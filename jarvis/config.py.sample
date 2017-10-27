@@ -120,6 +120,13 @@ JOBS['avinor'] = {
     'timeout': 5
 }
 
+JOBS['flybussen'] = {
+    'enabled': True,
+    'interval': 600,
+    'from_stop': 'Dronningens gate D2',
+    'to_airport': 'TRD'
+}
+
 JOBS['stats'] = {
     'enabled': False,
     'interval': 600,

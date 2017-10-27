@@ -1,18 +1,49 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import json
 import logging
 import os.path
 import unittest
 
 from app import app
 from datetime import datetime
-from jobs import yr, hackernews, nsb, ping, calendar, avinor
+from jobs import avinor, calendar, flybussen, hackernews, nsb, ping, yr
 from multiprocessing import Process
 from xml.etree import ElementTree as etree
 from requests import Session
 from requests.packages.urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+
+class TestRequestHandler(BaseHTTPRequestHandler):
+
+    def do_GET(self):
+        response = self.server.mocked_responses.get('GET', {}).get(self.path)
+        status_code = 200
+        if response is None:
+            status_code = 404
+            response = {'error': 'No match for {} {}'.format(self.command,
+                                                             self.path)}
+        self.send_response(status_code)
+        self.send_header('Content-Type', 'application/json; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(json.dumps(response).encode('utf-8'))
+
+    def log_message(self, format, *args):
+        # Disable request logging
+        return
+
+
+def read_test_data(file_name, as_json=False):
+    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                             'test_data', file_name))
+    with open(file_path, 'rb') as f:
+        if as_json:
+            return json.load(f)
+        else:
+            return f.read()
 
 
 class App(unittest.TestCase):
@@ -246,6 +277,60 @@ class Avinor(unittest.TestCase):
                            'to': 'OSL'})
         data = a._parse(self.xml)
         self.assertEqual(34, len(data['flights']))
+
+
+class Flybussen(unittest.TestCase):
+
+    def _mocked_responses(self):
+        airport_path = '/server/wsapi/airport/format/json/p/web/v/1'
+        stop_path = ('/server/wsapi/stop/format/json/p/web/v/1'
+                     '?action=departures&airport_code=TRD&product_id=1')
+        trip_path = ('/server/api/travel/format/json/p/web/v/1'
+                     '?data=%7B%22from_stop_id%22%3A+%227146%22%2C+%22'
+                     'to_stop_id%22%3A+%22150%22%2C+%22'
+                     'from_date%22%3A+%222017-10-27%22%2C+%22'
+                     'to_date%22%3A+null%2C+%22'
+                     'from_time%22%3A+%2220%3A25%22%2C+%22'
+                     'airport_code%22%3A+%22TRD%22%7D')
+        return {
+            'GET': {
+                airport_path: read_test_data('flybussen_airport.json', True),
+                stop_path: read_test_data('flybussen_stop.json', True),
+                trip_path: read_test_data('flybussen_trip.json', True),
+            }
+        }
+
+    @property
+    def url(self):
+        return 'http://{}:{}'.format(self.listen[0], self.listen[1])
+
+    def setUp(self):
+        self.listen = ('127.0.0.1', 8080)
+        self.server = HTTPServer(self.listen, TestRequestHandler)
+        self.server.mocked_responses = self._mocked_responses()
+        self.p = Process(target=self.server.serve_forever)
+        self.p.start()
+
+    def test_get(self):
+        f = flybussen.Flybussen({
+            'interval': None,
+            'from_stop': 'Dronningens gate D2',
+            'to_airport': 'TRD',
+            'base_url': self.url
+        })
+        f.now = lambda: datetime(2017, 10, 27, 20, 25)
+        data = f.get()
+        self.assertEqual(26, len(data['departures']))
+        self.assertEqual('1509116640', data['departures'][0]['departure_time'])
+        self.assertEqual('Dronningens gate D2',
+                         data['departures'][0]['stop_name'])
+        self.assertEqual('Dronningens gate D2', data['from'])
+        self.assertEqual('Trondheim lufthavn Værnes', data['to'])
+
+    def tearDown(self):
+        self.server.socket.close()
+        self.p.terminate()
+        self.p.join()
 
 
 if __name__ == '__main__':

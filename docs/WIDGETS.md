@@ -74,6 +74,29 @@ The values for `client_id` and `client_secret` can be created using the
 When you have set `client_id` and `client_secret` in your config file, you need
 to run `make google-api-auth` to generate a credentials file.
 
+flybussen
+---------
+Displays the next [Flybussen](https://www.flybussen.no) departures from a
+configured bus stop.
+
+```python
+JOBS['flybussen'] = {
+    'enabled': True,
+    'interval': 600,
+    'from_stop': 'Dronningens gate D2',
+    'to_airport': 'TRD'
+}
+```
+
+The `from_stop` field is the name (case-insensitive) of a valid bus stop.
+
+The `to_airport` field is a [IATA airport
+code](https://en.wikipedia.org/wiki/IATA_airport_code) of a valid destination
+airport.
+
+See the [Flybussen website](https://www.flybussen.no) for valid airports and
+stop names.
+
 gmail
 -----
 Displays the current unread count, and total email count in the configured

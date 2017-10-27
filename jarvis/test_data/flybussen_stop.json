@@ -1,0 +1,159 @@
+{
+  "status": true,
+  "data": [
+    {
+      "stop_id": "128",
+      "stop_name": "Sorgenfriveien",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "129",
+      "stop_name": "Bratsbergveien",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "130",
+      "stop_name": "Valøyveien",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "131",
+      "stop_name": "Tempe Kirke",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "132",
+      "stop_name": "Professor Brochs gate",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "133",
+      "stop_name": "Einar Tambarskjelves gate",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "134",
+      "stop_name": "Studentersamfundet",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "135",
+      "stop_name": "Prinsen kino",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "137",
+      "stop_name": "Søndre gate",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "138",
+      "stop_name": "Trondheim Sentralstasjon",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "139",
+      "stop_name": "Strandveien",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "140",
+      "stop_name": "Buran",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "141",
+      "stop_name": "Rosendal",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "142",
+      "stop_name": "Rønningsbakken",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "143",
+      "stop_name": "Saxenborg Alle",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "144",
+      "stop_name": "Dalen Hageby",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "145",
+      "stop_name": "Strindheim",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "146",
+      "stop_name": "Gildheim",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "147",
+      "stop_name": "Leangen Travbane",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "148",
+      "stop_name": "Ranheim fabrikker E6",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "149",
+      "stop_name": "Leistadkrysset",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    },
+    {
+      "stop_id": "7146",
+      "stop_name": "Dronningens gate D2",
+      "stop_alias": null,
+      "stop_type": "STOP",
+      "stop_zone_id": "15"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "status": true,
+  "data": [
+    {
+      "id": "5",
+      "code": "BDU",
+      "name": "Bardufoss BDU",
+      "city": "Bardufoss",
+      "stops": [
+        {
+          "id": "106",
+          "name": "Bardufoss lufthavn",
+          "type": "STATION",
+          "alias": "BDU",
+          "zone_id": "8"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "code": "BGO",
+      "name": "Bergen BGO",
+      "city": "Bergen",
+      "stops": [
+        {
+          "id": "1",
+          "name": "Bergen lufthavn Flesland",
+          "type": "STATION",
+          "alias": "BGO",
+          "zone_id": "4"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "code": "EVE",
+      "name": "Harstad/Narvik EVE",
+      "city": "Harstad, Narvik, Sortland",
+      "stops": [
+        {
+          "id": "89",
+          "name": "Harstad/Narvik Lufthavn Evenes",
+          "type": "STATION",
+          "alias": "EVE",
+          "zone_id": "9"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "code": "HAU",
+      "name": "Haugesund HAU",
+      "city": "Haugesund",
+      "stops": [
+        {
+          "id": "7097",
+          "name": "Haugesund lufthavn, Helganes",
+          "type": "STATION",
+          "alias": "HAU",
+          "zone_id": "972"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "code": "OSL",
+      "name": "Oslo OSL",
+      "city": "Oslo",
+      "stops": [
+        {
+          "id": "7006",
+          "name": "Oslo Lufthavn",
+          "type": "STATION",
+          "alias": "OSL",
+          "zone_id": "22"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "code": "SVG",
+      "name": "Stavanger/Sandnes SVG",
+      "city": "Stavanger",
+      "stops": [
+        {
+          "id": "99",
+          "name": "Stavanger lufthavn Sola (SVG)",
+          "type": "STATION",
+          "alias": "SVG",
+          "zone_id": "1002"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "code": "TOS",
+      "name": "Tromsø TOS",
+      "city": "Tromsø",
+      "stops": [
+        {
+          "id": "127",
+          "name": "Tromsø lh, Langnes",
+          "type": "STATION",
+          "alias": "TOS",
+          "zone_id": "8"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "code": "TRD",
+      "name": "Trondheim TRD",
+      "city": "Trondheim",
+      "stops": [
+        {
+          "id": "150",
+          "name": "Trondheim lufthavn Værnes",
+          "type": "STATION",
+          "alias": "TRD",
+          "zone_id": "15"
+        }
+      ]
+    }
+  ]
+}

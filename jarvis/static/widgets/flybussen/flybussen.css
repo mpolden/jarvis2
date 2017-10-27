@@ -1,0 +1,27 @@
+[data-widget="flybussen"] {
+    padding: 5px;
+    background: #615ba5;
+    text-align: center;
+}
+
+[data-widget="flybussen"] h1 {
+  font-size: 55px;
+  margin: 0;
+}
+[data-widget="flybussen"] h2 {
+  font-size: 20px;
+}
+[data-widget="flybussen"] p {
+  font-size: 16px;
+}
+[data-widget="flybussen"] table {
+  margin: 0 10px 0 10px;
+}
+[data-widget="flybussen"] .time {
+  text-align: right;
+  white-space: nowrap;
+}
+[data-widget="flybussen"] .destination {
+  text-align: left;
+  width: 100%;
+}
