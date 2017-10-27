@@ -14,7 +14,11 @@ from xml.etree import ElementTree as etree
 from requests import Session
 from requests.packages.urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
-from http.server import BaseHTTPRequestHandler, HTTPServer
+try:
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+except ImportError:
+    # Python 2
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 
 class TestRequestHandler(BaseHTTPRequestHandler):
@@ -41,7 +45,7 @@ def test_data(file_name, parse_json=False):
                                              'test_data', file_name))
     with open(file_path, 'rb') as f:
         if parse_json:
-            return json.load(f)
+            return json.loads(f.read().decode('utf-8'))
         else:
             return f.read()
 
@@ -266,13 +270,12 @@ class Flybussen(unittest.TestCase):
         airport_path = '/server/wsapi/airport/format/json/p/web/v/1'
         stop_path = ('/server/wsapi/stop/format/json/p/web/v/1'
                      '?action=departures&airport_code=TRD&product_id=1')
-        trip_path = ('/server/api/travel/format/json/p/web/v/1'
-                     '?data=%7B%22from_stop_id%22%3A+%227146%22%2C+%22'
-                     'to_stop_id%22%3A+%22150%22%2C+%22'
+        trip_path = ('/server/api/travel/format/json/p/web/v/1?data=%7B%22'
+                     'airport_code%22%3A+%22TRD%22%2C+%22'
                      'from_date%22%3A+%222017-10-27%22%2C+%22'
-                     'to_date%22%3A+null%2C+%22'
+                     'from_stop_id%22%3A+%227146%22%2C+%22'
                      'from_time%22%3A+%2220%3A25%22%2C+%22'
-                     'airport_code%22%3A+%22TRD%22%7D')
+                     'to_date%22%3A+null%2C+%22to_stop_id%22%3A+%22150%22%7D')
         return {
             'GET': {
                 airport_path: test_data('flybussen_airport.json', True),
@@ -306,7 +309,7 @@ class Flybussen(unittest.TestCase):
         self.assertEqual('Dronningens gate D2',
                          data['departures'][0]['stop_name'])
         self.assertEqual('Dronningens gate D2', data['from'])
-        self.assertEqual('Trondheim lufthavn Værnes', data['to'])
+        self.assertEqual(u'Trondheim lufthavn Værnes', data['to'])
 
     def tearDown(self):
         self.server.socket.close()

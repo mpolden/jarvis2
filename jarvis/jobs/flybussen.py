@@ -21,11 +21,11 @@ class Flybussen(AbstractJob):
         url = '{}/server/wsapi/stop/format/json/p/web/v/1'.format(
             self.base_url
         )
-        params = {
-            'action': 'departures',
-            'airport_code': self.to_airport,
-            'product_id': 1
-        }
+        params = (
+            ('action', 'departures'),
+            ('airport_code', self.to_airport),
+            ('product_id', 1)
+        )
         r = requests.get(url, params=params, timeout=self.timeout)
         r.raise_for_status()
         stops = r.json()
@@ -56,7 +56,7 @@ class Flybussen(AbstractJob):
             'from_time': dt.strftime('%H:%M'),
             'airport_code': self.to_airport
         }
-        params = {'data': json.dumps(data)}
+        params = {'data': json.dumps(data, sort_keys=True)}
         r = requests.get(url, params=params, timeout=self.timeout)
         r.raise_for_status()
         return r.json()
