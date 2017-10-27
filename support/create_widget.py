@@ -19,7 +19,7 @@ class WidgetFactory(object):
     def __init__(self, name):
         self.name = name.lower()
         self.app_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                     '..', 'app'))
+                                                     '..', 'jarvis'))
         self.widget_dir = os.path.join(self.app_path, 'static', 'widgets',
                                        self.name)
         self.job_file = os.path.join(self.app_path, 'jobs',
