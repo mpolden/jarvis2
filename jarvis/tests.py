@@ -36,11 +36,11 @@ class TestRequestHandler(BaseHTTPRequestHandler):
         return
 
 
-def read_test_data(file_name, as_json=False):
+def test_data(file_name, parse_json=False):
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                              'test_data', file_name))
     with open(file_path, 'rb') as f:
-        if as_json:
+        if parse_json:
             return json.load(f)
         else:
             return f.read()
@@ -136,10 +136,7 @@ class App(unittest.TestCase):
 class Yr(unittest.TestCase):
 
     def setUp(self):
-        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                'test_data', 'varsel.xml'))
-        with open(xml_path, 'rb') as f:
-            self.tree = etree.fromstring(f.read())
+        self.tree = etree.fromstring(test_data('varsel.xml'))
 
     def test_parse_tree(self):
         y = yr.Yr({'interval': None, 'url': None})
@@ -164,19 +161,13 @@ class Yr(unittest.TestCase):
         self.assertEqual('Lett bris', data['wind']['description'])
 
     def test_parse_tree_missing_wind(self):
-        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                'test_data', 'varsel2.xml'))
-        with open(xml_path, 'rb') as f:
-            tree = etree.fromstring(f.read())
+        tree = etree.fromstring(test_data('varsel2.xml'))
         y = yr.Yr({'interval': None, 'url': None})
         data = y._parse_tree(tree)
         self.assertIsNone(data['wind'])
 
     def test_parse_tree_missing_temperature(self):
-        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                'test_data', 'varsel3.xml'))
-        with open(xml_path, 'rb') as f:
-            tree = etree.fromstring(f.read())
+        tree = etree.fromstring(test_data('varsel3.xml'))
         y = yr.Yr({'interval': None, 'url': None})
         data = y._parse_tree(tree)
         self.assertIsNone(data['temperature'])
@@ -185,10 +176,7 @@ class Yr(unittest.TestCase):
 class HackerNews(unittest.TestCase):
 
     def setUp(self):
-        html_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                 'test_data', 'hn.html'))
-        with open(html_path, 'r') as f:
-            self.html = f.read()
+        self.html = test_data('hn.html')
         self.hn = hackernews.HackerNews({'interval': None})
 
     def test_parse(self):
@@ -205,11 +193,7 @@ class HackerNews(unittest.TestCase):
 class Nsb(unittest.TestCase):
 
     def setUp(self):
-        test_data = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                 'test_data'))
-        with open(os.path.join(test_data, 'nsb.html')) as f:
-            self.html = f.read()
-
+        self.html = test_data('nsb.html')
         self.nsb = nsb.Nsb({'interval': None,
                             'from': 'Skansen',
                             'to': 'V\xc3\xa6rnes (Trondheim Lufthavn)'})
@@ -265,10 +249,7 @@ class Calendar(unittest.TestCase):
 class Avinor(unittest.TestCase):
 
     def setUp(self):
-        xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                'test_data', 'flights.xml'))
-        with open(xml_path, 'rb') as f:
-            self.xml = f.read()
+        self.xml = test_data('flights.xml')
 
     def test_parse(self):
         a = avinor.Avinor({'interval': None,
@@ -294,9 +275,9 @@ class Flybussen(unittest.TestCase):
                      'airport_code%22%3A+%22TRD%22%7D')
         return {
             'GET': {
-                airport_path: read_test_data('flybussen_airport.json', True),
-                stop_path: read_test_data('flybussen_stop.json', True),
-                trip_path: read_test_data('flybussen_trip.json', True),
+                airport_path: test_data('flybussen_airport.json', True),
+                stop_path: test_data('flybussen_stop.json', True),
+                trip_path: test_data('flybussen_trip.json', True),
             }
         }
 
