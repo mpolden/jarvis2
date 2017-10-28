@@ -3,11 +3,11 @@ APP_ROOT := jarvis
 all: clean lint test
 
 lint-py:
-	flake8 --max-complexity=8 $(APP_ROOT)/*.py $(APP_ROOT)/jobs/*.py support/*.py
+	find . -name '*.py' | xargs flake8 --max-complexity=8
 
 lint-js:
 ifdef TRAVIS
-	jshint $(APP_ROOT)/static/*.js $(APP_ROOT)/static/widgets/*/*.js
+	find . -name '*.js' | xargs jshint
 else
 	@echo "lint-js: Skipping, not running on Travis"
 endif
@@ -18,8 +18,8 @@ test:
 	python $(APP_ROOT)/tests.py
 
 clean:
-	rm -rf *.pyc $(APP_ROOT)/*.pyc $(APP_ROOT)/jobs/*.pyc support/*.pyc \
-$(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
+	find . -name '*.pyc' -delete
+	rm -rf $(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
 
 widget:
 	python support/create_widget.py $(NAME)
