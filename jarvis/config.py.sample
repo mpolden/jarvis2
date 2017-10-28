@@ -1,24 +1,8 @@
-# Main configuration file for jarvis
+# Sample configuration file for jarvis
 #
-# Please see WIDGETS.md for more detailed documentation.
+# Please see WIDGETS.md for documentation.
 
 JOBS = {}
-
-JOBS['yr'] = {
-    # Enable job
-    'enabled': True,
-    # Run job every N seconds
-    'interval': 600,
-    # URL for data
-    'url': ('https://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
-            'Trondheim/varsel.xml'),
-    # Job timeout in seconds
-    'timeout': 5
-}
-
-JOBS['time'] = {
-    'enabled': True
-}
 
 JOBS['atb'] = {
     'enabled': True,
@@ -36,16 +20,11 @@ JOBS['atb-16010382'] = {
     'job_impl': 'atb'
 }
 
-JOBS['hackernews'] = {
+JOBS['avinor'] = {
     'enabled': True,
-    'interval': 900,
-    'timeout': 5
-}
-
-JOBS['sonos'] = {
-    'enabled': False,
-    'interval': 10,
-    'ip': 'ip.addr',
+    'interval': 180,
+    'from': 'TRD',
+    'to': 'OSL',
     'timeout': 5
 }
 
@@ -57,42 +36,11 @@ JOBS['calendar'] = {
     'timeout': 5
 }
 
-JOBS['uptime'] = {
-    'enabled': False,
-    'interval': 60,
-    'hosts': [
-        ('Router', 'ip.addr'),
-        ('Laptop', 'ip.addr')
-    ],
-    'timeout': 5
-}
-
-JOBS['plex'] = {
-    'enabled': False,
-    'interval': 900,
-    'movies': 'https://ip:port/library/sections/2/recentlyAdded/',
-    'shows': 'https://ip:port/library/sections/1/recentlyAdded/',
-    'verify': False,
-    'timeout': 5
-}
-
-JOBS['nsb'] = {
+JOBS['flybussen'] = {
     'enabled': True,
-    'interval': 900,
-    # See https://nsb.no for valid locations
-    'from': 'Trondheim S',
-    'to': 'Oslo S',
-    'timeout': 10
-}
-
-JOBS['ping'] = {
-    'enabled': False,
-    'interval': 3,
-    'hosts': [
-        ('google.com', 'google.com'),
-        ('gw', '10.0.0.1')
-    ],
-    'timeout': 1
+    'interval': 600,
+    'from_stop': 'Dronningens gate D2',
+    'to_airport': 'TRD'
 }
 
 JOBS['gmail'] = {
@@ -100,6 +48,12 @@ JOBS['gmail'] = {
     'interval': 600,
     'email': 'your.username@gmail.com',
     'folder': 'inbox'
+}
+
+JOBS['hackernews'] = {
+    'enabled': True,
+    'interval': 900,
+    'timeout': 5
 }
 
 JOBS['imap'] = {
@@ -112,19 +66,38 @@ JOBS['imap'] = {
     'folder': 'INBOX'
 }
 
-JOBS['avinor'] = {
+JOBS['nsb'] = {
     'enabled': True,
-    'interval': 180,
-    'from': 'TRD',
-    'to': 'OSL',
+    'interval': 900,
+    'from': 'Trondheim S',
+    'to': 'Oslo S',
+    'timeout': 10
+}
+
+JOBS['ping'] = {
+    'enabled': False,
+    'interval': 3,
+    'hosts': (
+        ('google.com', 'google.com'),
+        ('gw', '10.0.0.1')
+    ),
+    'timeout': 1
+}
+
+JOBS['plex'] = {
+    'enabled': False,
+    'interval': 900,
+    'movies': 'https://ip:port/library/sections/2/recentlyAdded/',
+    'shows': 'https://ip:port/library/sections/1/recentlyAdded/',
+    'verify': False,
     'timeout': 5
 }
 
-JOBS['flybussen'] = {
-    'enabled': True,
-    'interval': 600,
-    'from_stop': 'Dronningens gate D2',
-    'to_airport': 'TRD'
+JOBS['sonos'] = {
+    'enabled': False,
+    'interval': 10,
+    'ip': 'ip.addr',
+    'timeout': 5
 }
 
 JOBS['stats'] = {
@@ -141,10 +114,32 @@ JOBS['stats'] = {
 JOBS['stockquotes'] = {
     'enabled': True,
     'interval': 900,
-    'symbols': [
+    'symbols': (
         'YHOO',
         'AAPL',
         'GOOG',
         'MSFT'
-    ]
+    )
+}
+
+JOBS['time'] = {
+    'enabled': True
+}
+
+JOBS['uptime'] = {
+    'enabled': False,
+    'interval': 60,
+    'hosts': (
+        ('Router', 'ip.addr'),
+        ('Laptop', 'ip.addr')
+    ),
+    'timeout': 5
+}
+
+JOBS['yr'] = {
+    'enabled': True,
+    'interval': 600,
+    'url': ('https://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
+            'Trondheim/varsel.xml'),
+    'timeout': 5
 }
