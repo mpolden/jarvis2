@@ -253,6 +253,11 @@ JOBS['stockquotes'] = {
 }
 ```
 
+time
+----
+Displays the current time and date. This widget has no associated job and is not
+configurable.
+
 uptime
 ------
 Ping one or more hosts and display their status (up or down).
