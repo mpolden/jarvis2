@@ -10,10 +10,10 @@ from app import app
 from datetime import datetime
 from jobs import avinor, calendar, flybussen, hackernews, nsb, ping, yr
 from multiprocessing import Process
-from xml.etree import ElementTree as etree
 from requests import Session
-from requests.packages.urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+from xml.etree import ElementTree as etree
 try:
     from http.server import BaseHTTPRequestHandler, HTTPServer
 except ImportError:
@@ -43,10 +43,9 @@ class TestRequestHandler(BaseHTTPRequestHandler):
         return
 
 
-def test_data(file_name, parse_json=False):
-    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                             'test_data', file_name))
-    with open(file_path, 'rb') as f:
+def test_data(name, parse_json=False):
+    path = os.path.join(os.path.dirname(__file__), 'test_data', name)
+    with open(path, 'rb') as f:
         if parse_json:
             return json.loads(f.read().decode('utf-8'))
         else:
