@@ -23,8 +23,11 @@ except ImportError:
 
 class TestRequestHandler(BaseHTTPRequestHandler):
 
+    def _response(self):
+        return self.server.test_responses.get(self.command, {}).get(self.path)
+
     def do_GET(self):
-        response = self.server.mocked_responses.get('GET', {}).get(self.path)
+        response = self._response()
         status_code = 200
         if response is None:
             status_code = 404
@@ -266,7 +269,7 @@ class Avinor(unittest.TestCase):
 
 class Flybussen(unittest.TestCase):
 
-    def _mocked_responses(self):
+    def _test_responses(self):
         airport_path = '/server/wsapi/airport/format/json/p/web/v/1'
         stop_path = ('/server/wsapi/stop/format/json/p/web/v/1'
                      '?action=departures&airport_code=TRD&product_id=1')
@@ -291,7 +294,7 @@ class Flybussen(unittest.TestCase):
     def setUp(self):
         self.listen = ('127.0.0.1', 8080)
         self.server = HTTPServer(self.listen, TestRequestHandler)
-        self.server.mocked_responses = self._mocked_responses()
+        self.server.test_responses = self._test_responses()
         self.p = Process(target=self.server.serve_forever)
         self.p.start()
 
