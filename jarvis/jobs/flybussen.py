@@ -13,7 +13,7 @@ class Flybussen(AbstractJob):
         self.to_airport = conf['to_airport'].upper()
         self.from_stop = conf['from_stop']
         self.interval = conf['interval']
-        self.timeout = conf.get('timeout', 10)
+        self.timeout = conf.get('timeout')
         self.base_url = conf.get('base_url', 'https://www.flybussen.no')
         self.now = datetime.now
 

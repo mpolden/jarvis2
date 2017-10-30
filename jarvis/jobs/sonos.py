@@ -9,6 +9,13 @@ class Sonos(AbstractJob):
     def __init__(self, conf):
         self.interval = conf['interval']
         self._device = SoCo(conf['ip'])
+        self._timeout = conf.get('timeout')
+
+    @property
+    def timeout(self):
+        if self._timeout is None:
+            return None
+        return (self._timeout, self._timeout)  # connect and read timeout
 
     @property
     def device(self):
@@ -19,7 +26,8 @@ class Sonos(AbstractJob):
         return self._device
 
     def get(self):
-        zone_name = self.device.get_speaker_info()['zone_name']
+        speaker_info = self.device.get_speaker_info(timeout=self.timeout)
+        zone_name = speaker_info['zone_name']
         np = self.device.get_current_track_info()
 
         current_track = np if np['playlist_position'] != '0' else None

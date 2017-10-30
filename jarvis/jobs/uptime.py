@@ -10,19 +10,22 @@ class Uptime(AbstractJob):
     def __init__(self, conf):
         self.hosts = conf['hosts']
         self.interval = conf['interval']
-        self.timeout = conf.get('timeout', 1)
+        self.timeout = conf.get('timeout')
+
+    def _deadline_flag(self):
+        if self.timeout is None:
+            return []
+        # ping on darwin uses -t for deadline/timeout
+        if platform == 'darwin':
+            return ['-t', str(self.timeout)]
+        return ['-w', str(self.timeout)]
 
     def get(self):
         hosts = []
         for label, ip in self.hosts:
             ping_cmd = 'ping6' if ':' in ip else 'ping'
-            deadline_flag = '-w'
-            # ping on darwin uses -t for deadline/timeout
-            if platform == 'darwin':
-                deadline_flag = '-t'
-            ping = '%s %s %d -c 1 %s' % (ping_cmd, deadline_flag, self.timeout,
-                                         ip)
-            p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
+            ping = [ping_cmd, '-c', '1'] + self._deadline_flag() + [ip]
+            p = Popen(ping, stdout=PIPE, stderr=PIPE)
             hosts.append({
                 'label': label,
                 'ip': ip,

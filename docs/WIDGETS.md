@@ -181,6 +181,9 @@ JOBS['ping'] = {
 }
 ```
 
+Note that for this job the `timeout` parameter is applied per host, so the total
+timeout is `timeout * len(hosts)`.
+
 plex
 ----
 Displays latest TV shows and movies from Plex Media Server. Plex Media Server
@@ -272,6 +275,9 @@ JOBS['uptime'] = {
     ]
 }
 ```
+
+Note that for this job the `timeout` parameter is applied per host, so the total
+timeout is `timeout * len(hosts)`.
 
 yr
 --

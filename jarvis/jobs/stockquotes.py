@@ -9,7 +9,7 @@ class Stockquotes(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']
-        self.timeout = conf.get('timeout', 5)
+        self.timeout = conf.get('timeout')
         self.symbols = conf['symbols']
 
     def _build_query(self):

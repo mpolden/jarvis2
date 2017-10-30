@@ -42,14 +42,16 @@ JOBS['flybussen'] = {
     'enabled': True,
     'interval': 600,
     'from_stop': 'Dronningens gate D2',
-    'to_airport': 'TRD'
+    'to_airport': 'TRD',
+    'timeout': 5
 }
 
 JOBS['gmail'] = {
     'enabled': False,
     'interval': 600,
     'email': 'your.username@gmail.com',
-    'folder': 'inbox'
+    'folder': 'inbox',
+    'timeout': 5
 }
 
 JOBS['hackernews'] = {
@@ -73,7 +75,7 @@ JOBS['nsb'] = {
     'interval': 900,
     'from': 'Trondheim S',
     'to': 'Oslo S',
-    'timeout': 10
+    'timeout': 5
 }
 
 JOBS['ping'] = {
@@ -121,7 +123,8 @@ JOBS['stockquotes'] = {
         'AAPL',
         'GOOG',
         'MSFT'
-    )
+    ),
+    'timeout': 5
 }
 
 JOBS['time'] = {

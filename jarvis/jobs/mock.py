@@ -3,6 +3,7 @@
 from jobs import AbstractJob
 
 
+# This job is used in unit tests and does nothing useful
 class Mock(AbstractJob):
 
     def __init__(self, conf):

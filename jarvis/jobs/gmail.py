@@ -15,7 +15,7 @@ class Gmail(AbstractJob):
         self.interval = conf['interval']
         self.email = conf['email']
         self.folder = conf['folder']
-        self.timeout = 5
+        self.timeout = conf.get('timeout')
 
     def _auth(self):
         credentials_file = os.path.abspath(os.path.join(

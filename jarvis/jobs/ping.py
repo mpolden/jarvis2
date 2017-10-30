@@ -21,7 +21,7 @@ class Ping(AbstractJob):
     def __init__(self, conf):
         self.interval = conf['interval']
         self.hosts = conf['hosts']
-        self.timeout = conf.get('timeout', 1)
+        self.timeout = conf.get('timeout')
         self.cache_size = conf.get('cache_size', 10)
         self.values = {}
 
@@ -29,15 +29,18 @@ class Ping(AbstractJob):
         time = re.search(r'time=(\d+(?:\.\d+)?)', ping_output)
         return float(time.group(1)) if time is not None else 0
 
-    def _ping(self, host):
-        ping_cmd = 'ping6' if ':' in host else 'ping'
-        deadline_flag = '-w'
+    def _deadline_flag(self):
+        if self.timeout is None:
+            return []
         # ping on darwin uses -t for deadline/timeout
         if platform == 'darwin':
-            deadline_flag = '-t'
-        ping = '%s %s %d -c 1 %s' % (ping_cmd, deadline_flag, self.timeout,
-                                     host)
-        p = Popen(ping.split(' '), stdout=PIPE, stderr=PIPE)
+            return ['-t', str(self.timeout)]
+        return ['-w', str(self.timeout)]
+
+    def _ping(self, host):
+        ping_cmd = 'ping6' if ':' in host else 'ping'
+        ping = [ping_cmd, '-c', '1'] + self._deadline_flag() + [host]
+        p = Popen(ping, stdout=PIPE, stderr=PIPE)
         return self._parse_time(p.communicate()[0].decode())
 
     def get(self):
