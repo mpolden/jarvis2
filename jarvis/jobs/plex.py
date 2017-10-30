@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import requests
 from urllib3.exceptions import InsecureRequestWarning
