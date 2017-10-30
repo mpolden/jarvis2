@@ -17,18 +17,23 @@ from jinja2 import Environment, FileSystemLoader
 
 class WidgetFactory(object):
 
-    def __init__(self, name):
+    def __init__(self, name, app_root=None, quiet=False):
         self.name = name.lower()
-        self.app_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                     '..'))
-        self.widget_dir = os.path.join(self.app_path, 'static', 'widgets',
+        self.quiet = quiet
+        if app_root is None:
+            app_root = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                    '..'))
+        self.widget_dir = os.path.join(app_root, 'static', 'widgets',
                                        self.name)
-        self.job_file = os.path.join(self.app_path, 'jobs',
-                                     '%s.py' % (self.name,))
+        self.job_file = os.path.join(app_root, 'jobs', '%s.py' % (self.name,))
         template_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                      'templates', 'widget'))
         self.env = Environment(loader=FileSystemLoader(template_path),
                                keep_trailing_newline=True)
+
+    def _print(self, s):
+        if not self.quiet:
+            print(s)
 
     def _render_templates(self):
         js = self.env.get_template('widget.js.j2').render(name=self.name)
@@ -43,12 +48,12 @@ class WidgetFactory(object):
 
     def _create_widget_dir(self):
         os.mkdir(self.widget_dir)
-        print('Created {}'.format(self.widget_dir))
+        self._print('Created {}'.format(self.widget_dir))
 
     def _write_file(self, file_path, contents):
         with open(file_path, 'w') as f:
             f.write(contents)
-            print('Created {}'.format(file_path))
+            self._print('Created {}'.format(file_path))
 
     def create_widget(self):
         contents = self._render_templates()
@@ -73,7 +78,7 @@ class WidgetFactory(object):
             os.remove(file_path)
         else:
             os.rmdir(file_path)
-        print('Removed {}'.format(file_path))
+        self._print('Removed {}'.format(file_path))
 
     def remove_widget(self):
         if os.path.isdir(self.widget_dir):

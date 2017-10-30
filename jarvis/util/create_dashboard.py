@@ -17,22 +17,29 @@ from shutil import copyfile
 
 class DashboardFactory(object):
 
-    def __init__(self, name):
+    def __init__(self, name, app_root=None, quiet=False):
         self.name = name
-        self.layout_dir = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'templates', 'layouts'))
+        self.quiet = quiet
+        if app_root is None:
+            app_root = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                    '..'))
+        self.layout_dir = os.path.join(app_root, 'templates', 'layouts')
         self.layout = os.path.join(self.layout_dir,
                                    '{0}.html'.format(self.name))
+
+    def _print(self, s):
+        if not self.quiet:
+            print(s)
 
     def _write_file(self, file_path):
         layout_template = os.path.abspath(os.path.join(
             os.path.dirname(__file__), 'templates', 'layout_empty.html.j2'))
         copyfile(layout_template, file_path)
-        print('Created {}'.format(file_path))
+        self._print('Created {}'.format(file_path))
 
     def _remove_file(self, file_path):
         os.remove(file_path)
-        print('Removed {}'.format(file_path))
+        self._print('Removed {}'.format(file_path))
 
     def create_dashboard(self):
         if os.path.isfile(self.layout):
@@ -41,11 +48,11 @@ class DashboardFactory(object):
 
         if not os.path.isdir(self.layout_dir):
             os.mkdir(self.layout_dir)
-            print('Created {}'.format(self.layout_dir))
+            self._print('Created {}'.format(self.layout_dir))
 
         self._write_file(self.layout)
 
-        print('Your dashboard will be available at /dashboard/{}'.format(
+        self._print('Your dashboard will be available at /dashboard/{}'.format(
             self.name))
 
     def remove_dashboard(self):

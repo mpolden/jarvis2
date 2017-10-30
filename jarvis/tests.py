@@ -13,7 +13,10 @@ from multiprocessing import Process
 from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
+from tempfile import mkdtemp
 from xml.etree import ElementTree as etree
+from util.create_dashboard import DashboardFactory
+from util.create_widget import WidgetFactory
 try:
     from http.server import BaseHTTPRequestHandler, HTTPServer
 except ImportError:
@@ -317,6 +320,51 @@ class Flybussen(unittest.TestCase):
         self.server.socket.close()
         self.p.terminate()
         self.p.join()
+
+
+class CreateDashboard(unittest.TestCase):
+
+    def setUp(self):
+        self.tmpdir = mkdtemp(prefix='jarvis')
+        os.makedirs(os.path.join(self.tmpdir, 'templates', 'layouts'))
+        self.factory = DashboardFactory('foo', app_root=self.tmpdir,
+                                        quiet=True)
+
+    def test_create_and_remove(self):
+        self.factory.create_dashboard()
+        self.assertTrue(os.path.exists(self.factory.layout))
+        self.factory.remove_dashboard()
+        self.assertFalse(os.path.exists(self.factory.layout))
+
+    def tearDown(self):
+        os.removedirs(self.factory.layout_dir)
+
+
+class CreateWidget(unittest.TestCase):
+
+    def setUp(self):
+        self.tmpdir = mkdtemp(prefix='jarvis')
+        os.makedirs(os.path.join(self.tmpdir, 'jobs'))
+        os.makedirs(os.path.join(self.tmpdir, 'static', 'widgets'))
+        self.factory = WidgetFactory('foo', app_root=self.tmpdir, quiet=True)
+
+    def test_create_and_remove(self):
+        self.factory.create_widget()
+        assets = ['foo.js', 'foo.css']
+        for asset in assets:
+            self.assertTrue(os.path.exists(os.path.join(
+                self.factory.widget_dir, asset)))
+        self.assertTrue(os.path.exists(self.factory.job_file))
+
+        self.factory.remove_widget()
+        for asset in assets:
+            self.assertFalse(os.path.exists(os.path.join(
+                self.factory.widget_dir, asset)))
+        self.assertFalse(os.path.exists(self.factory.job_file))
+
+    def tearDown(self):
+        os.removedirs(os.path.dirname(self.factory.job_file))
+        os.removedirs(os.path.dirname(self.factory.widget_dir))
 
 
 if __name__ == '__main__':
