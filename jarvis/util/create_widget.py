@@ -20,7 +20,7 @@ class WidgetFactory(object):
     def __init__(self, name):
         self.name = name.lower()
         self.app_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                                     '..', 'jarvis'))
+                                                     '..'))
         self.widget_dir = os.path.join(self.app_path, 'static', 'widgets',
                                        self.name)
         self.job_file = os.path.join(self.app_path, 'jobs',
@@ -77,8 +77,7 @@ class WidgetFactory(object):
 
     def remove_widget(self):
         if os.path.isdir(self.widget_dir):
-            filenames = map(lambda f, e: f + e, (self.name,) * 2,
-                            ('.js', '.css'))
+            filenames = [self.name + '.js', self.name + '.css']
             pyc_file = self.job_file + 'c'
             filenames += [self.job_file, pyc_file, self.widget_dir]
             for filename in filenames:

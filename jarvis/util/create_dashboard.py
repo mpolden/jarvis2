@@ -20,7 +20,7 @@ class DashboardFactory(object):
     def __init__(self, name):
         self.name = name
         self.layout_dir = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'jarvis', 'templates', 'layouts'))
+            os.path.dirname(__file__), '..', 'templates', 'layouts'))
         self.layout = os.path.join(self.layout_dir,
                                    '{0}.html'.format(self.name))
 

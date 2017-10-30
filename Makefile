@@ -22,10 +22,10 @@ clean:
 	rm -rf $(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
 
 widget:
-	python support/create_widget.py $(NAME)
+	python $(APP_ROOT)/util/create_widget.py $(NAME)
 
 dashboard:
-	python support/create_dashboard.py $(NAME)
+	python $(APP_ROOT)/util/create_dashboard.py $(NAME)
 
 debug:
 ifndef JARVIS_SETTINGS
@@ -49,4 +49,4 @@ google-api-auth:
 ifndef JARVIS_SETTINGS
 	$(error JARVIS_SETTINGS must be set)
 endif
-	python support/google_api_auth.py
+	python $(APP_ROOT)/util/google_api_auth.py
