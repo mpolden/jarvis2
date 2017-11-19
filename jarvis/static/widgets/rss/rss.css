@@ -1,0 +1,14 @@
+[data-widget="rss"] {
+    height: 100%;
+    padding: 5px;
+    background: #875BA6;
+}
+
+[data-widget="rss"] p {
+    font-size: 16px;
+    text-align: center;
+}
+
+[data-widget="rss"] ul {
+    padding-left: 20px;
+}

@@ -8,7 +8,7 @@ import unittest
 
 from app import app
 from datetime import datetime
-from jobs import avinor, calendar, flybussen, hackernews, nsb, ping, yr
+from jobs import avinor, calendar, flybussen, hackernews, nsb, ping, rss, yr
 from multiprocessing import Process
 from requests import Session
 from requests.adapters import HTTPAdapter
@@ -320,6 +320,21 @@ class Flybussen(unittest.TestCase):
         self.server.socket.close()
         self.p.terminate()
         self.p.join()
+
+
+class Rss(unittest.TestCase):
+
+    def setUp(self):
+        self.xml = test_data('nrk.rss').decode('utf-8')
+
+    def test_parse(self):
+        r = rss.Rss({'title': 'NRK', 'url': None, 'interval': None})
+        data = r._parse(self.xml)
+        self.assertEqual('NRK', data['title'])
+        self.assertEqual(100, len(data['items']))
+        self.assertEqual('Heilt likt i nedrykksstriden',
+                         data['items'][0]['title'])
+        self.assertEqual(1511117699, data['items'][0]['time'])
 
 
 class CreateDashboard(unittest.TestCase):

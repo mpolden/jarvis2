@@ -35,6 +35,11 @@
       <div data-widget="uptime"></div>
     </div>
     {% endif %}
+    {% if is_job_enabled('rss-nrk') %}
+    <div class="col-3">
+      <div data-widget="rss" data-job="rss-nrk"></div>
+    </div>
+    {% endif %}
     {% if is_job_enabled('plex') %}
     <div class="col-3">      
       <div data-widget="plex"></div>

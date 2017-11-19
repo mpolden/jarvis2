@@ -97,6 +97,24 @@ JOBS['plex'] = {
     'timeout': 5
 }
 
+JOBS['rss-nrk'] = {
+    'enabled': False,
+    'interval': 900,
+    'url': 'https://www.nrk.no/toppsaker.rss',
+    'title': 'NRK',
+    'timeout': 5,
+    'job_impl': 'rss'
+}
+
+JOBS['rss-guardian'] = {
+    'enabled': False,
+    'interval': 900,
+    'url': 'https://www.theguardian.com/international/rss',
+    'title': 'The Guardian',
+    'timeout': 5,
+    'job_impl': 'rss'
+}
+
 JOBS['sonos'] = {
     'enabled': False,
     'interval': 10,

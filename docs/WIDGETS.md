@@ -207,6 +207,20 @@ for instruction on how to find your token.
 If `verify` is set to `False`, certificate warnings are ignored when using
 HTTPS. Default is `True`.
 
+rss
+---
+Displays a RSS feed.
+
+```python
+JOBS['rss-guardian'] = {
+    'enabled': False,
+    'interval': 900,
+    'url': 'https://www.theguardian.com/international/rss',
+    'title': 'The Guardian',
+    'job_impl': 'rss'
+}
+```
+
 sonos
 -----
 Displays the current track playing on your Sonos device. Also displays the
