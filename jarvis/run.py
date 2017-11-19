@@ -13,7 +13,7 @@ try:
 except NameError:
     pass
 
-from app import app, queues, sched, _config
+from app import app, queues, sched, _config, _enabled_jobs
 
 
 def _teardown(signal, frame):
@@ -31,19 +31,21 @@ def _run_job(name=None, print_json=False):
     from jobs import load_jobs
     from pprint import pprint
 
+    enabled_jobs = _enabled_jobs()
     jobs = load_jobs()
-    if name is None or len(name) == 0:
-        names = ' '.join(jobs.keys())
-        name = input('Name of the job to run [%s]: ' % (names,)).lower()
 
-    cls = jobs.get(name)
-    if cls is None:
-        print('No such job: %s' % (name,))
-        sys.exit(1)
+    if name is None or len(name) == 0:
+        names = ' '.join(enabled_jobs)
+        name = input('Name of the job to run [%s]: ' % (names,)).lower()
 
     job_conf = _config()['JOBS'].get(name)
     if job_conf is None:
         print('No config found for job: %s' % (name,))
+        sys.exit(1)
+
+    cls = jobs.get(job_conf.get('job_impl', name))
+    if cls is None:
+        print('No such job: %s' % (name,))
         sys.exit(1)
 
     job = cls(job_conf)
