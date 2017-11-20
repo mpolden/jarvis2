@@ -24,7 +24,7 @@ yr.view = function (vnode) {
   return [
     m('p.fade', 'Været i ' + state.today.location),
     m('h1', yr.formatTemperature(state.today.temperature)),
-    m('p', state.today.description),
+    m('h2', state.today.description),
     m('p.wind', yr.formatWind(state.today.wind)),
     m('p.tomorrow', 'I morgen: ' +
       yr.formatTemperature(state.tomorrow.temperature) +
