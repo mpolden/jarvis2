@@ -252,24 +252,6 @@ JOBS['stats'] = {
 }
 ```
 
-stockquotes
------------
-Displays current stock quotes using the
-[Yahoo YQL API](https://developer.yahoo.com/yql/).
-
-```python
-JOBS['stockquotes'] = {
-    'enabled': True,
-    'interval': 900,
-    'symbols': [
-        'YHOO',
-        'AAPL',
-        'GOOG',
-        'MSFT'
-    ]
-}
-```
-
 time
 ----
 Displays the current time and date. This widget has no associated job and is not
