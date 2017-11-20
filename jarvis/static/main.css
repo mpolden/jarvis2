@@ -34,3 +34,7 @@ body {
   height: 290px !important;
   width: 100%;
 }
+
+p {
+    font-size: 16px;
+}

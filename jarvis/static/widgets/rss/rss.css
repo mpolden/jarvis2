@@ -5,10 +5,14 @@
 }
 
 [data-widget="rss"] p {
-    font-size: 16px;
     text-align: center;
 }
 
 [data-widget="rss"] ul {
+    font-size: 16px;
     padding-left: 20px;
+}
+
+[data-widget="rss"] .age {
+    font-size: 10px;
 }
