@@ -25,7 +25,7 @@ def _teardown(signal, frame):
     raise KeyboardInterrupt
 
 
-def _run_job(name=None, print_json=False):
+def _run_job(job_id=None, print_json=False):
     import json
     import sys
     from jobs import load_jobs
@@ -34,21 +34,21 @@ def _run_job(name=None, print_json=False):
     enabled_jobs = _enabled_jobs()
     jobs = load_jobs()
 
-    if name is None or len(name) == 0:
-        names = ' '.join(enabled_jobs)
-        name = input('Name of the job to run [%s]: ' % (names,)).lower()
+    if job_id is None or len(job_id) == 0:
+        job_ids = ' '.join(enabled_jobs)
+        job_id = input('Name of the job to run [%s]: ' % (job_ids,)).lower()
 
-    job_conf = _config()['JOBS'].get(name)
-    if job_conf is None:
-        print('No config found for job: %s' % (name,))
+    job_config = _config().get(job_id)
+    if job_config is None:
+        print('No config found for job: %s' % (job_id,))
         sys.exit(1)
 
-    cls = jobs.get(job_conf.get('job_impl', name))
+    cls = jobs.get(job_config.get('job_impl', job_id))
     if cls is None:
-        print('No such job: %s' % (name,))
+        print('No such job: %s' % (job_id,))
         sys.exit(1)
 
-    job = cls(job_conf)
+    job = cls(job_config)
     data = job.get()
     if print_json:
         print(json.dumps(data, indent=2))

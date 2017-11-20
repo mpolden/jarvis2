@@ -64,8 +64,9 @@ def widget(job_id):
     if not _is_enabled(job_id):
         abort(404)
     x = request.args.get('x', 3)
-    widget = request.args.get('widget', job_id)
     widgets = _enabled_jobs()
+    # Widget name shares the name of the job implementation
+    widget = _config()[job_id].get('job_impl', job_id)
     return render_template('index.html', layout='layout_single.html',
                            widget=widget, job=job_id, x=x, widgets=widgets)
 
@@ -120,14 +121,15 @@ def create_event(job_id):
 
 def _config():
     if 'JOBS' in app.config:
-        return app.config
+        return app.config['JOBS']
     app.config.from_envvar('JARVIS_SETTINGS')
-    return app.config
+    return app.config['JOBS']
 
 
 def _enabled_jobs():
-    conf = _config()['JOBS']
-    return [job_id for job_id in conf.keys() if conf[job_id].get('enabled')]
+    config = _config()
+    return [job_id for job_id in config.keys()
+            if config[job_id].get('enabled')]
 
 
 def _is_enabled(job_id):
@@ -141,20 +143,19 @@ def _inject_template_methods():
 
 @app.before_first_request
 def _schedule_jobs():
-    conf = _config()['JOBS']
     offset = 0
     jobs = load_jobs()
 
-    for job_id, config in conf.items():
-        job_impl = config.get('job_impl', job_id)
-        if not config.get('enabled'):
+    for job_id, job_config in _config().items():
+        job_impl = job_config.get('job_impl', job_id)
+        if not job_config.get('enabled'):
             app.logger.info('Skipping disabled job: %s', job_id)
             continue
         if job_impl not in jobs:
             app.logger.info(('Skipping job with ID %s (no such '
                              'implementation: %s)'), job_id, job_impl)
             continue
-        job = jobs[job_impl](config)
+        job = jobs[job_impl](job_config)
         if app.debug:
             start_date = datetime.now() + timedelta(seconds=1)
         else:
@@ -175,9 +176,9 @@ def _schedule_jobs():
         sched.start()
 
 
-def _add_event(job_id, body):
+def _add_event(job_id, data):
     json_data = json.dumps({
-        'body': body,
+        'body': data,
         'job': job_id
     }, separators=(',', ':'), sort_keys=True)
     last_events[job_id] = json_data
@@ -187,8 +188,8 @@ def _add_event(job_id, body):
 
 def _run_job(job_id, job):
     try:
-        body = job.get()
-        _add_event(job_id, body)
+        data = job.get()
+        _add_event(job_id, data)
     except Exception:
         app.logger.exception('Failed to execute job with ID: ' + job_id)
 
