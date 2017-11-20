@@ -10,7 +10,7 @@ time.view = function (vnode) {
   return [
     m('h1', state.now.format('HH:mm')),
     m('h2', state.now.format('dddd')),
-    m('p', state.now.format('D. MMMM YYYY'))
+    m('h3', state.now.format('D. MMMM YYYY'))
   ];
 };
 

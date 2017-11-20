@@ -4,9 +4,6 @@
   background: #e9b64d;
   text-align: center;
 }
-[data-widget="hn"] p {
-  font-size: 16px;
-}
 [data-widget="hn"] table {
   margin: 0 6px 0 6px;
 }

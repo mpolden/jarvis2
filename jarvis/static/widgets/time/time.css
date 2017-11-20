@@ -10,6 +10,7 @@
 [data-widget="time"] h2 {
   font-size: 30px;
 }
-[data-widget="time"] p {
+[data-widget="time"] h3 {
   font-size: 18px;
+  font-weight: normal;
 }

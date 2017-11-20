@@ -4,9 +4,6 @@
   background: #7A3E48;
   text-align: center;
 }
-[data-widget="plex"] p {
-  font-size: 18px;
-}
 [data-widget="plex"] table {
   margin: 0 10px 0 10px;
 }

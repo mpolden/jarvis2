@@ -4,9 +4,6 @@
   background: #B95835;
   text-align: center;
 }
-[data-widget="uptime"] p {
-  font-size: 18px;
-}
 [data-widget="uptime"] table {
   margin: 0 10px 0 10px;
 }

@@ -6,12 +6,8 @@ email.view = function (vnode) {
   }
   var state = vnode.attrs.data;
   return [
+    m('p.fade', state.email),
     m('h1', 'Uleste eposter'),
-    m('p.fade', [
-      m('span', state.email),
-      m('br'),
-      m('span', state.folder)
-    ]),
     m('p.count', state.unread),
     m('p.fade', 'Totalt i ' + state.folder + ': ' + state.count),
     m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
