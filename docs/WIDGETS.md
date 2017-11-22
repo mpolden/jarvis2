@@ -168,16 +168,16 @@ The `from` and `to` fields are the same location names as used on the website.
 ping
 ----
 Displays a graph of response times to the given hosts. The `hosts` field is
-a list of tuples on this format: `('label', 'host or ip')`
+a tuple of tuples on this format: `('label', 'host or ip')`
 
 ```python
 JOBS['ping'] = {
     'enabled': True,
     'interval': 10,
-    'hosts': [
+    'hosts': (
         ('vg.no', 'vg.no'),
         ('google.com', 'google.com')
-    ]
+    )
 }
 ```
 
@@ -209,7 +209,7 @@ HTTPS. Default is `True`.
 
 rss
 ---
-Displays a RSS feed.
+Displays the most recent items in a RSS feed. Works with any standard RSS feed.
 
 ```python
 JOBS['rss-guardian'] = {
@@ -220,6 +220,9 @@ JOBS['rss-guardian'] = {
     'job_impl': 'rss'
 }
 ```
+
+The `title` field specifies the widget title. If it's omitted, the title will be
+taken from `<title>` tag in the RSS feed.
 
 sonos
 -----
@@ -265,10 +268,10 @@ Ping one or more hosts and display their status (up or down).
 JOBS['uptime'] = {
     'enabled': True,
     'interval': 60,
-    'hosts': [
+    'hosts': (
         ('Desktop', '10.0.0.11'),
         ('Laptop', '10.0.0.10')
-    ]
+    )
 }
 ```
 

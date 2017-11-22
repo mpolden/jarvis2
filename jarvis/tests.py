@@ -328,13 +328,18 @@ class Rss(unittest.TestCase):
         self.xml = test_data('nrk.rss').decode('utf-8')
 
     def test_parse(self):
-        r = rss.Rss({'title': 'NRK', 'url': None, 'interval': None})
+        r = rss.Rss({'url': None, 'interval': None})
         data = r._parse(self.xml)
         self.assertEqual('NRK', data['title'])
         self.assertEqual(100, len(data['items']))
         self.assertEqual('Heilt likt i nedrykksstriden',
                          data['items'][0]['title'])
         self.assertEqual(1511117699, data['items'][0]['time'])
+
+        # Override title
+        r.title = 'foo'
+        data = r._parse(self.xml)
+        self.assertEqual('foo', data['title'])
 
 
 class CreateDashboard(unittest.TestCase):

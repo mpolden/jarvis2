@@ -11,7 +11,7 @@ class Rss(AbstractJob):
 
     def __init__(self, conf):
         self.url = conf['url']
-        self.title = conf['title']
+        self.title = conf.get('title')
         self.interval = conf['interval']
         self.timeout = conf.get('timeout')
 
@@ -26,7 +26,10 @@ class Rss(AbstractJob):
                 'title': title,
                 'time': time
             })
-        return {'title': self.title, 'items': items}
+        title = self.title
+        if title is None:
+            title = tree.find('./channel/title').text
+        return {'title': title, 'items': items}
 
     def get(self):
         r = requests.get(self.url, timeout=self.timeout)
