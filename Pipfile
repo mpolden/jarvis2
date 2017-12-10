@@ -5,16 +5,15 @@ name = "pypi"
 
 [packages]
 
-apscheduler = "==3.3.1"
-flask = "==0.12.2"
-"flask-assets" = "==0.12"
-"jinja2" = "==2.9.6"
-cssmin = "==0.2.0"
-"google-api-python-client" = "==1.6.2"
-requests = "==2.18.4"
-soco = "==0.12"
-"beautifulsoup4" = "==4.6.0"
-
+apscheduler = "*"
+flask = "*"
+"flask-assets" = "*"
+"jinja2" = "*"
+cssmin = "*"
+"google-api-python-client" = "*"
+requests = "*"
+soco = "*"
+"beautifulsoup4" = "*"
 
 [dev-packages]
-"flake8" = "==3.4.1"
+"flake8" = "*"
