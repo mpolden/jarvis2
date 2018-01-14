@@ -289,6 +289,10 @@ JOBS['yr'] = {
     'enabled': True,
     'interval': 600,
     'url': ('https://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
-            'Trondheim/varsel.xml')
+            'Trondheim/varsel.xml'),
+    'forecast_fallback': True
 }
 ```
+
+Setting `forecast_fallback` to `True` (default) will display the weather
+forecast in case the closest weather station is not reporting any data.

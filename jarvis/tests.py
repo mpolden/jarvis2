@@ -177,9 +177,21 @@ class Yr(unittest.TestCase):
 
     def test_parse_tree_missing_temperature(self):
         tree = etree.fromstring(test_data('varsel3.xml'))
-        y = yr.Yr({'interval': None, 'url': None})
+        y = yr.Yr({'interval': None, 'url': None, 'forecast_fallback': False})
         data = y._parse_tree(tree)
         self.assertIsNone(data['temperature'])
+
+    def test_parse_tree_forecast_fallback(self):
+        tree = etree.fromstring(test_data('varsel4.xml'))
+        y = yr.Yr({'interval': None, 'url': None})
+        data = y._parse_tree(tree)
+
+        self.assertEqual('Delvis skyet', data['description'])
+        self.assertEqual('Trondheim', data['location'])
+        self.assertEqual('-3', data['temperature'])
+        self.assertEqual(u'Sør', data['wind']['direction'])
+        self.assertEqual('8.6', data['wind']['speed'])
+        self.assertEqual('Frisk bris', data['wind']['description'])
 
 
 class HackerNews(unittest.TestCase):
