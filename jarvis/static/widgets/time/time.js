@@ -2,7 +2,7 @@ var time = time || {};
 
 time.update = function (vnode) {
   vnode.state.data = {now: moment().locale('nb')};
-  m.redraw();
+  m.render(vnode.attrs.el, m(time, vnode.attrs));
 };
 
 time.view = function (vnode) {
@@ -21,10 +21,3 @@ time.oncreate = function (vnode) {
     time.update(vnode);
   }, 500);
 };
-
-(function () {
-  var el = document.querySelector('[data-widget="time"]');
-  if (el !== null) {
-    m.mount(el, time);
-  }
-})();

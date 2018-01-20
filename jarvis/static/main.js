@@ -23,12 +23,12 @@ jrvs.widgetForJob = function (name) {
   return el;
 };
 
-jrvs.render = function (widgetElement, data) {
+jrvs.render = function (widgetElement, attrs) {
   if (widgetElement === null) {
     return;
   }
-  m.render(widgetElement, m(window[widgetElement.dataset.widget],
-                            data || {'data': {}}));
+  attrs = Object.assign(attrs || {'data': {}}, {'el': widgetElement});
+  m.render(widgetElement, m(window[widgetElement.dataset.widget], attrs));
 };
 
 jrvs.truncate = function (s, n) {
