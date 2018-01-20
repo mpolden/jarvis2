@@ -28,7 +28,7 @@ jrvs.render = function (widgetElement, attrs) {
     return;
   }
   attrs = attrs || {'data': {}};
-  attrs['el'] = widgetElement;
+  attrs.el = widgetElement;
   m.render(widgetElement, m(window[widgetElement.dataset.widget], attrs));
 };
 
