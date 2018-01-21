@@ -15,5 +15,6 @@ install:
   # https://github.com/pypa/setuptools/issues/951
   - pip install -U setuptools
   - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
 
 script: make
