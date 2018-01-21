@@ -8,6 +8,7 @@ class Sonos(AbstractJob):
 
     def __init__(self, conf):
         self.interval = conf['interval']
+        self.display_album_art = conf.get('display_album_art', True)
         self._device = SoCo(conf['ip'])
         self._timeout = conf.get('timeout')
 
@@ -48,5 +49,6 @@ class Sonos(AbstractJob):
             'room': zone_name,
             'state': state,
             'current': current_track,
-            'next': next_track
+            'next': next_track,
+            'display_album_art': self.display_album_art
         }

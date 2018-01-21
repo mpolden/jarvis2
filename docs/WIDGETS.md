@@ -227,15 +227,20 @@ taken from `<title>` tag in the RSS feed.
 sonos
 -----
 Displays the current track playing on your Sonos device. Also displays the
-upcoming track. The `ip` field should be the IP of your Sonos device.
+upcoming track.
 
 ```python
 JOBS['sonos'] = {
     'enabled': False,
     'interval': 10,
-    'ip': '127.0.0.1'
+    'ip': '127.0.0.1',
+    'display_album_art': True
 }
 ```
+
+The `ip` field should be the IP of your Sonos device. If `display_album_art` is
+`True` (default) the widget will use album art for the currently playing track
+as its background image.
 
 stats
 -----

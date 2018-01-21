@@ -119,6 +119,7 @@ JOBS['sonos'] = {
     'enabled': False,
     'interval': 10,
     'ip': 'ip.addr',
+    'display_album_art': True,
     'timeout': 5
 }
 
