@@ -13,17 +13,19 @@ sonos.stateName = function (state) {
   return '';
 };
 
-sonos.setAlbumArt = function (vnode) {
-  var image = 'none';
+sonos.applyAlbumArt = function (vnode) {
+  var defaultValue = 'none';
+  var image = defaultValue;
   var state = vnode.attrs.data;
   if (state.display_album_art && state.current && state.current.album_art) {
     image = 'url(' + state.current.album_art + ')';
   }
   vnode.attrs.el.style.backgroundImage = image;
+  return image !== defaultValue;
 };
 
 sonos.view = function (vnode) {
-  sonos.setAlbumArt(vnode);
+  var hasAlbumArt = sonos.applyAlbumArt(vnode);
   if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
@@ -34,10 +36,11 @@ sonos.view = function (vnode) {
     if (state.state !== 'PLAYING') {
       position += ' (' + sonos.stateName(state.state) + ')';
     }
+    var textClass = {'class': hasAlbumArt ? 'outline' : ''};
     current = [
-      m('h1', jrvs.truncate(state.current.title, 28)),
+      m('h1', textClass, jrvs.truncate(state.current.title, 28)),
       m('p.fade', state.current.artist.length > 0 ? 'av' : ''),
-      m('h2', jrvs.truncate(state.current.artist, 20)),
+      m('h2', textClass, jrvs.truncate(state.current.artist, 20)),
       m('p.fade', m('small', position))
     ];
   }
