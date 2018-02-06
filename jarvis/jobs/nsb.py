@@ -53,7 +53,7 @@ class Nsb(AbstractJob):
             'to': self.to_location,
             'date': now.strftime('%d.%m.%Y'),
             'hour': 'now',
-            'redirect_to': 'https://www.nsb.no/bestill/velg-togavgang',
+            'redirect_new': 'https://www.nsb.no/bestill/velg-togavgang',
             'travelPlannerStationValidatorVersion': 'v1'
         }
 
