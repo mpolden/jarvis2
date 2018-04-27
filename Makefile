@@ -31,13 +31,13 @@ debug:
 ifndef JARVIS_SETTINGS
 	$(error JARVIS_SETTINGS must be set)
 endif
-	python $(APP_ROOT)/run.py --debug
+	FLASK_APP=$(APP_ROOT)/app FLASK_ENV=development flask run
 
 run:
 ifndef JARVIS_SETTINGS
 	$(error JARVIS_SETTINGS must be set)
 endif
-	python $(APP_ROOT)/run.py
+	FLASK_APP=$(APP_ROOT)/app flask run
 
 run-job:
 ifndef JARVIS_SETTINGS

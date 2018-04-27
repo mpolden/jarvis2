@@ -4,8 +4,6 @@
 from __future__ import print_function
 
 import argparse
-import os
-import signal
 
 try:
     # Python 2
@@ -13,16 +11,7 @@ try:
 except NameError:
     pass
 
-from app import app, queues, sched, _config, _enabled_jobs
-
-
-def _teardown(signal, frame):
-    sched.shutdown(wait=False)
-    for queue in queues.values():
-        queue.put(None)
-    queues.clear()
-    # Let the interrupt bubble up so that Flask/Werkzeug see it
-    raise KeyboardInterrupt
+from app import _config, _enabled_jobs
 
 
 def _run_job(job_id=None, print_json=False):
@@ -56,19 +45,8 @@ def _run_job(job_id=None, print_json=False):
         pprint(data)
 
 
-def _run_app(debug=False):
-    app.jinja_env.auto_reload = debug
-    app.debug = debug
-    signal.signal(signal.SIGINT, _teardown)
-    host = os.environ.get('HOST', 'localhost')
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host=host, port=port, use_reloader=False, threaded=True)
-
-
 def main():
     parser = argparse.ArgumentParser(description='Helper script.')
-    parser.add_argument('-d', '--debug', dest='debug', action='store_true',
-                        help='Run app in debug mode')
     parser.add_argument('-j', '--job', dest='job', action='store_true',
                         help='Run a job, will prompt if NAME is not given')
     parser.add_argument('-s', '--json', dest='json', action='store_true',
@@ -78,8 +56,6 @@ def main():
 
     if args.job:
         _run_job(args.name, args.json)
-    else:
-        _run_app(args.debug)
 
 
 if __name__ == '__main__':
