@@ -17,6 +17,7 @@ from tempfile import mkdtemp
 from xml.etree import ElementTree as etree
 from util.create_dashboard import DashboardFactory
 from util.create_widget import WidgetFactory
+from werkzeug.serving import run_simple
 try:
     from http.server import BaseHTTPRequestHandler, HTTPServer
 except ImportError:
@@ -70,11 +71,7 @@ class App(unittest.TestCase):
         logging.getLogger('werkzeug').setLevel(logging.WARN)
         # Run the application in a separate process so that streamed responses
         # are not blocked on running the client in the same thread
-        self.p = Process(target=app.run, kwargs={
-            'host': '127.0.0.1',
-            'port': 8080,
-            'use_reloader': False
-        })
+        self.p = Process(target=run_simple, args=('127.0.0.1', 8080, app))
         self.p.start()
 
     def url(self, path):
