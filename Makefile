@@ -43,7 +43,7 @@ run-job:
 ifndef JARVIS_SETTINGS
 	$(error JARVIS_SETTINGS must be set)
 endif
-	python $(APP_ROOT)/run.py --job $(NAME)
+	python $(APP_ROOT)/run_job.py $(NAME)
 
 google-api-auth:
 ifndef JARVIS_SETTINGS

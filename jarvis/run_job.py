@@ -46,16 +46,15 @@ def _run_job(job_id=None, print_json=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Helper script.')
-    parser.add_argument('-j', '--job', dest='job', action='store_true',
-                        help='Run a job, will prompt if NAME is not given')
+    parser = argparse.ArgumentParser(
+        description='Run given job and print output.'
+    )
     parser.add_argument('-s', '--json', dest='json', action='store_true',
                         help='Print job output as JSON')
     parser.add_argument('name', metavar='NAME', nargs='?')
     args = parser.parse_args()
 
-    if args.job:
-        _run_job(args.name, args.json)
+    _run_job(args.name, args.json)
 
 
 if __name__ == '__main__':
