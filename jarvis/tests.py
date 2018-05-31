@@ -222,8 +222,8 @@ class Nsb(unittest.TestCase):
         self.assertEqual('V\xc3\xa6rnes (Trondheim Lufthavn)', data['to'])
         self.assertEqual('Skansen', data['from'])
         self.assertEqual(5, len(data['departures']))
-        self.assertEqual(1527778980, data['departures'][0]['departure'])
-        self.assertEqual(1527781320, data['departures'][0]['arrival'])
+        self.assertEqual(1527786180, data['departures'][0]['departure'])
+        self.assertEqual(1527788520, data['departures'][0]['arrival'])
         self.assertEqual(2340, data['departures'][0]['duration'])
 
 

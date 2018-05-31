@@ -13,6 +13,9 @@ class Nsb(AbstractJob):
         self.interval = conf['interval']
         self.timeout = conf.get('timeout')
 
+    def _unix(self, dt):
+        return int((dt - datetime(1970, 1, 1)).total_seconds())
+
     def _parse(self, json):
         date_format = '%Y-%m-%dT%H:%M:%S'
         departures = []
@@ -23,8 +26,8 @@ class Nsb(AbstractJob):
                                         date_format)
             duration = abs((arrival - departure).seconds)
             departures.append({
-                'departure': int(departure.strftime('%s')),
-                'arrival': int(arrival.strftime('%s')),
+                'departure': self._unix(departure),
+                'arrival': self._unix(arrival),
                 'duration': duration
             })
 
