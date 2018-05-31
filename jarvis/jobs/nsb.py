@@ -24,7 +24,7 @@ class Nsb(AbstractJob):
                                           date_format)
             arrival = datetime.strptime(itinerary['arrivalScheduled'],
                                         date_format)
-            duration = abs((arrival - departure).seconds)
+            duration = abs((arrival - departure).total_seconds())
             departures.append({
                 'departure': self._unix(departure),
                 'arrival': self._unix(arrival),
