@@ -1,7 +1,12 @@
 var nsb = nsb || {};
 
-nsb.parseState = function (data) {
+nsb.parse = function (data) {
   var body = data;
+  body.departures.forEach(function (d) {
+    d.duration = moment.duration(d.duration, 'seconds').locale('nb').humanize();
+    d.departure = moment.unix(d.departure).format('HH:mm');
+    d.arrival = moment.unix(d.arrival).format('HH:mm');
+  });
   if (body.departures.length > 0) {
     body.next = body.departures[0];
     body.upcoming = body.departures.slice(1, 5);
@@ -16,8 +21,8 @@ nsb.view = function (vnode) {
   if (Object.keys(vnode.attrs.data).length === 0) {
     return m('p', 'Waiting for data');
   }
-  var state = nsb.parseState(vnode.attrs.data);
-  var rows = state.upcoming.map(function (departure) {
+  var data = nsb.parse(vnode.attrs.data);
+  var rows = data.upcoming.map(function (departure) {
     return m('tr', [
       m('td', departure.departure),
       m('td', departure.arrival),
@@ -27,18 +32,18 @@ nsb.view = function (vnode) {
   return [
     m('p.fade', [
       'Neste tog fra ',
-      m('em', state.from),
+      m('em', data.from),
       ' til ',
-      m('em', state.to),
+      m('em', data.to),
       ' går ',
-      m('em', state.date)
+      m('em', data.date)
     ]),
-    m('h1', state.next.departure),
+    m('h1', data.next.departure),
     m('h2.fade', [
       'Ankomst: ',
-      m('em', state.next.arrival),
+      m('em', data.next.arrival),
       ' (',
-      m('em', state.next.duration),
+      m('em', data.next.duration),
       ')'
     ]),
     m('table', [
@@ -49,6 +54,6 @@ nsb.view = function (vnode) {
       ])
     ].concat(rows)),
     m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
-      state.updatedAt)
+      data.updatedAt)
   ];
 };

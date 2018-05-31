@@ -1,0 +1,1038 @@
+{
+  "resultSetId": "fd529a63-68ae-41aa-b587-f86e256103af",
+  "itineraries": [
+    {
+      "id": "4da742d9-cbdb-4d2f-a0b6-0c8f7b52d313",
+      "from": "Skansen",
+      "to": "Trondheim Lufthavn",
+      "departureScheduled": "2018-05-31T17:03:00",
+      "departureRealTime": "2018-05-31T17:07:00",
+      "arrivalScheduled": "2018-05-31T17:42:00",
+      "arrivalRealTime": null,
+      "duration": {
+        "days": 0,
+        "hours": 0,
+        "minutes": 39
+      },
+      "priceOptions": null,
+      "tripStatus": null,
+      "legs": [
+        {
+          "id": "4da742d9-cbdb-4d2f-a0b6-0c8f7b52d313-0",
+          "from": "Skansen",
+          "to": "Trondheim Lufthavn",
+          "departureScheduled": "2018-05-31T17:03:00",
+          "departureRealTime": "2018-05-31T17:07:00",
+          "arrivalScheduled": "2018-05-31T17:42:00",
+          "arrivalRealTime": null,
+          "duration": {
+            "days": 0,
+            "hours": 0,
+            "minutes": 39
+          },
+          "durationUntilNextLeg": null,
+          "finalDestinationOfLine": "Steinkjer",
+          "transportMode": "NSB Lokaltog",
+          "transportType": "TRAIN",
+          "line": {
+            "name": "Lokal",
+            "colors": {
+              "background": "FFFFFF",
+              "border": "333333",
+              "text": "333333"
+            }
+          },
+          "departureTrack": "1",
+          "arrivalTrack": "1",
+          "transitionRulingToNextLeg": null,
+          "cancelled": false,
+          "partiallyCancelled": false,
+          "cancellationType": null,
+          "cancellationConclusionText": null,
+          "serviceCode": "Lt",
+          "trainJourney": {
+            "departureStation": {
+              "name": "Skansen",
+              "country": "76",
+              "code": "1125000"
+            },
+            "arrivalStation": {
+              "name": "Værnes (Trondheim Lufthavn)",
+              "country": "76",
+              "code": "1299000"
+            },
+            "departureTime": "2018-05-31T17:03:00",
+            "arrivalTime": "2018-05-31T17:42:00",
+            "train": {
+              "number": 445
+            },
+            "identifier": "445.76.1125000.31.05.2018.76.1299000.31.05.2018",
+            "alternativeTransport": null
+          },
+          "messages": [
+            {
+              "text": "Trondheim S-Lademoen:  Du må regne med forsinkelser. Årsak: Problemer med signalanlegget.",
+              "type": "INFO"
+            }
+          ],
+          "stops": [
+            {
+              "name": "Skansen",
+              "departureScheduled": "2018-05-31T17:03:00",
+              "departureRealTime": "2018-05-31T17:07:00",
+              "arrivalScheduled": "2018-05-31T17:02:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim",
+              "departureScheduled": "2018-05-31T17:10:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T17:08:00",
+              "arrivalRealTime": "2018-05-31T17:11:00",
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lademoen",
+              "departureScheduled": "2018-05-31T17:11:00",
+              "departureRealTime": "2018-05-31T17:14:00",
+              "arrivalScheduled": "2018-05-31T17:10:00",
+              "arrivalRealTime": "2018-05-31T17:14:00",
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lilleby (Lademoen)",
+              "departureScheduled": "2018-05-31T17:12:00",
+              "departureRealTime": "2018-05-31T17:15:00",
+              "arrivalScheduled": "2018-05-31T17:11:00",
+              "arrivalRealTime": "2018-05-31T17:15:00",
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Leangen",
+              "departureScheduled": "2018-05-31T17:16:00",
+              "departureRealTime": "2018-05-31T17:18:00",
+              "arrivalScheduled": "2018-05-31T17:15:00",
+              "arrivalRealTime": "2018-05-31T17:18:00",
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Rotvoll",
+              "departureScheduled": "2018-05-31T17:17:00",
+              "departureRealTime": "2018-05-31T17:19:00",
+              "arrivalScheduled": "2018-05-31T17:16:00",
+              "arrivalRealTime": "2018-05-31T17:19:00",
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Vikhamar",
+              "departureScheduled": "2018-05-31T17:25:00",
+              "departureRealTime": "2018-05-31T17:27:00",
+              "arrivalScheduled": "2018-05-31T17:24:00",
+              "arrivalRealTime": "2018-05-31T17:27:00",
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hommelvik",
+              "departureScheduled": "2018-05-31T17:35:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T17:34:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hell",
+              "departureScheduled": "2018-05-31T17:41:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T17:40:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim Lufthavn",
+              "departureScheduled": "2018-05-31T17:43:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T17:42:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            }
+          ],
+          "attributes": [],
+          "deviation": {
+            "severity": "MINOR_DEVIATION",
+            "message": "Beregnet 4 min forsinket"
+          },
+          "realtimeTextSummary": "Beregnet 4 min forsinket"
+        }
+      ],
+      "messages": [
+        {
+          "text": "Dette er en lokalbillett som må hentes ut i NSB-appen",
+          "type": "INFO"
+        }
+      ],
+      "mainMessage": null,
+      "cancellationText": null,
+      "modified": false,
+      "tripId": "T$A=1@O=Skansen@L=7601125@a=128@$A=1@O=Trondheim Lufthavn@L=7601299@a=128@$201805311703$201805311742$     445$",
+      "cancellationPresent": false
+    },
+    {
+      "id": "1211f988-2a7b-4fcf-a369-0d3369b61987",
+      "from": "Skansen",
+      "to": "Trondheim Lufthavn",
+      "departureScheduled": "2018-05-31T18:03:00",
+      "departureRealTime": null,
+      "arrivalScheduled": "2018-05-31T18:42:00",
+      "arrivalRealTime": null,
+      "duration": {
+        "days": 0,
+        "hours": 0,
+        "minutes": 39
+      },
+      "priceOptions": null,
+      "tripStatus": null,
+      "legs": [
+        {
+          "id": "1211f988-2a7b-4fcf-a369-0d3369b61987-0",
+          "from": "Skansen",
+          "to": "Trondheim Lufthavn",
+          "departureScheduled": "2018-05-31T18:03:00",
+          "departureRealTime": null,
+          "arrivalScheduled": "2018-05-31T18:42:00",
+          "arrivalRealTime": null,
+          "duration": {
+            "days": 0,
+            "hours": 0,
+            "minutes": 39
+          },
+          "durationUntilNextLeg": null,
+          "finalDestinationOfLine": "Steinkjer",
+          "transportMode": "NSB Lokaltog",
+          "transportType": "TRAIN",
+          "line": {
+            "name": "Lokal",
+            "colors": {
+              "background": "FFFFFF",
+              "border": "333333",
+              "text": "333333"
+            }
+          },
+          "departureTrack": "1",
+          "arrivalTrack": "1",
+          "transitionRulingToNextLeg": null,
+          "cancelled": false,
+          "partiallyCancelled": false,
+          "cancellationType": null,
+          "cancellationConclusionText": null,
+          "serviceCode": "Lt",
+          "trainJourney": {
+            "departureStation": {
+              "name": "Skansen",
+              "country": "76",
+              "code": "1125000"
+            },
+            "arrivalStation": {
+              "name": "Værnes (Trondheim Lufthavn)",
+              "country": "76",
+              "code": "1299000"
+            },
+            "departureTime": "2018-05-31T18:03:00",
+            "arrivalTime": "2018-05-31T18:42:00",
+            "train": {
+              "number": 447
+            },
+            "identifier": "447.76.1125000.31.05.2018.76.1299000.31.05.2018",
+            "alternativeTransport": null
+          },
+          "messages": [],
+          "stops": [
+            {
+              "name": "Skansen",
+              "departureScheduled": "2018-05-31T18:03:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:02:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim",
+              "departureScheduled": "2018-05-31T18:10:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:07:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lademoen",
+              "departureScheduled": "2018-05-31T18:11:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:10:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lilleby (Lademoen)",
+              "departureScheduled": "2018-05-31T18:12:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:11:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Leangen",
+              "departureScheduled": "2018-05-31T18:16:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:15:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Rotvoll",
+              "departureScheduled": "2018-05-31T18:17:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:16:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Vikhamar",
+              "departureScheduled": "2018-05-31T18:25:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:24:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hommelvik",
+              "departureScheduled": "2018-05-31T18:35:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:34:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hell",
+              "departureScheduled": "2018-05-31T18:41:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:40:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim Lufthavn",
+              "departureScheduled": "2018-05-31T18:43:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T18:42:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            }
+          ],
+          "attributes": [],
+          "deviation": {
+            "severity": "UNKNOWN",
+            "message": "Ikke startet"
+          },
+          "realtimeTextSummary": "Ikke startet"
+        }
+      ],
+      "messages": [
+        {
+          "text": "Dette er en lokalbillett som må hentes ut i NSB-appen",
+          "type": "INFO"
+        }
+      ],
+      "mainMessage": null,
+      "cancellationText": null,
+      "modified": false,
+      "tripId": "T$A=1@O=Skansen@L=7601125@a=128@$A=1@O=Trondheim Lufthavn@L=7601299@a=128@$201805311803$201805311842$     447$",
+      "cancellationPresent": false
+    },
+    {
+      "id": "abf01458-c258-4c9e-9cbe-5fa45096d6b4",
+      "from": "Skansen",
+      "to": "Trondheim Lufthavn",
+      "departureScheduled": "2018-05-31T19:02:00",
+      "departureRealTime": null,
+      "arrivalScheduled": "2018-05-31T19:44:00",
+      "arrivalRealTime": null,
+      "duration": {
+        "days": 0,
+        "hours": 0,
+        "minutes": 42
+      },
+      "priceOptions": null,
+      "tripStatus": null,
+      "legs": [
+        {
+          "id": "abf01458-c258-4c9e-9cbe-5fa45096d6b4-0",
+          "from": "Skansen",
+          "to": "Trondheim Lufthavn",
+          "departureScheduled": "2018-05-31T19:02:00",
+          "departureRealTime": null,
+          "arrivalScheduled": "2018-05-31T19:44:00",
+          "arrivalRealTime": null,
+          "duration": {
+            "days": 0,
+            "hours": 0,
+            "minutes": 42
+          },
+          "durationUntilNextLeg": null,
+          "finalDestinationOfLine": "Steinkjer",
+          "transportMode": "NSB Lokaltog",
+          "transportType": "TRAIN",
+          "line": {
+            "name": "Lokal",
+            "colors": {
+              "background": "FFFFFF",
+              "border": "333333",
+              "text": "333333"
+            }
+          },
+          "departureTrack": "1",
+          "arrivalTrack": "1",
+          "transitionRulingToNextLeg": null,
+          "cancelled": false,
+          "partiallyCancelled": false,
+          "cancellationType": null,
+          "cancellationConclusionText": null,
+          "serviceCode": "Lt",
+          "trainJourney": {
+            "departureStation": {
+              "name": "Skansen",
+              "country": "76",
+              "code": "1125000"
+            },
+            "arrivalStation": {
+              "name": "Værnes (Trondheim Lufthavn)",
+              "country": "76",
+              "code": "1299000"
+            },
+            "departureTime": "2018-05-31T19:02:00",
+            "arrivalTime": "2018-05-31T19:44:00",
+            "train": {
+              "number": 449
+            },
+            "identifier": "449.76.1125000.31.05.2018.76.1299000.31.05.2018",
+            "alternativeTransport": null
+          },
+          "messages": [],
+          "stops": [
+            {
+              "name": "Skansen",
+              "departureScheduled": "2018-05-31T19:02:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:01:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim",
+              "departureScheduled": "2018-05-31T19:10:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:07:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lademoen",
+              "departureScheduled": "2018-05-31T19:11:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:10:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lilleby (Lademoen)",
+              "departureScheduled": "2018-05-31T19:12:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:11:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Leangen",
+              "departureScheduled": "2018-05-31T19:16:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:15:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Rotvoll",
+              "departureScheduled": "2018-05-31T19:17:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:16:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Vikhamar",
+              "departureScheduled": "2018-05-31T19:25:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:24:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hommelvik",
+              "departureScheduled": "2018-05-31T19:37:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:34:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hell",
+              "departureScheduled": "2018-05-31T19:43:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:42:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim Lufthavn",
+              "departureScheduled": "2018-05-31T19:45:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T19:44:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            }
+          ],
+          "attributes": [],
+          "deviation": {
+            "severity": "UNKNOWN",
+            "message": "Ikke startet"
+          },
+          "realtimeTextSummary": "Ikke startet"
+        }
+      ],
+      "messages": [
+        {
+          "text": "Dette er en lokalbillett som må hentes ut i NSB-appen",
+          "type": "INFO"
+        }
+      ],
+      "mainMessage": null,
+      "cancellationText": null,
+      "modified": false,
+      "tripId": "T$A=1@O=Skansen@L=7601125@a=128@$A=1@O=Trondheim Lufthavn@L=7601299@a=128@$201805311902$201805311944$     449$",
+      "cancellationPresent": false
+    },
+    {
+      "id": "b829de1d-c3cb-4985-9352-314c4d0d16c4",
+      "from": "Skansen",
+      "to": "Trondheim Lufthavn",
+      "departureScheduled": "2018-05-31T21:02:00",
+      "departureRealTime": null,
+      "arrivalScheduled": "2018-05-31T21:42:00",
+      "arrivalRealTime": null,
+      "duration": {
+        "days": 0,
+        "hours": 0,
+        "minutes": 40
+      },
+      "priceOptions": null,
+      "tripStatus": null,
+      "legs": [
+        {
+          "id": "b829de1d-c3cb-4985-9352-314c4d0d16c4-0",
+          "from": "Skansen",
+          "to": "Trondheim Lufthavn",
+          "departureScheduled": "2018-05-31T21:02:00",
+          "departureRealTime": null,
+          "arrivalScheduled": "2018-05-31T21:42:00",
+          "arrivalRealTime": null,
+          "duration": {
+            "days": 0,
+            "hours": 0,
+            "minutes": 40
+          },
+          "durationUntilNextLeg": null,
+          "finalDestinationOfLine": "Steinkjer",
+          "transportMode": "NSB Lokaltog",
+          "transportType": "TRAIN",
+          "line": {
+            "name": "Lokal",
+            "colors": {
+              "background": "FFFFFF",
+              "border": "333333",
+              "text": "333333"
+            }
+          },
+          "departureTrack": "1",
+          "arrivalTrack": "1",
+          "transitionRulingToNextLeg": null,
+          "cancelled": false,
+          "partiallyCancelled": false,
+          "cancellationType": null,
+          "cancellationConclusionText": null,
+          "serviceCode": "Lt",
+          "trainJourney": {
+            "departureStation": {
+              "name": "Skansen",
+              "country": "76",
+              "code": "1125000"
+            },
+            "arrivalStation": {
+              "name": "Værnes (Trondheim Lufthavn)",
+              "country": "76",
+              "code": "1299000"
+            },
+            "departureTime": "2018-05-31T21:02:00",
+            "arrivalTime": "2018-05-31T21:42:00",
+            "train": {
+              "number": 453
+            },
+            "identifier": "453.76.1125000.31.05.2018.76.1299000.31.05.2018",
+            "alternativeTransport": null
+          },
+          "messages": [],
+          "stops": [
+            {
+              "name": "Skansen",
+              "departureScheduled": "2018-05-31T21:02:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:01:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim",
+              "departureScheduled": "2018-05-31T21:10:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:07:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lademoen",
+              "departureScheduled": "2018-05-31T21:11:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:10:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lilleby (Lademoen)",
+              "departureScheduled": "2018-05-31T21:12:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:11:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Leangen",
+              "departureScheduled": "2018-05-31T21:16:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:15:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Rotvoll",
+              "departureScheduled": "2018-05-31T21:17:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:16:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Vikhamar",
+              "departureScheduled": "2018-05-31T21:25:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:24:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hommelvik",
+              "departureScheduled": "2018-05-31T21:35:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:34:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hell",
+              "departureScheduled": "2018-05-31T21:41:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:40:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim Lufthavn",
+              "departureScheduled": "2018-05-31T21:43:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T21:42:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            }
+          ],
+          "attributes": [],
+          "deviation": {
+            "severity": "UNKNOWN",
+            "message": "Ikke startet"
+          },
+          "realtimeTextSummary": "Ikke startet"
+        }
+      ],
+      "messages": [
+        {
+          "text": "Dette er en lokalbillett som må hentes ut i NSB-appen",
+          "type": "INFO"
+        }
+      ],
+      "mainMessage": null,
+      "cancellationText": null,
+      "modified": false,
+      "tripId": "T$A=1@O=Skansen@L=7601125@a=128@$A=1@O=Trondheim Lufthavn@L=7601299@a=128@$201805312102$201805312142$     453$",
+      "cancellationPresent": false
+    },
+    {
+      "id": "5265b390-659e-4d6d-995e-65b6cb23d45c",
+      "from": "Skansen",
+      "to": "Trondheim Lufthavn",
+      "departureScheduled": "2018-05-31T23:02:00",
+      "departureRealTime": null,
+      "arrivalScheduled": "2018-05-31T23:42:00",
+      "arrivalRealTime": null,
+      "duration": {
+        "days": 0,
+        "hours": 0,
+        "minutes": 40
+      },
+      "priceOptions": null,
+      "tripStatus": null,
+      "legs": [
+        {
+          "id": "5265b390-659e-4d6d-995e-65b6cb23d45c-0",
+          "from": "Skansen",
+          "to": "Trondheim Lufthavn",
+          "departureScheduled": "2018-05-31T23:02:00",
+          "departureRealTime": null,
+          "arrivalScheduled": "2018-05-31T23:42:00",
+          "arrivalRealTime": null,
+          "duration": {
+            "days": 0,
+            "hours": 0,
+            "minutes": 40
+          },
+          "durationUntilNextLeg": null,
+          "finalDestinationOfLine": "Steinkjer",
+          "transportMode": "NSB Lokaltog",
+          "transportType": "TRAIN",
+          "line": {
+            "name": "Lokal",
+            "colors": {
+              "background": "FFFFFF",
+              "border": "333333",
+              "text": "333333"
+            }
+          },
+          "departureTrack": "1",
+          "arrivalTrack": "1",
+          "transitionRulingToNextLeg": null,
+          "cancelled": false,
+          "partiallyCancelled": false,
+          "cancellationType": null,
+          "cancellationConclusionText": null,
+          "serviceCode": "Lt",
+          "trainJourney": {
+            "departureStation": {
+              "name": "Skansen",
+              "country": "76",
+              "code": "1125000"
+            },
+            "arrivalStation": {
+              "name": "Værnes (Trondheim Lufthavn)",
+              "country": "76",
+              "code": "1299000"
+            },
+            "departureTime": "2018-05-31T23:02:00",
+            "arrivalTime": "2018-05-31T23:42:00",
+            "train": {
+              "number": 457
+            },
+            "identifier": "457.76.1125000.31.05.2018.76.1299000.31.05.2018",
+            "alternativeTransport": null
+          },
+          "messages": [],
+          "stops": [
+            {
+              "name": "Skansen",
+              "departureScheduled": "2018-05-31T23:02:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:01:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim",
+              "departureScheduled": "2018-05-31T23:10:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:07:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lademoen",
+              "departureScheduled": "2018-05-31T23:11:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:10:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Lilleby (Lademoen)",
+              "departureScheduled": "2018-05-31T23:12:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:11:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Leangen",
+              "departureScheduled": "2018-05-31T23:16:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:15:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Rotvoll",
+              "departureScheduled": "2018-05-31T23:17:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:16:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Vikhamar",
+              "departureScheduled": "2018-05-31T23:25:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:24:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hommelvik",
+              "departureScheduled": "2018-05-31T23:35:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:34:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "2"
+            },
+            {
+              "name": "Hell",
+              "departureScheduled": "2018-05-31T23:41:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:40:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "",
+              "cancelled": false,
+              "track": "1"
+            },
+            {
+              "name": "Trondheim Lufthavn",
+              "departureScheduled": "2018-05-31T23:43:00",
+              "departureRealTime": null,
+              "arrivalScheduled": "2018-05-31T23:42:00",
+              "arrivalRealTime": null,
+              "boardingRuleDescription": "Kun av- og påstigning på signal",
+              "cancelled": false,
+              "track": "1"
+            }
+          ],
+          "attributes": [],
+          "deviation": {
+            "severity": "UNKNOWN",
+            "message": "Ikke startet"
+          },
+          "realtimeTextSummary": "Ikke startet"
+        }
+      ],
+      "messages": [
+        {
+          "text": "Dette er en lokalbillett som må hentes ut i NSB-appen",
+          "type": "INFO"
+        }
+      ],
+      "mainMessage": null,
+      "cancellationText": null,
+      "modified": false,
+      "tripId": "T$A=1@O=Skansen@L=7601125@a=128@$A=1@O=Trondheim Lufthavn@L=7601299@a=128@$201805312302$201805312342$     457$",
+      "cancellationPresent": false
+    }
+  ],
+  "passengerInformation": {
+    "availableCategories": [
+      {
+        "id": 1,
+        "type": "ADULT",
+        "categoryName": "Voksen",
+        "categoryNamePlural": "Voksne",
+        "description": "Ordinær billett for reisende over 16 år.",
+        "discount": "CUSTOMER_CARD",
+        "prioritized": true
+      },
+      {
+        "id": 1,
+        "type": "ADULT",
+        "categoryName": "Voksen",
+        "categoryNamePlural": "Voksne",
+        "description": "Ordinær billett for reisende over 16 år.",
+        "discount": null,
+        "prioritized": true
+      },
+      {
+        "id": 4,
+        "type": "STUDENT",
+        "categoryName": "Student",
+        "categoryNamePlural": "Studenter",
+        "description": "Studenter med legitimasjon og bekreftelse for betalt semesteravgift får 25 % rabatt på ordinære priser på alle avganger. Studentrabatten har samme vilkår som ordinær billett.",
+        "discount": null,
+        "prioritized": true
+      },
+      {
+        "id": 3,
+        "type": "SENIOR_CITIZEN",
+        "categoryName": "Honnør",
+        "categoryNamePlural": "Honnør",
+        "description": "Er du over 67 år, uføretrygdet eller ledsager for blind får du 50 % rabatt ved kjøp av ordinære billetter.",
+        "discount": null,
+        "prioritized": true
+      },
+      {
+        "id": 5,
+        "type": "MILITARY",
+        "categoryName": "Vernepliktig",
+        "categoryNamePlural": "Vernepliktige",
+        "description": "Vernepliktige får 90% rabatt ved fremvisning av gyldig vernepliktskort ved billettkontroll.",
+        "discount": null,
+        "prioritized": false
+      },
+      {
+        "id": 2,
+        "type": "CHILD",
+        "categoryName": "Barn 4-15 år",
+        "categoryNamePlural": "Barn 4-15 år",
+        "description": "Barn under 16 år, barn under 4 år reiser gratis. Barnebilletten har samme vilkår som ordinær billett. Voksen med fullprisbillett eller billett med kundekortrabatt kan ta med ett barn gratis på alle avganger.",
+        "discount": null,
+        "prioritized": false
+      },
+      {
+        "id": 8,
+        "type": "INFANT",
+        "categoryName": "Barn under 4 år",
+        "categoryNamePlural": "Barn under 4 år",
+        "description": "Barn under 4 år reiser gratis.",
+        "discount": null,
+        "prioritized": false
+      }
+    ],
+    "passengers": null,
+    "modified": false,
+    "modificationReason": null
+  },
+  "hasEarlierItineraries": true,
+  "hasLaterItineraries": true,
+  "useNewApi": false
+}

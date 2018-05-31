@@ -211,22 +211,20 @@ class HackerNews(unittest.TestCase):
 class Nsb(unittest.TestCase):
 
     def setUp(self):
-        self.html = test_data('nsb.html')
+        self.json = test_data('nsb.json', parse_json=True)
         self.nsb = nsb.Nsb({'interval': None,
                             'from': 'Skansen',
                             'to': 'V\xc3\xa6rnes (Trondheim Lufthavn)'})
 
     def test_parse(self):
-        # Test data contains multiple dates and varying durations
-        data = self.nsb._parse(self.html)
+        data = self.nsb._parse(self.json)
 
-        self.assertEqual('02.10.2016', data['date'])
         self.assertEqual('V\xc3\xa6rnes (Trondheim Lufthavn)', data['to'])
         self.assertEqual('Skansen', data['from'])
         self.assertEqual(5, len(data['departures']))
-        self.assertEqual('20:56', data['departures'][0]['departure'])
-        self.assertEqual('21:36', data['departures'][0]['arrival'])
-        self.assertEqual('40min', data['departures'][0]['duration'])
+        self.assertEqual(1527778980, data['departures'][0]['departure'])
+        self.assertEqual(1527781320, data['departures'][0]['arrival'])
+        self.assertEqual(2340, data['departures'][0]['duration'])
 
 
 class Ping(unittest.TestCase):

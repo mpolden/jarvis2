@@ -3,7 +3,6 @@
 import requests
 from datetime import datetime
 from jobs import AbstractJob
-from bs4 import BeautifulSoup
 
 
 class Nsb(AbstractJob):
@@ -14,33 +13,22 @@ class Nsb(AbstractJob):
         self.interval = conf['interval']
         self.timeout = conf.get('timeout')
 
-    def _parse(self, html):
-        d = BeautifulSoup(html, 'html.parser')
-
-        def is_time(el):
-            classes = el.attrs.get('class', [])
-            return not any(cls in classes for cls in
-                           ('nsb-time-corrected', 'nsb-visually-hidden'))
-
-        date = d.select_one('.travel-date').text.strip()
-        all_times = [el.text.strip() for el in d.select('.nsb-time span')
-                     if is_time(el)]
-        durations = [el.text.strip() for el in d.select('.nsb-time-total')]
-
-        departure_times = all_times[::2]  # filter even elements
-        arrival_times = all_times[1::2]  # filter odd elements
-
+    def _parse(self, json):
+        date_format = '%Y-%m-%dT%H:%M:%S'
         departures = []
-        for departure, arrival, duration in zip(departure_times, arrival_times,
-                                                durations):
+        for itinerary in json['itineraries']:
+            departure = datetime.strptime(itinerary['departureScheduled'],
+                                          date_format)
+            arrival = datetime.strptime(itinerary['arrivalScheduled'],
+                                        date_format)
+            duration = abs((arrival - departure).seconds)
             departures.append({
-                'departure': departure,
-                'arrival': arrival,
+                'departure': int(departure.strftime('%s')),
+                'arrival': int(arrival.strftime('%s')),
                 'duration': duration
             })
 
         return {
-            'date': date.partition(', ')[2],
             'from': self.from_location,
             'to': self.to_location,
             'departures': departures
@@ -48,16 +36,12 @@ class Nsb(AbstractJob):
 
     def get(self):
         now = datetime.now()
-        params = {
+        data = {
             'from': self.from_location,
             'to': self.to_location,
-            'date': now.strftime('%d.%m.%Y'),
-            'hour': 'now',
-            'redirect_new': 'https://www.nsb.no/bestill/velg-togavgang',
-            'travelPlannerStationValidatorVersion': 'v1'
+            'time': now.strftime('%Y-%m-%dT%H:%M')
         }
-
-        url = 'https://www.nsb.no/bestill/travel-planner-validator-v2'
-        r = requests.get(url, timeout=self.timeout, params=params)
+        url = 'https://booking.cloud.nsb.no/api/itineraries/search'
+        r = requests.post(url, timeout=self.timeout, json=data)
         r.raise_for_status()
-        return self._parse(r.text)
+        return self._parse(r.json())
