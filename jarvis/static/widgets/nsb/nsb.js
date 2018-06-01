@@ -4,8 +4,8 @@ nsb.parse = function (data) {
   var body = data;
   body.departures.forEach(function (d) {
     d.duration = moment.duration(d.duration, 'seconds').locale('nb').humanize();
-    d.departure = moment.unix(d.departure).format('HH:mm');
-    d.arrival = moment.unix(d.arrival).format('HH:mm');
+    d.departure = moment(d.departure).format('HH:mm');
+    d.arrival = moment(d.arrival).format('HH:mm');
   });
   if (body.departures.length > 0) {
     body.next = body.departures[0];
