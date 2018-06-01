@@ -8,8 +8,6 @@ lint-py:
 lint-js:
 ifdef TRAVIS
 	find . -name '*.js' | xargs jshint
-else
-	@echo "lint-js: Skipping, not running on Travis"
 endif
 
 lint: lint-py lint-js
