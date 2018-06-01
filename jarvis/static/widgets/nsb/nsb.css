@@ -1,24 +1,28 @@
 [data-widget="nsb"] {
-  height: 100%;
   padding: 5px;
   background: #6e8243;
   text-align: center;
 }
+
 [data-widget="nsb"] h1 {
-  font-size: 45px;
-  margin: 8px;
+  font-size: 55px;
+  margin: 0;
 }
+
 [data-widget="nsb"] h2 {
-  font-size: 16px;
-  margin: 12px 0 12px 0;
+  font-size: 20px;
 }
+
 [data-widget="nsb"] table {
+  margin: 0 10px 0 10px;
+}
+
+[data-widget="nsb"] .time {
+  text-align: right;
+  white-space: nowrap;
+}
+
+[data-widget="nsb"] .destination {
+  text-align: left;
   width: 100%;
-}
-[data-widget="nsb"] th {
-  font-size: 14px;
-}
-[data-widget="nsb"] em {
-  font-style: normal;
-  color: white;
 }

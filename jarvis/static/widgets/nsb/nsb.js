@@ -1,20 +1,23 @@
 var nsb = nsb || {};
 
 nsb.parse = function (data) {
-  var body = data;
-  body.departures.forEach(function (d) {
-    d.duration = moment.duration(d.duration, 'seconds').locale('nb').humanize();
-    d.departure = moment(d.departure).format('HH:mm');
-    d.arrival = moment(d.arrival).format('HH:mm');
+  var now = moment();
+  data.departures = data.departures.map(function (d) {
+    d.departure = moment(d.departure);
+    d.arrival = moment(d.arrival);
+    return d;
+  }).filter(function (d) {
+    // Ignore departures that have passed
+    return d.departure.isAfter(now);
   });
-  if (body.departures.length > 0) {
-    body.next = body.departures[0];
-    body.upcoming = body.departures.slice(1, 5);
+  if (data.departures.length > 0) {
+    data.next = data.departures[0];
+    data.upcoming = data.departures.slice(1, 5);
   } else {
-    body.next = null;
-    body.upcoming = [];
+    data.next = null;
+    data.upcoming = [];
   }
-  return body;
+  return data;
 };
 
 nsb.view = function (vnode) {
@@ -24,36 +27,18 @@ nsb.view = function (vnode) {
   var data = nsb.parse(vnode.attrs.data);
   var rows = data.upcoming.map(function (departure) {
     return m('tr', [
-      m('td', departure.departure),
-      m('td', departure.arrival),
-      m('td', departure.duration)
+      m('td.destination', data.from),
+      m('td', departure.departure.format('HH:mm')),
+      m('td', m.trust('&mdash;')),
+      m('td', departure.arrival.format('HH:mm'))
     ]);
   });
   return [
-    m('p.fade', [
-      'Neste tog fra ',
-      m('em', data.from),
-      ' til ',
-      m('em', data.to),
-      ' går ',
-      m('em', data.date)
-    ]),
-    m('h1', data.next.departure),
-    m('h2.fade', [
-      'Ankomst: ',
-      m('em', data.next.arrival),
-      ' (',
-      m('em', data.next.duration),
-      ')'
-    ]),
-    m('table', [
-      m('tr.fade', [
-        m('th', 'Avgang'),
-        m('th', 'Ankomst'),
-        m('th', 'Reisetid')
-      ])
-    ].concat(rows)),
-    m('p', {class: 'fade updated-at'}, 'Sist oppdatert: ' +
+    m('p.fade', 'Neste tog til ' + data.to + ' går'),
+    m('h1', data.next.departure.format('HH:mm')),
+    m('h2', data.next.departure.fromNow()),
+    m('table', rows),
+    m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
       data.updatedAt)
   ];
 };
