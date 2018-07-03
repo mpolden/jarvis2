@@ -61,6 +61,7 @@ class App(unittest.TestCase):
     def setUp(self):
         app.testing = True
         app.debug = True
+        app.config['DEFAULT_LAYOUT'] = None
         app.config['JOBS'] = {
             'mock': {
                 'enabled': True,
@@ -71,7 +72,8 @@ class App(unittest.TestCase):
         logging.getLogger('werkzeug').setLevel(logging.WARN)
         # Run the application in a separate process so that streamed responses
         # are not blocked on running the client in the same thread
-        self.p = Process(target=run_simple, args=('127.0.0.1', 8080, app))
+        self.p = Process(target=run_simple, args=('127.0.0.1', 8080, app),
+                         kwargs={'use_debugger': app.debug})
         self.p.start()
 
     def url(self, path):

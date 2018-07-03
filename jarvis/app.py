@@ -66,7 +66,7 @@ def widget(job_id):
     x = request.args.get('x', 3)
     widgets = _enabled_jobs()
     # Widget name shares the name of the job implementation
-    widget = _config()[job_id].get('job_impl', job_id)
+    widget = _config()['JOBS'][job_id].get('job_impl', job_id)
     return render_template('index.html', layout='layout_single.html',
                            widget=widget, job=job_id, x=x, widgets=widgets)
 
@@ -77,14 +77,15 @@ def widget(job_id):
 def dashboard(layout=None):
     locale = request.args.get('locale')
     widgets = _enabled_jobs()
-    if layout is not None:
-        try:
-            return render_template('index.html',
-                                   layout='layouts/{0}.html'.format(layout),
-                                   locale=locale, widgets=widgets)
-        except TemplateNotFound:
-            abort(404)
-    return render_template('index.html', locale=locale, widgets=widgets)
+    layout = layout or _config().get('DEFAULT_LAYOUT')
+    if layout is None:
+        return render_template('index.html', locale=locale, widgets=widgets)
+    try:
+        return render_template('index.html',
+                               layout='layouts/{0}.html'.format(layout),
+                               locale=locale, widgets=widgets)
+    except TemplateNotFound:
+        abort(404)
 
 
 @app.route('/events')
@@ -120,14 +121,14 @@ def create_event(job_id):
 
 
 def _config():
-    if 'JOBS' in app.config:
-        return app.config['JOBS']
+    if set(['DEFAULT_LAYOUT', 'JOBS']).issubset(app.config.keys()):
+        return app.config
     app.config.from_envvar('JARVIS_SETTINGS')
-    return app.config['JOBS']
+    return app.config
 
 
 def _enabled_jobs():
-    config = _config()
+    config = _config()['JOBS']
     return [job_id for job_id in config.keys()
             if config[job_id].get('enabled')]
 
@@ -146,7 +147,7 @@ def _schedule_jobs():
     offset = 0
     jobs = load_jobs()
 
-    for job_id, job_config in _config().items():
+    for job_id, job_config in _config()['JOBS'].items():
         job_impl = job_config.get('job_impl', job_id)
         if not job_config.get('enabled'):
             app.logger.info('Skipping disabled job: %s', job_id)

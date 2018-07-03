@@ -4,6 +4,13 @@
 #
 # Please see WIDGETS.md for documentation.
 
+# Set the default layout to use. This should be the name of a file in
+# jarvis/templates/layouts, without the .html extension.
+#
+# Example: If your custom layout exists at jarvis/templates/layouts/custom.html
+# and you want this layout to be served at /, set DEFAULT_LAYOUT = 'custom'.
+DEFAULT_LAYOUT = None
+
 JOBS = {}
 
 JOBS['atb'] = {
