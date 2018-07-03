@@ -121,7 +121,7 @@ def create_event(job_id):
 
 
 def _config():
-    if set(['DEFAULT_LAYOUT', 'JOBS']).issubset(app.config.keys()):
+    if app.testing:  # tests set their own config
         return app.config
     app.config.from_envvar('JARVIS_SETTINGS')
     return app.config
