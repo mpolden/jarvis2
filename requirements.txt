@@ -1,23 +1,31 @@
--i https://pypi.python.org/simple
-apscheduler==3.5.1
+APScheduler==3.5.1
 beautifulsoup4==4.6.0
+cachetools==3.0.0
 certifi==2018.4.16
 chardet==3.0.4
 click==6.7
+configparser==3.5.0; python_version < '3.2'
 cssmin==0.2.0
-flask-assets==0.12
-flask==1.0
+enum34==1.1.6; python_version < '3.4'
+flake8==3.6.0
+Flask==1.0
+Flask-Assets==0.12
 funcsigs==1.0.2; python_version == '2.7'
 futures==3.2.0; python_version == '2.7'
 google-api-python-client==1.6.6
+google-auth==1.6.1
+google-auth-httplib2==0.0.3
 httplib2==0.11.3
 idna==2.6
 itsdangerous==0.24
-jinja2==2.10
-markupsafe==1.0
+Jinja2==2.10
+MarkupSafe==1.0
+mccabe==0.6.1
 oauth2client==4.1.2
-pyasn1-modules==0.2.1
 pyasn1==0.4.2
+pyasn1-modules==0.2.1
+pycodestyle==2.4.0
+pyflakes==2.0.0
 pytz==2018.4
 requests==2.18.4
 rsa==3.4.2
@@ -27,5 +35,5 @@ tzlocal==1.5.1
 uritemplate==3.0.0
 urllib3==1.22
 webassets==0.12.1
-werkzeug==0.14.1
+Werkzeug==0.14.1
 xmltodict==0.11.0
