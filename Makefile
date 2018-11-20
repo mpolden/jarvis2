@@ -3,11 +3,11 @@ APP_ROOT := jarvis
 all: clean lint test
 
 lint-py:
-	find . -name '*.py' | xargs flake8 --max-complexity=8
+	find $(APP_ROOT) -name '*.py' | xargs flake8 --max-complexity=8
 
 lint-js:
 ifdef TRAVIS
-	find . -name '*.js' | xargs jshint
+	find $(APP_ROOT) -name '*.js' | xargs jshint
 endif
 
 lint: lint-py lint-js
@@ -16,7 +16,7 @@ test:
 	python $(APP_ROOT)/tests.py
 
 clean:
-	find . -name '*.pyc' -delete
+	find $(APP_ROOT) -name '*.pyc' -delete
 	rm -rf $(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
 
 widget:
