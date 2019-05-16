@@ -1,5 +1,5 @@
-APScheduler==3.5.3
-beautifulsoup4==4.6.3
+APScheduler==3.6.0
+beautifulsoup4==4.7.1
 cachetools==3.0.0
 certifi==2018.4.16
 chardet==3.0.4
@@ -12,13 +12,13 @@ Flask==1.0.2
 Flask-Assets==0.12
 funcsigs==1.0.2; python_version == '2.7'
 futures==3.2.0; python_version == '2.7'
-google-api-python-client==1.7.4
+google-api-python-client==1.7.8
 google-auth==1.6.1
 google-auth-httplib2==0.0.3
 httplib2==0.11.3
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.10.1
 MarkupSafe==1.0
 mccabe==0.6.1
 oauth2client==4.1.2
@@ -27,13 +27,14 @@ pyasn1-modules==0.2.1
 pycodestyle==2.4.0
 pyflakes==2.0.0
 pytz==2018.4
-requests==2.20.1
+requests==2.22.0
 rsa==3.4.2
 six==1.11.0
 soco==0.16
+soupsieve==1.9.1
 tzlocal==1.5.1
 uritemplate==3.0.0
-urllib3==1.22
+urllib3==1.25.2
 webassets==0.12.1
-Werkzeug==0.14.1
+Werkzeug==0.15.4
 xmltodict==0.11.0
