@@ -16,7 +16,7 @@ Screenshots
 
 Dependencies
 ------------
-JARVIS requires Python 2.7+ or Python 3.3+ to run.
+JARVIS requires Python 2.7+ or Python 3.5+ to run.
 
 Install requirements:
 
