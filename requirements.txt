@@ -8,7 +8,7 @@ configparser==3.5.0; python_version < '3.2'
 cssmin==0.2.0
 enum34==1.1.6; python_version < '3.4'
 flake8==3.6.0
-Flask==1.0.2
+Flask==1.0.3
 Flask-Assets==0.12
 funcsigs==1.0.2; python_version == '2.7'
 futures==3.2.0; python_version == '2.7'
@@ -30,7 +30,7 @@ pytz==2018.4
 requests==2.22.0
 rsa==3.4.2
 six==1.11.0
-soco==0.16
+soco==0.17
 soupsieve==1.9.1
 tzlocal==1.5.1
 uritemplate==3.0.0
