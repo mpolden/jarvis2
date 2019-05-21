@@ -48,3 +48,6 @@ ifndef JARVIS_SETTINGS
 	$(error JARVIS_SETTINGS must be set)
 endif
 	python $(APP_ROOT)/util/google_api_auth.py
+
+list-outdated-deps:
+	@pip list --outdated --not-required
