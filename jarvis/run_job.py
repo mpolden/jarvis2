@@ -24,10 +24,11 @@ def _run_job(job_id=None, print_json=False):
     jobs = load_jobs()
 
     if job_id is None or len(job_id) == 0:
+        enabled_jobs.sort()
         job_ids = ' '.join(enabled_jobs)
         job_id = input('Name of the job to run [%s]: ' % (job_ids,)).lower()
 
-    job_config = _config().get(job_id)
+    job_config = _config()['JOBS'].get(job_id)
     if job_config is None:
         print('No config found for job: %s' % (job_id,))
         sys.exit(1)
