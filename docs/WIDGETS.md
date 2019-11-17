@@ -300,4 +300,4 @@ JOBS['yr'] = {
 ```
 
 Setting `forecast_fallback` to `True` (default) will display the weather
-forecast in case the closest weather station is not reporting any data.
+forecast in case the closest weather station is reporting incomplete data.

@@ -168,11 +168,13 @@ class Yr(unittest.TestCase):
         self.assertEqual('3.6', data['wind']['speed'])
         self.assertEqual('Lett bris', data['wind']['description'])
 
-    def test_parse_tree_missing_wind(self):
+    def test_parse_tree_missing_wind_from_weather_station(self):
         tree = etree.fromstring(test_data('varsel2.xml'))
         y = yr.Yr({'interval': None, 'url': None})
         data = y._parse_tree(tree)
-        self.assertIsNone(data['wind'])
+        self.assertEqual(u'Vest-sørvest', data['wind']['direction'])
+        self.assertEqual('10.0', data['wind']['speed'])
+        self.assertEqual('Frisk bris', data['wind']['description'])
 
     def test_parse_tree_missing_temperature(self):
         tree = etree.fromstring(test_data('varsel3.xml'))
@@ -185,12 +187,24 @@ class Yr(unittest.TestCase):
         y = yr.Yr({'interval': None, 'url': None})
         data = y._parse_tree(tree)
 
-        self.assertEqual('Delvis skyet', data['description'])
+        self.assertEqual('Lettskyet', data['description'])
         self.assertEqual('Trondheim', data['location'])
         self.assertEqual('-3', data['temperature'])
         self.assertEqual(u'Sør', data['wind']['direction'])
         self.assertEqual('8.6', data['wind']['speed'])
         self.assertEqual('Frisk bris', data['wind']['description'])
+
+    def test_parse_tree_weather_station_removed(self):
+        tree = etree.fromstring(test_data('varsel5.xml'))
+        y = yr.Yr({'interval': None, 'url': None})
+        data = y._parse_tree(tree)
+
+        self.assertEqual('Skyet', data['description'])
+        self.assertEqual('Trondheim', data['location'])
+        self.assertEqual('-1', data['temperature'])
+        self.assertEqual(u'Sør-sørvest', data['wind']['direction'])
+        self.assertEqual('0.6', data['wind']['speed'])
+        self.assertEqual('Flau vind', data['wind']['description'])
 
 
 class HackerNews(unittest.TestCase):

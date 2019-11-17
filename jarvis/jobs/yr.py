@@ -14,43 +14,74 @@ class Yr(AbstractJob):
         self.timeout = conf.get('timeout')
         self.forecast_fallback = conf.get('forecast_fallback', True)
 
-    def _find_tag(self, root, tag):
-        return next(iter(root.findall(tag)), None)
+    def _find(self, element, path):
+        return next(iter(element.findall(path)), None)
 
-    def _parse_wind(self, windSpeed, windDirection):
-        if None in (windSpeed, windDirection):
+    def _parse_location(self, element):
+        location = self._find(element, './location/name')
+        if location is None:
+            return None
+        return location.text
+
+    def _parse_temperature(self, element):
+        temperature = self._find(element, 'temperature')
+        if temperature is None:
+            return None
+        return temperature.get('value')
+
+    def _parse_description(self, element):
+        description = self._find(element, 'symbol')
+        if description is None:
+            return None
+        return description.get('name')
+
+    def _parse_wind(self, element):
+        speed = self._find(element, 'windSpeed')
+        direction = self._find(element, 'windDirection')
+        if None in (speed, direction):
             return None
         return {
-            'speed': windSpeed.get('mps'),
-            'description': windSpeed.get('name'),
-            'direction': windDirection.get('name')
+            'speed': speed.get('mps'),
+            'description': speed.get('name'),
+            'direction': direction.get('name')
         }
 
-    def _parse_tree(self, tree, date=None):
+    def _parse_value(self, observations, parse_fn):
+        if len(observations) == 0:
+            raise ValueError('No observations found')
+        for observation in observations:
+            value = parse_fn(observation)
+            if value is None and self.forecast_fallback:
+                continue
+            return value
+
+    def _find_observations(self, tree, date=None):
+        observations = []
         if date is None:
-            tabular = tree.findall('./forecast/tabular/time[1]').pop()
-            root = tree.findall('./observations/weatherstation[1]').pop()
+            station = self._find(tree, './observations/weatherstation[1]')
+            if station is not None:
+                observations.append(station)
+            tabular = self._find(tree, './forecast/tabular/time[1]')
+            if tabular is not None:
+                observations.append(tabular)
         else:
             date_prefix = date.strftime('%F')
             period_xpath = "./forecast/tabular/time[@period='2']"
             tabular = next((el for el in tree.findall(period_xpath)
                             if el.get('from').startswith(date_prefix)))
-            root = tabular
+            if tabular is not None:
+                observations.append(tabular)
+        return observations
 
-        temperature = self._find_tag(root, 'temperature')
-        # Fall back to forecast if weather station is not reporting any data
-        if temperature is None and self.forecast_fallback:
-            root = tabular
-            temperature = self._find_tag(root, 'temperature')
-        windSpeed = self._find_tag(root, 'windSpeed')
-        windDirection = self._find_tag(root, 'windDirection')
-
-        wind = self._parse_wind(windSpeed, windDirection)
-        if temperature is not None:
-            temperature = temperature.get('value')
+    def _parse_tree(self, tree, date=None):
+        location = self._parse_location(tree)
+        observations = self._find_observations(tree, date)
+        temperature = self._parse_value(observations, self._parse_temperature)
+        description = self._parse_value(observations, self._parse_description)
+        wind = self._parse_value(observations, self._parse_wind)
         return {
-            'location': tree.findall('./location/name').pop().text,
-            'description': tabular.findall('symbol').pop().get('name'),
+            'location': location,
+            'description': description,
             'temperature': temperature,
             'wind': wind
         }
