@@ -14,30 +14,27 @@ class Yr(AbstractJob):
         self.timeout = conf.get('timeout')
         self.forecast_fallback = conf.get('forecast_fallback', True)
 
-    def _find(self, element, path):
-        return next(iter(element.findall(path)), None)
-
     def _parse_location(self, element):
-        location = self._find(element, './location/name')
+        location = element.find('./location/name')
         if location is None:
             return None
         return location.text
 
     def _parse_temperature(self, element):
-        temperature = self._find(element, 'temperature')
+        temperature = element.find('temperature')
         if temperature is None:
             return None
         return temperature.get('value')
 
     def _parse_description(self, element):
-        description = self._find(element, 'symbol')
+        description = element.find('symbol')
         if description is None:
             return None
         return description.get('name')
 
     def _parse_wind(self, element):
-        speed = self._find(element, 'windSpeed')
-        direction = self._find(element, 'windDirection')
+        speed = element.find('windSpeed')
+        direction = element.find('windDirection')
         if None in (speed, direction):
             return None
         return {
@@ -55,23 +52,18 @@ class Yr(AbstractJob):
                 continue
             return value
 
-    def _find_observations(self, tree, date=None):
-        observations = []
-        if date is None:
-            station = self._find(tree, './observations/weatherstation[1]')
-            if station is not None:
-                observations.append(station)
-            tabular = self._find(tree, './forecast/tabular/time[1]')
-            if tabular is not None:
-                observations.append(tabular)
-        else:
+    def _find_observations(self, element, date=None):
+        if date is not None:
             date_prefix = date.strftime('%F')
+            # period='2' identifies afternoon
             period_xpath = "./forecast/tabular/time[@period='2']"
-            tabular = next((el for el in tree.findall(period_xpath)
-                            if el.get('from').startswith(date_prefix)))
-            if tabular is not None:
-                observations.append(tabular)
-        return observations
+            return [el for el in element.findall(period_xpath)
+                    if el.get('from').startswith(date_prefix)]
+        elements = (
+            element.find('./observations/weatherstation[1]'),
+            element.find('./forecast/tabular/time[1]'),
+        )
+        return [el for el in elements if el is not None]
 
     def _parse_tree(self, tree, date=None):
         location = self._parse_location(tree)
@@ -97,4 +89,4 @@ class Yr(AbstractJob):
     def get(self):
         r = requests.get(self.url, timeout=self.timeout)
         r.raise_for_status()
-        return self._parse(r.content)
+        return self._parse(r.text)
