@@ -293,7 +293,7 @@ feed to use. Note that Yr requires a polling interval of at least 10 minutes
 JOBS['yr'] = {
     'enabled': True,
     'interval': 600,
-    'url': ('https://www.yr.no/sted/Norge/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/'
+    'url': ('https://www.yr.no/sted/Norge/Tr%C3%B8ndelag/Trondheim/'
             'Trondheim/varsel.xml'),
     'forecast_fallback': True
 }
