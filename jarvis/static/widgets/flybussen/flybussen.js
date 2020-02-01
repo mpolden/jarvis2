@@ -36,7 +36,7 @@ flybussen.view = function (vnode) {
     ]);
   });
   return [
-    m('p.fade', 'Flybussen til ' + data.to + ' går'),
+    m('p.fade', 'Flybuss til ' + data.to + ' går'),
     m('h1', data.next.departure_time.format('HH:mm')),
     m('h2', data.next.departure_time.fromNow()),
     m('table', rows),

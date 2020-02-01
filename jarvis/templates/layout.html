@@ -80,5 +80,10 @@
       <div data-widget="flybussen"></div>
     </div>
     {% endif %}
+    {% if is_job_enabled('vaernesekspressen') %}
+    <div class="col-3">
+      <div data-widget="flybussen" data-job="vaernesekspressen"></div>
+    </div>
+    {% endif %}
   </div>
 </div>

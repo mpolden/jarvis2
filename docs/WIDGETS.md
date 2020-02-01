@@ -76,7 +76,7 @@ to run `make google-api-auth` to generate a credentials file.
 
 flybussen
 ---------
-Displays the next [Flybussen](https://www.flybussen.no) departures from a
+Displays the next [Flybussen](https://www.flybussen.no) departures from the
 configured bus stop.
 
 ```python
@@ -282,6 +282,25 @@ JOBS['uptime'] = {
 
 Note that for this job the `timeout` parameter is applied per host, so the total
 timeout is `timeout * len(hosts)`.
+
+vaernesekspressen
+---------
+Displays the next [Vaernesekspressen](https://www.vaernesekspressen.no)
+departures from the configured bus stop.
+
+```python
+JOBS['vaernesekspressen'] = {
+    'enabled': True,
+    'interval': 600,
+    'from_stop': 'FB 73 Nidarosdomen'
+}
+```
+
+The `from_stop` field is the name (case-insensitive) of a valid bus stop.
+
+See the [Vaernesekspressen website](https://www.vaernesekspressen.no) for valid
+stop names. Trondheim airport is the only possible destination and is thus not
+configurable.
 
 yr
 --

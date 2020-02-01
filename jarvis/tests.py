@@ -8,7 +8,8 @@ import unittest
 
 from app import app
 from datetime import datetime
-from jobs import avinor, calendar, flybussen, hackernews, nsb, ping, rss, yr
+from jobs import (avinor, calendar, flybussen, hackernews, nsb, ping, rss,
+                  vaernesekspressen, yr)
 from multiprocessing import Process
 from requests import Session
 from requests.adapters import HTTPAdapter
@@ -30,7 +31,7 @@ class TestRequestHandler(BaseHTTPRequestHandler):
     def _response(self):
         return self.server.test_responses.get(self.command, {}).get(self.path)
 
-    def do_GET(self):
+    def _write_response(self):
         response = self._response()
         status_code = 200
         if response is None:
@@ -41,6 +42,12 @@ class TestRequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.end_headers()
         self.wfile.write(json.dumps(response).encode('utf-8'))
+
+    def do_GET(self):
+        self._write_response()
+
+    def do_POST(self):
+        self._write_response()
 
     def log_message(self, format, *args):
         # Disable request logging
@@ -340,6 +347,53 @@ class Flybussen(unittest.TestCase):
                          data['departures'][0]['stop_name'])
         self.assertEqual('Dronningens gate D2', data['from'])
         self.assertEqual(u'Trondheim lufthavn Værnes', data['to'])
+
+    def tearDown(self):
+        self.server.socket.close()
+        self.p.terminate()
+        self.p.join()
+
+
+class Vaernesekspressen(unittest.TestCase):
+
+    def _test_responses(self):
+        stop_path = ('/Umbraco/Api/TicketOrderApi/GetStops?routeId=31')
+        departure_path = ('/Umbraco/Api/TicketOrderApi/GetJourneys')
+        return {
+            'GET': {
+                stop_path: test_data('vaernesekspressen_stops.json', True),
+            },
+            'POST': {
+                departure_path: test_data('vaernesekspressen_departures.json',
+                                          True)
+            }
+        }
+
+    @property
+    def url(self):
+        return 'http://{}:{}'.format(self.listen[0], self.listen[1])
+
+    def setUp(self):
+        self.listen = ('127.0.0.1', 8080)
+        self.server = HTTPServer(self.listen, TestRequestHandler)
+        self.server.test_responses = self._test_responses()
+        self.p = Process(target=self.server.serve_forever)
+        self.p.start()
+
+    def test_get(self):
+        f = vaernesekspressen.Vaernesekspressen({
+            'interval': None,
+            'from_stop': 'fb 73 nidarosdomen',
+            'base_url': self.url
+        })
+        f.now = lambda: datetime(2020, 2, 1, 10)
+        data = f.get()
+        self.assertEqual(9, len(data['departures']))
+        self.assertEqual('1580570100', data['departures'][0]['departure_time'])
+        self.assertEqual('FB 73 Nidarosdomen',
+                         data['departures'][0]['stop_name'])
+        self.assertEqual('FB 73 Nidarosdomen', data['from'])
+        self.assertEqual(u'Trondheim Lufthavn Værnes', data['to'])
 
     def tearDown(self):
         self.server.socket.close()
