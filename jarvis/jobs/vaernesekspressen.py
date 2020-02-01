@@ -83,5 +83,5 @@ class Vaernesekspressen(AbstractJob):
         return {
             'from': from_,
             'to': to,
-            'departures': self._departures(self.now())
+            'departures': departures
         }
