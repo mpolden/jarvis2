@@ -16,15 +16,15 @@ JOBS = {}
 JOBS['atb'] = {
     'enabled': True,
     'interval': 60,
-    'url': 'https://atbapi.tar.io/api/v1/departures/16011376',
+    'url': 'https://atbapi.tar.io/api/v1/departures/16010194',
     'timeout': 5
 }
 
 # Add additional atb job for another departure
 JOBS['atb-16010382'] = {
-    'enabled': True,
+    'enabled': False,
     'interval': 60,
-    'url': 'https://atbapi.tar.io/api/v1/departures/16010382',
+    'url': 'https://atbapi.tar.io/api/v1/departures/16010007',
     'timeout': 5,
     'job_impl': 'atb'
 }
@@ -48,8 +48,8 @@ JOBS['calendar'] = {
 JOBS['flybussen'] = {
     'enabled': True,
     'interval': 600,
-    'from_stop': 'Dronningens gate D2',
-    'to_airport': 'TRD',
+    'from_stop': 'Ullevål Stadion',
+    'to_airport': 'OSL',
     'timeout': 5
 }
 
@@ -105,7 +105,7 @@ JOBS['plex'] = {
 }
 
 JOBS['rss-nrk'] = {
-    'enabled': False,
+    'enabled': True,
     'interval': 900,
     'url': 'https://www.nrk.no/toppsaker.rss',
     'title': 'NRK',
@@ -114,7 +114,7 @@ JOBS['rss-nrk'] = {
 }
 
 JOBS['rss-guardian'] = {
-    'enabled': False,
+    'enabled': True,
     'interval': 900,
     'url': 'https://www.theguardian.com/international/rss',
     'title': 'The Guardian',
@@ -156,7 +156,7 @@ JOBS['uptime'] = {
 }
 
 JOBS['vaernesekspressen'] = {
-    'enabled': False,
+    'enabled': True,
     'interval': 600,
     'from_stop': 'FB 73 Nidarosdomen',
     'timeout': 10  # Very slow API

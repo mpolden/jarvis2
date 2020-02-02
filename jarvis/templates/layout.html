@@ -40,6 +40,11 @@
       <div data-widget="rss" data-job="rss-nrk"></div>
     </div>
     {% endif %}
+    {% if is_job_enabled('rss-guardian') %}
+    <div class="col-3">
+      <div data-widget="rss" data-job="rss-guardian"></div>
+    </div>
+    {% endif %}
     {% if is_job_enabled('plex') %}
     <div class="col-3">      
       <div data-widget="plex"></div>
