@@ -19,11 +19,7 @@ from xml.etree import ElementTree as etree
 from util.create_dashboard import DashboardFactory
 from util.create_widget import WidgetFactory
 from werkzeug.serving import run_simple
-try:
-    from http.server import BaseHTTPRequestHandler, HTTPServer
-except ImportError:
-    # Python 2
-    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
 class TestRequestHandler(BaseHTTPRequestHandler):

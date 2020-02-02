@@ -5,12 +5,6 @@ from __future__ import print_function
 
 import argparse
 
-try:
-    # Python 2
-    input = raw_input
-except NameError:
-    pass
-
 from app import _config, _enabled_jobs
 
 

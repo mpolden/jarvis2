@@ -7,11 +7,6 @@ import argparse
 import os
 import sys
 
-try:
-    # Python 2
-    input = raw_input
-except NameError:
-    pass
 from jinja2 import Environment, FileSystemLoader
 
 

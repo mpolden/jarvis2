@@ -7,12 +7,6 @@ import os.path
 import sys
 import argparse
 
-try:
-    # Python 2
-    input = raw_input
-except NameError:
-    pass
-
 from flask import Flask
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
