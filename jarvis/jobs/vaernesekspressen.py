@@ -46,8 +46,7 @@ class Vaernesekspressen(AbstractJob):
         dt = datetime.strptime(parts[0], '%Y-%m-%d %H:%M:%S.0')
         return int(self._timestamp(dt, tz))
 
-    def _departures(self, dt):
-        stop_id = self._find_stop_id()
+    def _departures(self, stop_id, dt):
         url = '{}/Umbraco/Api/TicketOrderApi/GetJourneys'.format(self.base_url)
         data = {
             'From': str(stop_id),
@@ -69,12 +68,13 @@ class Vaernesekspressen(AbstractJob):
                 for d in r.json()]
 
     def get(self):
+        stop_id = self._find_stop_id()
         now = self.now()
-        departures = self._departures(now)
+        departures = self._departures(stop_id, now)
         if len(departures) == 0:
             # No more departures today, try next day
             tomorrow = (now + timedelta(days=1)).date()
-            departures = self._departures(tomorrow)
+            departures = self._departures(stop_id, tomorrow)
         from_ = 'N/A'
         to = 'N/A'
         if len(departures) > 0:
