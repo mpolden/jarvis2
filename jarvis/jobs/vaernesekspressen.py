@@ -71,10 +71,10 @@ class Vaernesekspressen(AbstractJob):
         stop_id = self._find_stop_id()
         now = self.now()
         departures = self._departures(stop_id, now)
-        if len(departures) == 0:
-            # No more departures today, try next day
+        if len(departures) < 2:
+            # Few departures today, include tomorrow's departures
             tomorrow = (now + timedelta(days=1)).date()
-            departures = self._departures(stop_id, tomorrow)
+            departures += self._departures(stop_id, tomorrow)
         from_ = 'N/A'
         to = 'N/A'
         if len(departures) > 0:
