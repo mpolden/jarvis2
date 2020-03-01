@@ -29,11 +29,9 @@ class Sonos(AbstractJob):
     def get(self):
         speaker_info = self.device.get_speaker_info(timeout=self.timeout)
         zone_name = speaker_info['zone_name']
-        np = self.device.get_current_track_info()
-
-        current_track = np if np['playlist_position'] != '0' else None
-        queue = self.device.get_queue(int(np['playlist_position']), 1)
-        next_item = queue.pop() if len(queue) > 0 else None
+        current_track = self.device.get_current_track_info()
+        queue = self.device.get_queue()
+        next_item = next(iter(queue), None)
         next_track = {}
         if next_item is not None:
             next_track = {
@@ -41,10 +39,8 @@ class Sonos(AbstractJob):
                 'title': next_item.title,
                 'album': next_item.album
             }
-
         state = self.device.get_current_transport_info()[
             'current_transport_state']
-
         return {
             'room': zone_name,
             'state': state,
