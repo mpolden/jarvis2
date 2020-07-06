@@ -65,8 +65,11 @@ def widget(job_id):
         abort(404)
     x = request.args.get('x', 3)
     widgets = _enabled_jobs()
-    # Widget name shares the name of the job implementation
-    widget = _config()['JOBS'][job_id].get('job_impl', job_id)
+    # Use the widget matching the job implementation, or an explicitly declared
+    # widget
+    job = _config()['JOBS'][job_id]
+    widget = job.get('job_impl', job_id)
+    widget = job.get('widget', widget)
     return render_template('index.html', layout='layout_single.html',
                            widget=widget, job=job_id, x=x, widgets=widgets)
 

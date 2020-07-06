@@ -58,7 +58,8 @@ JOBS['gmail'] = {
     'interval': 600,
     'email': 'your.username@gmail.com',
     'folder': 'inbox',
-    'timeout': 5
+    'timeout': 5,
+    'widget': 'email'
 }
 
 JOBS['hackernews'] = {
@@ -74,7 +75,8 @@ JOBS['imap'] = {
     'url': 'imap://username:password@host:port',
     'tls': True,
     'starttls': False,
-    'folder': 'INBOX'
+    'folder': 'INBOX',
+    'widget': 'email',
 }
 
 JOBS['nsb'] = {
@@ -159,7 +161,8 @@ JOBS['vaernesekspressen'] = {
     'enabled': True,
     'interval': 600,
     'from_stop': 'FB 73 Nidarosdomen',
-    'timeout': 10  # Very slow API
+    'timeout': 10,  # Very slow API
+    'widget': 'flybussen'
 }
 
 JOBS['yr'] = {
