@@ -1,7 +1,7 @@
 JARVIS
 ======
 
-[![Build Status](https://travis-ci.org/mpolden/jarvis2.svg)](https://travis-ci.org/mpolden/jarvis2)
+![Build Status](https://github.com/mpolden/jarvis2/workflows/ci/badge.svg)
 
 JARVIS is a dashboard framework designed to run on the Raspberry Pi.
 
@@ -16,7 +16,7 @@ Screenshots
 
 Dependencies
 ------------
-JARVIS requires Python 3.5+ to run.
+JARVIS requires Python 3.6+ to run.
 
 Install requirements:
 
