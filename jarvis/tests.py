@@ -10,7 +10,7 @@ from app import app
 from datetime import datetime
 from jobs import (avinor, calendar, flybussen, hackernews, nsb, ping, rss,
                   vaernesekspressen, yr)
-from multiprocessing import Process
+from multiprocessing import Process, set_start_method
 from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -463,4 +463,8 @@ class CreateWidget(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    # 3.8 changed default method 'spawn' on macOS, however werkzeug doesn't
+    # work with spawn.
+    # https://bugs.python.org/issue33725
+    set_start_method('fork')
     unittest.main()
