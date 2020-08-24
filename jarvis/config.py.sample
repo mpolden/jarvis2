@@ -172,3 +172,12 @@ JOBS['yr'] = {
     'location': 'Trondheim',
     'timeout': 5
 }
+
+JOBS['yr2'] = {
+    'enabled': True,
+    'interval': 600,
+    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
+    'location': 'Trondheim',
+    'timeout': 5,
+    'job_impl': 'yr'
+}
