@@ -319,7 +319,7 @@ details.
 JOBS['yr'] = {
     'enabled': True,
     'interval': 600,
-    # Trondheim
-    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.14&lon=10.39'
+    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.14&lon=10.39',
+    'location': 'Trondheim'
 }
 ```
