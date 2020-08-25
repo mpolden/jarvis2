@@ -304,19 +304,22 @@ configurable.
 
 yr
 --
-Displays weather data from https://www.yr.no. The `url` field specifies the XML
-feed to use. Note that Yr requires a polling interval of at least 10 minutes
-(600 seconds).
+Displays weather data from https://www.yr.no. The `url` field specifies the
+location to display. Note that Yr requires a polling interval of at least 10
+minutes (600 seconds).
+
+Past versions of the Yr API allowed looking up a location by name, e.g.
+"Trondheim". In the current version callers have to provide latitude and
+longitude instead.
+
+See https://api.met.no/weatherapi/locationforecast/2.0/documentation for more
+details.
 
 ```python
 JOBS['yr'] = {
     'enabled': True,
     'interval': 600,
-    'url': ('https://www.yr.no/sted/Norge/Tr%C3%B8ndelag/Trondheim/'
-            'Trondheim/varsel.xml'),
-    'forecast_fallback': True
+    # Trondheim
+    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.14&lon=10.39'
 }
 ```
-
-Setting `forecast_fallback` to `True` (default) will display the weather
-forecast in case the closest weather station is reporting incomplete data.
