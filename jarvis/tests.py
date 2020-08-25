@@ -15,7 +15,6 @@ from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from tempfile import mkdtemp
-from xml.etree import ElementTree as etree
 from util.create_dashboard import DashboardFactory
 from util.create_widget import WidgetFactory
 from werkzeug.serving import run_simple
@@ -147,67 +146,23 @@ class App(unittest.TestCase):
 class Yr(unittest.TestCase):
 
     def setUp(self):
-        self.tree = etree.fromstring(test_data('varsel.xml'))
+        self.json = test_data('varsel.json', parse_json=True)
+        self.yr = yr.Yr({'interval': None, 'url': None,
+                         'location': 'Trondheim'})
 
-    def test_parse_tree(self):
-        y = yr.Yr({'interval': None, 'url': None})
-        data = y._parse_tree(self.tree)
+    def test_parse(self):
+        data = self.yr._parse(self.json, datetime(2020, 8, 17, 15))
+        self.assertEqual('Trondheim', data['today']['location'])
+        self.assertEqual(19.9, data['today']['temperature'])
+        self.assertEqual('Klarvær', data['today']['description'])
+        self.assertEqual('nordvest', data['today']['wind']['direction'])
+        self.assertEqual(2.8, data['today']['wind']['speed'])
 
-        self.assertEqual('Delvis skyet', data['description'])
-        self.assertEqual('Trondheim', data['location'])
-        self.assertEqual('16.3', data['temperature'])
-        self.assertEqual('Nord', data['wind']['direction'])
-        self.assertEqual('0.7', data['wind']['speed'])
-        self.assertEqual('Flau vind', data['wind']['description'])
-
-    def test_parse_tree_date(self):
-        y = yr.Yr({'interval': None, 'url': None})
-        data = y._parse_tree(self.tree, datetime(2013, 7, 1))
-
-        self.assertEqual('Regn', data['description'])
-        self.assertEqual('Trondheim', data['location'])
-        self.assertEqual('23', data['temperature'])
-        self.assertEqual(u'Sør', data['wind']['direction'])
-        self.assertEqual('3.6', data['wind']['speed'])
-        self.assertEqual('Lett bris', data['wind']['description'])
-
-    def test_parse_tree_missing_wind_from_weather_station(self):
-        tree = etree.fromstring(test_data('varsel2.xml'))
-        y = yr.Yr({'interval': None, 'url': None})
-        data = y._parse_tree(tree)
-        self.assertEqual(u'Vest-sørvest', data['wind']['direction'])
-        self.assertEqual('10.0', data['wind']['speed'])
-        self.assertEqual('Frisk bris', data['wind']['description'])
-
-    def test_parse_tree_missing_temperature(self):
-        tree = etree.fromstring(test_data('varsel3.xml'))
-        y = yr.Yr({'interval': None, 'url': None, 'forecast_fallback': False})
-        data = y._parse_tree(tree)
-        self.assertIsNone(data['temperature'])
-
-    def test_parse_tree_forecast_fallback(self):
-        tree = etree.fromstring(test_data('varsel4.xml'))
-        y = yr.Yr({'interval': None, 'url': None})
-        data = y._parse_tree(tree)
-
-        self.assertEqual('Lettskyet', data['description'])
-        self.assertEqual('Trondheim', data['location'])
-        self.assertEqual('-3', data['temperature'])
-        self.assertEqual(u'Sør', data['wind']['direction'])
-        self.assertEqual('8.6', data['wind']['speed'])
-        self.assertEqual('Frisk bris', data['wind']['description'])
-
-    def test_parse_tree_weather_station_removed(self):
-        tree = etree.fromstring(test_data('varsel5.xml'))
-        y = yr.Yr({'interval': None, 'url': None})
-        data = y._parse_tree(tree)
-
-        self.assertEqual('Skyet', data['description'])
-        self.assertEqual('Trondheim', data['location'])
-        self.assertEqual('-1', data['temperature'])
-        self.assertEqual(u'Sør-sørvest', data['wind']['direction'])
-        self.assertEqual('0.6', data['wind']['speed'])
-        self.assertEqual('Flau vind', data['wind']['description'])
+        self.assertEqual('Trondheim', data['tomorrow']['location'])
+        self.assertEqual(23.0, data['tomorrow']['temperature'])
+        self.assertEqual('Klarvær', data['tomorrow']['description'])
+        self.assertEqual('nordvest', data['tomorrow']['wind']['direction'])
+        self.assertEqual(2.2, data['tomorrow']['wind']['speed'])
 
 
 class HackerNews(unittest.TestCase):

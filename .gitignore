@@ -11,3 +11,4 @@
 /venv3/
 config.py
 config_*.py
+/.vscode/
