@@ -150,7 +150,7 @@ class Yr(unittest.TestCase):
         self.yr = yr.Yr({'interval': None, 'url': None,
                          'location': 'Trondheim'})
 
-    def test_parse_tree_new_api(self):
+    def test_parse(self):
         data = self.yr._parse(self.json, datetime(2020, 8, 17, 15))
         self.assertEqual('Trondheim', data['today']['location'])
         self.assertEqual(19.9, data['today']['temperature'])
