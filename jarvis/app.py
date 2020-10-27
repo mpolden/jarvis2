@@ -15,11 +15,12 @@ except ImportError:
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
-from flask import Flask, render_template, Response, request, abort
+from flask import Flask, render_template, Response, request, abort, g
 from flask_assets import Environment, Bundle
 from flask.templating import TemplateNotFound
 from jobs import load_jobs
 from random import randint
+from secrets import token_urlsafe
 
 
 app = Flask(__name__)
@@ -143,6 +144,23 @@ def _is_enabled(job_id):
 @app.context_processor
 def _inject_template_methods():
     return dict(is_job_enabled=_is_enabled)
+
+
+@app.context_processor
+def _inject_nonce():
+    return dict(nonce=g.nonce)
+
+
+@app.after_request
+def _set_csp(response):
+    csp = 'script-src \'self\' cdnjs.cloudflare.com \'nonce-' + g.nonce + '\''
+    response.headers['Content-Security-Policy'] = csp
+    return response
+
+
+@app.before_request
+def _set_nonce():
+    g.nonce = token_urlsafe(32)
 
 
 @app.before_first_request
