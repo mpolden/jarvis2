@@ -22,11 +22,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: install dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install black flake8
-        python3 -m pip install -r requirements.txt
-        npm install -g jshint
+    - name: install requirements
+      run: make install-requirements
     - name: run tests
       run: make

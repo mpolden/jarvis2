@@ -64,3 +64,10 @@ list-outdated-deps:
 
 venv:
 	$(VENV) venv
+
+install-requirements:
+	$(PIP) install -r requirements-build.txt
+	$(PIP) install -r requirements.txt
+ifdef TRAVIS
+	npm install -g jshint
+endif
