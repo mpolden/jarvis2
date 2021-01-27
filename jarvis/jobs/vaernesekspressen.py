@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 import requests
 
 from datetime import datetime, timedelta
@@ -62,10 +63,13 @@ class Vaernesekspressen(AbstractJob):
         }
         r = requests.post(url, json=data, timeout=self.timeout)
         r.raise_for_status()
-        return [{'stop_name': d['Start']['Name'],
-                 'destination_name': d['End']['Name'],
+        return [{'stop_name': self._trim_name(d['Start']['Name']),
+                 'destination_name': self._trim_name(d['End']['Name']),
                  'departure_time': str(self._parse_time(d['DepartureTime']))}
                 for d in r.json()]
+
+    def _trim_name(self, name):
+        return re.sub(r"^FB \d+ ", "", name)
 
     def get(self):
         stop_id = self._find_stop_id()

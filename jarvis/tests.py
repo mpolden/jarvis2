@@ -341,9 +341,9 @@ class Vaernesekspressen(unittest.TestCase):
         data = f.get()
         self.assertEqual(9, len(data['departures']))
         self.assertEqual('1580570100', data['departures'][0]['departure_time'])
-        self.assertEqual('FB 73 Nidarosdomen',
+        self.assertEqual('Nidarosdomen',
                          data['departures'][0]['stop_name'])
-        self.assertEqual('FB 73 Nidarosdomen', data['from'])
+        self.assertEqual('Nidarosdomen', data['from'])
         self.assertEqual(u'Trondheim Lufthavn Værnes', data['to'])
 
     def tearDown(self):
