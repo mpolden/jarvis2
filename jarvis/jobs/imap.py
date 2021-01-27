@@ -12,25 +12,24 @@ from jobs import AbstractJob
 
 
 class IMAP(AbstractJob):
-
     def __init__(self, conf):
-        self.interval = conf['interval']
-        self.email = conf['email']
-        self.url = urlparse(conf['url'])
-        self.tls = conf.get('tls', True)
-        self.starttls = conf.get('starttls', False)
-        self.folder = conf['folder']
+        self.interval = conf["interval"]
+        self.email = conf["email"]
+        self.url = urlparse(conf["url"])
+        self.tls = conf.get("tls", True)
+        self.starttls = conf.get("starttls", False)
+        self.folder = conf["folder"]
 
     def _parse_count(self, message):
-        count = re.search(r'\w+ (\d+)', message.decode('utf-8'))
+        count = re.search(r"\w+ (\d+)", message.decode("utf-8"))
         return int(count.group(1)) if count is not None else 0
 
     def _get_count(self):
-        _, message = self.mail.status(self.folder, '(MESSAGES)')
+        _, message = self.mail.status(self.folder, "(MESSAGES)")
         return self._parse_count(message[0])
 
     def _get_unread_count(self):
-        _, message = self.mail.status(self.folder, '(UNSEEN)')
+        _, message = self.mail.status(self.folder, "(UNSEEN)")
         return self._parse_count(message[0])
 
     def get(self):
@@ -45,8 +44,8 @@ class IMAP(AbstractJob):
         unread = self._get_unread_count()
         self.mail.logout()
         return {
-            'email': self.email,
-            'folder': self.folder,
-            'count': count,
-            'unread': unread
+            "email": self.email,
+            "folder": self.folder,
+            "count": count,
+            "unread": unread,
         }
