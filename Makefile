@@ -17,7 +17,7 @@ flake8:
 
 lint-js:
 ifdef CI
-	find $(APP_ROOT) -name '*.js' -type -f | xargs jshint
+	find $(APP_ROOT) -name '*.js' -type f | xargs jshint
 endif
 
 lint: lint-py lint-js
