@@ -16,7 +16,7 @@ flake8:
 	find $(APP_ROOT) -name '*.py' -type f | xargs $(FLAKE8)
 
 lint-js:
-ifdef TRAVIS
+ifdef CI
 	find $(APP_ROOT) -name '*.js' -type -f | xargs jshint
 endif
 
@@ -68,6 +68,6 @@ venv:
 install-requirements:
 	$(PIP) install -r requirements-build.txt
 	$(PIP) install -r requirements.txt
-ifdef TRAVIS
+ifdef CI
 	npm install -g jshint
 endif
