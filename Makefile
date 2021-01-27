@@ -1,17 +1,23 @@
 PYTHON ?= python3
 FLAKE8 ?= $(PYTHON) -m flake8 --max-complexity=8
+BLACK ?= $(PYTHON) -m black --quiet --check
 PIP ?= $(PYTHON) -m pip
 VENV ?= $(PYTHON) -m venv
 APP_ROOT := jarvis
 
 all: clean lint test
 
-lint-py:
-	find $(APP_ROOT) -name '*.py' | xargs $(FLAKE8)
+lint-py: black flake8
+
+black:
+	find $(APP_ROOT) -name '*.py' -type f | xargs $(BLACK)
+
+flake8:
+	find $(APP_ROOT) -name '*.py' -type f | xargs $(FLAKE8)
 
 lint-js:
 ifdef TRAVIS
-	find $(APP_ROOT) -name '*.js' | xargs jshint
+	find $(APP_ROOT) -name '*.js' -type -f | xargs jshint
 endif
 
 lint: lint-py lint-js
@@ -20,7 +26,7 @@ test:
 	$(PYTHON) $(APP_ROOT)/tests.py
 
 clean:
-	find $(APP_ROOT) -name '*.pyc' -delete
+	find $(APP_ROOT) -name '*.pyc' -type f -delete
 	rm -rf $(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
 
 widget:
