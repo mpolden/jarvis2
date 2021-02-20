@@ -16,7 +16,7 @@ JOBS = {}
 JOBS['atb'] = {
     'enabled': True,
     'interval': 60,
-    'url': 'https://atbapi.tar.io/api/v1/departures/16010194',
+    'url': 'https://mpolden.no/atb/v1/departures/16010194',
     'timeout': 5
 }
 
@@ -24,7 +24,7 @@ JOBS['atb'] = {
 JOBS['atb-16010382'] = {
     'enabled': False,
     'interval': 60,
-    'url': 'https://atbapi.tar.io/api/v1/departures/16010007',
+    'url': 'https://mpolden.no/atb/v1/departures/16010007',
     'timeout': 5,
     'job_impl': 'atb'
 }
