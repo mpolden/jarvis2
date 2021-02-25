@@ -19,8 +19,9 @@ sonos.applyAlbumArt = function (vnode) {
   var state = vnode.attrs.data;
   if (state.display_album_art && state.current && state.current.album_art) {
     image = 'url(' + state.current.album_art + ')';
+    vnode.attrs.el.style.backgroundImage = image;
+    vnode.attrs.el.style.backgroundSize = '300px';
   }
-  vnode.attrs.el.style.backgroundImage = image;
   return image !== defaultValue;
 };
 
