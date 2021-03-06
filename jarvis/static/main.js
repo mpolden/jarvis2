@@ -42,8 +42,8 @@ jrvs.truncate = function (s, n) {
 var bootstrapReq = new XMLHttpRequest();
 
 bootstrapReq.onreadystatechange = function() {
-  if (bootstrapReq.readyState == XMLHttpRequest.DONE) {
-    if (bootstrapReq.status != 200) {
+  if (bootstrapReq.readyState === XMLHttpRequest.DONE) {
+    if (bootstrapReq.status !== 200) {
       return;
     }
     var widgets = JSON.parse(bootstrapReq.responseText);
@@ -56,6 +56,6 @@ bootstrapReq.onreadystatechange = function() {
 
 document.addEventListener('DOMContentLoaded', function () {
   jrvs.subscribe();
-  bootstrapReq.open("GET", "/widgets");
+  bootstrapReq.open('GET', '/widgets');
   bootstrapReq.send();
 });
