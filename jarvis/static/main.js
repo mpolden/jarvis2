@@ -39,23 +39,24 @@ jrvs.truncate = function (s, n) {
   return s;
 };
 
-var bootstrapReq = new XMLHttpRequest();
-
-bootstrapReq.onreadystatechange = function() {
-  if (bootstrapReq.readyState === XMLHttpRequest.DONE) {
-    if (bootstrapReq.status !== 200) {
+jrvs.bootstrap = function() {
+  if (this.readyState === XMLHttpRequest.DONE) {
+    if (this.status !== 200) {
       return;
     }
-    var widgets = JSON.parse(bootstrapReq.responseText);
-    // Pre-render widgets until data is available
+    var widgets = JSON.parse(this.responseText);
+    // Pre-render enabled widgets
     widgets.forEach(function (name) {
       jrvs.render(jrvs.widgetForJob(name));
     });
+    // Subscribe to events
+    jrvs.subscribe();
   }
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-  jrvs.subscribe();
-  bootstrapReq.open('GET', '/widgets');
-  bootstrapReq.send();
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = jrvs.bootstrap;
+  req.open('GET', '/widgets');
+  req.send();
 });
