@@ -162,7 +162,7 @@ def _inject_template_methods():
 
 
 @app.after_request
-def _set_csp(response):
+def _set_security_headers(response):
     csp = (
         "default-src 'none'; "
         "connect-src 'self'; "
@@ -171,6 +171,9 @@ def _set_csp(response):
         "font-src https://fonts.gstatic.com"
     )
     response.headers["Content-Security-Policy"] = csp
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
     return response
 
 
