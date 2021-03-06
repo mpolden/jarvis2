@@ -39,12 +39,23 @@ jrvs.truncate = function (s, n) {
   return s;
 };
 
-jrvs.widgets = [];
+var bootstrapReq = new XMLHttpRequest();
+
+bootstrapReq.onreadystatechange = function() {
+  if (bootstrapReq.readyState == XMLHttpRequest.DONE) {
+    if (bootstrapReq.status != 200) {
+      return;
+    }
+    var widgets = JSON.parse(bootstrapReq.responseText);
+    // Pre-render widgets until data is available
+    widgets.forEach(function (name) {
+      jrvs.render(jrvs.widgetForJob(name));
+    });
+  }
+};
 
 document.addEventListener('DOMContentLoaded', function () {
   jrvs.subscribe();
-  // Pre-render widgets until data is available
-  jrvs.widgets.forEach(function (name) {
-    jrvs.render(jrvs.widgetForJob(name));
-  });
+  bootstrapReq.open("GET", "/widgets");
+  bootstrapReq.send();
 });

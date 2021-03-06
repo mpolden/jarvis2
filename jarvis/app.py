@@ -15,12 +15,11 @@ except ImportError:
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
-from flask import Flask, render_template, Response, request, abort, g
+from flask import Flask, render_template, Response, request, abort, jsonify
 from flask_assets import Environment, Bundle
 from flask.templating import TemplateNotFound
 from jobs import load_jobs
 from random import randint
-from secrets import token_urlsafe
 
 
 app = Flask(__name__)
@@ -104,6 +103,11 @@ def dashboard(layout=None):
         abort(404)
 
 
+@app.route("/widgets")
+def widgets():
+    return jsonify(_enabled_jobs())
+
+
 @app.route("/events")
 def events():
     remote_port = request.environ["REMOTE_PORT"]
@@ -157,21 +161,17 @@ def _inject_template_methods():
     return dict(is_job_enabled=_is_enabled)
 
 
-@app.context_processor
-def _inject_nonce():
-    return dict(nonce=g.nonce)
-
-
 @app.after_request
 def _set_csp(response):
-    csp = "script-src 'self' cdnjs.cloudflare.com 'nonce-" + g.nonce + "'"
+    csp = (
+        "default-src 'none'; "
+        "connect-src 'self'; "
+        "script-src 'self' https://cdnjs.cloudflare.com; "
+        "style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; "
+        "font-src https://fonts.gstatic.com"
+    )
     response.headers["Content-Security-Policy"] = csp
     return response
-
-
-@app.before_request
-def _set_nonce():
-    g.nonce = token_urlsafe(32)
 
 
 @app.before_first_request

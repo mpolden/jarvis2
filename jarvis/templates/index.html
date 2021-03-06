@@ -40,8 +40,5 @@
     <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
     {% endif %}
-    <script nonce="{{ nonce }}">
-      jrvs.widgets = ['{{ "', '".join(widgets) | safe }}'];
-    </script>
   </body>
 </html>
