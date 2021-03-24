@@ -25,7 +25,7 @@ pycodestyle==2.6.0
 pyflakes==2.2.0
 pytz==2018.4
 requests==2.22.0
-rsa==3.4.2
+rsa==4.1
 six==1.11.0
 soco==0.19
 soupsieve==1.9.1
