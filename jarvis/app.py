@@ -166,6 +166,7 @@ def _set_security_headers(response):
     csp = (
         "default-src 'none'; "
         "connect-src 'self'; "
+        "img-src 'self' https://i.scdn.co; "
         "script-src 'self' https://cdnjs.cloudflare.com; "
         "style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; "
         "font-src https://fonts.gstatic.com"
