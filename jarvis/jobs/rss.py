@@ -18,8 +18,10 @@ class Rss(AbstractJob):
         tree = etree.fromstring(xml.encode("utf-8"))
         items = []
         for item in tree.findall("./channel/item"):
-            title = item.find("title").text
-            pubDate = item.find("pubDate").text
+            title = getattr(item.find("title"), "text", None)
+            pubDate = getattr(item.find("pubDate"), "text", None)
+            if title is None or pubDate is None:
+                continue
             time = mktime_tz(parsedate_tz(pubDate))
             items.append({"title": title, "time": time})
         title = self.title
