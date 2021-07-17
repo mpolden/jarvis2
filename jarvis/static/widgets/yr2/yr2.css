@@ -1,0 +1,46 @@
+[data-widget="yr2"] {
+  height: 100%;
+  padding: 5px;
+  background: #81c6dd;
+  text-align: center;
+}
+
+[data-widget="yr2"] p.fade {
+  margin-bottom: 0px;
+}
+
+[data-widget="yr2"] h1 {
+  font-size: 42px;
+  margin: 5px 0 5px 0;
+  height: 50px;
+}
+
+[data-widget="yr2"] h1 img {
+  height: 52px;
+  width: 52px;
+  margin-top: -18px;
+}
+
+[data-widget="yr2"] table {
+  margin: 0 8px 0 8px;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+[data-widget="yr2"] table td {
+  height: 23px;
+}
+
+[data-widget="yr2"] img {
+  width: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+[data-widget="yr2"] header {
+  margin: 7px;
+}
+
+[data-widget="yr2"] p.wind {
+  margin: 0;
+}

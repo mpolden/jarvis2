@@ -323,3 +323,19 @@ JOBS['yr'] = {
     'location': 'Trondheim'
 }
 ```
+
+yr2
+---
+
+Similar to `yr`, but has a compact widget layout including a weather forecast
+for the next six hours and next six days. The widget also displays [weather
+icons](https://api.met.no/weatherapi/weathericon/2.0/documentation).
+
+```python
+JOBS['yr2'] = {
+    'enabled': True,
+    'interval': 600,
+    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.14&lon=10.39',
+    'location': 'Trondheim'
+}
+```

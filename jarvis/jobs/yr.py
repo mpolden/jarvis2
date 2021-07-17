@@ -48,6 +48,8 @@ SYMBOL_TABLE = {
     "heavysleetshowersandthunder": "Kraftige sluddbyger og torden",
 }
 
+HOUR_OF_NEXT_DAY = 12
+
 
 class Yr(AbstractJob):
     def __init__(self, conf):
@@ -59,11 +61,13 @@ class Yr(AbstractJob):
     def _get_temperature(self, data):
         return data["data"]["instant"]["details"]["air_temperature"]
 
-    def _get_description(self, data):
-        symbol = data["data"]["next_1_hours"]["summary"]["symbol_code"]
+    def _get_description(self, data, period=None):
+        if period is None:
+            period = "next_1_hours"
+        symbol_code = data["data"][period]["summary"]["symbol_code"]
         # Remove any trailing time of day identifier: cloudy_night -> cloudy
-        symbol = symbol.split("_")[0]
-        return SYMBOL_TABLE[symbol]
+        symbol_key = symbol_code.split("_")[0]
+        return (SYMBOL_TABLE[symbol_key], symbol_code)
 
     def _baufort(self, wind_speed):  # noqa: C901
         if wind_speed < 0.3:
@@ -111,6 +115,24 @@ class Yr(AbstractJob):
             return "nordvest"
         raise ValueError("Invalid direction {}".format(deg))
 
+    def _get_day_name(self, dt):
+        day = dt.weekday()
+        if day == 0:
+            return "mandag"
+        elif day == 1:
+            return "tirsdag"
+        elif day == 2:
+            return "onsdag"
+        elif day == 3:
+            return "torsdag"
+        elif day == 4:
+            return "fredag"
+        elif day == 5:
+            return "lørdag"
+        elif day == 6:
+            return "søndag"
+        raise ValueError("Invalid day: {}".format(day))
+
     def _get_wind(self, data):
         speed = data["data"]["instant"]["details"]["wind_speed"]
         direction = self._get_direction(
@@ -118,6 +140,31 @@ class Yr(AbstractJob):
         )
         description = self._baufort(speed)
         return {"speed": speed, "direction": direction, "description": description}
+
+    def _find_forecast(self, data, date, hourly=False, count=6):
+        if not hourly:
+            date = date.replace(hour=HOUR_OF_NEXT_DAY)
+        forecast = []
+        for n in range(1, count + 1):
+            forecasted_date = date + timedelta(days=n)
+            if hourly:
+                forecasted_date = date + timedelta(hours=n)
+            observation = self._find_observation(data, forecasted_date)
+            time = datetime.strptime(observation["time"], "%Y-%m-%dT%H:%M:%SZ")
+            temperature = observation["data"]["instant"]["details"]["air_temperature"]
+            if not hourly or n == 1:
+                # Only get description for next 6 hours if we're forecasting several
+                # days or if this is the first forecast
+                _, symbol = self._get_description(observation, period="next_6_hours")
+            day_name = self._get_day_name(time)
+            f = {
+                "day": day_name,
+                "hour": time.hour,
+                "temperature": temperature,
+                "symbol": symbol,
+            }
+            forecast.append(f)
+        return forecast
 
     def _find_observation(self, data, date):
         date = date.replace(minute=0, second=0, microsecond=0)
@@ -129,26 +176,33 @@ class Yr(AbstractJob):
             return ts
         raise ValueError("No observation found for time {}".format(date_fmt))
 
-    def _parse_tree(self, data, date):
+    def _parse_week(self, data, date):
+        forecast = self._find_forecast(data, date)
+        return {"forecast": forecast}
+
+    def _parse_day(self, data, date):
         observation = self._find_observation(data, date)
         temperature = self._get_temperature(observation)
-        description = self._get_description(observation)
+        description, symbol = self._get_description(observation)
         wind = self._get_wind(observation)
+        forecast = self._find_forecast(data, date, hourly=True)
         return {
             "location": self.location,
             "description": description,
+            "symbol": symbol,
             "temperature": temperature,
             "wind": wind,
+            "forecast": forecast,
         }
 
     def _parse(self, data, date=None):
         if date is None:
             date = datetime.now()
-        next_day = date + timedelta(days=1)
-        next_day = next_day.replace(hour=15)
+        next_day = (date + timedelta(days=1)).replace(hour=HOUR_OF_NEXT_DAY)
         return {
-            "today": self._parse_tree(data, date),
-            "tomorrow": self._parse_tree(data, next_day),
+            "today": self._parse_day(data, date),
+            "tomorrow": self._parse_day(data, next_day),
+            "week": self._parse_week(data, date),
         }
 
     def get(self):

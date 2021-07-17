@@ -18,3 +18,8 @@
   font-size: 16px;
   margin: 0;
 }
+
+[data-widget="yr"] img.tomorrow {
+  width: 20px;
+  position: absolute;
+}

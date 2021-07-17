@@ -233,7 +233,12 @@ def _run_job(job_id, job):
         data = job.get()
         _add_event(job_id, data)
     except Exception as e:
-        app.logger.warning("Failed to execute job: " + job_id + ": " + str(e))
+        msg = "Failed to execute job: " + job_id + ": " + str(e)
+        if app.debug:
+            app.logger.warning(msg, e)
+        else:
+            # Skip logging stack trace
+            app.logger.warning(msg)
 
 
 def _close_stream(*args, **kwargs):

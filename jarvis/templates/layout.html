@@ -5,6 +5,11 @@
       <div data-widget="yr"></div>
     </div>
     {% endif %}
+    {% if is_job_enabled('yr2') %}
+    <div class="col-3">
+      <div data-widget="yr2"></div>
+    </div>
+    {% endif %}
     {% if is_job_enabled('time') %}
     <div class="col-3">
       <div data-widget="time"></div>
@@ -31,7 +36,7 @@
     </div>
     {% endif %}
     {% if is_job_enabled('uptime') %}
-    <div class="col-3">    
+    <div class="col-3">
       <div data-widget="uptime"></div>
     </div>
     {% endif %}
@@ -46,7 +51,7 @@
     </div>
     {% endif %}
     {% if is_job_enabled('plex') %}
-    <div class="col-3">      
+    <div class="col-3">
       <div data-widget="plex"></div>
     </div>
     {% endif %}
@@ -61,12 +66,12 @@
     </div>
     {% endif %}
     {% if is_job_enabled('gmail') %}
-    <div class="col-3">    
+    <div class="col-3">
       <div data-widget="email" data-job="gmail"></div>
     </div>
     {% endif %}
     {% if is_job_enabled('imap') %}
-    <div class="col-3">    
+    <div class="col-3">
       <div data-widget="email" data-job="imap"></div>
     </div>
     {% endif %}

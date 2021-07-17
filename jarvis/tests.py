@@ -149,20 +149,143 @@ class Yr(unittest.TestCase):
     def setUp(self):
         self.json = test_data("varsel.json", parse_json=True)
         self.yr = yr.Yr({"interval": None, "url": None, "location": "Trondheim"})
+        self.maxDiff = None
 
     def test_parse(self):
         data = self.yr._parse(self.json, datetime(2020, 8, 17, 15))
+        # Today
         self.assertEqual("Trondheim", data["today"]["location"])
         self.assertEqual(19.9, data["today"]["temperature"])
         self.assertEqual("Klarvær", data["today"]["description"])
         self.assertEqual("nordvest", data["today"]["wind"]["direction"])
         self.assertEqual(2.8, data["today"]["wind"]["speed"])
+        self.assertEqual(
+            [
+                {
+                    "day": "mandag",
+                    "hour": 16,
+                    "symbol": "clearsky_day",
+                    "temperature": 19.3,
+                },
+                {
+                    "day": "mandag",
+                    "hour": 17,
+                    "symbol": "clearsky_day",
+                    "temperature": 18.4,
+                },
+                {
+                    "day": "mandag",
+                    "hour": 18,
+                    "symbol": "clearsky_day",
+                    "temperature": 17.3,
+                },
+                {
+                    "day": "mandag",
+                    "hour": 19,
+                    "symbol": "clearsky_day",
+                    "temperature": 15.7,
+                },
+                {
+                    "day": "mandag",
+                    "hour": 20,
+                    "symbol": "clearsky_day",
+                    "temperature": 14.0,
+                },
+                {
+                    "day": "mandag",
+                    "hour": 21,
+                    "symbol": "clearsky_day",
+                    "temperature": 12.9,
+                },
+            ],
+            data["today"]["forecast"],
+        )
 
+        # Tomorrow
         self.assertEqual("Trondheim", data["tomorrow"]["location"])
-        self.assertEqual(23.0, data["tomorrow"]["temperature"])
+        self.assertEqual(23.2, data["tomorrow"]["temperature"])
         self.assertEqual("Klarvær", data["tomorrow"]["description"])
         self.assertEqual("nordvest", data["tomorrow"]["wind"]["direction"])
-        self.assertEqual(2.2, data["tomorrow"]["wind"]["speed"])
+        self.assertEqual(1.6, data["tomorrow"]["wind"]["speed"])
+        self.assertEqual(
+            [
+                {
+                    "day": "tirsdag",
+                    "hour": 13,
+                    "symbol": "clearsky_day",
+                    "temperature": 23.4,
+                },
+                {
+                    "day": "tirsdag",
+                    "hour": 14,
+                    "symbol": "clearsky_day",
+                    "temperature": 23.3,
+                },
+                {
+                    "day": "tirsdag",
+                    "hour": 15,
+                    "symbol": "clearsky_day",
+                    "temperature": 23.0,
+                },
+                {
+                    "day": "tirsdag",
+                    "hour": 16,
+                    "symbol": "clearsky_day",
+                    "temperature": 22.4,
+                },
+                {
+                    "day": "tirsdag",
+                    "hour": 17,
+                    "symbol": "clearsky_day",
+                    "temperature": 21.5,
+                },
+                {
+                    "day": "tirsdag",
+                    "hour": 18,
+                    "symbol": "clearsky_day",
+                    "temperature": 20.3,
+                },
+            ],
+            data["tomorrow"]["forecast"],
+        )
+
+        # Week
+        self.assertEqual(
+            [
+                {
+                    "day": "tirsdag",
+                    "hour": 12,
+                    "symbol": "clearsky_day",
+                    "temperature": 23.2,
+                },
+                {
+                    "day": "onsdag",
+                    "hour": 12,
+                    "symbol": "rainshowers_day",
+                    "temperature": 22.4,
+                },
+                {"day": "torsdag", "hour": 12, "symbol": "cloudy", "temperature": 20.2},
+                {
+                    "day": "fredag",
+                    "hour": 12,
+                    "symbol": "partlycloudy_day",
+                    "temperature": 22.5,
+                },
+                {
+                    "day": "lørdag",
+                    "hour": 12,
+                    "symbol": "partlycloudy_day",
+                    "temperature": 21.4,
+                },
+                {
+                    "day": "søndag",
+                    "hour": 12,
+                    "symbol": "rainshowers_day",
+                    "temperature": 18.1,
+                },
+            ],
+            data["week"]["forecast"],
+        )
 
 
 class HackerNews(unittest.TestCase):
