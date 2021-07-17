@@ -8,7 +8,7 @@ yr2.formatWind = function (wind) {
 };
 
 yr2.symbolIcon = (symbol) => {
-  return '/static/widgets/yr2/weather_icons/png/' + symbol + '.png';
+  return '/widget/yr2/' + symbol + '.png';
 };
 
 yr2.view = function (vnode) {
