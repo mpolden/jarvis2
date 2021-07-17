@@ -15,7 +15,15 @@ except ImportError:
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
-from flask import Flask, render_template, Response, request, abort, jsonify
+from flask import (
+    Flask,
+    render_template,
+    Response,
+    request,
+    abort,
+    jsonify,
+    send_from_directory,
+)
 from flask_assets import Environment, Bundle
 from flask.templating import TemplateNotFound
 from jobs import load_jobs
@@ -29,16 +37,15 @@ app.jinja_env.lstrip_blocks = True
 sched = BackgroundScheduler(logger=app.logger)
 queues = {}
 last_events = {}
+widgets_path = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "static", "widgets")
+)
 
 
 @app.before_first_request
 def _configure_bundles():
     js = ["main.js"]
     css = ["main.css"]
-    widgets_path = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "static", "widgets")
-    )
-
     for widget in os.listdir(widgets_path):
         widget_path = os.path.join("widgets", widget)
         for asset_file in os.listdir(os.path.join(widgets_path, widget)):
@@ -81,6 +88,12 @@ def widget(job_id):
         x=x,
         widgets=widgets,
     )
+
+
+@app.route("/widget/<widget>/<filename>")
+def widget_files(widget, filename):
+    public_path = os.path.join(widgets_path, widget, "public")
+    return send_from_directory(public_path, filename)
 
 
 @app.route("/")
