@@ -209,7 +209,7 @@ class Yr(AbstractJob):
     def get(self):
         # Yr API requires a unique user agent
         # https://api.met.no/weatherapi/locationforecast/2.0/documentation#AUTHENTICATION
-        headers = {"User-Agent": "jarvis2/1.0"}
+        headers = {"User-Agent": "jarvis2/1.0 (+https://github.com/mpolden/jarvis2)"}
         r = requests.get(self.url, timeout=self.timeout, headers=headers)
         r.raise_for_status()
         return self._parse(r.json())
