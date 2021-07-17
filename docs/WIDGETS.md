@@ -319,7 +319,7 @@ details.
 JOBS['yr'] = {
     'enabled': True,
     'interval': 600,
-    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.14&lon=10.39',
+    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
     'location': 'Trondheim'
 }
 ```
@@ -335,7 +335,7 @@ icons](https://api.met.no/weatherapi/weathericon/2.0/documentation).
 JOBS['yr2'] = {
     'enabled': True,
     'interval': 600,
-    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.14&lon=10.39',
+    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
     'location': 'Trondheim'
 }
 ```
