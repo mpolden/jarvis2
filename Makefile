@@ -10,14 +10,14 @@ all: clean lint test
 lint-py: black flake8
 
 black:
-	find $(APP_ROOT) -name '*.py' -type f | xargs $(BLACK)
+	git ls-files '*.py' | xargs $(BLACK)
 
 flake8:
-	find $(APP_ROOT) -name '*.py' -type f | xargs $(FLAKE8)
+	git ls-files '*.py' | xargs $(FLAKE8)
 
 lint-js:
 ifdef CI
-	find $(APP_ROOT) -name '*.js' -type f | xargs jshint
+	git ls-files '*.js' | xargs jshint
 endif
 
 lint: lint-py lint-js
@@ -26,8 +26,7 @@ test:
 	$(PYTHON) $(APP_ROOT)/tests.py
 
 clean:
-	find $(APP_ROOT) -name '*.pyc' -type f -delete
-	rm -rf $(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
+	rm -rf $(APP_ROOT)/**/*.pyc $(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
 
 widget:
 	$(PYTHON) $(APP_ROOT)/util/create_widget.py $(NAME)
