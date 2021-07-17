@@ -55,8 +55,8 @@ class Yr(AbstractJob):
     def __init__(self, conf):
         self.url = conf["url"]
         self.interval = conf["interval"]
+        self.location = conf["location"]
         self.timeout = conf.get("timeout")
-        self.location = conf.get("location")
 
     def _temperature(self, observation):
         return observation["data"]["instant"]["details"]["air_temperature"]
