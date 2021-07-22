@@ -13,171 +13,156 @@ DEFAULT_LAYOUT = None
 
 JOBS = {}
 
-JOBS['atb'] = {
-    'enabled': True,
-    'interval': 60,
-    'url': 'https://mpolden.no/atb/v1/departures/16010194',
-    'timeout': 5
+JOBS["atb"] = {
+    "enabled": True,
+    "interval": 60,
+    "url": "https://mpolden.no/atb/v1/departures/16010194",
+    "timeout": 5,
 }
 
 # Add additional atb job for another departure
-JOBS['atb-16010382'] = {
-    'enabled': False,
-    'interval': 60,
-    'url': 'https://mpolden.no/atb/v1/departures/16010007',
-    'timeout': 5,
-    'job_impl': 'atb'
+JOBS["atb-16010382"] = {
+    "enabled": False,
+    "interval": 60,
+    "url": "https://mpolden.no/atb/v1/departures/16010007",
+    "timeout": 5,
+    "job_impl": "atb",
 }
 
-JOBS['avinor'] = {
-    'enabled': True,
-    'interval': 180,
-    'from': 'TRD',
-    'to': 'OSL',
-    'timeout': 5
+JOBS["avinor"] = {
+    "enabled": True,
+    "interval": 180,
+    "from": "TRD",
+    "to": "OSL",
+    "timeout": 5,
 }
 
-JOBS['calendar'] = {
-    'enabled': False,
-    'interval': 600,
-    'client_id': '',
-    'client_secret': '',
-    'timeout': 5
+JOBS["calendar"] = {
+    "enabled": False,
+    "interval": 600,
+    "client_id": "",
+    "client_secret": "",
+    "timeout": 5,
 }
 
-JOBS['flybussen'] = {
-    'enabled': True,
-    'interval': 600,
-    'from_stop': 'Ullevål Stadion',
-    'to_airport': 'OSL',
-    'timeout': 5
+JOBS["flybussen"] = {
+    "enabled": True,
+    "interval": 600,
+    "from_stop": "Ullevål Stadion",
+    "to_airport": "OSL",
+    "timeout": 5,
 }
 
-JOBS['gmail'] = {
-    'enabled': False,
-    'interval': 600,
-    'email': 'your.username@gmail.com',
-    'folder': 'inbox',
-    'timeout': 5,
-    'widget': 'email'
+JOBS["gmail"] = {
+    "enabled": False,
+    "interval": 600,
+    "email": "your.username@gmail.com",
+    "folder": "inbox",
+    "timeout": 5,
+    "widget": "email",
 }
 
-JOBS['hackernews'] = {
-    'enabled': True,
-    'interval': 900,
-    'timeout': 5
+JOBS["hackernews"] = {"enabled": True, "interval": 900, "timeout": 5}
+
+JOBS["imap"] = {
+    "enabled": False,
+    "interval": 600,
+    "email": "email-address-to-display",
+    "url": "imap://username:password@host:port",
+    "tls": True,
+    "starttls": False,
+    "folder": "INBOX",
+    "widget": "email",
 }
 
-JOBS['imap'] = {
-    'enabled': False,
-    'interval': 600,
-    'email': 'email-address-to-display',
-    'url': 'imap://username:password@host:port',
-    'tls': True,
-    'starttls': False,
-    'folder': 'INBOX',
-    'widget': 'email',
+JOBS["nsb"] = {
+    "enabled": True,
+    "interval": 900,
+    "from": "Trondheim S",
+    "to": "Oslo S",
+    "timeout": 5,
 }
 
-JOBS['nsb'] = {
-    'enabled': True,
-    'interval': 900,
-    'from': 'Trondheim S',
-    'to': 'Oslo S',
-    'timeout': 5
+JOBS["ping"] = {
+    "enabled": False,
+    "interval": 3,
+    "hosts": (("google.com", "google.com"), ("gw", "10.0.0.1")),
+    "timeout": 1,
 }
 
-JOBS['ping'] = {
-    'enabled': False,
-    'interval': 3,
-    'hosts': (
-        ('google.com', 'google.com'),
-        ('gw', '10.0.0.1')
-    ),
-    'timeout': 1
+JOBS["plex"] = {
+    "enabled": False,
+    "interval": 900,
+    "movies": "https://ip:port/library/sections/2/recentlyAdded/",
+    "shows": "https://ip:port/library/sections/1/recentlyAdded/",
+    "verify": False,
+    "timeout": 5,
 }
 
-JOBS['plex'] = {
-    'enabled': False,
-    'interval': 900,
-    'movies': 'https://ip:port/library/sections/2/recentlyAdded/',
-    'shows': 'https://ip:port/library/sections/1/recentlyAdded/',
-    'verify': False,
-    'timeout': 5
+JOBS["rss-nrk"] = {
+    "enabled": True,
+    "interval": 900,
+    "url": "https://www.nrk.no/toppsaker.rss",
+    "title": "NRK",
+    "timeout": 5,
+    "job_impl": "rss",
 }
 
-JOBS['rss-nrk'] = {
-    'enabled': True,
-    'interval': 900,
-    'url': 'https://www.nrk.no/toppsaker.rss',
-    'title': 'NRK',
-    'timeout': 5,
-    'job_impl': 'rss'
+JOBS["rss-guardian"] = {
+    "enabled": True,
+    "interval": 900,
+    "url": "https://www.theguardian.com/international/rss",
+    "title": "The Guardian",
+    "timeout": 5,
+    "job_impl": "rss",
 }
 
-JOBS['rss-guardian'] = {
-    'enabled': True,
-    'interval': 900,
-    'url': 'https://www.theguardian.com/international/rss',
-    'title': 'The Guardian',
-    'timeout': 5,
-    'job_impl': 'rss'
+JOBS["sonos"] = {
+    "enabled": False,
+    "interval": 10,
+    "ip": "ip.addr",
+    "display_album_art": True,
+    "timeout": 5,
 }
 
-JOBS['sonos'] = {
-    'enabled': False,
-    'interval': 10,
-    'ip': 'ip.addr',
-    'display_album_art': True,
-    'timeout': 5
+JOBS["stats"] = {
+    "enabled": False,
+    "interval": 600,
+    "nick": "nick",
+    "max": {"coffee": 8, "beer": 10},
+    "timeout": 5,
 }
 
-JOBS['stats'] = {
-    'enabled': False,
-    'interval': 600,
-    'nick': 'nick',
-    'max': {
-        'coffee': 8,
-        'beer': 10
-    },
-    'timeout': 5
+JOBS["time"] = {"enabled": True}
+
+JOBS["uptime"] = {
+    "enabled": False,
+    "interval": 60,
+    "hosts": (("Router", "ip.addr"), ("Laptop", "ip.addr")),
+    "timeout": 5,
 }
 
-JOBS['time'] = {
-    'enabled': True
+JOBS["vaernesekspressen"] = {
+    "enabled": True,
+    "interval": 600,
+    "from_stop": "FB 73 Nidarosdomen",
+    "timeout": 10,  # Very slow API
+    "widget": "flybussen",
 }
 
-JOBS['uptime'] = {
-    'enabled': False,
-    'interval': 60,
-    'hosts': (
-        ('Router', 'ip.addr'),
-        ('Laptop', 'ip.addr')
-    ),
-    'timeout': 5
+JOBS["yr"] = {
+    "enabled": True,
+    "interval": 600,
+    "url": "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506",
+    "location": "Trondheim",
+    "timeout": 5,
 }
 
-JOBS['vaernesekspressen'] = {
-    'enabled': True,
-    'interval': 600,
-    'from_stop': 'FB 73 Nidarosdomen',
-    'timeout': 10,  # Very slow API
-    'widget': 'flybussen'
-}
-
-JOBS['yr'] = {
-    'enabled': True,
-    'interval': 600,
-    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
-    'location': 'Trondheim',
-    'timeout': 5
-}
-
-JOBS['yr2'] = {
-    'enabled': True,
-    'interval': 600,
-    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
-    'location': 'Trondheim',
-    'timeout': 5,
-    'job_impl': 'yr'
+JOBS["yr2"] = {
+    "enabled": True,
+    "interval": 600,
+    "url": "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506",
+    "location": "Trondheim",
+    "timeout": 5,
+    "job_impl": "yr",
 }
