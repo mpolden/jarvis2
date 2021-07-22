@@ -315,12 +315,20 @@ longitude instead.
 See https://api.met.no/weatherapi/locationforecast/2.0/documentation for more
 details.
 
+The `location` field sets which location to display in the widget. This field
+must be set.
+
+The Yr API provides an hourly forecast. The field `forecast_hour` controls which
+hour to choose when displaying forecast-ed temperature. Defaults to `12` when
+unset.
+
 ```python
 JOBS['yr'] = {
     'enabled': True,
     'interval': 600,
     'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
-    'location': 'Trondheim'
+    'location': 'Trondheim',
+    'forecast_hour': 12
 }
 ```
 
@@ -331,11 +339,15 @@ Similar to `yr`, but has a compact widget layout including a weather forecast
 for the next six hours and next six days. The widget also displays [weather
 icons](https://api.met.no/weatherapi/weathericon/2.0/documentation).
 
+The fields `location` and `forecast_hour` mean the same here as in the `yr`
+widget.
+
 ```python
 JOBS['yr2'] = {
     'enabled': True,
     'interval': 600,
     'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
-    'location': 'Trondheim'
+    'location': 'Trondheim',
+    'forecast_hour': 12
 }
 ```

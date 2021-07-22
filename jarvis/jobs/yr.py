@@ -48,8 +48,6 @@ SYMBOL_TABLE = {
     "heavysleetshowersandthunder": "Kraftige sluddbyger og torden",
 }
 
-HOUR_OF_NEXT_DAY = 12
-
 
 class Yr(AbstractJob):
     def __init__(self, conf):
@@ -57,6 +55,7 @@ class Yr(AbstractJob):
         self.interval = conf["interval"]
         self.location = conf["location"]
         self.timeout = conf.get("timeout")
+        self.forecast_hour = conf.get("forecast_hour", 12)
 
     def _temperature(self, observation):
         return observation["data"]["instant"]["details"]["air_temperature"]
@@ -145,7 +144,7 @@ class Yr(AbstractJob):
 
     def _find_forecast(self, data, date, hourly=False, count=6):
         if not hourly:
-            date = date.replace(hour=HOUR_OF_NEXT_DAY)
+            date = date.replace(hour=self.forecast_hour)
         forecast = []
         for n in range(1, count + 1):
             forecasted_date = date + timedelta(days=n)
@@ -199,7 +198,7 @@ class Yr(AbstractJob):
     def _parse(self, data, now=None):
         if now is None:
             now = datetime.now()
-        next_day = (now + timedelta(days=1)).replace(hour=HOUR_OF_NEXT_DAY)
+        next_day = (now + timedelta(days=1)).replace(hour=self.forecast_hour)
         return {
             "today": self._parse_day(data, now),
             "tomorrow": self._parse_day(data, next_day),
