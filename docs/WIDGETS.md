@@ -27,10 +27,10 @@ Displays bus routes in Trondheim, Norway. Uses the API provided by
 [atbapi](https://github.com/mpolden/atbapi).
 
 ```python
-JOBS['atb'] = {
-    'enabled': True,
-    'interval': 60,
-    'url': 'https://mpolden.no/atb/v1/departures/<location-id>'
+JOBS["atb"] = {
+    "enabled": True,
+    "interval": 60,
+    "url": "https://mpolden.no/atb/v1/departures/<location-id>",
 }
 ```
 
@@ -43,11 +43,11 @@ Displays future flights for the configured destination. This widget uses
 [data provided by Avinor](https://avinor.no/konsern/tjenester/flydata/flydata-i-xml-format).
 
 ```python
-JOBS['avinor'] = {
-    'enabled': True,
-    'interval': 180,
-    'from': 'TRD',
-    'to': 'OSL'
+JOBS["avinor"] = {
+    "enabled": True,
+    "interval": 180,
+    "from": "TRD",
+    "to": "OSL",
 }
 ```
 
@@ -60,11 +60,11 @@ Displays current and upcoming events in your Google Calendar. This widget uses
 the Google Calendar API to retrieve data.
 
 ```python
-JOBS['calendar'] = {
-    'enabled': True,
-    'interval': 600,
-    'client_id': '',
-    'client_secret': ''
+JOBS["calendar"] = {
+    "enabled": True,
+    "interval": 600,
+    "client_id": "",
+    "client_secret": "",
 }
 ```
 
@@ -80,11 +80,11 @@ Displays the next [Flybussen](https://www.flybussen.no) departures from the
 configured bus stop.
 
 ```python
-JOBS['flybussen'] = {
-    'enabled': True,
-    'interval': 600,
-    'from_stop': 'Dronningens gate D2',
-    'to_airport': 'TRD'
+JOBS["flybussen"] = {
+    "enabled": True,
+    "interval": 600,
+    "from_stop": "Dronningens gate D2",
+    "to_airport": "TRD",
 }
 ```
 
@@ -103,13 +103,13 @@ Displays the current unread count, and total email count in the configured
 folder.
 
 ```python
-JOBS['gmail'] = {
-    'enabled': True,
-    'interval': 900,
-    'client_id': '',
-    'client_secret': '',
-    'email': 'example@gmail.com',
-    'folder': 'inbox'
+JOBS["gmail"] = {
+    "enabled": True,
+    "interval": 900,
+    "client_id": "",
+    "client_secret": "",
+    "email": "example@gmail.com",
+    "folder": "inbox",
 }
 ```
 
@@ -126,9 +126,9 @@ Displays the top 10 trending items on
 website.
 
 ```python
-JOBS['hackernews'] = {
-    'enabled': True,
-    'interval': 900
+JOBS["hackernews"] = {
+    "enabled": True,
+    "interval": 900,
 }
 ```
 
@@ -138,14 +138,14 @@ Uses IMAP to display the current unread count, and total email count in the conf
 folder.
 
 ```python
-JOBS['imap'] = {
-    'enabled': True,
-    'interval': 900,
-    'email': 'email-address-to-display,
-    'url': 'imap://username:password@host:port',
-    'tls': True,
-    'starttls': False,
-    'folder': 'INBOX'
+JOBS["imap"] = {
+    "enabled": True,
+    "interval": 900,
+    "email": "email-address-to-display,
+    "url": "imap://username:password@host:port",
+    "tls": True,
+    "starttls": False,
+    "folder": "INBOX",
 }
 ```
 
@@ -155,11 +155,11 @@ Displays upcoming train departures from a configured location. Scrapes data
 directly from https://www.nsb.no.
 
 ```python
-JOBS['nsb'] = {
-    'enabled': True,
-    'interval': 900,
-    'from': 'Lillehammer',
-    'to': 'Oslo S'
+JOBS["nsb"] = {
+    "enabled": True,
+    "interval": 900,
+    "from": "Lillehammer",
+    "to": "Oslo S",
 }
 ```
 
@@ -168,16 +168,16 @@ The `from` and `to` fields are the same location names as used on the website.
 ping
 ----
 Displays a graph of response times to the given hosts. The `hosts` field is
-a tuple of tuples on this format: `('label', 'host or ip')`
+a tuple of tuples on this format: `("label", "host or ip")`
 
 ```python
-JOBS['ping'] = {
-    'enabled': True,
-    'interval': 10,
-    'hosts': (
-        ('vg.no', 'vg.no'),
-        ('google.com', 'google.com')
-    )
+JOBS["ping"] = {
+    "enabled": True,
+    "interval": 10,
+    "hosts": (
+        ("vg.no", "vg.no"),
+        ("google.com", "google.com"),
+    ),
 }
 ```
 
@@ -191,12 +191,12 @@ makes metadata for each section available as XML at the following URL:
 `https://<ip>:32400/library/sections/<section-number>/recentlyAdded?X-Plex-Token=<secret-token>`.
 
 ```python
-JOBS['plex'] = {
-    'enabled': True,
-    'interval': 900,
-    'movies': 'https://127.0.0.1:32400/library/sections/2/recentlyAdded?X-Plex-Token=secret',
-    'shows': 'https://127.0.0.1:32400/library/sections/1/recentlyAdded?X-Plex-Token=secret',
-    'verify': True
+JOBS["plex"] = {
+    "enabled": True,
+    "interval": 900,
+    "movies": "https://127.0.0.1:32400/library/sections/2/recentlyAdded?X-Plex-Token=secret",
+    "shows": "https://127.0.0.1:32400/library/sections/1/recentlyAdded?X-Plex-Token=secret",
+    "verify": True,
 }
 ```
 
@@ -212,12 +212,12 @@ rss
 Displays the most recent items in a RSS feed. Works with any standard RSS feed.
 
 ```python
-JOBS['rss-guardian'] = {
-    'enabled': False,
-    'interval': 900,
-    'url': 'https://www.theguardian.com/international/rss',
-    'title': 'The Guardian',
-    'job_impl': 'rss'
+JOBS["rss-guardian"] = {
+    "enabled": False,
+    "interval": 900,
+    "url": "https://www.theguardian.com/international/rss",
+    "title": "The Guardian",
+    "job_impl": "rss",
 }
 ```
 
@@ -230,11 +230,11 @@ Displays the current track playing on your Sonos device. Also displays the
 upcoming track.
 
 ```python
-JOBS['sonos'] = {
-    'enabled': False,
-    'interval': 10,
-    'ip': '127.0.0.1',
-    'display_album_art': True
+JOBS["sonos"] = {
+    "enabled": False,
+    "interval": 10,
+    "ip": "127.0.0.1",
+    "display_album_art": True,
 }
 ```
 
@@ -249,14 +249,14 @@ The `max` dict sets the wanted limit for each beverage. `nick` is the nick you
 want to retrieve stats for.
 
 ```python
-JOBS['stats'] = {
-    'enabled': True,
-    'interval': 600,
-    'nick': 'yournick',
-    'max': {
-        'coffee': 8,
-        'beer': 12
-    }
+JOBS["stats"] = {
+    "enabled": True,
+    "interval": 600,
+    "nick": "yournick",
+    "max": {
+        "coffee": 8,
+        "beer": 12,
+    },
 }
 ```
 
@@ -270,13 +270,13 @@ uptime
 Ping one or more hosts and display their status (up or down).
 
 ```python
-JOBS['uptime'] = {
-    'enabled': True,
-    'interval': 60,
-    'hosts': (
-        ('Desktop', '10.0.0.11'),
-        ('Laptop', '10.0.0.10')
-    )
+JOBS["uptime"] = {
+    "enabled": True,
+    "interval": 60,
+    "hosts": (
+        ("Desktop", "10.0.0.11"),
+        ("Laptop", "10.0.0.10"),
+    ),
 }
 ```
 
@@ -289,10 +289,10 @@ Displays the next [Vaernesekspressen](https://www.vaernesekspressen.no)
 departures from the configured bus stop.
 
 ```python
-JOBS['vaernesekspressen'] = {
-    'enabled': True,
-    'interval': 600,
-    'from_stop': 'FB 73 Nidarosdomen'
+JOBS["vaernesekspressen"] = {
+    "enabled": True,
+    "interval": 600,
+    "from_stop": "FB 73 Nidarosdomen",
 }
 ```
 
@@ -323,12 +323,12 @@ hour to choose when displaying forecast-ed temperature. Defaults to `12` when
 unset.
 
 ```python
-JOBS['yr'] = {
-    'enabled': True,
-    'interval': 600,
-    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
-    'location': 'Trondheim',
-    'forecast_hour': 12
+JOBS["yr"] = {
+    "enabled": True,
+    "interval": 600,
+    "url": "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506",
+    "location": "Trondheim",
+    "forecast_hour": 12,
 }
 ```
 
@@ -343,11 +343,11 @@ The fields `location` and `forecast_hour` mean the same here as in the `yr`
 widget.
 
 ```python
-JOBS['yr2'] = {
-    'enabled': True,
-    'interval': 600,
-    'url': 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506',
-    'location': 'Trondheim',
-    'forecast_hour': 12
+JOBS["yr2"] = {
+    "enabled": True,
+    "interval": 600,
+    "url": "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.43048&lon=10.39506",
+    "location": "Trondheim",
+    "forecast_hour": 12,
 }
 ```
