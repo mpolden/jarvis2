@@ -244,7 +244,7 @@ as its background image.
 
 stats
 -----
-Displays beverage consumption stats from the IRC channel #tihlde on freenode.
+Displays beverage consumption stats from the IRC channel #tihlde on Libera.
 The `max` dict sets the wanted limit for each beverage. `nick` is the nick you
 want to retrieve stats for.
 
