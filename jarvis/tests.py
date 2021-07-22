@@ -148,7 +148,14 @@ class App(unittest.TestCase):
 class Yr(unittest.TestCase):
     def setUp(self):
         self.json = test_data("varsel.json", parse_json=True)
-        self.yr = yr.Yr({"interval": None, "url": None, "location": "Trondheim"})
+        self.yr = yr.Yr(
+            {
+                "interval": None,
+                "url": None,
+                "location": "Trondheim",
+                "forecast_hour": 14,
+            }
+        )
         self.maxDiff = None
 
     def test_parse(self):
@@ -203,24 +210,12 @@ class Yr(unittest.TestCase):
 
         # Tomorrow
         self.assertEqual("Trondheim", data["tomorrow"]["location"])
-        self.assertEqual(23.2, data["tomorrow"]["temperature"])
+        self.assertEqual(23.3, data["tomorrow"]["temperature"])
         self.assertEqual("Klarvær", data["tomorrow"]["description"])
         self.assertEqual("nordvest", data["tomorrow"]["wind"]["direction"])
-        self.assertEqual(1.6, data["tomorrow"]["wind"]["speed"])
+        self.assertEqual(1.9, data["tomorrow"]["wind"]["speed"])
         self.assertEqual(
             [
-                {
-                    "day": "tirsdag",
-                    "hour": 13,
-                    "symbol": "clearsky_day",
-                    "temperature": 23.4,
-                },
-                {
-                    "day": "tirsdag",
-                    "hour": 14,
-                    "symbol": "clearsky_day",
-                    "temperature": 23.3,
-                },
                 {
                     "day": "tirsdag",
                     "hour": 15,
@@ -245,6 +240,18 @@ class Yr(unittest.TestCase):
                     "symbol": "clearsky_day",
                     "temperature": 20.3,
                 },
+                {
+                    "day": "tirsdag",
+                    "hour": 19,
+                    "symbol": "clearsky_day",
+                    "temperature": 18.6,
+                },
+                {
+                    "day": "tirsdag",
+                    "hour": 20,
+                    "symbol": "clearsky_day",
+                    "temperature": 16.9,
+                },
             ],
             data["tomorrow"]["forecast"],
         )
@@ -254,9 +261,9 @@ class Yr(unittest.TestCase):
             [
                 {
                     "day": "tirsdag",
-                    "hour": 12,
+                    "hour": 14,
                     "symbol": "clearsky_day",
-                    "temperature": 23.2,
+                    "temperature": 23.3,
                 },
                 {
                     "day": "onsdag",

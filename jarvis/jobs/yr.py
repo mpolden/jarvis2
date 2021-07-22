@@ -48,6 +48,8 @@ SYMBOL_TABLE = {
     "heavysleetshowersandthunder": "Kraftige sluddbyger og torden",
 }
 
+DEFAULT_FORECAST_HOUR = 12
+
 
 class Yr(AbstractJob):
     def __init__(self, conf):
@@ -55,7 +57,7 @@ class Yr(AbstractJob):
         self.interval = conf["interval"]
         self.location = conf["location"]
         self.timeout = conf.get("timeout")
-        self.forecast_hour = conf.get("forecast_hour", 12)
+        self.forecast_hour = conf.get("forecast_hour", DEFAULT_FORECAST_HOUR)
 
     def _temperature(self, observation):
         return observation["data"]["instant"]["details"]["air_temperature"]
@@ -174,6 +176,10 @@ class Yr(AbstractJob):
             if ts["time"] != date_fmt:
                 continue
             return ts
+        if date.hour != DEFAULT_FORECAST_HOUR:
+            # Fall back to default hour if there is no match for given hour
+            date = date.replace(hour=DEFAULT_FORECAST_HOUR)
+            return self._find_observation(data, date)
         raise ValueError("No observation found for time {}".format(date_fmt))
 
     def _parse_week(self, data, date):
