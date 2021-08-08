@@ -179,8 +179,7 @@ class Yr(AbstractJob):
         return forecast
 
     def _find_observation(self, data, date):
-        date = date.replace(minute=0, second=0, microsecond=0)
-        date_fmt = date.strftime("%Y-%m-%dT%H:%M:%SZ")
+        date_fmt = date.strftime("%Y-%m-%dT%H:00:00Z")
         timeseries = data["properties"]["timeseries"]
         for ts in timeseries:
             if ts["time"] != date_fmt:
