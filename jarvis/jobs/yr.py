@@ -128,24 +128,6 @@ class Yr(AbstractJob):
             return "nordvest"
         raise ValueError("Invalid direction {}".format(deg))
 
-    def _day_name(self, dt):
-        day = dt.weekday()
-        if day == 0:
-            return "mandag"
-        elif day == 1:
-            return "tirsdag"
-        elif day == 2:
-            return "onsdag"
-        elif day == 3:
-            return "torsdag"
-        elif day == 4:
-            return "fredag"
-        elif day == 5:
-            return "lørdag"
-        elif day == 6:
-            return "søndag"
-        raise ValueError("Invalid day: {}".format(day))
-
     def _wind(self, observation):
         speed = observation["data"]["instant"]["details"]["wind_speed"]
         direction = self._direction(
