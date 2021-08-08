@@ -212,7 +212,7 @@ class Yr(AbstractJob):
 
     def _parse(self, data, now=None):
         if now is None:
-            now = datetime.now()
+            now = datetime.utcnow()
         next_day = (now + timedelta(days=1)).replace(hour=self.forecast_hour)
         return {
             "today": self._parse_day(data, now),
