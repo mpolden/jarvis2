@@ -63,10 +63,20 @@ class Yr(AbstractJob):
         return observation["data"]["instant"]["details"]["air_temperature"]
 
     def _description(self, observation, short_term=True):
+        # The periods returned from the Yr API are unpredicatable, we therefore try all
+        # possible periods in order
         if short_term:
-            period = "next_1_hours"
+            periods = ("next_1_hours", "next_6_hours", "next_12_hours")
         else:
-            period = "next_6_hours"
+            periods = ("next_6_hours", "next_1_hours", "next_12_hours")
+        known_periods = observation["data"].keys()
+        period = next((p for p in periods if p in known_periods), None)
+        if period is None:
+            raise ValueError(
+                "Yr API returned periods {}, which does not contain any of {}".format(
+                    known_periods, periods
+                )
+            )
         symbol_code = observation["data"][period]["summary"]["symbol_code"]
         # Remove any trailing time of day identifier: cloudy_night -> cloudy
         symbol_key = symbol_code.split("_")[0]
@@ -155,8 +165,8 @@ class Yr(AbstractJob):
             observation = self._find_observation(data, forecasted_date)
             temperature = self._temperature(observation)
             if not hourly or n == 1:
-                # Only get description for next 6 hours if we're forecasting several
-                # days or if this is the first forecast
+                # Get the description for next 6 hours if we're forecasting future days
+                # or if we're looking at the forecast for the first hour
                 _, symbol = self._description(observation, short_term=False)
             dt = datetime.strptime(observation["time"], "%Y-%m-%dT%H:%M:%SZ")
             f = {
