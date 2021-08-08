@@ -17,8 +17,9 @@ yr2.view = function (vnode) {
   }
   var state = vnode.attrs.data;
   var table_week = state.week.forecast.map((forecast) => {
+    var time = moment(forecast.time).local();
     return m('tr', [
-      m('td', forecast.day),
+      m('td', time.locale('nb').format('dddd')),
       m('td', forecast.temperature + '°'),
       m(
         'td',
@@ -27,8 +28,9 @@ yr2.view = function (vnode) {
     ]);
   });
   var table_today = state.today.forecast.map((forecast) => {
+    var time = moment(forecast.time).local();
     return m('tr', [
-      m('td', forecast.hour.toString().padStart(2, '0') + ':00'),
+      m('td', time.format('HH:mm')),
       m('td', forecast.temperature + '°'),
       m(
         'td',

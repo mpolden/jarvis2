@@ -168,10 +168,8 @@ class Yr(AbstractJob):
                 # Get the description for next 6 hours if we're forecasting future days
                 # or if we're looking at the forecast for the first hour
                 _, symbol = self._description(observation, short_term=False)
-            dt = datetime.strptime(observation["time"], "%Y-%m-%dT%H:%M:%SZ")
             f = {
-                "day": self._day_name(dt),
-                "hour": dt.hour,
+                "time": observation["time"],
                 "temperature": temperature,
                 "symbol": symbol,
             }
