@@ -24,18 +24,15 @@ interval to prevent slow jobs from blocking future jobs.
 atb
 ---
 Displays bus routes in Trondheim, Norway. Uses the API provided by
-[atbapi](https://github.com/mpolden/atbapi).
+[mpolden/atb](https://github.com/mpolden/atb).
 
 ```python
 JOBS["atb"] = {
     "enabled": True,
     "interval": 60,
-    "url": "https://mpolden.no/atb/v1/departures/<location-id>",
+    "url": "https://mpolden.no/atb/v2/departures/<stop-id>",
 }
 ```
-
-A list of possible location IDs is available here:
-https://mpolden.no/atb/v1/busstops
 
 avinor
 ------

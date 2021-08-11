@@ -16,15 +16,15 @@ JOBS = {}
 JOBS["atb"] = {
     "enabled": True,
     "interval": 60,
-    "url": "https://mpolden.no/atb/v1/departures/16010194",
+    "url": "https://mpolden.no/atb/v2/departures/43501",
     "timeout": 5,
 }
 
 # Add additional atb job for another departure
-JOBS["atb-16010382"] = {
+JOBS["atb-41613"] = {
     "enabled": False,
     "interval": 60,
-    "url": "https://mpolden.no/atb/v1/departures/16010007",
+    "url": "https://mpolden.no/atb/v2/departures/41613",
     "timeout": 5,
     "job_impl": "atb",
 }
