@@ -3,15 +3,7 @@ var atb = atb || {};
 atb.parseState = function (data) {
   var body = data;
   body.departures.forEach(function (d) {
-    var departureTime = moment(d.registeredDepartureTime).locale('nb'),
-        now = moment();
-    if (departureTime.isBefore(now)) {
-      // BusBuddy sometimes returns dates in the past
-      departureTime.set('year', now.get('year'));
-      departureTime.set('month', now.get('month'));
-      departureTime.set('date', now.get('date'));
-    }
-    d.departureTime = departureTime;
+    d.departureTime = moment(d.scheduledDepartureTime).locale('nb');
   });
   if (body.departures.length > 0) {
     body.next = body.departures[0];
