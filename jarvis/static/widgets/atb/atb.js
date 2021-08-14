@@ -27,11 +27,19 @@ atb.view = function (vnode) {
       m('td.time', departure.departureTime.format('HH:mm'))
     ]);
   });
+  var nextText = 'Ingen avganger funnet';
+  var nextDeparture = ''
+  var nextDepartureFromNow = '';
+  if (state.next !== null) {
+    nextText = 'Buss ' + state.next.line + ' til ' +
+      state.next.destination + ' går';
+    nextDeparture = state.next.departureTime.format('HH:mm');
+    nextDepartureFromNow = state.next.departureTime.fromNow();
+  }
   return [
-    m('p.fade', 'Buss ' + state.next.line + ' til ' +
-      state.next.destination + ' går'),
-    m('h1', state.next.departureTime.format('HH:mm')),
-    m('h2', state.next.departureTime.fromNow()),
+    m('p.fade', nextText),
+    m('h1', nextDeparture),
+    m('h2', nextDepartureFromNow),
     m('table', rows),
     m('p', {'class': 'fade updated-at'}, 'Sist oppdatert: ' +
       state.updatedAt)
