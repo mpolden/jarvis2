@@ -28,7 +28,7 @@ atb.view = function (vnode) {
     ]);
   });
   var nextText = 'Ingen avganger funnet';
-  var nextDeparture = ''
+  var nextDeparture = '';
   var nextDepartureFromNow = '';
   if (state.next !== null) {
     nextText = 'Buss ' + state.next.line + ' til ' +
