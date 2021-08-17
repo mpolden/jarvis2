@@ -4,6 +4,7 @@ cachetools==4.2.1
 certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
+cssmin==0.2.0
 Flask==1.1.2
 Flask-Assets==2.0
 google-api-core==1.26.3
