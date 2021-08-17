@@ -23,7 +23,7 @@ atb.view = function (vnode) {
   var rows = state.upcoming.map(function (departure) {
     return m('tr', [
       m('td', {'class': 'destination'}, departure.line + ' ' +
-        departure.destination),
+        jrvs.truncate(departure.destination, 22)),
       m('td.time', departure.departureTime.format('HH:mm'))
     ]);
   });
