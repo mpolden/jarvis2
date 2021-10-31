@@ -41,6 +41,12 @@ class Nsb(AbstractJob):
             "time": now.strftime("%Y-%m-%dT%H:%M"),
         }
         url = "https://booking.cloud.nsb.no/api/itineraries/search"
-        r = requests.post(url, timeout=self.timeout, json=data)
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; "
+                "rv:93.0) Gecko/20100101 Firefox/93.0"
+            )
+        }
+        r = requests.post(url, timeout=self.timeout, json=data, headers=headers)
         r.raise_for_status()
         return self._parse(r.json())
