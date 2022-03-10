@@ -451,10 +451,19 @@ class Vaernesekspressen(unittest.TestCase):
         self.p = Process(target=self.server.serve_forever)
         self.p.start()
 
-    def test_get(self):
-        f = vaernesekspressen.Vaernesekspressen(
-            {"interval": None, "from_stop": "fb 73 nidarosdomen", "base_url": self.url}
-        )
+    def test_get_by_name(self):
+        self._get(stop_name="fb 73 nidarosdomen")
+
+    def test_get_by_id(self):
+        self._get(stop_id=131)
+
+    def _get(self, stop_id=None, stop_name=None):
+        config = {"interval": None, "base_url": self.url}
+        if stop_id is not None:
+            config["from_stop_id"] = stop_id
+        if stop_name is not None:
+            config["from_stop"] = stop_name
+        f = vaernesekspressen.Vaernesekspressen(config)
         f.now = lambda: datetime(2020, 2, 1, 10)
         data = f.get()
         self.assertEqual(9, len(data["departures"]))

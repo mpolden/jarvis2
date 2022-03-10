@@ -9,12 +9,15 @@ from jobs import AbstractJob
 
 class Vaernesekspressen(AbstractJob):
     def __init__(self, conf):
-        self.airport_id = 113  # Vaernes is the the only supported destionation
-        self.from_stop = conf["from_stop"]
+        self.airport_id = 113  # Vaernes is the the only supported destination
+        self.from_stop = conf.get("from_stop")
+        self.from_stop_id = conf.get("from_stop_id")
         self.interval = conf["interval"]
         self.timeout = conf.get("timeout")
         self.base_url = conf.get("base_url", "https://www.vaernesekspressen.no")
         self.now = datetime.now
+        if self.from_stop is None and self.from_stop_id is None:
+            raise ValueError("Either from_stop or from_stop_id must be set")
 
     def _find_stop_id(self):
         url = "{}/Umbraco/Api/TicketOrderApi/GetStops".format(self.base_url)
@@ -73,7 +76,9 @@ class Vaernesekspressen(AbstractJob):
         return re.sub(r"^FB \d+ ", "", name)
 
     def get(self):
-        stop_id = self._find_stop_id()
+        stop_id = self.from_stop_id
+        if stop_id is None:
+            stop_id = self._find_stop_id()
         now = self.now()
         departures = self._departures(stop_id, now)
         if len(departures) < 2:
