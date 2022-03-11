@@ -31,7 +31,7 @@ flybussen.view = function (vnode) {
   }
   var rows = data.upcoming.map(function (departure) {
     return m('tr', [
-      m('td.destination', departure.stop_name),
+      m('td.destination', jrvs.truncate(departure.stop_name, 21)),
       m('td.time', departure.departure_time.format('HH:mm'))
     ]);
   });
