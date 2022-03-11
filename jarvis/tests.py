@@ -419,7 +419,7 @@ class Flybussen(unittest.TestCase):
         self.assertEqual("1509116640", data["departures"][0]["departure_time"])
         self.assertEqual("Dronningens gate D2", data["departures"][0]["stop_name"])
         self.assertEqual("Dronningens gate D2", data["from"])
-        self.assertEqual(u"Trondheim lufthavn Værnes", data["to"])
+        self.assertEqual("Trondheim lufthavn Værnes", data["to"])
 
     def tearDown(self):
         self.server.socket.close()
@@ -470,7 +470,7 @@ class Vaernesekspressen(unittest.TestCase):
         self.assertEqual("1580570100", data["departures"][0]["departure_time"])
         self.assertEqual("Nidarosdomen", data["departures"][0]["stop_name"])
         self.assertEqual("Nidarosdomen", data["from"])
-        self.assertEqual(u"Trondheim Lufthavn Værnes", data["to"])
+        self.assertEqual("Trondheim Lufthavn Værnes", data["to"])
 
     def tearDown(self):
         self.server.socket.close()
