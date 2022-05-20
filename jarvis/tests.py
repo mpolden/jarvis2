@@ -303,8 +303,8 @@ class Nsb(unittest.TestCase):
         self.nsb = nsb.Nsb(
             {
                 "interval": None,
-                "from": "Skansen",
-                "to": "V\xc3\xa6rnes (Trondheim Lufthavn)",
+                "from": (144, "Skansen"),
+                "to": (456, "V\xc3\xa6rnes (Trondheim Lufthavn)"),
             }
         )
 
@@ -313,10 +313,12 @@ class Nsb(unittest.TestCase):
 
         self.assertEqual("V\xc3\xa6rnes (Trondheim Lufthavn)", data["to"])
         self.assertEqual("Skansen", data["from"])
-        self.assertEqual(5, len(data["departures"]))
-        self.assertEqual("2018-05-31T17:03:00", data["departures"][0]["departure"])
-        self.assertEqual("2018-05-31T17:42:00", data["departures"][0]["arrival"])
-        self.assertEqual(2340, data["departures"][0]["duration"])
+        self.assertEqual(3, len(data["departures"]))
+        self.assertEqual(
+            "2022-05-20T19:11:00+02:00", data["departures"][0]["departure"]
+        )
+        self.assertEqual("2022-05-20T19:52:00+02:00", data["departures"][0]["arrival"])
+        self.assertEqual(2460, data["departures"][0]["duration"])
 
 
 class Ping(unittest.TestCase):

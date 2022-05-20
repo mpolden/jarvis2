@@ -7,18 +7,22 @@ from jobs import AbstractJob
 
 class Nsb(AbstractJob):
     def __init__(self, conf):
-        self.from_location = conf["from"]
-        self.to_location = conf["to"]
+        self.from_stop_id, self.from_location = conf["from"]
+        self.to_stop_id, self.to_location = conf["to"]
         self.interval = conf["interval"]
         self.timeout = conf.get("timeout")
 
     def _parse(self, json):
-        date_format = "%Y-%m-%dT%H:%M:%S"
         departures = []
-        for itinerary in json["itineraries"]:
-            departure = datetime.strptime(itinerary["departureScheduled"], date_format)
-            arrival = datetime.strptime(itinerary["arrivalScheduled"], date_format)
-            duration = abs((arrival - departure).total_seconds())
+        for tp in json["data"]["trip"]["tripPatterns"]:
+            legs = tp["legs"]
+            if len(legs) == 0:
+                continue
+            elif len(legs) > 1:
+                raise ValueError("found {} legs, but expected 1".format(len(legs)))
+            departure = datetime.fromisoformat(legs[0]["expectedStartTime"])
+            arrival = datetime.fromisoformat(legs[0]["expectedEndTime"])
+            duration = tp["duration"]
             departures.append(
                 {
                     "departure": departure.isoformat(),
@@ -34,19 +38,40 @@ class Nsb(AbstractJob):
         }
 
     def get(self):
-        now = datetime.now()
-        data = {
-            "from": self.from_location,
-            "to": self.to_location,
-            "time": now.strftime("%Y-%m-%dT%H:%M"),
+        query = """
+{
+  trip(
+    from: {
+      place: "NSR:StopPlace:%d"
+    },
+    to: {
+      place: "NSR:StopPlace:%d"
+    },
+    modes: {
+      transportModes: {
+        transportMode: rail
+      }
+    },
+    searchWindow: 720,
+    maximumTransfers: 1
+  ) {
+    tripPatterns {
+      duration
+      legs {
+        expectedStartTime
+        expectedEndTime
+        line {
+          id
+          publicCode
         }
-        url = "https://booking.cloud.nsb.no/api/itineraries/search"
-        headers = {
-            "User-Agent": (
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; "
-                "rv:93.0) Gecko/20100101 Firefox/93.0"
-            )
-        }
+      }
+    }
+  }
+}
+"""
+        data = {"query": query % (self.from_stop_id, self.to_stop_id)}
+        url = "https://api.entur.io/journey-planner/v3/graphql"
+        headers = {"ET-Client-Name": "github_mpolden-jarvis2"}
         r = requests.post(url, timeout=self.timeout, json=data, headers=headers)
         r.raise_for_status()
         return self._parse(r.json())

@@ -148,19 +148,19 @@ JOBS["imap"] = {
 
 nsb
 ---
-Displays upcoming train departures from a configured location. Scrapes data
-directly from https://www.nsb.no.
+Displays upcoming train departures from a configured location. Data is retrieved
+from the [Entur API](https://developer.entur.org).
+
+Use https://stoppested.entur.org to find valid stop IDs.
 
 ```python
 JOBS["nsb"] = {
     "enabled": True,
     "interval": 900,
-    "from": "Lillehammer",
-    "to": "Oslo S",
+    "from": (420, "Lillehammer"),
+    "to": (59872, "Oslo S"),
 }
 ```
-
-The `from` and `to` fields are the same location names as used on the website.
 
 ping
 ----
