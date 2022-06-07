@@ -18,10 +18,8 @@ class Nsb(AbstractJob):
             legs = tp["legs"]
             if len(legs) == 0:
                 continue
-            elif len(legs) > 1:
-                raise ValueError("found {} legs, but expected 1".format(len(legs)))
             departure = datetime.fromisoformat(legs[0]["expectedStartTime"])
-            arrival = datetime.fromisoformat(legs[0]["expectedEndTime"])
+            arrival = datetime.fromisoformat(legs[-1]["expectedEndTime"])
             duration = tp["duration"]
             departures.append(
                 {
@@ -38,6 +36,7 @@ class Nsb(AbstractJob):
         }
 
     def get(self):
+        # Test query at https://api.entur.io/graphql-explorer/journey-planner-v3
         query = """
 {
   trip(
@@ -52,8 +51,7 @@ class Nsb(AbstractJob):
         transportMode: rail
       }
     },
-    searchWindow: 720,
-    maximumTransfers: 1
+    searchWindow: 720
   ) {
     tripPatterns {
       duration
