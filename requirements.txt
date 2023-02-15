@@ -36,5 +36,5 @@ tzlocal==4.1
 uritemplate==4.1.1
 urllib3==1.26.8
 webassets==2.0
-Werkzeug==2.0.3
+Werkzeug==2.2.3
 xmltodict==0.12.0
