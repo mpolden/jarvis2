@@ -3,7 +3,7 @@
 import json
 import requests
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from jobs import AbstractJob
 
 
@@ -51,8 +51,7 @@ class Vaernesekspressen(AbstractJob):
         r.raise_for_status()
         departures = []
         for d in r.json():
-            time = f"{today} {d['time']}"
-            departure_time = datetime.strptime(time, "%Y-%m-%d %H:%M:%S")
+            departure_time = datetime.fromisoformat(f"{today}T{d['time']}")
             departure = {
                 "stop_name": stop_name,
                 "destination_name": "Trondheim lufthavn",
