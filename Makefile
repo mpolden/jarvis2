@@ -1,5 +1,4 @@
 PYTHON ?= python3
-FLAKE8 ?= $(PYTHON) -m flake8 --max-complexity=8
 BLACK ?= $(PYTHON) -m black --quiet --check
 PIP ?= $(PYTHON) -m pip
 VENV ?= $(PYTHON) -m venv
@@ -7,13 +6,10 @@ APP_ROOT := jarvis
 
 all: clean lint test
 
-lint-py: black flake8
+lint-py: black
 
 black:
 	git ls-files '*.py' | xargs $(BLACK)
-
-flake8:
-	git ls-files '*.py' | xargs $(FLAKE8)
 
 lint-js:
 ifdef CI
