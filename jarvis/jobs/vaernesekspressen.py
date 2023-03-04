@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import re
+import json
 import requests
 
 from datetime import datetime, timedelta
@@ -9,78 +9,62 @@ from jobs import AbstractJob
 
 class Vaernesekspressen(AbstractJob):
     def __init__(self, conf):
-        self.airport_id = 113  # Vaernes is the the only supported destination
         self.from_stop = conf.get("from_stop")
-        self.from_stop_id = conf.get("from_stop_id")
         self.interval = conf["interval"]
         self.timeout = conf.get("timeout")
-        self.base_url = conf.get("base_url", "https://www.vaernesekspressen.no")
+        self.base_url = conf.get("base_url", "https://unibussticket.azurewebsites.net")
         self.now = datetime.now
         if self.from_stop is None and self.from_stop_id is None:
             raise ValueError("Either from_stop or from_stop_id must be set")
 
-    def _find_stop_id(self):
-        url = "{}/Umbraco/Api/TicketOrderApi/GetStops".format(self.base_url)
-        params = {"routeId": 31}  # There is only one route
-        r = requests.get(url, params=params, timeout=self.timeout)
+    def _find_stop(self, now):
+        today = now.strftime("%Y-%m-%d")
+        url = f"{self.base_url}/api/operators/UNI:Operator:VerExp/lines/3/routes/8/stops?lang=no&date={today}"
+        r = requests.get(url, timeout=self.timeout)
         r.raise_for_status()
         for stop in r.json():
-            if stop["Name"].lower() == self.from_stop.lower():
-                return stop["Id"]
+            if stop["name"].lower() == self.from_stop.lower():
+                return stop["id"], stop["name"]
         raise ValueError('Could not find ID for stop "{}"'.format(self.from_stop))
 
-    def _timestamp(self, dt, tz):
-        # I hate Python.
-        utc_offset = timedelta(0)
-        if tz == "CET":
-            utc_offset = timedelta(hours=1)
-        elif tz == "CEST":
-            utc_offset = timedelta(hours=2)
-        else:
-            raise ValueError('Unexpected time zone "{}"'.format(tz))
-        epoch = datetime(1970, 1, 1)
-        return (dt - utc_offset - epoch).total_seconds()
-
-    def _parse_time(self, date):
-        parts = date.rsplit(" ", 1)
-        tz = parts[1]
-        dt = datetime.strptime(parts[0], "%Y-%m-%d %H:%M:%S.0")
-        return int(self._timestamp(dt, tz))
-
-    def _departures(self, stop_id, dt):
-        url = "{}/Umbraco/Api/TicketOrderApi/GetJourneys".format(self.base_url)
+    def _departures(self, stop_id, stop_name, dt):
+        url = f"{self.base_url}/api/operators/UNI:Operator:VerExp/lines/3/routes/8/departures"
+        today = dt.strftime("%Y-%m-%d")
         data = {
-            "From": str(stop_id),
-            "To": str(self.airport_id),
-            "Route": "31",
-            "Date": dt.strftime("%d.%m.%Y"),
-            "Adult": "1",
-            "Student": "0",
-            "Child": "0",
-            "Baby": "0",
-            "Senior": "0",
-            "isRoundTrip": False,
+            "from": str(stop_id),
+            "to": "NSR:Quay:100211",  # Trondheim lufthavn
+            "date": today,
+            "type": "NORMAL",
+            "travelers": json.dumps(
+                [
+                    {
+                        "travellerProfileId": 1,
+                        "maximumAge": 120,
+                        "isAdult": True,
+                        "name": "Voksen",
+                        "count": 1,
+                    }
+                ]
+            ),
         }
-        r = requests.post(url, json=data, timeout=self.timeout)
+        r = requests.get(url, params=data, timeout=self.timeout)
         r.raise_for_status()
-        return [
-            {
-                "stop_name": self._trim_name(d["Start"]["Name"]),
-                "destination_name": self._trim_name(d["End"]["Name"]),
-                "departure_time": str(self._parse_time(d["DepartureTime"])),
+        departures = []
+        for d in r.json():
+            time = f"{today} {d['time']}"
+            departure_time = datetime.strptime(time, "%Y-%m-%d %H:%M:%S")
+            departure = {
+                "stop_name": stop_name,
+                "destination_name": "Trondheim lufthavn",
+                "departure_time": int(departure_time.timestamp()),
             }
-            for d in r.json()
-        ]
-
-    def _trim_name(self, name):
-        return re.sub(r"^FB \d+ ", "", name)
+            departures.append(departure)
+        return departures
 
     def get(self):
-        stop_id = self.from_stop_id
-        if stop_id is None:
-            stop_id = self._find_stop_id()
         now = self.now()
-        departures = self._departures(stop_id, now)
+        stop_id, stop_name = self._find_stop(now)
+        departures = self._departures(stop_id, stop_name, now)
         if len(departures) < 2:
             # Few departures today, include tomorrow's departures
             tomorrow = (now + timedelta(days=1)).date()

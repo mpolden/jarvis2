@@ -431,14 +431,12 @@ class Flybussen(unittest.TestCase):
 
 class Vaernesekspressen(unittest.TestCase):
     def _test_responses(self):
-        stop_path = "/Umbraco/Api/TicketOrderApi/GetStops?routeId=31"
-        departure_path = "/Umbraco/Api/TicketOrderApi/GetJourneys"
+        stop_path = "/api/operators/UNI:Operator:VerExp/lines/3/routes/8/stops?lang=no&date=2020-02-01"
+        departure_path = "/api/operators/UNI:Operator:VerExp/lines/3/routes/8/departures?from=NSR%3AQuay%3A73976&to=NSR%3AQuay%3A100211&date=2020-02-01&type=NORMAL&travelers=%5B%7B%22travellerProfileId%22%3A+1%2C+%22maximumAge%22%3A+120%2C+%22isAdult%22%3A+true%2C+%22name%22%3A+%22Voksen%22%2C+%22count%22%3A+1%7D%5D"
         return {
             "GET": {
                 stop_path: test_data("vaernesekspressen_stops.json", True),
-            },
-            "POST": {
-                departure_path: test_data("vaernesekspressen_departures.json", True)
+                departure_path: test_data("vaernesekspressen_departures.json", True),
             },
         }
 
@@ -453,26 +451,15 @@ class Vaernesekspressen(unittest.TestCase):
         self.p = Process(target=self.server.serve_forever)
         self.p.start()
 
-    def test_get_by_name(self):
-        self._get(stop_name="fb 73 nidarosdomen")
-
-    def test_get_by_id(self):
-        self._get(stop_id=131)
-
-    def _get(self, stop_id=None, stop_name=None):
-        config = {"interval": None, "base_url": self.url}
-        if stop_id is not None:
-            config["from_stop_id"] = stop_id
-        if stop_name is not None:
-            config["from_stop"] = stop_name
+    def test_get(self, stop_id=None, stop_name=None):
+        config = {"interval": None, "base_url": self.url, "from_stop": "solsiden"}
         f = vaernesekspressen.Vaernesekspressen(config)
         f.now = lambda: datetime(2020, 2, 1, 10)
         data = f.get()
-        self.assertEqual(9, len(data["departures"]))
-        self.assertEqual("1580570100", data["departures"][0]["departure_time"])
-        self.assertEqual("Nidarosdomen", data["departures"][0]["stop_name"])
-        self.assertEqual("Nidarosdomen", data["from"])
-        self.assertEqual("Trondheim Lufthavn Værnes", data["to"])
+        self.assertEqual(13, len(data["departures"]))
+        self.assertEqual(1580554800, data["departures"][0]["departure_time"])
+        self.assertEqual("Solsiden", data["departures"][0]["stop_name"])
+        self.assertEqual("Trondheim lufthavn", data["to"])
 
     def tearDown(self):
         self.server.socket.close()

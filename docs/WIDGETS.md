@@ -289,8 +289,7 @@ departures from the configured bus stop.
 JOBS["vaernesekspressen"] = {
     "enabled": True,
     "interval": 600,
-    "from_stop_id": 133,
-    # or "from_stop": "FB 73 Nidarosdomen",
+    "from_stop": "Solsiden",
 }
 ```
 
@@ -299,11 +298,6 @@ The `from_stop` field is the name (case-insensitive) of a valid bus stop.
 See the [Vaernesekspressen website](https://www.vaernesekspressen.no) for valid
 stop names. Trondheim airport is the only possible destination and is thus not
 configurable.
-
-The `from_stop_id` field is the ID of a bust stop. When set this takes
-precedence over `from_stop`. This is likely more robust in practice as the stop
-name may change occasionally. Stop IDs can be found at
-https://www.vaernesekspressen.no/Umbraco/Api/TicketOrderApi/GetStops?routeId=31.
 
 yr
 --

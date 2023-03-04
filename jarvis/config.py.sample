@@ -145,7 +145,7 @@ JOBS["uptime"] = {
 JOBS["vaernesekspressen"] = {
     "enabled": True,
     "interval": 600,
-    "from_stop": "FB 73 Nidarosdomen",
+    "from_stop": "Solsiden",
     "timeout": 10,  # Very slow API
     "widget": "flybussen",
 }
