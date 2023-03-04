@@ -458,7 +458,9 @@ class Vaernesekspressen(unittest.TestCase):
         data = f.get()
         self.assertEqual(13, len(data["departures"]))
         utcoffset = datetime.now().astimezone().utcoffset().seconds
-        self.assertEqual(1580558400 - utcoffset, data["departures"][0]["departure_time"])
+        self.assertEqual(
+            1580558400 - utcoffset, data["departures"][0]["departure_time"]
+        )
         self.assertEqual("Solsiden", data["departures"][0]["stop_name"])
         self.assertEqual("Trondheim lufthavn", data["to"])
 
