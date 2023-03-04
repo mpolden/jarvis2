@@ -78,8 +78,8 @@ JOBS["imap"] = {
 JOBS["nsb"] = {
     "enabled": True,
     "interval": 900,
-    "from": "Trondheim S",
-    "to": "Oslo S",
+    "from": (144, "Skansen"),
+    "to": (456, "Trondheim lufthavn Værnes"),
     "timeout": 5,
 }
 
