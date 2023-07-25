@@ -19,7 +19,7 @@ endif
 lint: lint-py lint-js
 
 test:
-	$(PYTHON) $(APP_ROOT)/tests.py
+	env TZ=UTC $(PYTHON) $(APP_ROOT)/tests.py
 
 clean:
 	rm -rf $(APP_ROOT)/**/*.pyc $(APP_ROOT)/static/.webassets-cache/ $(APP_ROOT)/static/gen/
