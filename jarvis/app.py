@@ -30,25 +30,34 @@ from jobs import load_jobs
 from random import randint
 
 
-app = Flask(__name__)
-app.logger.setLevel(logging.INFO)
-app.jinja_env.trim_blocks = True
-app.jinja_env.lstrip_blocks = True
-sched = BackgroundScheduler(logger=app.logger)
-queues = {}
-last_events = {}
-widgets_path = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "static", "widgets")
-)
+class Jarvis(Flask):
+    def __init__(self, name):
+        Flask.__init__(self, name)
+        self.logger.setLevel(logging.INFO)
+        self.jinja_env.trim_blocks = True
+        self.jinja_env.lstrip_blocks = True
+        self.sched = BackgroundScheduler(logger=self.logger)
+        self.queues = {}
+        self.last_events = {}
+        self.widgets_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), "static", "widgets")
+        )
+
+    def wsgi_app(self, *args, **kwargs):
+        _configure_bundles(self)
+        _schedule_jobs(self)
+        return super().wsgi_app(*args, **kwargs)
 
 
-@app.before_first_request
-def _configure_bundles():
+app = Jarvis(__name__)
+
+
+def _configure_bundles(app):
     js = ["main.js"]
     css = ["main.css"]
-    for widget in os.listdir(widgets_path):
+    for widget in os.listdir(app.widgets_path):
         widget_path = os.path.join("widgets", widget)
-        for asset_file in os.listdir(os.path.join(widgets_path, widget)):
+        for asset_file in os.listdir(os.path.join(app.widgets_path, widget)):
             asset_path = os.path.join(widget_path, asset_file)
             if asset_file.endswith(".js"):
                 js.append(asset_path)
@@ -92,7 +101,7 @@ def widget(job_id):
 
 @app.route("/widget/<widget>/<filename>")
 def widget_files(widget, filename):
-    public_path = os.path.join(widgets_path, widget, "public")
+    public_path = os.path.join(app.widgets_path, widget, "public")
     return send_from_directory(public_path, filename)
 
 
@@ -125,9 +134,9 @@ def widgets():
 def events():
     remote_port = request.environ["REMOTE_PORT"]
     current_queue = queue.Queue()
-    queues[remote_port] = current_queue
+    app.queues[remote_port] = current_queue
 
-    for event in last_events.values():
+    for event in app.last_events.values():
         current_queue.put(event)
 
     def consume():
@@ -191,8 +200,7 @@ def _set_security_headers(response):
     return response
 
 
-@app.before_first_request
-def _schedule_jobs():
+def _schedule_jobs(app):
     offset = 0
     jobs = load_jobs()
 
@@ -219,7 +227,7 @@ def _schedule_jobs():
         app.logger.info(
             "Scheduling job with ID %s (implementation: %s): %s", job_id, job_impl, job
         )
-        sched.add_job(
+        app.sched.add_job(
             _run_job,
             "interval",
             name=job_id,
@@ -228,16 +236,16 @@ def _schedule_jobs():
             seconds=job.interval,
             kwargs={"job_id": job_id, "job": job},
         )
-    if not sched.running:
-        sched.start()
+    if not app.sched.running:
+        app.sched.start()
 
 
 def _add_event(job_id, data):
     json_data = json.dumps(
         {"body": data, "job": job_id}, separators=(",", ":"), sort_keys=True
     )
-    last_events[job_id] = json_data
-    for q in queues.values():
+    app.last_events[job_id] = json_data
+    for q in app.queues.values():
         q.put(json_data)
 
 
@@ -256,8 +264,8 @@ def _run_job(job_id, job):
 
 def _close_stream(*args, **kwargs):
     remote_port = args[2][1]
-    if remote_port in queues:
-        del queues[remote_port]
+    if remote_port in app.queues:
+        del app.queues[remote_port]
 
 
 socketserver.BaseServer.handle_error = _close_stream
