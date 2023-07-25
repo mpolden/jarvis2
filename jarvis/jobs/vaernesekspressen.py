@@ -14,8 +14,8 @@ class Vaernesekspressen(AbstractJob):
         self.timeout = conf.get("timeout")
         self.base_url = conf.get("base_url", "https://unibussticket.azurewebsites.net")
         self.now = datetime.now
-        if self.from_stop is None and self.from_stop_id is None:
-            raise ValueError("Either from_stop or from_stop_id must be set")
+        if self.from_stop is None:
+            raise ValueError("from_stop must be set")
 
     def _find_stop(self, now):
         today = now.strftime("%Y-%m-%d")
@@ -67,7 +67,7 @@ class Vaernesekspressen(AbstractJob):
         if len(departures) < 2:
             # Few departures today, include tomorrow's departures
             tomorrow = (now + timedelta(days=1)).date()
-            departures += self._departures(stop_id, tomorrow)
+            departures += self._departures(stop_id, stop_name, tomorrow)
         from_ = "N/A"
         to = "N/A"
         if len(departures) > 0:
