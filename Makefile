@@ -61,7 +61,7 @@ venv:
 	$(VENV) venv
 
 install-requirements:
-	$(PIP) install -r requirements-build.txt
+	$(PIP) install -r requirements-dev.txt
 	$(PIP) install -r requirements.txt
 ifdef CI
 	npm install -g jshint
