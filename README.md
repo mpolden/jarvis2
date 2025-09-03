@@ -1,7 +1,7 @@
 JARVIS
 ======
 
-![Build Status](https://github.com/mpolden/jarvis2/workflows/ci/badge.svg)
+[![ci](https://github.com/mpolden/jarvis2/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/mpolden/jarvis2/actions/workflows/ci.yml)
 
 JARVIS is a dashboard framework designed to run on the Raspberry Pi.
 
