@@ -34,7 +34,7 @@ six==1.17.0
 soco==0.29.1
 soupsieve==2.3.1
 tzdata==2021.5
-tzlocal==4.1
+tzlocal==5.3.1
 uritemplate==4.1.1
 urllib3==2.5.0
 webassets==2.0
