@@ -31,7 +31,7 @@ pytz-deprecation-shim==0.1.0.post0
 requests==2.32.4
 rsa==4.8
 six==1.17.0
-soco==0.29.1
+soco==0.30.12
 soupsieve==2.3.1
 tzdata==2021.5
 tzlocal==5.3.1
