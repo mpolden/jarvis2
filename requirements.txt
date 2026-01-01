@@ -1,5 +1,5 @@
 appdirs==1.4.4
-APScheduler==3.10.1
+APScheduler==3.11.2
 beautifulsoup4==4.11.2
 blinker==1.9.0
 cachetools==5.0.0
