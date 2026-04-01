@@ -16,13 +16,9 @@ Screenshots
 
 Dependencies
 ------------
-JARVIS requires Python 3.6+ to run.
 
-Install requirements:
-
-    pip install -r requirements.txt
-
-For development it's recommended to use [virtualenv](https://virtualenv.pypa.io).
+- JARVIS requires Python 3.11+ to run.
+- The development environment is managed with [uv](https://docs.astral.sh/uv/).
 
 Configuration
 -------------

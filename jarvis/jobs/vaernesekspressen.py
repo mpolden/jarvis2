@@ -3,7 +3,7 @@
 import json
 import requests
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from jobs import AbstractJob
 
 

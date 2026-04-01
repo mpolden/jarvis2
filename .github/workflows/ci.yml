@@ -17,16 +17,17 @@ jobs:
           - "3.13"
           - "3.14"
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: install python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+    - uses: astral-sh/setup-uv@v1
+      with:
+        version: "latest"
     - name: install node
       uses: actions/setup-node@v1
       with:
-        node-version: 16.x
-    - name: install requirements
-      run: make install-requirements
+        node-version: 24.x
     - name: run tests
       run: make
