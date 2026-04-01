@@ -16,3 +16,8 @@ dependencies = [
     "requests>=2.33.1",
     "soco>=0.30.14",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.8",
+]
