@@ -9,4 +9,7 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
+      semver-major-days: 60
     open-pull-requests-limit: 5
