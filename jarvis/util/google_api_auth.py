@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import argparse
 import os.path
 import sys
-import argparse
 
 from flask import Flask
+from oauth2client import tools
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
-from oauth2client import tools
-
 
 app = Flask(
     __name__,
@@ -57,9 +56,7 @@ def main():
     name = args.name
 
     if name is None:
-        name = input(
-            ("Enter widget to generate credentials for (gmail" " or calendar): ")
-        )
+        name = input("Enter widget to generate credentials for (gmail or calendar): ")
 
     if name not in ("calendar", "gmail"):
         print("Name must be either 'gmail' or 'calendar'")

@@ -116,7 +116,7 @@ if __name__ == "__main__":
         "--dry-run",
         dest="dry_run",
         action="store_true",
-        help=("Show what would be done, but don't" " do anything"),
+        help=("Show what would be done, but don't do anything"),
     )
     parser.add_argument(
         "-l", "--list", dest="list_widgets", action="store_true", help="List widgets"

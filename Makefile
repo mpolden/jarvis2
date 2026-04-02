@@ -5,7 +5,8 @@ export JARVIS_SETTINGS ?= config.py.sample
 all: clean lint test
 
 lint-py:
-	uv run ruff check
+	uv run ruff check --quiet --diff
+	uv run ruff format --quiet --diff
 
 lint-js:
 ifdef CI

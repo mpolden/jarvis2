@@ -211,7 +211,7 @@ def _schedule_jobs(app):
             continue
         if job_impl not in jobs:
             app.logger.info(
-                ("Skipping job with ID %s (no such " "implementation: %s)"),
+                ("Skipping job with ID %s (no such implementation: %s)"),
                 job_id,
                 job_impl,
             )
