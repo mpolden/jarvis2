@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import requests
-from jobs import AbstractJob
 from xml.etree import ElementTree as etree
+
+import requests
+
+from jobs import AbstractJob
 
 
 class Avinor(AbstractJob):
@@ -39,7 +41,7 @@ class Avinor(AbstractJob):
             "direction": "D",
         }
         r = requests.get(
-            "http://flydata.avinor.no/XmlFeed.asp", timeout=self.timeout, params=params
+            "https://asrv.avinor.no/XmlFeed/v1.0", timeout=self.timeout, params=params
         )
         r.raise_for_status()
         return self._parse(r.content)
