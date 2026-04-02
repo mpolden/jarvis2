@@ -46,7 +46,7 @@ JOBS["calendar"] = {
 }
 
 JOBS["flybussen"] = {
-    "enabled": True,
+    "enabled": False, # Broken. API has changed
     "interval": 600,
     "from_stop": "Ullevål Stadion",
     "to_airport": "OSL",
