@@ -17,6 +17,9 @@ avinor.view = function (vnode) {
     return m('p', 'Waiting for data');
   }
   var state = avinor.parseState(vnode.attrs.data);
+  if (state.next === null) {
+    return m('p', 'No upcoming flight found for ' + state.from + '-' + state.to);
+  }
   var rows = state.flights.map(function (flight) {
     return m('tr', [
       m('td', flight.flight_id),
