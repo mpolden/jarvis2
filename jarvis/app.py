@@ -256,7 +256,7 @@ def _run_job(job_id, job):
     except Exception as e:
         msg = "Failed to execute job: " + job_id + ": " + str(e)
         if app.debug:
-            app.logger.warning(msg, e)
+            app.logger.exception(msg)
         else:
             # Skip logging stack trace
             app.logger.warning(msg)
