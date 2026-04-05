@@ -17,17 +17,26 @@ jobs:
           - "3.13"
           - "3.14"
     steps:
+    # python
     - uses: actions/checkout@v3
     - name: install python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+    # uv
     - uses: astral-sh/setup-uv@v1
       with:
         version: latest
+    # node
     - name: install node
       uses: actions/setup-node@v6
       with:
         node-version: 24
+    # pnpm
+    - name: install pnpm
+      uses: pnpm/action-setup@v5
+      with:
+        version: latest
+    # run tests
     - name: run tests
       run: make

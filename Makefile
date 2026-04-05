@@ -10,8 +10,7 @@ lint-py:
 
 lint-js:
 ifdef CI
-	npm install -g jshint
-	git ls-files '*.js' | xargs jshint
+	git ls-files '*.js' | xargs pnpx jshint
 endif
 
 lint: lint-py lint-js
