@@ -2,7 +2,7 @@ APP_ROOT := jarvis
 
 export JARVIS_SETTINGS ?= config.py.sample
 
-all: clean lint test
+all: lint test
 
 lint-py:
 	uv run ruff check --quiet --diff
