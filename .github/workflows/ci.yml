@@ -24,10 +24,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - uses: astral-sh/setup-uv@v1
       with:
-        version: "latest"
+        version: latest
     - name: install node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v6
       with:
-        node-version: 24.x
+        node-version: 24
     - name: run tests
       run: make
