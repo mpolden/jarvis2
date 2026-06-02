@@ -475,7 +475,7 @@ requires-dist = [
     { name = "jinja2", specifier = ">=3.1.6" },
     { name = "oauth2client", specifier = ">=4.1.3" },
     { name = "requests", specifier = ">=2.33.1" },
-    { name = "soco", specifier = ">=0.31.0" },
+    { name = "soco", specifier = ">=0.31.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -869,7 +869,7 @@ wheels = [
 
 [[package]]
 name = "soco"
-version = "0.31.0"
+version = "0.31.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "appdirs" },
@@ -878,9 +878,9 @@ dependencies = [
     { name = "requests" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/51/0f/54a9e8640a682c58b75b452f930924021d3ba89b2a8a603e6405ec85f0c5/soco-0.31.0.tar.gz", hash = "sha256:d72279eb3b5d44b9359843c8d3237d6eaaa95ce04096539720f2d377b19fd89f", size = 737898, upload-time = "2026-04-05T09:32:19.159Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/12/08/8ec8fca7acb683a5c7dccda27d0ec4dab7d32886c390a35fd2e011a2c661/soco-0.31.1.tar.gz", hash = "sha256:c9519ad2c56332b99419ec674bbd96070b60e00af2706bfb87b9622b4f730374", size = 744441, upload-time = "2026-05-25T13:24:32.945Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/70/f7/a661067f14cb420edb96a6a0732a171b0819170a61c6ff7eeca5cddd45b3/soco-0.31.0-py2.py3-none-any.whl", hash = "sha256:a4152803f736705d759c052b2079af4282b31bd481e46f15c3a6d79b41bb9521", size = 164042, upload-time = "2026-04-05T09:32:13.359Z" },
+    { url = "https://files.pythonhosted.org/packages/30/3b/a1099a0184454372d3e8784814bb46dc1e61c5c6691c6348e291138b9208/soco-0.31.1-py3-none-any.whl", hash = "sha256:d3907b60e58f59e4942da092defd54b6a20f38c0371315d0c26d3f5dc29a1979", size = 165509, upload-time = "2026-05-25T13:24:30.544Z" },
 ]
 
 [[package]]
