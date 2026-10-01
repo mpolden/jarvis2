@@ -1,12 +1,13 @@
 APP_ROOT := jarvis
+RUFF_PY_VERSION := py311
 
 export JARVIS_SETTINGS ?= config.py.sample
 
 all: lint test
 
 lint-py:
-	uv run ruff check --quiet --diff
-	uv run ruff format --quiet --diff
+	uv run ruff check --quiet --diff --target-version $(RUFF_PY_VERSION)
+	uv run ruff format --quiet --diff --target-version $(RUFF_PY_VERSION)
 
 lint-js:
 ifdef CI
