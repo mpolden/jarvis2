@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
+from subprocess import PIPE, Popen
+from sys import platform
 
 from jobs import AbstractJob
-from subprocess import Popen, PIPE
-from sys import platform
 
 
 class Uptime(AbstractJob):

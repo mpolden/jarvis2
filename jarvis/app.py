@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import json
 import logging
 import os
@@ -13,21 +11,22 @@ try:
 except ImportError:
     import SocketServer as socketserver
 
-from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
+from random import randint
+
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import (
     Flask,
-    render_template,
     Response,
-    request,
     abort,
     jsonify,
+    render_template,
+    request,
     send_from_directory,
 )
-from flask_assets import Environment, Bundle
 from flask.templating import TemplateNotFound
+from flask_assets import Bundle, Environment
 from jobs import load_jobs
-from random import randint
 
 
 class Jarvis(Flask):
@@ -117,7 +116,7 @@ def dashboard(layout=None):
     try:
         return render_template(
             "index.html",
-            layout="layouts/{0}.html".format(layout),
+            layout=f"layouts/{layout}.html",
             locale=locale,
             widgets=widgets,
         )

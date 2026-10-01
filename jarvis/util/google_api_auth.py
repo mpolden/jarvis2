@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import argparse
 import os.path
@@ -35,12 +34,12 @@ def create_credentials(name):
     FLOW = OAuth2WebServerFlow(
         client_id=config["client_id"],
         client_secret=config["client_secret"],
-        scope="https://www.googleapis.com/auth/{}.readonly".format(name),
+        scope=f"https://www.googleapis.com/auth/{name}.readonly",
     )
 
     run_flags = tools.argparser.parse_args(args=[])
 
-    credentials_file = os.path.join(app.instance_path, "jobs", ".{}.json".format(name))
+    credentials_file = os.path.join(app.instance_path, "jobs", f".{name}.json")
     storage = Storage(credentials_file)
     credentials = storage.get()
     if credentials is None or credentials.invalid:

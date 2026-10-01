@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-
 import re
-from datetime import datetime
 from collections import deque
-from jobs import AbstractJob
-from subprocess import Popen, PIPE
+from datetime import datetime
+from subprocess import PIPE, Popen
 from sys import platform
+
+from jobs import AbstractJob
 
 
 def _items(d):

@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import json
+from datetime import datetime, timedelta
+
 import requests
 
-from datetime import datetime, timedelta
 from jobs import AbstractJob
 
 
@@ -25,7 +24,7 @@ class Vaernesekspressen(AbstractJob):
         for stop in r.json():
             if stop["name"].lower() == self.from_stop.lower():
                 return stop["id"], stop["name"]
-        raise ValueError('Could not find ID for stop "{}"'.format(self.from_stop))
+        raise ValueError(f'Could not find ID for stop "{self.from_stop}"')
 
     def _departures(self, stop_id, stop_name, dt):
         url = f"{self.base_url}/api/operators/UNI:Operator:VerExp/lines/3/routes/8/departures"

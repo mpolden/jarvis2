@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import argparse
 import os
@@ -8,7 +7,7 @@ import sys
 from jinja2 import Environment, FileSystemLoader
 
 
-class WidgetFactory(object):
+class WidgetFactory:
     def __init__(self, name, app_root=None, quiet=False):
         self.name = name.lower()
         self.quiet = quiet
@@ -40,12 +39,12 @@ class WidgetFactory(object):
 
     def _create_widget_dir(self):
         os.mkdir(self.widget_dir)
-        self._print("Created {}".format(self.widget_dir))
+        self._print(f"Created {self.widget_dir}")
 
     def _write_file(self, file_path, contents):
         with open(file_path, "w") as f:
             f.write(contents)
-            self._print("Created {}".format(file_path))
+            self._print(f"Created {file_path}")
 
     def create_widget(self):
         contents = self._render_templates()
@@ -70,7 +69,7 @@ class WidgetFactory(object):
             os.remove(file_path)
         else:
             os.rmdir(file_path)
-        self._print("Removed {}".format(file_path))
+        self._print(f"Removed {file_path}")
 
     def remove_widget(self):
         if os.path.isdir(self.widget_dir):
@@ -85,24 +84,24 @@ class WidgetFactory(object):
 
     def list_widgets(self):
         if not os.path.isdir(self.widget_dir):
-            print("No such directory: {}".format(self.widget_dir))
+            print(f"No such directory: {self.widget_dir}")
             sys.exit(1)
 
         for d in os.listdir(self.widget_dir):
             widget_path = os.path.join(self.widget_dir, d)
             name, _ = os.path.splitext(os.path.basename(d))
-            print("{} {}".format(name, widget_path))
+            print(f"{name} {widget_path}")
 
 
 class DryrunFactory(WidgetFactory):
     def _create_widget_dir(self):
-        print("Would create {}".format(self.widget_dir))
+        print(f"Would create {self.widget_dir}")
 
     def _write_file(self, file_path, contents):
-        print("Would create {}".format(file_path))
+        print(f"Would create {file_path}")
 
     def _remove_file(self, file_path):
-        print("Would remove {}".format(file_path))
+        print(f"Would remove {file_path}")
 
 
 def get_factory(name, dry_run=False):

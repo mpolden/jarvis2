@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
-
 from abc import ABCMeta, abstractmethod
 from importlib import import_module
-from os.path import dirname, basename
+from os.path import basename, dirname
 from pkgutil import iter_modules
 
 
-class AbstractJob(object):
+class AbstractJob:
     __metaclass__ = ABCMeta
 
     @abstractmethod

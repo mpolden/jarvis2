@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import imaplib
 import re
 

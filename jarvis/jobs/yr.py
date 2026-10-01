@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+from datetime import datetime, timedelta
 
 import requests
-from datetime import datetime, timedelta
+
 from jobs import AbstractJob
 
 SYMBOL_TABLE = {
@@ -73,16 +73,14 @@ class Yr(AbstractJob):
         period = next((p for p in periods if p in known_periods), None)
         if period is None:
             raise ValueError(
-                "Yr API returned periods {}, which does not contain any of {}".format(
-                    known_periods, periods
-                )
+                f"Yr API returned periods {known_periods}, which does not contain any of {periods}"
             )
         symbol_code = observation["data"][period]["summary"]["symbol_code"]
         # Remove any trailing time of day identifier: cloudy_night -> cloudy
         symbol_key = symbol_code.split("_")[0]
         return (SYMBOL_TABLE[symbol_key], symbol_code)
 
-    def _baufort(self, wind_speed):  # noqa: C901
+    def _baufort(self, wind_speed):
         if wind_speed < 0.3:
             return "Stille"
         elif wind_speed < 1.6:
@@ -109,7 +107,7 @@ class Yr(AbstractJob):
             return "Sterk storm"
         return "Orkan"
 
-    def _direction(self, deg):  # noqa: C901
+    def _direction(self, deg):
         if deg <= 22.5 or deg > 337.5:
             return "nord"
         elif deg <= 67.5:
@@ -126,7 +124,7 @@ class Yr(AbstractJob):
             return "vest"
         elif deg <= 337.5:
             return "nordvest"
-        raise ValueError("Invalid direction {}".format(deg))
+        raise ValueError(f"Invalid direction {deg}")
 
     def _wind(self, observation):
         speed = observation["data"]["instant"]["details"]["wind_speed"]
@@ -169,7 +167,7 @@ class Yr(AbstractJob):
             # Fall back to default hour if there is no match for given hour
             date = date.replace(hour=DEFAULT_FORECAST_HOUR)
             return self._find_observation(data, date)
-        raise ValueError("No observation found for time {}".format(date_fmt))
+        raise ValueError(f"No observation found for time {date_fmt}")
 
     def _parse_week(self, data, date):
         forecast = self._find_forecast(data, date)

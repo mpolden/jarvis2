@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+from datetime import datetime
 
 import requests
-from datetime import datetime
+
 from jobs import AbstractJob
 
 

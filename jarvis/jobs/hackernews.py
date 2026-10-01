@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-
 import requests
-from jobs import AbstractJob
 from bs4 import BeautifulSoup
+
+from jobs import AbstractJob
 
 
 class HackerNews(AbstractJob):

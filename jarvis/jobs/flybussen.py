@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import json
+from datetime import datetime, timedelta
+
 import requests
 
-from datetime import datetime, timedelta
 from jobs import AbstractJob
 
 
@@ -17,7 +16,7 @@ class Flybussen(AbstractJob):
         self.now = datetime.now
 
     def _stop(self):
-        url = "{}/server/wsapi/stop/format/json/p/web/v/1".format(self.base_url)
+        url = f"{self.base_url}/server/wsapi/stop/format/json/p/web/v/1"
         params = (
             ("action", "departures"),
             ("airport_code", self.to_airport),
@@ -36,7 +35,7 @@ class Flybussen(AbstractJob):
         )
 
     def _airport(self):
-        url = "{}/server/wsapi/airport/format/json/p/web/v/1".format(self.base_url)
+        url = f"{self.base_url}/server/wsapi/airport/format/json/p/web/v/1"
         r = requests.get(url, timeout=self.timeout)
         r.raise_for_status()
         airports = r.json()
@@ -50,7 +49,7 @@ class Flybussen(AbstractJob):
         )
 
     def _trip(self, stop, airport, dt):
-        url = "{}/server/api/travel/format/json/p/web/v/1".format(self.base_url)
+        url = f"{self.base_url}/server/api/travel/format/json/p/web/v/1"
         data = {
             "from_stop_id": stop["stop_id"],
             "to_stop_id": airport["stops"][0]["id"],
@@ -76,13 +75,13 @@ class Flybussen(AbstractJob):
     def get(self):
         airport = self._airport()
         if airport is None:
-            raise ValueError("No airport with code: {}".format(self.to_airport))
+            raise ValueError(f"No airport with code: {self.to_airport}")
         if len(airport["stops"]) == 0:
-            raise ValueError("No stops found for airport: {}".format(self.to_airport))
+            raise ValueError(f"No stops found for airport: {self.to_airport}")
 
         stop = self._stop()
         if stop is None:
-            raise ValueError("No stop ID found with name: {}".format(self.from_stop))
+            raise ValueError(f"No stop ID found with name: {self.from_stop}")
 
         from_ = stop["stop_name"]
         to = airport["stops"][0]["name"]

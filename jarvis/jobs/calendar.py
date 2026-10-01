@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-
 import os
-import httplib2
+from datetime import datetime
 
+import httplib2
 from apiclient.discovery import build
 from oauth2client.file import Storage
-from datetime import datetime
+
 from jobs import AbstractJob
 
 

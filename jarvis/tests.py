@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import json
 import logging
 import os.path
 import unittest
+from datetime import datetime
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from multiprocessing import Process, set_start_method
+from tempfile import mkdtemp
 
 from app import app
-from datetime import datetime
 from jobs import (
     avinor,
     calendar,
@@ -19,15 +21,12 @@ from jobs import (
     vaernesekspressen,
     yr,
 )
-from multiprocessing import Process, set_start_method
 from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-from tempfile import mkdtemp
 from util.create_dashboard import DashboardFactory
 from util.create_widget import WidgetFactory
 from werkzeug.serving import run_simple
-from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
 class TestRequestHandler(BaseHTTPRequestHandler):
@@ -39,7 +38,7 @@ class TestRequestHandler(BaseHTTPRequestHandler):
         status_code = 200
         if response is None:
             status_code = 404
-            response = {"error": "No match for {} {}".format(self.command, self.path)}
+            response = {"error": f"No match for {self.command} {self.path}"}
         self.send_response(status_code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.end_headers()
@@ -71,8 +70,8 @@ class App(unittest.TestCase):
         app.debug = True
         app.config["DEFAULT_LAYOUT"] = None
         app.config["JOBS"] = {"mock": {"enabled": True, "interval": 60}}
-        app.logger.setLevel(logging.WARN)
-        logging.getLogger("werkzeug").setLevel(logging.WARN)
+        app.logger.setLevel(logging.WARNING)
+        logging.getLogger("werkzeug").setLevel(logging.WARNING)
         # Run the application in a separate process so that streamed responses
         # are not blocked on running the client in the same thread
         self.p = Process(
@@ -397,7 +396,7 @@ class Flybussen(unittest.TestCase):
 
     @property
     def url(self):
-        return "http://{}:{}".format(self.listen[0], self.listen[1])
+        return f"http://{self.listen[0]}:{self.listen[1]}"
 
     def setUp(self):
         self.listen = ("127.0.0.1", 8080)
@@ -442,7 +441,7 @@ class Vaernesekspressen(unittest.TestCase):
 
     @property
     def url(self):
-        return "http://{}:{}".format(self.listen[0], self.listen[1])
+        return f"http://{self.listen[0]}:{self.listen[1]}"
 
     def setUp(self):
         self.listen = ("127.0.0.1", 8080)

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import argparse
 
@@ -9,8 +8,9 @@ from app import _config, _enabled_jobs
 def _run_job(job_id=None, print_json=False):
     import json
     import sys
-    from jobs import load_jobs
     from pprint import pprint
+
+    from jobs import load_jobs
 
     enabled_jobs = _enabled_jobs()
     jobs = load_jobs()

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 
 import httplib2
@@ -30,7 +28,7 @@ class Gmail(AbstractJob):
         result = (
             self.service.users()
             .messages()
-            .list(userId=self.email, q="label:{}".format(self.folder))
+            .list(userId=self.email, q=f"label:{self.folder}")
             .execute()
         )
         return result.get("resultSizeEstimate", 0)

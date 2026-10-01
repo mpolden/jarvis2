@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+from datetime import datetime
 
 import requests
-from datetime import datetime
+
 from jobs import AbstractJob
 
 
@@ -14,11 +14,7 @@ class Stats(AbstractJob):
 
     def get(self):
         today = datetime.now().date().strftime("%s000")
-        params = {
-            "q": "statsByTimestamp('{nick}', {today})".format(
-                nick=self.nick, today=today
-            )
-        }
+        params = {"q": f"statsByTimestamp('{self.nick}', {today})"}
         r = requests.get(
             "http://hilde.nerdvana.tihlde.org:3000", timeout=self.timeout, params=params
         )

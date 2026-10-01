@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from xml.etree import ElementTree as etree
 
 import requests

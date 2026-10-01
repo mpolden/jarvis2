@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
+from email.utils import mktime_tz, parsedate_tz
+from xml.etree import ElementTree as etree
 
 import requests
 
 from jobs import AbstractJob
-from xml.etree import ElementTree as etree
-from email.utils import parsedate_tz, mktime_tz
 
 
 class Rss(AbstractJob):

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
+from soco import SoCo
 
 from jobs import AbstractJob
-from soco import SoCo
 
 
 class Sonos(AbstractJob):
